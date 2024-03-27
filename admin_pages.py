@@ -318,6 +318,8 @@ class Ui_MainWindow(object):
         def showChart_Pages(self):
                 self.stackedWidget.setCurrentIndex(4)
         
+        
+        # Xử lý giao diện
         def eventHandling(self):
                 self.btnEmployee.clicked.connect(self.showEmployee_Pages)
                 self.btnCustomer.clicked.connect(self.showCustomer_Pages)
