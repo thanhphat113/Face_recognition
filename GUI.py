@@ -12,7 +12,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(791, 488)
+        MainWindow.resize(800, 500)
         MainWindow.setAutoFillBackground(False)
         self.centralwidget = QtWidgets.QWidget(parent=MainWindow)
         self.centralwidget.setStyleSheet("\n"
@@ -151,11 +151,11 @@ class Ui_MainWindow(object):
         self.label_3.setScaledContents(True)
         self.label_3.setObjectName("label_3")
         self.horizontalLayout.addWidget(self.label_3)
-        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Maximum, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem1 = QtWidgets.QSpacerItem(10, 20, QtWidgets.QSizePolicy.Policy.Maximum, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout.addItem(spacerItem1)
         self.label = QtWidgets.QLabel(parent=self.widget_2)
         font = QtGui.QFont()
-        font.setPointSize(15)
+        font.setPointSize(16)
         font.setBold(True)
         font.setWeight(75)
         self.label.setFont(font)
