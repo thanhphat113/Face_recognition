@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_MainWindow(object):
         def setupUi(self, MainWindow):
-                MainWindow.setObjectName("MainWindow")
+                MainWindow.setObjectName("Phòng khám thú y")
                 MainWindow.resize(417, 462)
                 sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
                 sizePolicy.setHorizontalStretch(0)
@@ -86,7 +86,7 @@ class Ui_MainWindow(object):
 
         def retranslateUi(self, MainWindow):
                 _translate = QtCore.QCoreApplication.translate
-                MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+                MainWindow.setWindowTitle(_translate("MainWindow", "Phòng khám thú y"))
                 self.label.setText(_translate("MainWindow", "Phòng khám"))
                 self.label_2.setText(_translate("MainWindow", "Tên đăng nhập"))
                 self.label_3.setText(_translate("MainWindow", "Mật khẩu"))
@@ -113,14 +113,4 @@ class Ui_MainWindow(object):
                 self.pushButton_2.setStyleSheet("background-image: url(img/login-back.png);\nborder: 1px solid black;\nborder-radius:10px;")  # Xóa bất kỳ styleSheet nào được thiết lập
                 event.accept()
         
-        
 
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec())

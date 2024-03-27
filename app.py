@@ -1,4 +1,4 @@
-import login
+import GUI.login as login
 from PyQt5 import QtWidgets
 import sys
 
