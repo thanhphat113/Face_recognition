@@ -1,8 +1,11 @@
-from main import Main_Page
-from PyQt5.QtWidgets import QApplication
+import login
+from PyQt5 import QtWidgets
 import sys
 
-app = QApplication(sys.argv) 
-
-window = Main_Page()
-sys.exit(app.exec())
+if __name__=="__main__":
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    ui = login.Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec())

@@ -150,6 +150,7 @@ class Ui_Form(object):
         self.pushButton.setText(_translate("Form", "Xoá"))
         self.pushButton_2.setText(_translate("Form", "Sửa"))
         self.label_2.setText(_translate("Form", "Tìm kiếm "))
+        self.label_2.setStyleSheet("border:none")
         self.pushButton_4.setText(_translate("Form", "Tìm"))
         self.tableWidget.setSortingEnabled(False)
         item = self.tableWidget.horizontalHeaderItem(0)
