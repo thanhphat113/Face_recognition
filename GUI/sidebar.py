@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import nhanvien as nv ,dichvu as dv,home 
+import nhanvien as nv ,dichvu as dv, thunuoi, home 
 
 
 class Ui_MainWindow(object):
@@ -279,12 +279,13 @@ class Ui_MainWindow(object):
                 self.label_5.setGeometry(QtCore.QRect(240, 110, 60, 16))
                 self.label_5.setObjectName("label_5")
                 self.stackedWidget.addWidget(self.customer_Page)
+
                 self.pets_Page = QtWidgets.QWidget()
+                uipets = thunuoi.Ui_Form()
+                uipets.setupUi(self.pets_Page)
                 self.pets_Page.setObjectName("pets_Page")
-                self.label_6 = QtWidgets.QLabel(self.pets_Page)
-                self.label_6.setGeometry(QtCore.QRect(280, 160, 60, 16))
-                self.label_6.setObjectName("label_6")
                 self.stackedWidget.addWidget(self.pets_Page)
+
                 self.employee_page = QtWidgets.QWidget()
                 uinv = nv.Ui_Form()
                 uinv.setupUi(self.employee_page)
@@ -340,7 +341,6 @@ class Ui_MainWindow(object):
                 self.btnChart.setText(_translate("MainWindow", "Doanh thu"))
                 self.pushButton_12.setText(_translate("MainWindow", "Thoát"))
                 self.label_5.setText(_translate("MainWindow", "Customer"))
-                self.label_6.setText(_translate("MainWindow", "Pets"))
                 self.label_8.setText(_translate("MainWindow", "Chart"))
                 
         def showHome_Pages(self):
