@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import nhanvien as nv ,dichvu as dv, thunuoi, home 
+import nhanvien as nv ,dichvu as dv, thunuoi, home ,khachhang as kh
 
 
 class Ui_MainWindow(object):
@@ -274,10 +274,9 @@ class Ui_MainWindow(object):
                 self.home_Page.setObjectName("home_Page")
                 self.stackedWidget.addWidget(self.home_Page)
                 self.customer_Page = QtWidgets.QWidget()
+                ui_cus=kh.Ui_Form()
+                ui_cus.setupUi(self.customer_Page)
                 self.customer_Page.setObjectName("customer_Page")
-                self.label_5 = QtWidgets.QLabel(self.customer_Page)
-                self.label_5.setGeometry(QtCore.QRect(240, 110, 60, 16))
-                self.label_5.setObjectName("label_5")
                 self.stackedWidget.addWidget(self.customer_Page)
 
                 self.pets_Page = QtWidgets.QWidget()
@@ -340,7 +339,6 @@ class Ui_MainWindow(object):
                 self.btnService.setText(_translate("MainWindow", "Dịch vụ"))
                 self.btnChart.setText(_translate("MainWindow", "Doanh thu"))
                 self.pushButton_12.setText(_translate("MainWindow", "Thoát"))
-                self.label_5.setText(_translate("MainWindow", "Customer"))
                 self.label_8.setText(_translate("MainWindow", "Chart"))
                 
         def showHome_Pages(self):
