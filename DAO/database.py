@@ -1,20 +1,42 @@
 import mysql.connector
-class database:
-    def __init__(self, host="localhost", user="root", password="", database="PhongKhamThuY"):
-        self.host = host
-        self.user = user
-        self.password = password
-        self.database = database
-        self.connection = None
-        
-    def connect(self):
-        try:
-            self.connection = mysql.connector.connect(
-                host=self.host,
-                user=self.user,
-                password=self.password,
-                database=self.database
-            )
-        except mysql.connector.Error as err:
-            print("Error:", err)
+
+def connect_to_database():
+    # Thực hiện kết nối đến cơ sở dữ liệu MySQL
+    try:
+        connection = mysql.connector.connect(
+            host="localhost",
+            user="root",
+            password="",
+            database="PhongKhamThuY"
+        )
+        print("Connected to the database")
+        return connection
+    except mysql.connector.Error as error:
+        print("Failed to connect to the database: {}".format(error))
+        return None
+
+def close_connection(connection):
+    # Đóng kết nối đến cơ sở dữ liệu
+    if connection:
+        connection.close()
+        print("Connection closed")
+
+def execute_query(connection, query):
+    # Thực thi truy vấn và trả về kết quả (nếu có)
+    cursor = connection.cursor()
+    try:
+        cursor.execute(query)
+        result = cursor.fetchall()
+        return result
+    except mysql.connector.Error as error:
+        print("Error executing query: {}".format(error))
+        return None
     
+def insert_data(connection, query, data):
+    # Thêm dữ liệu vào bảng
+    cursor = connection.cursor()
+    try:
+        cursor.execute(query, data)
+        connection.commit()
+    except mysql.connector.Error as error:
+        print("Error inserting data: {}".format(error))

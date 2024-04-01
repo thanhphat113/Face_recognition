@@ -1,5 +1,5 @@
 class employee:
-    def __init__(self,manv,tennv,email,sdt):
+    def __init__(self,manv,tennv,sdt ,email):
         self.__manv=manv
         self.__tennv=tennv
         self.__email=email
@@ -11,7 +11,7 @@ class employee:
     
     @manv.setter
     def manv(self,manv):
-        self.manv=manv
+        self.__manv=manv
     
     @property
     def tennv(self):
@@ -19,7 +19,7 @@ class employee:
     
     @tennv.setter
     def tennv(self,tennv):
-        self.tennv=tennv
+        self.__tennv=tennv
     
     @property
     def email(self):
@@ -35,4 +35,4 @@ class employee:
     
     @sdt.setter
     def sdt(self,sdt):
-        self.sdt=sdt
+        self.__sdt=sdt
