@@ -23,9 +23,10 @@ class petDAO:
                 tn = pet(item[0], item[1], item[2], item[3], item[4], item[5], item[6], item[7], item[8])
                 self.pet_list.append(tn)
                 self.n = self.n + 1
+            return self.pet_list
         except mysql.connector.Error as error:
             print(f'Error: {error}')
-
+            return None
     
     def WriteToDatabase(self):
         pass
@@ -60,4 +61,4 @@ if __name__ == "__main__":
     dstn = petDAO()
     qltn = dstn.ReadFromDatabase()
     for tn in qltn:
-        print(f'Mã thú nuôi: {tn.matn}, Tên thú nuôi: {tn.tentn}, Màu lông: {tn.maulong}, Cân nặng: {tn.cannang}, Loài: {tn.loai}, Giới tính: {tn.gioitinh}, Giống: {tn.giong}, Khách hàng: {tn.kh}')
+        print(f'Mã thú nuôi: {tn.matn}, Tên thú nuôi: {tn.tentn}, Màu lông: {tn.maulong}, Cân nặng: {tn.cannang}, Loài: {tn.loai}, Giống: {tn.giong}, Giới tính: {tn.gioitinh}, Khách hàng: {tn.kh}')

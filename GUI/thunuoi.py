@@ -9,7 +9,14 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QTableWidgetItem
 
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+import DAO.database as db
+from  DAO.petDAO import petDAO
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -196,6 +203,16 @@ class Ui_Form(object):
         item = self.tableWidget.horizontalHeaderItem(8)
         item.setText(_translate("Form", "Hình ảnh"))
 
+        pet_list = petDAO().ReadFromDatabase()
+        for tn in pet_list:
+                data = [tn.matn,tn.tentn,tn.maulong,tn.cannang,tn.loai,tn.giong,tn.gioitinh,tn.kh,tn.hinhanh]
+                self.add_row_to_table(data)
+        
+    def add_row_to_table(self, data):
+        rowPosition = self.tableWidget.rowCount()
+        self.tableWidget.insertRow(rowPosition)
+        for column, item in enumerate(data):
+                self.tableWidget.setItem(rowPosition, column, QTableWidgetItem(str(item)))
 
 if __name__ == "__main__":
     import sys
