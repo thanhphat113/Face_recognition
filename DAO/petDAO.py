@@ -18,7 +18,7 @@ class petDAO:
         try:
             conn.connect()
             query = "Select * from thunuoi"
-            list = db.execute_query(conn,query)
+            list = db.execute_query(conn, query)
             for item in list:
                 tn = pet(item[0], item[1], item[2], item[3], item[4], item[5], item[6], item[7], item[8])
                 self.pet_list.append(tn)
@@ -29,7 +29,16 @@ class petDAO:
             return None
     
     def WriteToDatabase(self):
-        pass
+        conn = self.conn
+        try:
+            conn.connect()
+            query = "Delete from thunuoi"
+            db.execute_query(conn, query)
+            for item in self.pet_list:
+                query = f"Insert into thunuoi values ('{item.get_matn}', '{item.get_tentn}', '{item.get_maulong}', '{item.get_cannang}', '{item.get_loai}', '{item.get_giong}', '{item.get_gioitinh}', '{item.get_kh}, '{item.get_hinhanh}')"
+                db.insert_data(conn, query)
+        except mysql.connector.Error as error:
+            print(f'Error: {error}')
 
     def find(self, noidung : str, tuychon : str):
         conn = self.conn

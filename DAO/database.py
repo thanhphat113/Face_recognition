@@ -31,11 +31,11 @@ def execute_query(connection, query):
         print("Error executing query: {}".format(error))
         return None
     
-def insert_data(connection, query, data):
+def insert_data(connection, query):
     # Thêm dữ liệu vào bảng
     cursor = connection.cursor()
     try:
-        cursor.execute(query, data)
+        cursor.execute(query)
         connection.commit()
     except mysql.connector.Error as error:
         print("Error inserting data: {}".format(error))
