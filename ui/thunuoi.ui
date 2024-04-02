@@ -175,7 +175,23 @@ QLabel{
          <widget class="QLineEdit" name="lineEdit"/>
         </item>
         <item>
-         <widget class="QComboBox" name="comboBox"/>
+         <widget class="QComboBox" name="comboBox">
+          <item>
+           <property name="text">
+            <string>Mã thú nuôi</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Tên thú nuôi</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Khách hàng</string>
+           </property>
+          </item>
+         </widget>
         </item>
         <item>
          <widget class="QPushButton" name="pushButton_4">
