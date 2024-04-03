@@ -18,7 +18,7 @@ class billDAO:
         try:
             conn.connect()
             query = "Select * from hoadon"
-            list = db.execute_query(conn, query)
+            list = db.execute_fetch_all(conn, query)
             for item in list:
                 bll = bill(item[0], item[1], item[2], item[3], item[4])
                 self.bill_list.append(bll)
@@ -33,10 +33,10 @@ class billDAO:
         try:
             conn.connect()
             query = "Delete from hoadon"
-            db.execute_query(conn, query)
+            db.execute_fetch_all(conn, query)
             for item in self.bill_list:
                 query = f"Insert into hoadon values ('{item.get_mahd()}', '{item.get_ngaytao()}', '{item.get_tongtien()}', '{item.get_manv()}', '{item.get_makh()}')"
-                db.insert_data(conn, query)
+                db.execute_query(conn, query)
         except mysql.connector.Error as error:
             print(f'Error: {error}')
 
@@ -52,7 +52,7 @@ class billDAO:
                 query = f"Select * from hoadon where manv = {noidung}"
             elif tuychon == "makh":
                 query = f"Select * from hoadon where makh = {noidung}"
-            db.execute_query(conn, query)
+            db.execute_fetch_all(conn, query)
         except mysql.connector.Error as error:
             print(f'Error: {error}')
         

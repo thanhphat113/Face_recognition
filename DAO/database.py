@@ -6,8 +6,8 @@ def connect_to_database():
         connection = mysql.connector.connect(
             host="localhost",
             user="root",
-            password="",
-            database="PhongKhamThuY"
+            password="Beenguyen2002",
+            database="phongkhamthuy"
         )
         return connection
     except mysql.connector.Error as error:
@@ -20,7 +20,7 @@ def close_connection(connection):
         connection.close()
         print("Connection closed")
 
-def execute_query(connection, query):
+def execute_fetch_all(connection, query):
     # Thực thi truy vấn và trả về kết quả (nếu có)
     cursor = connection.cursor()
     try:
@@ -31,11 +31,11 @@ def execute_query(connection, query):
         print("Error executing query: {}".format(error))
         return None
     
-def insert_data(connection, query):
+def execute_query(connection, query):
     # Thêm dữ liệu vào bảng
     cursor = connection.cursor()
     try:
         cursor.execute(query)
         connection.commit()
     except mysql.connector.Error as error:
-        print("Error inserting data: {}".format(error))
+        print("Error execute query: {}".format(error))

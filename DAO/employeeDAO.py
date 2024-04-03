@@ -17,8 +17,8 @@ class employeeDAO:
         conn=self.conn
         try:
             conn.connect()
-            query="Select * from NhanVien"
-            list=db.execute_query(conn,query)
+            query="Select * from nhanvien"
+            list=db.execute_fetch_all(conn,query)
             for nv in list:
                 emp=employee(nv[0],nv[1],nv[2],nv[3])
                 employee_list.append(emp)
@@ -33,8 +33,8 @@ class employeeDAO:
         conn=self.conn
         try:
             conn.connect()
-            query=f"insert into NhanVien(tennv,sdt,email) values ('{emp.tennv}','{emp.sdt}','{emp.email}')"
-            db.insert_data(conn,query)
+            query=f"insert into nhanvien(tennv,sdt,email) values ('{emp.tennv}','{emp.sdt}','{emp.email}')"
+            db.execute_query(conn,query)
             return 'Thêm thành công !!!!'
         except mysql.connector.Error as error:
             return 'Thêm thất bại !!!!'
