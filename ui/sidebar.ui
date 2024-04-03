@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>500</height>
+    <width>1055</width>
+    <height>638</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -70,7 +70,7 @@ QPushButton:checked{
           <string/>
          </property>
          <property name="pixmap">
-          <pixmap>img/house-chimney-window-solid.png</pixmap>
+          <pixmap>../img/house-chimney-window-solid.png</pixmap>
          </property>
          <property name="scaledContents">
           <bool>true</bool>
@@ -98,7 +98,7 @@ QPushButton:checked{
            </property>
            <property name="icon">
             <iconset>
-             <normaloff>img/dashboard.png</normaloff>img/dashboard.png</iconset>
+             <normaloff>../img/dashboard.png</normaloff>../img/dashboard.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -121,7 +121,7 @@ QPushButton:checked{
            </property>
            <property name="icon">
             <iconset>
-             <normaloff>img/user-group-solid.png</normaloff>img/user-group-solid.png</iconset>
+             <normaloff>../img/user-group-solid.png</normaloff>../img/user-group-solid.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -144,7 +144,7 @@ QPushButton:checked{
            </property>
            <property name="icon">
             <iconset>
-             <normaloff>img/pets.png</normaloff>img/pets.png</iconset>
+             <normaloff>../img/pets.png</normaloff>../img/pets.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -167,7 +167,53 @@ QPushButton:checked{
            </property>
            <property name="icon">
             <iconset>
-             <normaloff>img/employee.png</normaloff>img/employee.png</iconset>
+             <normaloff>../img/employee.png</normaloff>../img/employee.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="autoExclusive">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="iconPhieuNhap">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>../img/note_48px.png</normaloff>../img/note_48px.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="autoExclusive">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="iconMedicine">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>../img/medical_bag_100px.png</normaloff>../img/medical_bag_100px.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -190,7 +236,7 @@ QPushButton:checked{
            </property>
            <property name="icon">
             <iconset>
-             <normaloff>img/service.png</normaloff>img/service.png</iconset>
+             <normaloff>../img/service.png</normaloff>../img/service.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -213,7 +259,7 @@ QPushButton:checked{
            </property>
            <property name="icon">
             <iconset>
-             <normaloff>img/chart.png</normaloff>img/chart.png</iconset>
+             <normaloff>../img/chart.png</normaloff>../img/chart.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -251,7 +297,7 @@ QPushButton:checked{
          </property>
          <property name="icon">
           <iconset>
-           <normaloff>img/off.png</normaloff>img/off.png</iconset>
+           <normaloff>../img/off.png</normaloff>../img/off.png</iconset>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -318,7 +364,7 @@ QPushButton:checked{
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap>img/house-chimney-window-solid.png</pixmap>
+            <pixmap>../img/house-chimney-window-solid.png</pixmap>
            </property>
            <property name="scaledContents">
             <bool>true</bool>
@@ -381,7 +427,7 @@ QPushButton:checked{
            </property>
            <property name="icon">
             <iconset>
-             <normaloff>img/dashboard.png</normaloff>img/dashboard.png</iconset>
+             <normaloff>../img/dashboard.png</normaloff>../img/dashboard.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -404,7 +450,7 @@ QPushButton:checked{
            </property>
            <property name="icon">
             <iconset>
-             <normaloff>img/user-group-solid.png</normaloff>img/user-group-solid.png</iconset>
+             <normaloff>../img/user-group-solid.png</normaloff>../img/user-group-solid.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -427,7 +473,7 @@ QPushButton:checked{
            </property>
            <property name="icon">
             <iconset>
-             <normaloff>img/pets.png</normaloff>img/pets.png</iconset>
+             <normaloff>../img/pets.png</normaloff>../img/pets.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -450,7 +496,53 @@ QPushButton:checked{
            </property>
            <property name="icon">
             <iconset>
-             <normaloff>img/employee.png</normaloff>img/employee.png</iconset>
+             <normaloff>../img/employee.png</normaloff>../img/employee.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="autoExclusive">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnPhieuNhap">
+           <property name="text">
+            <string>Phiếu nhập</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>../img/note_48px.png</normaloff>../img/note_48px.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="autoExclusive">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnMedicine">
+           <property name="text">
+            <string>Dược phẩm</string>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>../img/medical_bag_100px.png</normaloff>../img/medical_bag_100px.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -473,7 +565,7 @@ QPushButton:checked{
            </property>
            <property name="icon">
             <iconset>
-             <normaloff>img/service.png</normaloff>img/service.png</iconset>
+             <normaloff>../img/service.png</normaloff>../img/service.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -496,7 +588,7 @@ QPushButton:checked{
            </property>
            <property name="icon">
             <iconset>
-             <normaloff>img/chart.png</normaloff>img/chart.png</iconset>
+             <normaloff>../img/chart.png</normaloff>../img/chart.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -534,7 +626,7 @@ QPushButton:checked{
          </property>
          <property name="icon">
           <iconset>
-           <normaloff>img/off.png</normaloff>img/off.png</iconset>
+           <normaloff>../img/off.png</normaloff>../img/off.png</iconset>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -562,7 +654,7 @@ QPushButton:checked{
             </property>
             <property name="icon">
              <iconset>
-              <normaloff>img/menu.png</normaloff>img/menu.png</iconset>
+              <normaloff>../img/menu.png</normaloff>../img/menu.png</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -598,7 +690,7 @@ QPushButton:checked{
             </property>
             <property name="icon">
              <iconset>
-              <normaloff>img/customer.png</normaloff>img/customer.png</iconset>
+              <normaloff>../img/customer.png</normaloff>../img/customer.png</iconset>
             </property>
             <property name="iconSize">
              <size>
@@ -618,7 +710,7 @@ QPushButton:checked{
 border:1px solid black;</string>
          </property>
          <property name="currentIndex">
-          <number>4</number>
+          <number>5</number>
          </property>
          <widget class="QWidget" name="home_Page">
           <widget class="QLabel" name="label_4">
@@ -666,6 +758,8 @@ border:1px solid black;</string>
           </widget>
          </widget>
          <widget class="QWidget" name="employee_page"/>
+         <widget class="QWidget" name="phieunhap_page"/>
+         <widget class="QWidget" name="medicine_page"/>
          <widget class="QWidget" name="service_Page"/>
          <widget class="QWidget" name="chart_Page">
           <widget class="QLabel" name="label_8">

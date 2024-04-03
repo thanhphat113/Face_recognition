@@ -15,7 +15,7 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from DAO.employeeDAO import employeeDAO
 from DTO.employeeDTO import employee
-import thongbao as tb
+import GUI.thongbao as tb
 
 
 class Ui_Dialog(object):

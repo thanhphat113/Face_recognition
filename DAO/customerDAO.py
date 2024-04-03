@@ -18,7 +18,7 @@ class customerDAO:
         try:
             conn.connect()
             query = "Select * from khachhang"
-            list = db.execute_query(conn, query)
+            list = db.execute_fetch_all(conn, query)
             for item in list:
                 cus = customer(item[0], item[1], item[2], item[3], item[4])
                 self.customer_list.append(cus)
@@ -33,10 +33,10 @@ class customerDAO:
         try:
             conn.connect()
             query = "Delete from khachhang"
-            db.execute_query(conn, query)
+            db.execute_fetch_all(conn, query)
             for item in self.customer_list:
                 query = f"Insert into khachhang values ('{item.get_makh()}', '{item.get_tenkh()}', '{item.get_gioitinh()}', '{item.get_sdt()}', '{item.get_email()}')"
-                db.insert_data(conn, query)
+                db.execute_query(conn, query)
         except mysql.connector.Error as error:
             print(f'Error: {error}')
 
@@ -52,7 +52,7 @@ class customerDAO:
                 query = f"Select * from khachhang where sdt = {noidung}"
             elif tuychon == "email":
                 query = f"Select * from khachhang where email = {noidung}"
-            db.execute_query(conn, query)
+            db.execute_fetch_all(conn, query)
         except mysql.connector.Error as error:
             print(f'Error: {error}')
         

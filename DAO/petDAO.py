@@ -17,7 +17,7 @@ class petDAO:
         try:
             conn.connect()
             query = "Select * from ThuNuoi"
-            list = db.execute_query(conn, query)
+            list = db.execute_fetch_all(conn, query)
             for item in list:
                 tn = pet(item[0], item[1], item[2], item[3], item[4])
                 thunuoi_list.append(tn)
@@ -54,7 +54,7 @@ class petDAO:
                 query = f"Select * from thunuoi where giong = {noidung}"
             elif tuychon == "makh":
                 query = f"Select * from thunuoi where makh = {noidung}"
-            db.execute_query(conn, query)
+            db.execute_fetch_all(conn, query)
         except mysql.connector.Error as error:
             print(f'Error: {error}')
         
