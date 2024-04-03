@@ -20,7 +20,7 @@ class petDAO:
             query = "Select * from thunuoi"
             list = db.execute_query(conn, query)
             for item in list:
-                tn = pet(item[0], item[1], item[2], item[3], item[4], item[5], item[6], item[7], item[8])
+                tn = pet(item[0], item[1], item[2], item[3], item[4], item[5], item[6], item[7])
                 self.pet_list.append(tn)
                 self.n = self.n + 1
             return self.pet_list
@@ -35,7 +35,7 @@ class petDAO:
             query = "Delete from thunuoi"
             db.execute_query(conn, query)
             for item in self.pet_list:
-                query = f"Insert into thunuoi values ('{item.get_matn()}', '{item.get_tentn()}', '{item.get_hinhanh()}', '{item.get_maulong()}', '{item.get_cannang()}', '{item.get_loai()}', '{item.get_giong()}', '{item.get_gioitinh()}', '{item.get_kh()})"
+                query = f"Insert into thunuoi values ('{item.get_matn()}', '{item.get_tentn()}', '{item.get_maulong()}', '{item.get_cannang()}', '{item.get_loai()}', '{item.get_giong()}', '{item.get_gioitinh()}', '{item.get_kh()})"
                 db.insert_data(conn, query)
         except mysql.connector.Error as error:
             print(f'Error: {error}')
@@ -76,4 +76,4 @@ if __name__ == "__main__":
     dstn = petDAO()
     qltn = dstn.ReadFromDatabase()
     for tn in qltn:
-        print(f"Mã thú nuôi: {tn.get_matn()}, Tên thú nuôi: {tn.get_tentn()}, Hình ảnh: {tn.get_hinhanh()}, Màu lông: {tn.get_maulong()}, Cân nặng: {tn.get_cannang()}, Loài: {tn.get_loai()}, Giống: {tn.get_giong()}, Giới tính: {tn.get_gioitinh()}, Khách hàng: {tn.get_kh()}")
+        print(f"Mã thú nuôi: {tn.get_matn()}, Tên thú nuôi: {tn.get_tentn()}, Màu lông: {tn.get_maulong()}, Cân nặng: {tn.get_cannang()}, Loài: {tn.get_loai()}, Giống: {tn.get_giong()}, Giới tính: {tn.get_gioitinh()}, Khách hàng: {tn.get_kh()}")

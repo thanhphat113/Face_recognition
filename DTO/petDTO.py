@@ -8,6 +8,7 @@ class pet:
         self.__giong = giong
         self.__gioitinh = gioitinh
         self.__kh = kh
+
     
     def get_matn(self):
         return self.__matn
@@ -55,6 +56,4 @@ class pet:
     
     def get_kh(self):
         return self.__kh
-    
-    
     
