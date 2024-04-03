@@ -390,6 +390,7 @@ class Ui_MainWindow(object):
         self.label_6.setText(_translate("MainWindow", "Pets"))
         self.label_8.setText(_translate("MainWindow", "Chart"))
         self.icon_menu_widget.hide()
+        self.eventHandling()
         
         self.home_form = home.Ui_Form()
         self.home_form.setupUi(self.home_Page)
@@ -412,10 +413,10 @@ class Ui_MainWindow(object):
         self.tn_form = tn.Ui_Form()
         self.tn_form.setupUi(self.pets_Page)
 
-        self.eventHandling()
         self.dv_form.btnAdd.clicked.connect(self.show_add_dialog)
 
     def showHome_Pages(self):
+        print("aaaaaaaaa")
         self.stackedWidget.setCurrentIndex(0)
     
     def showCustomer_Pages(self):
@@ -459,7 +460,7 @@ class Ui_MainWindow(object):
 
     # Xử lý giao diện
     def eventHandling(self):
-        self.btnEmployee.clicked.connect(self.showEmployee_Pages)
+        self.btnEmployee.clicked.connect(self.showHome_Pages)
         self.btnCustomer.clicked.connect(self.showCustomer_Pages)
         self.btnPets.clicked.connect(self.showPets_Pages)
         self.btnChart.clicked.connect(self.showChart_Pages)

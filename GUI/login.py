@@ -95,7 +95,7 @@ class Ui_MainWindow(object):
                 self.btnAccept.setText(_translate("MainWindow", "Đăng nhập"))
                 self.btnAccept.enterEvent = self.enter_accept_event
                 self.btnAccept.leaveEvent = self.leave_accept_event
-                self.btnAccept.clicked.connect(self.show_GUI)
+                self.btnAccept.clicked.connect(lambda: self.show_GUI())
                 self.btnDeny.setText(_translate("MainWindow", "Huỷ"))
                 self.btnDeny.enterEvent = self.enter_cancel_event
                 self.btnDeny.leaveEvent = self.leave_cancel_event
@@ -132,19 +132,29 @@ class Ui_MainWindow(object):
                 #         if taikhoan.maloai == 1:
                                 
                 #         elif taikhoan.maloai == 2:
+                
+        def setGUI(self,login:QtWidgets.QMainWindow):
+                self.login = login
         
         def show_GUI(self):
                 print("Đã bấm")
-                sidebar = QtWidgets.QMainWindow()
+                self.sidebar = QtWidgets.QMainWindow()
                 uisb = sb.Ui_MainWindow()
-                uisb.setupUi(sidebar)
-                print(sidebar.show())
+                uisb.setupUi(self.sidebar)
+                
+                self.sidebar.show()
+                self.login.close()
+                
+                
+        
+                
                 
 if __name__=="__main__":
         app = QtWidgets.QApplication(sys.argv)
         sidebar = QtWidgets.QMainWindow()
-        sbui = sb.Ui_MainWindow()
+        sbui = Ui_MainWindow()
         sbui.setupUi(sidebar)
+        sbui.setGUI(sidebar)
         sidebar.show()
         sys.exit(app.exec()) 
                 
