@@ -26,13 +26,16 @@ class employeeDAO:
         except mysql.connector.Error as error:
             print(f'Error: {error}')
             return None
+        finally:
+            conn.close()
     
-    def insert(self,emp):
+    def insert(self, emp:employee):
         conn=self.conn
         try:
             conn.connect()
             query=f"insert into NhanVien(tennv,sdt,email) values ('{emp.tennv}','{emp.sdt}','{emp.email}')"
             db.insert_data(conn,query)
-            return 'Thêm thành công!!!!'
+            return 'Thêm thành công !!!!'
         except mysql.connector.Error as error:
-            return 'Thêm thất bại!!!!'
+            return 'Thêm thất bại !!!!'
+        
