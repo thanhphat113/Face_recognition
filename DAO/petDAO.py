@@ -1,4 +1,3 @@
-
 import sys
 import os
 
@@ -36,7 +35,7 @@ class petDAO:
             query = "Delete from thunuoi"
             db.execute_query(conn, query)
             for item in self.pet_list:
-                query = f"Insert into thunuoi values ('{item.get_matn}', '{item.get_tentn}', '{item.get_maulong}', '{item.get_cannang}', '{item.get_loai}', '{item.get_giong}', '{item.get_gioitinh}', '{item.get_kh}, '{item.get_hinhanh}')"
+                query = f"Insert into thunuoi values ('{item.get_matn()}', '{item.get_tentn()}', '{item.get_hinhanh()}', '{item.get_maulong()}', '{item.get_cannang()}', '{item.get_loai()}', '{item.get_giong()}', '{item.get_gioitinh()}', '{item.get_kh()})"
                 db.insert_data(conn, query)
         except mysql.connector.Error as error:
             print(f'Error: {error}')
@@ -49,6 +48,12 @@ class petDAO:
                 query = f"Select * from thunuoi where matn = {noidung}"
             elif tuychon == "tentn":
                 query = f"Select * from thunuoi where tentn = {noidung}"
+            elif tuychon == "mau":
+                query = f"Select * from thunuoi where mau = {noidung}"
+            elif tuychon == "loai":
+                query = f"Select * from thunuoi where loai = {noidung}"
+            elif tuychon == "giong":
+                query = f"Select * from thunuoi where giong = {noidung}"
             elif tuychon == "makh":
                 query = f"Select * from thunuoi where makh = {noidung}"
             db.execute_query(conn, query)
@@ -71,4 +76,4 @@ if __name__ == "__main__":
     dstn = petDAO()
     qltn = dstn.ReadFromDatabase()
     for tn in qltn:
-        print(f'Mã thú nuôi: {tn.matn}, Tên thú nuôi: {tn.tentn}, Màu lông: {tn.maulong}, Cân nặng: {tn.cannang}, Loài: {tn.loai}, Giống: {tn.giong}, Giới tính: {tn.gioitinh}, Khách hàng: {tn.kh}')
+        print(f"Mã thú nuôi: {tn.get_matn()}, Tên thú nuôi: {tn.get_tentn()}, Hình ảnh: {tn.get_hinhanh()}, Màu lông: {tn.get_maulong()}, Cân nặng: {tn.get_cannang()}, Loài: {tn.get_loai()}, Giống: {tn.get_giong()}, Giới tính: {tn.get_gioitinh()}, Khách hàng: {tn.get_kh()}")

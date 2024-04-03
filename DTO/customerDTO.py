@@ -1,47 +1,37 @@
 class customer:
-    def __init__(self,makh,tenkh,gioitinh,sdt ,email):
-        self.__makh=makh
-        self.__tenkh=tenkh
-        self.__gioitinh=gioitinh
-        self.__email=email
-        self.__sdt=sdt
+    def __init__(self, makh : int, tenkh : str, gioitinh : int, sdt : str, email : str):
+        self.__makh = makh
+        self.__tenkh = tenkh
+        self.__gioitinh = gioitinh
+        self.__email = email
+        self.__sdt = sdt
     
-    @property
-    def makh(self):
+    def get_makh(self):
         return self.__makh
     
-    @makh.setter
-    def makh(self,makh):
-        self.__makh=makh
+    def set_makh(self, makh):
+        self.__makh = makh
     
-    @property
-    def tenkh(self):
+    def get_tenkh(self):
         return self.__tenkh
     
-    @tenkh.setter
-    def tenkh(self,tenkh):
-        self.__tenkh=tenkh
+    def set_tenkh(self, tenkh):
+        self.__tenkh = tenkh
     
-    @property
-    def gioitinh(self):
+    def get_gioitinh(self):
         return self.__gioitinh
     
-    @gioitinh.setter
-    def gioitinh(self, gioitinh):
+    def set_gioitinh(self, gioitinh):
         self.__gioitinh = gioitinh
 
-    @property
-    def email(self):
+    def get_email(self):
         return self.__email
     
-    @email.setter
-    def email(self,email):
-        self.__email=email
+    def set_email(self, email):
+        self.__email = email
     
-    @property
-    def sdt(self):
+    def get_sdt(self):
         return self.__sdt
     
-    @sdt.setter
-    def sdt(self,sdt):
-        self.__sdt=sdt
+    def set_sdt(self, sdt):
+        self.__sdt = sdt

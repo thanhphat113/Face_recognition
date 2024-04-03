@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import nhanvien as nv ,dichvu as dv, thunuoi, home ,khachhang as kh
+import nhanvien as nv ,dichvu as dv, thunuoi, home ,khachhang as kh, hoadon
 
 
 class Ui_MainWindow(object):
@@ -55,6 +55,7 @@ class Ui_MainWindow(object):
                 self.verticalLayout.setObjectName("verticalLayout")
                 self.iconHome = QtWidgets.QPushButton(self.icon_menu_widget)
                 self.iconHome.setText("")
+
                 icon = QtGui.QIcon()
                 icon.addPixmap(QtGui.QPixmap("img/dashboard.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
                 self.iconHome.setIcon(icon)
@@ -66,6 +67,7 @@ class Ui_MainWindow(object):
                 self.verticalLayout.addWidget(self.iconHome)
                 self.iconCustomer = QtWidgets.QPushButton(self.icon_menu_widget)
                 self.iconCustomer.setText("")
+
                 icon1 = QtGui.QIcon()
                 icon1.addPixmap(QtGui.QPixmap("img/user-group-solid.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
                 self.iconCustomer.setIcon(icon1)
@@ -76,6 +78,7 @@ class Ui_MainWindow(object):
                 self.verticalLayout.addWidget(self.iconCustomer)
                 self.iconPets = QtWidgets.QPushButton(self.icon_menu_widget)
                 self.iconPets.setText("")
+
                 icon2 = QtGui.QIcon()
                 icon2.addPixmap(QtGui.QPixmap("img/pets.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
                 self.iconPets.setIcon(icon2)
@@ -86,6 +89,7 @@ class Ui_MainWindow(object):
                 self.verticalLayout.addWidget(self.iconPets)
                 self.iconEmployee = QtWidgets.QPushButton(self.icon_menu_widget)
                 self.iconEmployee.setText("")
+
                 icon3 = QtGui.QIcon()
                 icon3.addPixmap(QtGui.QPixmap("img/employee.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
                 self.iconEmployee.setIcon(icon3)
@@ -96,6 +100,7 @@ class Ui_MainWindow(object):
                 self.verticalLayout.addWidget(self.iconEmployee)
                 self.iconService = QtWidgets.QPushButton(self.icon_menu_widget)
                 self.iconService.setText("")
+
                 icon4 = QtGui.QIcon()
                 icon4.addPixmap(QtGui.QPixmap("img/service.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
                 self.iconService.setIcon(icon4)
@@ -104,11 +109,23 @@ class Ui_MainWindow(object):
                 self.iconService.setAutoExclusive(True)
                 self.iconService.setObjectName("iconService")
                 self.verticalLayout.addWidget(self.iconService)
+                self.iconBill = QtWidgets.QPushButton(self.icon_menu_widget)
+                self.iconBill.setText("")
+                #--------------------------------------------------------------------------
+                icon5 = QtGui.QIcon()
+                icon5.addPixmap(QtGui.QPixmap("img/service.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+                self.iconBill.setIcon(icon5)
+                self.iconBill.setIconSize(QtCore.QSize(20, 20))
+                self.iconBill.setCheckable(True)
+                self.iconBill.setAutoExclusive(True)
+                self.iconBill.setObjectName("iconBill")
+                self.verticalLayout.addWidget(self.iconBill)
                 self.iconChart = QtWidgets.QPushButton(self.icon_menu_widget)
                 self.iconChart.setText("")
-                icon5 = QtGui.QIcon()
-                icon5.addPixmap(QtGui.QPixmap("img/chart.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-                self.iconChart.setIcon(icon5)
+                #---------------------------------------------------------
+                icon6 = QtGui.QIcon()
+                icon6.addPixmap(QtGui.QPixmap("img/chart.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+                self.iconChart.setIcon(icon6)
                 self.iconChart.setIconSize(QtCore.QSize(20, 20))
                 self.iconChart.setCheckable(True)
                 self.iconChart.setAutoExclusive(True)
@@ -119,9 +136,10 @@ class Ui_MainWindow(object):
                 self.verticalLayout_3.addItem(spacerItem)
                 self.pushButton_5 = QtWidgets.QPushButton(self.icon_menu_widget)
                 self.pushButton_5.setText("")
-                icon6 = QtGui.QIcon()
-                icon6.addPixmap(QtGui.QPixmap("img/off.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-                self.pushButton_5.setIcon(icon6)
+
+                icon7 = QtGui.QIcon()
+                icon7.addPixmap(QtGui.QPixmap("img/off.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+                self.pushButton_5.setIcon(icon7)
                 self.pushButton_5.setCheckable(True)
                 self.pushButton_5.setObjectName("pushButton_5")
                 self.verticalLayout_3.addWidget(self.pushButton_5)
@@ -179,6 +197,7 @@ class Ui_MainWindow(object):
                 self.verticalLayout_2.setContentsMargins(10, 15, -1, -1)
                 self.verticalLayout_2.setSpacing(15)
                 self.verticalLayout_2.setObjectName("verticalLayout_2")
+
                 self.btnHome = QtWidgets.QPushButton(self.menu_widget)
                 self.btnHome.setLayoutDirection(QtCore.Qt.LeftToRight)
                 self.btnHome.setAutoFillBackground(False)
@@ -188,6 +207,7 @@ class Ui_MainWindow(object):
                 self.btnHome.setAutoExclusive(True)
                 self.btnHome.setObjectName("btnHome")
                 self.verticalLayout_2.addWidget(self.btnHome)
+
                 self.btnCustomer = QtWidgets.QPushButton(self.menu_widget)
                 self.btnCustomer.setIcon(icon1)
                 self.btnCustomer.setIconSize(QtCore.QSize(20, 20))
@@ -195,6 +215,7 @@ class Ui_MainWindow(object):
                 self.btnCustomer.setAutoExclusive(True)
                 self.btnCustomer.setObjectName("btnCustomer")
                 self.verticalLayout_2.addWidget(self.btnCustomer)
+
                 self.btnPets = QtWidgets.QPushButton(self.menu_widget)
                 self.btnPets.setIcon(icon2)
                 self.btnPets.setIconSize(QtCore.QSize(20, 20))
@@ -202,6 +223,7 @@ class Ui_MainWindow(object):
                 self.btnPets.setAutoExclusive(True)
                 self.btnPets.setObjectName("btnPets")
                 self.verticalLayout_2.addWidget(self.btnPets)
+
                 self.btnEmployee = QtWidgets.QPushButton(self.menu_widget)
                 self.btnEmployee.setIcon(icon3)
                 self.btnEmployee.setIconSize(QtCore.QSize(20, 20))
@@ -209,6 +231,7 @@ class Ui_MainWindow(object):
                 self.btnEmployee.setAutoExclusive(True)
                 self.btnEmployee.setObjectName("btnEmployee")
                 self.verticalLayout_2.addWidget(self.btnEmployee)
+
                 self.btnService = QtWidgets.QPushButton(self.menu_widget)
                 self.btnService.setIcon(icon4)
                 self.btnService.setIconSize(QtCore.QSize(20, 20))
@@ -216,26 +239,38 @@ class Ui_MainWindow(object):
                 self.btnService.setAutoExclusive(True)
                 self.btnService.setObjectName("btnService")
                 self.verticalLayout_2.addWidget(self.btnService)
+                #------------------------------------------------------
+                self.btnBill = QtWidgets.QPushButton(self.menu_widget)
+                self.btnBill.setIcon(icon5)
+                self.btnBill.setIconSize(QtCore.QSize(20, 20))
+                self.btnBill.setCheckable(True)
+                self.btnBill.setAutoExclusive(True)
+                self.btnBill.setObjectName("btnBill")
+                self.verticalLayout_2.addWidget(self.btnBill)
+                #---------------------------------------------------------
                 self.btnChart = QtWidgets.QPushButton(self.menu_widget)
-                self.btnChart.setIcon(icon5)
+                self.btnChart.setIcon(icon6)
                 self.btnChart.setIconSize(QtCore.QSize(20, 20))
                 self.btnChart.setCheckable(True)
                 self.btnChart.setAutoExclusive(True)
                 self.btnChart.setObjectName("btnChart")
                 self.verticalLayout_2.addWidget(self.btnChart)
+
                 self.verticalLayout_4.addLayout(self.verticalLayout_2)
                 spacerItem2 = QtWidgets.QSpacerItem(20, 129, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
                 self.verticalLayout_4.addItem(spacerItem2)
                 self.pushButton_12 = QtWidgets.QPushButton(self.menu_widget)
-                self.pushButton_12.setIcon(icon6)
+                self.pushButton_12.setIcon(icon7)
                 self.pushButton_12.setCheckable(True)
                 self.pushButton_12.setObjectName("pushButton_12")
                 self.verticalLayout_4.addWidget(self.pushButton_12)
                 self.gridLayout.addWidget(self.menu_widget, 0, 1, 1, 1)
+
                 self.widget_3 = QtWidgets.QWidget(self.centralwidget)
                 self.widget_3.setObjectName("widget_3")
                 self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.widget_3)
                 self.verticalLayout_5.setObjectName("verticalLayout_5")
+
                 self.widget_4 = QtWidgets.QWidget(self.widget_3)
                 self.widget_4.setStyleSheet("QPushButton{\n"
         "    border:none;\n"
@@ -245,9 +280,10 @@ class Ui_MainWindow(object):
                 self.horizontalLayout_2.setObjectName("horizontalLayout_2")
                 self.btnMenu = QtWidgets.QPushButton(self.widget_4)
                 self.btnMenu.setText("")
-                icon7 = QtGui.QIcon()
-                icon7.addPixmap(QtGui.QPixmap("img/menu.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-                self.btnMenu.setIcon(icon7)
+
+                icon8 = QtGui.QIcon()
+                icon8.addPixmap(QtGui.QPixmap("img/menu.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+                self.btnMenu.setIcon(icon8)
                 self.btnMenu.setIconSize(QtCore.QSize(20, 20))
                 self.btnMenu.setCheckable(True)
                 self.btnMenu.setChecked(False)
@@ -257,9 +293,10 @@ class Ui_MainWindow(object):
                 self.horizontalLayout_2.addItem(spacerItem3)
                 self.btnAccount = QtWidgets.QPushButton(self.widget_4)
                 self.btnAccount.setText("")
-                icon8 = QtGui.QIcon()
-                icon8.addPixmap(QtGui.QPixmap("img/customer.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-                self.btnAccount.setIcon(icon8)
+
+                icon9 = QtGui.QIcon()
+                icon9.addPixmap(QtGui.QPixmap("img/customer.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+                self.btnAccount.setIcon(icon9)
                 self.btnAccount.setIconSize(QtCore.QSize(20, 20))
                 self.btnAccount.setObjectName("btnAccount")
                 self.horizontalLayout_2.addWidget(self.btnAccount)
@@ -268,11 +305,13 @@ class Ui_MainWindow(object):
                 self.stackedWidget.setStyleSheet("background-color: rgb(255, 255, 255);\n"
         "border:1px solid black;")
                 self.stackedWidget.setObjectName("stackedWidget")
+
                 self.home_Page = QtWidgets.QWidget()
                 uihome=home.Ui_Form()
                 uihome.setupUi(self.home_Page)
                 self.home_Page.setObjectName("home_Page")
                 self.stackedWidget.addWidget(self.home_Page)
+
                 self.customer_Page = QtWidgets.QWidget()
                 ui_cus=kh.Ui_Form()
                 ui_cus.setupUi(self.customer_Page)
@@ -290,17 +329,26 @@ class Ui_MainWindow(object):
                 uinv.setupUi(self.employee_page)
                 self.employee_page.setObjectName("employee_page")
                 self.stackedWidget.addWidget(self.employee_page)
+
                 self.service_Page = QtWidgets.QWidget()
                 uidv = dv.Ui_Form()
                 uidv.setupUi(self.service_Page)
                 self.service_Page.setObjectName("service_Page")
                 self.stackedWidget.addWidget(self.service_Page)
+
+                self.bill_Page = QtWidgets.QWidget()
+                uipets = hoadon.Ui_Form()
+                uipets.setupUi(self.bill_Page)
+                self.bill_Page.setObjectName("bill_Page")
+                self.stackedWidget.addWidget(self.bill_Page)
+
                 self.chart_Page = QtWidgets.QWidget()
                 self.chart_Page.setObjectName("chart_Page")
                 self.label_8 = QtWidgets.QLabel(self.chart_Page)
                 self.label_8.setGeometry(QtCore.QRect(260, 150, 60, 16))
                 self.label_8.setObjectName("label_8")
                 self.stackedWidget.addWidget(self.chart_Page)
+
                 self.verticalLayout_5.addWidget(self.stackedWidget)
                 self.gridLayout.addWidget(self.widget_3, 0, 2, 1, 1)
                 MainWindow.setCentralWidget(self.centralwidget)
@@ -320,6 +368,8 @@ class Ui_MainWindow(object):
                 self.btnPets.toggled['bool'].connect(self.iconPets.setChecked)
                 self.iconCustomer.toggled['bool'].connect(self.btnCustomer.setChecked) # type: ignore
                 self.btnCustomer.toggled['bool'].connect(self.iconCustomer.setChecked)
+                self.iconBill.toggled['bool'].connect(self.btnBill.setChecked) # type: ignore
+                self.btnBill.toggled['bool'].connect(self.iconBill.setChecked)
                 self.iconChart.toggled['bool'].connect(self.btnChart.setChecked) # type: ignore
                 self.btnChart.toggled['bool'].connect(self.iconChart.setChecked)
                 self.pushButton_5.toggled['bool'].connect(MainWindow.close) # type: ignore
@@ -337,6 +387,7 @@ class Ui_MainWindow(object):
                 self.btnPets.setText(_translate("MainWindow", "Thú nuôi"))
                 self.btnEmployee.setText(_translate("MainWindow", "Nhân viên"))
                 self.btnService.setText(_translate("MainWindow", "Dịch vụ"))
+                self.btnBill.setText(_translate("MainWindow", "Hóa đơn"))
                 self.btnChart.setText(_translate("MainWindow", "Doanh thu"))
                 self.pushButton_12.setText(_translate("MainWindow", "Thoát"))
                 self.label_8.setText(_translate("MainWindow", "Chart"))
@@ -355,9 +406,12 @@ class Ui_MainWindow(object):
                 
         def showService_Pages(self):
                 self.stackedWidget.setCurrentIndex(4)
+        
+        def showBill_Pages(self):
+                self.stackedWidget.setCurrentIndex(5)
                 
         def showChart_Pages(self):
-                self.stackedWidget.setCurrentIndex(5)
+                self.stackedWidget.setCurrentIndex(6)
         
         def eventHandling(self):
                 # Sự kiện nút nhân viên
@@ -372,6 +426,10 @@ class Ui_MainWindow(object):
                 self.btnPets.clicked.connect(self.showPets_Pages)
                 self.iconPets.clicked.connect(self.showPets_Pages)
                 
+                # Sự kiện nút hóa đơn
+                self.btnBill.clicked.connect(self.showBill_Pages)
+                self.iconBill.clicked.connect(self.showBill_Pages)
+
                 # Sự kiện nút thống kê
                 self.btnChart.clicked.connect(self.showChart_Pages)
                 self.iconChart.clicked.connect(self.showChart_Pages)

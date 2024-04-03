@@ -63,7 +63,7 @@ QLabel{
          <enum>Qt::LeftToRight</enum>
         </property>
         <property name="text">
-         <string>Quản lý thú nuôi</string>
+         <string>Quản lý hóa đơn</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -184,32 +184,22 @@ QLabel{
           </property>
           <item>
            <property name="text">
-            <string>Mã thú nuôi</string>
+            <string>Mã hóa đơn</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>Tên thú nuôi</string>
+            <string>Ngày tạo</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>Màu lông</string>
+            <string>Mã nhân viên</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>Loài</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Giống</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Khách hàng</string>
+            <string>Mã khách hàng</string>
            </property>
           </item>
          </widget>
@@ -257,12 +247,6 @@ QLabel{
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>0</height>
-         </size>
-        </property>
         <property name="sortingEnabled">
          <bool>false</bool>
         </property>
@@ -270,10 +254,16 @@ QLabel{
          <bool>false</bool>
         </property>
         <property name="columnCount">
-         <number>9</number>
+         <number>5</number>
         </property>
         <attribute name="horizontalHeaderCascadingSectionResizes">
          <bool>false</bool>
+        </attribute>
+        <attribute name="horizontalHeaderMinimumSectionSize">
+         <number>47</number>
+        </attribute>
+        <attribute name="horizontalHeaderDefaultSectionSize">
+         <number>150</number>
         </attribute>
         <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
          <bool>false</bool>
@@ -289,7 +279,7 @@ QLabel{
         </attribute>
         <column>
          <property name="text">
-          <string>Mã thú nuôi</string>
+          <string>Mã hóa đơn</string>
          </property>
          <property name="textAlignment">
           <set>AlignCenter</set>
@@ -297,7 +287,7 @@ QLabel{
         </column>
         <column>
          <property name="text">
-          <string>Tên thú nuôi</string>
+          <string>Ngày tạo</string>
          </property>
          <property name="textAlignment">
           <set>AlignCenter</set>
@@ -305,7 +295,7 @@ QLabel{
         </column>
         <column>
          <property name="text">
-          <string>Hình ảnh</string>
+          <string>Tổng tiền</string>
          </property>
          <property name="textAlignment">
           <set>AlignCenter</set>
@@ -313,7 +303,7 @@ QLabel{
         </column>
         <column>
          <property name="text">
-          <string>Màu lông</string>
+          <string>Mã nhân viên</string>
          </property>
          <property name="textAlignment">
           <set>AlignCenter</set>
@@ -321,39 +311,7 @@ QLabel{
         </column>
         <column>
          <property name="text">
-          <string>Cân nặng</string>
-         </property>
-         <property name="textAlignment">
-          <set>AlignCenter</set>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>Loài</string>
-         </property>
-         <property name="textAlignment">
-          <set>AlignCenter</set>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>Giống</string>
-         </property>
-         <property name="textAlignment">
-          <set>AlignCenter</set>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>Giới tính</string>
-         </property>
-         <property name="textAlignment">
-          <set>AlignCenter</set>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>Khách hàng</string>
+          <string>Mã khách hàng</string>
          </property>
          <property name="textAlignment">
           <set>AlignCenter</set>

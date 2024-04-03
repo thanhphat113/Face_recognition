@@ -1,8 +1,5 @@
-from DTO.customerDTO import customer
-
 class pet:
-    
-    def __init__(self, matn : str, tentn : str, maulong : str, cannang : int, loai : str, giong : str, gioitinh : str, kh : str, hinhanh : str):
+    def __init__(self, matn : int, tentn : str, hinhanh : str, maulong : str, cannang : str, loai : str, giong : str, gioitinh : str, kh : int):
         self.__matn = matn
         self.__tentn = tentn
         self.__maulong = maulong
@@ -15,14 +12,16 @@ class pet:
     
     def get_matn(self):
         return self.__matn
-
+    
+    def set_matn(self, matn):
+        self.__matn=matn
     
     def get_tentn(self):
         return self.__tentn
     
     def set_tentn(self, tentn):
         self.__tentn = tentn
-    #--------------------------------------------------------
+
     def get_maulong(self):
         return self.__maulong
     
@@ -58,7 +57,6 @@ class pet:
     def get_kh(self):
         return self.__kh
     
-
     def get_hinhanh(self):
         return self.__hinhanh
     
