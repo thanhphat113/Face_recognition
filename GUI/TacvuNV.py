@@ -101,7 +101,7 @@ class Ui_Dialog(object):
         if ten and sdt:
             new_manv = employee.generate_manv()
             employ = employee(manv=new_manv,tennv=ten,sdt=sdt,email=email)
-            employeeDAO.insert(employ)
+            empDAO.insert(employ)
         else: return 'Tên và số điện thoại không được rỗng !!!!'
 
 
