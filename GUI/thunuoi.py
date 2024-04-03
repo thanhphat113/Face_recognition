@@ -132,7 +132,7 @@ class Ui_Form(object):
         self.tableWidget.setSizePolicy(sizePolicy)
         self.tableWidget.setMinimumSize(QtCore.QSize(0, 0))
         self.tableWidget.setWordWrap(False)
-        self.tableWidget.setColumnCount(9)
+        self.tableWidget.setColumnCount(8)
         self.tableWidget.setObjectName("tableWidget")
         self.tableWidget.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
@@ -208,12 +208,10 @@ class Ui_Form(object):
         item.setText(_translate("Form", "Giới tính"))
         item = self.tableWidget.horizontalHeaderItem(7)
         item.setText(_translate("Form", "Khách hàng"))
-        item = self.tableWidget.horizontalHeaderItem(8)
-        item.setText(_translate("Form", "Hình ảnh"))
 
         pet_list = petDAO().ReadFromDatabase()
         for tn in pet_list:
-            data = [tn.get_matn(), tn.get_tentn(), tn.get_maulong(), tn.get_cannang(), tn.get_loai(), tn.get_giong(), tn.get_gioitinh(), tn.get_kh(), tn.get_hinhanh()]
+            data = [tn.get_matn(), tn.get_tentn(), tn.get_maulong(), tn.get_cannang(), tn.get_loai(), tn.get_giong(), tn.get_gioitinh(), tn.get_kh()]
             self.add_row_to_table(data)
         
     def add_row_to_table(self, data):
