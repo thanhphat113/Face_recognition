@@ -27,8 +27,12 @@ class employeeDAO:
             print(f'Error: {error}')
             return None
     
-if __name__=="__main__":
-    emDAO= employeeDAO()
-    employees = emDAO.find_All()
-    for nv in employees:
-        print(f'Mã nhân viên: {nv.manv}, Tên nhân viên: {nv.tennv}, Email: {nv.email}, Số điện thoại: {nv.sdt}')
+    def insert(self,emp):
+        conn=self.conn
+        try:
+            conn.connect()
+            query=f"insert into NhanVien(tennv,sdt,email) values ('{emp.tennv}','{emp.sdt}','{emp.email}')"
+            db.insert_data(conn,query)
+            return 'Thêm thành công!!!!'
+        except mysql.connector.Error as error:
+            return 'Thêm thất bại!!!!'

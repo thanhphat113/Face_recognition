@@ -1,5 +1,5 @@
 class pet:
-    def __init__(self, matn : int, tentn : str, hinhanh : str, maulong : str, cannang : str, loai : str, giong : str, gioitinh : str, kh : int):
+    def __init__(self, matn : int, tentn : str, maulong : str, cannang : str, loai : str, giong : str, gioitinh : str, kh : int):
         self.__matn = matn
         self.__tentn = tentn
         self.__maulong = maulong
@@ -8,7 +8,6 @@ class pet:
         self.__giong = giong
         self.__gioitinh = gioitinh
         self.__kh = kh
-        self.__hinhanh = hinhanh
     
     def get_matn(self):
         return self.__matn
@@ -57,10 +56,5 @@ class pet:
     def get_kh(self):
         return self.__kh
     
-    def get_hinhanh(self):
-        return self.__hinhanh
-    
-    def set_hinhanh(self, hinhanh):
-        self.__hinhanh = hinhanh
     
     

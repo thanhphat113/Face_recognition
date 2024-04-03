@@ -7,13 +7,13 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QTableWidgetItem
+from PyQt5.QtWidgets import QTableWidgetItem,QTableView
 
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-import DAO.database as db
+import GUI.TacvuNV as tv
 from  DAO.employeeDAO import employeeDAO
 
         
@@ -59,15 +59,16 @@ class Ui_Form(object):
                 self.horizontalLayout.setObjectName("horizontalLayout")
                 spacerItem = QtWidgets.QSpacerItem(218, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
                 self.horizontalLayout.addItem(spacerItem)
-                self.pushButton_3 = QtWidgets.QPushButton(parent=self.widget_3)
-                self.pushButton_3.setStyleSheet("background-color: rgb(159, 255, 153);\n"
+                self.btnAccept = QtWidgets.QPushButton(parent=self.widget_3)
+                self.btnAccept.setStyleSheet("background-color: rgb(159, 255, 153);\n"
         "")
                 icon = QtGui.QIcon()
                 icon.addPixmap(QtGui.QPixmap("img/add.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-                self.pushButton_3.setIcon(icon)
-                self.pushButton_3.setIconSize(QtCore.QSize(20, 20))
-                self.pushButton_3.setObjectName("pushButton_3")
-                self.horizontalLayout.addWidget(self.pushButton_3)
+                self.btnAccept.setIcon(icon)
+                self.btnAccept.setIconSize(QtCore.QSize(20, 20))
+                self.btnAccept.setObjectName("btnAccept")
+                self.btnAccept.clicked.connect(self.insert_NV)
+                self.horizontalLayout.addWidget(self.btnAccept)
                 self.pushButton = QtWidgets.QPushButton(parent=self.widget_3)
                 self.pushButton.setStyleSheet("background-color: rgb(255, 124, 125);\n"
         "\n"
@@ -78,14 +79,15 @@ class Ui_Form(object):
                 self.pushButton.setIconSize(QtCore.QSize(20, 20))
                 self.pushButton.setObjectName("pushButton")
                 self.horizontalLayout.addWidget(self.pushButton)
-                self.pushButton_2 = QtWidgets.QPushButton(parent=self.widget_3)
-                self.pushButton_2.setStyleSheet("background-color: rgb(188, 202, 255);")
+                self.btnUpdate = QtWidgets.QPushButton(parent=self.widget_3)
+                self.btnUpdate.setStyleSheet("background-color: rgb(188, 202, 255);")
                 icon2 = QtGui.QIcon()
                 icon2.addPixmap(QtGui.QPixmap("img/refresh.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-                self.pushButton_2.setIcon(icon2)
-                self.pushButton_2.setIconSize(QtCore.QSize(20, 20))
-                self.pushButton_2.setObjectName("pushButton_2")
-                self.horizontalLayout.addWidget(self.pushButton_2)
+                self.btnUpdate.setIcon(icon2)
+                self.btnUpdate.setIconSize(QtCore.QSize(20, 20))
+                self.btnUpdate.setObjectName("btnUpdate")
+                self.btnUpdate.clicked.connect(self.update_NV)
+                self.horizontalLayout.addWidget(self.btnUpdate)
                 self.gridLayout_2.addLayout(self.horizontalLayout, 0, 0, 1, 1)
                 self.gridLayout_3.addWidget(self.widget_3, 2, 0, 1, 1)
                 self.widget_2 = QtWidgets.QWidget(parent=Form)
@@ -151,20 +153,23 @@ class Ui_Form(object):
                 QtCore.QMetaObject.connectSlotsByName(Form)
 
         def retranslateUi(self, Form):
+                self._translate = QtCore.QCoreApplication.translate
                 _translate = QtCore.QCoreApplication.translate
                 Form.setWindowTitle(_translate("Form", "Form"))
                 self.label.setText(_translate("Form", "Quản lý nhân viên"))
-                self.pushButton_3.setText(_translate("Form", "Thêm"))
-                self.pushButton_3.setMinimumSize(100, 30)
+                self.btnAccept.setText(_translate("Form", "Thêm"))
+                self.btnAccept.setMinimumSize(100, 30)
                 self.pushButton.setText(_translate("Form", "Xoá"))
                 self.pushButton.setMinimumSize(100, 30)
-                self.pushButton_2.setText(_translate("Form", "Sửa"))
-                self.pushButton_2.setMinimumSize(100, 30)
+                self.btnUpdate.setText(_translate("Form", "Sửa"))
+                self.btnUpdate.setMinimumSize(100, 30)
                 self.label_2.setText(_translate("Form", "Tìm kiếm "))
                 self.pushButton_4.setText(_translate("Form", "Tìm"))
                 
                 
                 self.tableWidget.setSortingEnabled(False)
+                self.tableWidget.setEditTriggers(QTableView.NoEditTriggers)
+                self.tableWidget.setSelectionBehavior(QTableView.SelectRows)
                 item = self.tableWidget.horizontalHeaderItem(0)
                 item.setText(_translate("Form", "Mã nhân viên"))
                 item = self.tableWidget.horizontalHeaderItem(1)
@@ -173,17 +178,42 @@ class Ui_Form(object):
                 item.setText(_translate("Form", "Số điện thoại"))
                 item = self.tableWidget.horizontalHeaderItem(3)
                 item.setText(_translate("Form", "Email"))
+                self.upload_list();
+                
+        def upload_list(self):
                 empDAO = employeeDAO()
                 employee_list=empDAO.find_All()
                 for emp in employee_list:
                         data = [emp.manv,emp.tennv,emp.sdt,emp.email]
                         self.add_row_to_table(data)
-        
+                        
         def add_row_to_table(self, data):
                 rowPosition = self.tableWidget.rowCount()
                 self.tableWidget.insertRow(rowPosition)
                 for column, item in enumerate(data):
                         self.tableWidget.setItem(rowPosition, column, QTableWidgetItem(str(item)))
+                        
+        def insert_NV(self):
+                Dialog = QtWidgets.QDialog()
+                ui = tv.Ui_Dialog()
+                ui.setupUi(Dialog,1)
+                Dialog.exec_()
+        
+        def update_NV(self):
+                Dialog = QtWidgets.QDialog()
+                ui = tv.Ui_Dialog()
+                ui.setupUi(Dialog,2)    
+                ui.title.setText(self._translate("Dialog", "Sửa thông tin"))
+                selected_row = self.tableWidget.currentRow()
+                if selected_row >=0:
+                        selected_items = self.tableWidget.selectedItems()
+                        row_data = [item.text() for item in selected_items]
+                        print(row_data)
+                        ui.txtName.setText(self._translate("Dialog",row_data[1]))
+                        ui.txtPhone.setText(self._translate("Dialog",row_data[2]))
+                        ui.txtEmail.setText(self._translate("Dialog",row_data[3]))
+                Dialog.exec_()
+                
 
 if __name__ == "__main__":
     import sys
