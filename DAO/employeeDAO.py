@@ -26,8 +26,6 @@ class employeeDAO:
         except mysql.connector.Error as error:
             print(f'Error: {error}')
             return None
-        finally:
-            conn.close()
     
     def insert(self, emp:employee):
         conn=self.conn
@@ -38,6 +36,4 @@ class employeeDAO:
             return 'Thêm thành công !!!!'
         except mysql.connector.Error as error:
             return 'Thêm thất bại !!!!'
-        finally:
-            conn.close()
         

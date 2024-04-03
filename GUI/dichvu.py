@@ -131,7 +131,7 @@ class Ui_Form(object):
         sizePolicy.setHeightForWidth(self.table_service.sizePolicy().hasHeightForWidth())
         self.table_service.setSizePolicy(sizePolicy)
         self.table_service.setWordWrap(False)
-        self.table_service.setColumnCount(4)
+        self.table_service.setColumnCount(3)
         self.table_service.setObjectName("table_service")
         self.table_service.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
@@ -173,8 +173,6 @@ class Ui_Form(object):
         item.setText(_translate("Form", "Tên dịch vụ"))
         item = self.table_service.horizontalHeaderItem(2)
         item.setText(_translate("Form", "Giá"))
-        item = self.table_service.horizontalHeaderItem(3)
-        item.setText(_translate("Form", "Loại dịch vụ"))
         self.loadServiceData()
 
     def loadServiceData(self):
@@ -186,7 +184,6 @@ class Ui_Form(object):
             self.table_service.setItem(row, 0, QtWidgets.QTableWidgetItem(str(service.getMaDV())))
             self.table_service.setItem(row, 1, QtWidgets.QTableWidgetItem(service.getTen()))
             self.table_service.setItem(row, 2, QtWidgets.QTableWidgetItem(str(service.getGia())))
-            self.table_service.setItem(row, 3, QtWidgets.QTableWidgetItem(str(service.getMaLoaiDV())))
             row = row +1
 
 

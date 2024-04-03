@@ -9,8 +9,12 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from GUI.add_service_dialog import Ui_add_service_dialog
-import nhanvien as nv ,dichvu as dv, thunuoi, home ,khachhang as kh, hoadon
+from GUI import nhanvien as nv ,dichvu as dv, thunuoi as tn, home ,khachhang as kh, hoadon,phieunhap as pn,duocpham as dp
 
 
 class Ui_MainWindow(object):
@@ -46,7 +50,7 @@ class Ui_MainWindow(object):
         self.label_2.setMinimumSize(QtCore.QSize(40, 40))
         self.label_2.setMaximumSize(QtCore.QSize(40, 40))
         self.label_2.setText("")
-        self.label_2.setPixmap(QtGui.QPixmap("ui\\../img/house-chimney-window-solid.png"))
+        self.label_2.setPixmap(QtGui.QPixmap("img/house-chimney-window-solid.png"))
         self.label_2.setScaledContents(True)
         self.label_2.setObjectName("label_2")
         self.verticalLayout_3.addWidget(self.label_2)
@@ -57,7 +61,7 @@ class Ui_MainWindow(object):
         self.iconHome = QtWidgets.QPushButton(self.icon_menu_widget)
         self.iconHome.setText("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("ui\\../img/dashboard.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("img/dashboard.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.iconHome.setIcon(icon)
         self.iconHome.setIconSize(QtCore.QSize(20, 20))
         self.iconHome.setCheckable(True)
@@ -67,7 +71,7 @@ class Ui_MainWindow(object):
         self.iconCustomer = QtWidgets.QPushButton(self.icon_menu_widget)
         self.iconCustomer.setText("")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("ui\\../img/user-group-solid.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon1.addPixmap(QtGui.QPixmap("img/user-group-solid.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.iconCustomer.setIcon(icon1)
         self.iconCustomer.setIconSize(QtCore.QSize(20, 20))
         self.iconCustomer.setCheckable(True)
@@ -77,7 +81,7 @@ class Ui_MainWindow(object):
         self.iconPets = QtWidgets.QPushButton(self.icon_menu_widget)
         self.iconPets.setText("")
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("ui\\../img/pets.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon2.addPixmap(QtGui.QPixmap("img/pets.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.iconPets.setIcon(icon2)
         self.iconPets.setIconSize(QtCore.QSize(20, 20))
         self.iconPets.setCheckable(True)
@@ -87,7 +91,7 @@ class Ui_MainWindow(object):
         self.iconEmployee = QtWidgets.QPushButton(self.icon_menu_widget)
         self.iconEmployee.setText("")
         icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap("ui\\../img/employee.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon3.addPixmap(QtGui.QPixmap("img/employee.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.iconEmployee.setIcon(icon3)
         self.iconEmployee.setIconSize(QtCore.QSize(20, 20))
         self.iconEmployee.setCheckable(True)
@@ -97,7 +101,7 @@ class Ui_MainWindow(object):
         self.iconPhieuNhap = QtWidgets.QPushButton(self.icon_menu_widget)
         self.iconPhieuNhap.setText("")
         icon4 = QtGui.QIcon()
-        icon4.addPixmap(QtGui.QPixmap("ui\\../img/note_48px.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon4.addPixmap(QtGui.QPixmap("img/note_48px.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.iconPhieuNhap.setIcon(icon4)
         self.iconPhieuNhap.setIconSize(QtCore.QSize(20, 20))
         self.iconPhieuNhap.setCheckable(True)
@@ -107,7 +111,7 @@ class Ui_MainWindow(object):
         self.iconMedicine = QtWidgets.QPushButton(self.icon_menu_widget)
         self.iconMedicine.setText("")
         icon5 = QtGui.QIcon()
-        icon5.addPixmap(QtGui.QPixmap("ui\\../img/medical_bag_100px.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon5.addPixmap(QtGui.QPixmap("img/medical_bag_100px.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.iconMedicine.setIcon(icon5)
         self.iconMedicine.setIconSize(QtCore.QSize(20, 20))
         self.iconMedicine.setCheckable(True)
@@ -117,7 +121,7 @@ class Ui_MainWindow(object):
         self.iconService = QtWidgets.QPushButton(self.icon_menu_widget)
         self.iconService.setText("")
         icon6 = QtGui.QIcon()
-        icon6.addPixmap(QtGui.QPixmap("ui\\../img/service.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon6.addPixmap(QtGui.QPixmap("img/service.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.iconService.setIcon(icon6)
         self.iconService.setIconSize(QtCore.QSize(20, 20))
         self.iconService.setCheckable(True)
@@ -127,7 +131,7 @@ class Ui_MainWindow(object):
         self.iconChart = QtWidgets.QPushButton(self.icon_menu_widget)
         self.iconChart.setText("")
         icon7 = QtGui.QIcon()
-        icon7.addPixmap(QtGui.QPixmap("ui\\../img/chart.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon7.addPixmap(QtGui.QPixmap("img/chart.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.iconChart.setIcon(icon7)
         self.iconChart.setIconSize(QtCore.QSize(20, 20))
         self.iconChart.setCheckable(True)
@@ -140,7 +144,7 @@ class Ui_MainWindow(object):
         self.pushButton_5 = QtWidgets.QPushButton(self.icon_menu_widget)
         self.pushButton_5.setText("")
         icon8 = QtGui.QIcon()
-        icon8.addPixmap(QtGui.QPixmap("ui\\../img/off.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon8.addPixmap(QtGui.QPixmap("img/off.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pushButton_5.setIcon(icon8)
         self.pushButton_5.setCheckable(True)
         self.pushButton_5.setObjectName("pushButton_5")
@@ -180,7 +184,7 @@ class Ui_MainWindow(object):
         self.label_3.setMinimumSize(QtCore.QSize(40, 40))
         self.label_3.setMaximumSize(QtCore.QSize(40, 40))
         self.label_3.setText("")
-        self.label_3.setPixmap(QtGui.QPixmap("ui\\../img/house-chimney-window-solid.png"))
+        self.label_3.setPixmap(QtGui.QPixmap("img/house-chimney-window-solid.png"))
         self.label_3.setScaledContents(True)
         self.label_3.setObjectName("label_3")
         self.horizontalLayout.addWidget(self.label_3)
@@ -280,7 +284,7 @@ class Ui_MainWindow(object):
         self.btnMenu = QtWidgets.QPushButton(self.widget_4)
         self.btnMenu.setText("")
         icon9 = QtGui.QIcon()
-        icon9.addPixmap(QtGui.QPixmap("ui\\../img/menu.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon9.addPixmap(QtGui.QPixmap("img/menu.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btnMenu.setIcon(icon9)
         self.btnMenu.setIconSize(QtCore.QSize(20, 20))
         self.btnMenu.setCheckable(True)
@@ -292,7 +296,7 @@ class Ui_MainWindow(object):
         self.btnAccount = QtWidgets.QPushButton(self.widget_4)
         self.btnAccount.setText("")
         icon10 = QtGui.QIcon()
-        icon10.addPixmap(QtGui.QPixmap("ui\\../img/customer.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon10.addPixmap(QtGui.QPixmap("img/customer.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btnAccount.setIcon(icon10)
         self.btnAccount.setIconSize(QtCore.QSize(20, 20))
         self.btnAccount.setObjectName("btnAccount")
@@ -343,11 +347,29 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(5)
+        self.stackedWidget.setCurrentIndex(0)
         self.btnMenu.toggled['bool'].connect(self.menu_widget.setVisible) # type: ignore
         self.btnMenu.toggled['bool'].connect(self.icon_menu_widget.setHidden) # type: ignore
         self.pushButton_5.toggled['bool'].connect(MainWindow.close) # type: ignore
         self.pushButton_12.toggled['bool'].connect(MainWindow.close) # type: ignore
+        self.btnCustomer.toggled['bool'].connect(self.iconCustomer.setChecked)
+        self.iconCustomer.toggled['bool'].connect(self.btnCustomer.setChecked)
+        self.btnEmployee.toggled['bool'].connect(self.iconEmployee.setChecked)
+        self.iconEmployee.toggled['bool'].connect(self.btnEmployee.setChecked)
+        self.btnPets.toggled['bool'].connect(self.iconPets.setChecked)
+        self.iconPets.toggled['bool'].connect(self.btnPets.setChecked)
+        self.btnChart.toggled['bool'].connect(self.iconChart.setChecked)
+        self.iconChart.toggled['bool'].connect(self.btnChart.setChecked)
+        self.btnHome.toggled['bool'].connect(self.iconHome.setChecked)
+        self.iconHome.toggled['bool'].connect(self.btnHome.setChecked)
+        self.btnService.toggled['bool'].connect(self.iconService.setChecked)
+        self.iconService.toggled['bool'].connect(self.btnService.setChecked)
+        self.btnMedicine.toggled['bool'].connect(self.iconMedicine.setChecked)
+        self.iconMedicine.toggled['bool'].connect(self.btnMedicine.setChecked)
+        self.btnPhieuNhap.toggled['bool'].connect(self.iconPhieuNhap.setChecked)
+        self.iconPhieuNhap.toggled['bool'].connect(self.btnPhieuNhap.setChecked)
+        
+        
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -368,6 +390,9 @@ class Ui_MainWindow(object):
         self.label_6.setText(_translate("MainWindow", "Pets"))
         self.label_8.setText(_translate("MainWindow", "Chart"))
         self.icon_menu_widget.hide()
+        
+        self.home_form = home.Ui_Form()
+        self.home_form.setupUi(self.home_Page)
 
         self.nv_form = nv.Ui_Form()
         self.nv_form.setupUi(self.employee_page)
@@ -430,7 +455,6 @@ class Ui_MainWindow(object):
             self.dv_form.table_service.setItem(row, 0, QtWidgets.QTableWidgetItem(str(service.getMaDV())))
             self.dv_form.table_service.setItem(row, 1, QtWidgets.QTableWidgetItem(service.getTen()))
             self.dv_form.table_service.setItem(row, 2, QtWidgets.QTableWidgetItem(str(service.getGia())))
-            self.dv_form.table_service.setItem(row, 3, QtWidgets.QTableWidgetItem(str(service.getMaLoaiDV())))
             row = row +1
 
     # Xử lý giao diện

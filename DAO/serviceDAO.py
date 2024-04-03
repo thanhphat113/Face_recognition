@@ -18,7 +18,7 @@ class serviceDAO:
             query="Select * from dichvu"
             list=db.execute_fetch_all(conn,query)
             for dv in list:
-                service = Service(dv[0],dv[1],dv[2],dv[3])
+                service = Service(dv[0],dv[1],dv[2])
                 service_list.append(service)
             return service_list
         except mysql.connector.Error as error:
@@ -31,7 +31,7 @@ class serviceDAO:
         conn=self.conn
         try:
             conn.connect()
-            query=f"insert into dichvu(tendv, giatien, maloaidv) values ('{service.getTen()}', '{service.getGia()}', '{service.getMaLoaiDV()}')"
+            query=f"insert into dichvu(tendv, giatien) values ('{service.getTen()}', '{service.getGia()}')"
             db.execute_query(conn,query)
             return 'Thêm thành công !!!!'
         except mysql.connector.Error as error:

@@ -1,9 +1,8 @@
 class Service:
-    def __init__(self, madv, ten, gia, maloaidv):
+    def __init__(self, madv, ten, gia):
         self.madv = madv
         self.ten = ten
         self.gia = gia
-        self.maloaidv = maloaidv
 
     def getMaDV(self):
         return self.madv
@@ -22,9 +21,3 @@ class Service:
     
     def setGia(self, gia):
         self.gia = gia
-    
-    def getMaLoaiDV(self):
-        return self.maloaidv
-    
-    def setMaLoaiDV(self, maloaidv):
-        self.maloaidv = maloaidv
