@@ -38,4 +38,6 @@ class employeeDAO:
             return 'Thêm thành công !!!!'
         except mysql.connector.Error as error:
             return 'Thêm thất bại !!!!'
+        finally:
+            conn.close()
         

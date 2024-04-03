@@ -9,7 +9,11 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import nhanvien as nv ,dichvu as dv, thunuoi, home ,khachhang as kh, hoadon
+
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from GUI import nhanvien as nv ,dichvu as dv, thunuoi, home ,khachhang as kh, hoadon
 
 
 class Ui_MainWindow(object):

@@ -205,7 +205,7 @@ class Ui_Form(object):
                 ui.setupUi(Dialog,2)    
                 ui.title.setText(self._translate("Dialog", "Sửa thông tin"))
                 selected_row = self.tableWidget.currentRow()
-                if selected_row >=0:
+                if selected_row  >= 0:
                         selected_items = self.tableWidget.selectedItems()
                         row_data = [item.text() for item in selected_items]
                         print(row_data)
