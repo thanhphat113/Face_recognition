@@ -28,6 +28,10 @@ class Ui_Dialog(object):
         self.label = QtWidgets.QLabel(Dialog)
         self.label.setGeometry(QtCore.QRect(60, 90, 91, 16))
         self.label.setObjectName("label")
+        self.label_visible = QtWidgets.QLabel(Dialog)
+        self.label_visible.setGeometry(QtCore.QRect(60, 90, 91, 16))
+        self.label_visible.setObjectName("label_visible")
+        self.label_visible.setVisible(False)
         self.label_2 = QtWidgets.QLabel(Dialog)
         self.label_2.setGeometry(QtCore.QRect(60, 130, 91, 16))
         self.label_2.setObjectName("label_2")
@@ -64,8 +68,8 @@ class Ui_Dialog(object):
         self.btnAccept.setObjectName("btnAccept")
         if type == 1:
             self.btnAccept.clicked.connect(self.show_dialog_insert)
-        # elif type == 2:
-        #     self.
+        elif type == 2:
+            self.btnAccept.clicked.connect(lambda: self.show_dialog_update(self.label_visible.text()))
         self.btnDeny = QtWidgets.QPushButton(Dialog)
         self.btnDeny.setGeometry(QtCore.QRect(210, 220, 113, 32))
         self.btnDeny.setCheckable(True)
@@ -86,6 +90,13 @@ class Ui_Dialog(object):
         self.btnAccept.setText(_translate("Dialog", "Xác nhận"))
         self.btnDeny.setText(_translate("Dialog", "Huỷ"))
         
+    def show_dialog_update(self,id):
+        Dialog = QtWidgets.QDialog()
+        ui = tb.Ui_Dialog()
+        ui.setupUi(Dialog)
+        ui.label.setText(self._translate("Dialog", self.update_data(id)))
+        Dialog.exec_()
+        
     def show_dialog_insert(self):
         Dialog = QtWidgets.QDialog()
         ui = tb.Ui_Dialog()
@@ -100,9 +111,25 @@ class Ui_Dialog(object):
         sdt=self.txtPhone.text()
         empDAO= employeeDAO()
         if ten and sdt:
-            new_manv = employee.generate_manv()
-            emp = employee(manv=new_manv,tennv=ten,sdt=sdt,email=email)
-            return empDAO.insert(emp)
+            emp = employee("",ten,sdt,email)
+            result = empDAO.insert(emp)
+            if result == "Thêm thành công !!!!":
+                self.txtName.setText("")
+                self.txtEmail.setText("")
+                self.txtPhone.setText("")
+            return result
+            
+        else: 
+            return 'Tên và số điện thoại không được rỗng !!!!'
+        
+    def update_data(self,id):
+        ten=self.txtName.text()
+        email=self.txtEmail.text()
+        sdt=self.txtPhone.text()
+        empDAO= employeeDAO()
+        if ten and sdt:
+            emp = employee(id,ten,sdt,email)
+            return empDAO.update(emp)  
         else: 
             return 'Tên và số điện thoại không được rỗng !!!!'
 

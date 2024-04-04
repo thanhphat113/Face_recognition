@@ -26,6 +26,8 @@ class employeeDAO:
         except mysql.connector.Error as error:
             print(f'Error: {error}')
             return None
+        finally:
+            conn.close()
     
     def insert(self, emp:employee):
         conn=self.conn
@@ -36,4 +38,30 @@ class employeeDAO:
             return 'Thêm thành công !!!!'
         except mysql.connector.Error as error:
             return 'Thêm thất bại !!!!'
+        finally:
+            conn.close()
+        
+    def delete(self,id):
+        conn=self.conn
+        try:
+            conn.connect()
+            query=f"delete from NhanVien where manv = '{id}'"
+            db.execute_query(conn,query)
+            return 'Xoá thành công !!!!'
+        except mysql.connector.Error as error:
+            return f'Lỗi: {error}'
+        finally:
+            conn.close()
+            
+    def update(self,emp:employee):
+        conn=self.conn
+        try:
+            conn.connect()
+            query=f"update NhanVien set tennv = '{emp.tennv}',sdt = '{emp.sdt}', email = '{emp.email}' where manv = '{emp.manv}'"
+            db.execute_query(conn,query)
+            return 'Cập nhật thành công !!!!'
+        except mysql.connector.Error as error:
+            return f'Lỗi: {error}'
+        finally:
+            conn.close()
         

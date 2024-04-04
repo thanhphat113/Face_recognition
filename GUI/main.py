@@ -13,7 +13,6 @@ from DAO.serviceDAO import serviceDAO
 class Login(QWidget, Ui_login_form):
     def __init__(self):
         super().__init__()
-
         self.window = QWidget()
         self.setupUi(self)
         self.show()

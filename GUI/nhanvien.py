@@ -7,13 +7,14 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QTableWidgetItem,QTableView
+from PyQt5.QtWidgets import QTableWidgetItem,QTableView,QMessageBox,QWidget
 
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 import GUI.TacvuNV as tv
+import GUI.thongbao as tb
 from  DAO.employeeDAO import employeeDAO
 
         
@@ -67,7 +68,7 @@ class Ui_Form(object):
                 self.btnAccept.setIcon(icon)
                 self.btnAccept.setIconSize(QtCore.QSize(20, 20))
                 self.btnAccept.setObjectName("btnAccept")
-                self.btnAccept.clicked.connect(self.insert_NV)
+                self.btnAccept.clicked.connect(self.TacVu_NV)
                 self.horizontalLayout.addWidget(self.btnAccept)
                 self.pushButton = QtWidgets.QPushButton(parent=self.widget_3)
                 self.pushButton.setStyleSheet("background-color: rgb(255, 124, 125);\n"
@@ -161,6 +162,7 @@ class Ui_Form(object):
                 self.btnAccept.setMinimumSize(100, 30)
                 self.pushButton.setText(_translate("Form", "Xoá"))
                 self.pushButton.setMinimumSize(100, 30)
+                self.pushButton.clicked.connect(self.on_button_clicked)
                 self.btnUpdate.setText(_translate("Form", "Sửa"))
                 self.btnUpdate.setMinimumSize(100, 30)
                 self.label_2.setText(_translate("Form", "Tìm kiếm "))
@@ -178,11 +180,12 @@ class Ui_Form(object):
                 item.setText(_translate("Form", "Số điện thoại"))
                 item = self.tableWidget.horizontalHeaderItem(3)
                 item.setText(_translate("Form", "Email"))
-                self.upload_list();
+                self.upload_list()
                 
         def upload_list(self):
                 empDAO = employeeDAO()
                 employee_list=empDAO.find_All()
+                self.tableWidget.setRowCount(0)
                 for emp in employee_list:
                         data = [emp.manv,emp.tennv,emp.sdt,emp.email]
                         self.add_row_to_table(data)
@@ -193,11 +196,33 @@ class Ui_Form(object):
                 for column, item in enumerate(data):
                         self.tableWidget.setItem(rowPosition, column, QTableWidgetItem(str(item)))
                         
-        def insert_NV(self):
+        def TacVu_NV(self):
                 Dialog = QtWidgets.QDialog()
                 ui = tv.Ui_Dialog()
                 ui.setupUi(Dialog,1)
                 Dialog.exec_()
+                self.upload_list()
+        
+        
+        def on_button_clicked(self):
+                Dialog = QtWidgets.QDialog()
+                ui = tb.Ui_Dialog()
+                ui.setupUi(Dialog)
+                selected_items = self.tableWidget.selectedItems()
+                if selected_items:
+                        selected_row = selected_items[0].row()
+                        value = self.tableWidget.item(selected_row, 0).text()
+                        ui.label.setText(self._translate("Dialog", self.delete_NV(value)))
+                else:
+                        ui.label.setText(self._translate("Dialog", "Vui lòng hãy chọn dòng muốn xoá"))
+                Dialog.exec_()
+                self.upload_list()
+
+                
+        def delete_NV(self,value):
+                empDAO = employeeDAO()
+                return empDAO.delete(value)
+                
         
         def update_NV(self):
                 Dialog = QtWidgets.QDialog()
@@ -208,11 +233,13 @@ class Ui_Form(object):
                 if selected_row  >= 0:
                         selected_items = self.tableWidget.selectedItems()
                         row_data = [item.text() for item in selected_items]
-                        print(row_data)
+                        ui.label_visible.setText(self._translate("Dialog",row_data[0]))
                         ui.txtName.setText(self._translate("Dialog",row_data[1]))
                         ui.txtPhone.setText(self._translate("Dialog",row_data[2]))
                         ui.txtEmail.setText(self._translate("Dialog",row_data[3]))
+                        # ui.label.setText(self._translate("Dialog", self.update_NV()))
                 Dialog.exec_()
+                self.upload_list()
                 
 
 if __name__ == "__main__":

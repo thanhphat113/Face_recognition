@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost
--- Thời gian đã tạo: Th4 03, 2024 lúc 09:14 AM
+-- Thời gian đã tạo: Th4 04, 2024 lúc 06:19 PM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.0.28
 
@@ -238,16 +238,16 @@ CREATE TABLE `NhanVien` (
 
 INSERT INTO `NhanVien` (`manv`, `tennv`, `sdt`, `email`, `matk`) VALUES
 (1, 'Thanh phát', '089842525', 'thanhphat9523@gmail.com', 1),
-(2, 'Nguyễn Văn X', '0987654321', 'nguyenvanx@example.com', 1),
-(3, 'Trần Thị Y', '0901234567', 'tranthiy@example.com', 1),
-(4, 'Lê Văn Z', '0912345678', 'levanz@example.com', 1),
-(5, 'Phạm Thị T', '0923456789', 'phamthit@example.com', 1),
-(6, 'Hoàng Văn S', '0934567890', 'hoangvans@example.com', 1),
-(7, 'Mai Thị R', '0945678901', 'maithir@example.com', 1),
-(8, 'Vũ Văn Q', '0956789012', 'vuvanq@example.com', 1),
-(9, 'Lương Thị P', '0967890123', 'luongthip@example.com', 1),
-(10, 'Đặng Văn O', '0978901234', 'dangvano@example.com', 1),
-(11, 'Lê Thị N', '0989012345', 'lethin@example.com', 1);
+(2, 'Nguyễn Văn X', '0987654321', 'nguyenvanx@example.com', 2),
+(3, 'Trần Thị Y', '0901234567', 'tranthiy@example.com', 3),
+(4, 'Lê Văn Z', '0912345678', 'levanz@example.com', 4),
+(5, 'Phạm Thị T', '0923456789', 'phamthit@example.com', 5),
+(6, 'Hoàng Văn S', '0934567890', 'hoangvans@example.com', 6),
+(7, 'Mai Thị R', '0945678901', 'maithir@example.com', 7),
+(8, 'Vũ Văn Q', '0956789012', 'vuvanq@example.com', 8),
+(9, 'Lương Thị P', '0967890123', 'luongthip@example.com', 9),
+(10, 'Đặng Văn O', '0978901234', 'dangvano@example.com', 10),
+(11, 'Lê Thị N', '0989012345', 'lethin@example.com', 11);
 
 -- --------------------------------------------------------
 
@@ -483,7 +483,7 @@ ALTER TABLE `KhachHang`
 -- AUTO_INCREMENT cho bảng `LoaiTaiKhoan`
 --
 ALTER TABLE `LoaiTaiKhoan`
-  MODIFY `maloai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `maloai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `NhaCungCap`
@@ -495,7 +495,7 @@ ALTER TABLE `NhaCungCap`
 -- AUTO_INCREMENT cho bảng `NhanVien`
 --
 ALTER TABLE `NhanVien`
-  MODIFY `manv` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `manv` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT cho bảng `PhieuNhap`
