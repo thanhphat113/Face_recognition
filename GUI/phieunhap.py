@@ -24,7 +24,7 @@ class Ui_Form(object):
         self.widget = QtWidgets.QWidget(Form)
         self.widget.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
         self.widget.setStyleSheet("QWidget{\n"
-"    background-color: #BDD5D7;\n"
+"    background-color: rgb(133, 255, 246);\n"
 "    border:1px solid black\n"
 "}\n"
 "QLabel{\n"
