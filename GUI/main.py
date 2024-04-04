@@ -1,12 +1,28 @@
 from PyQt5.QtWidgets import *
 from PyQt5 import QtWidgets 
 
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from GUI.sidebar import Ui_MainWindow
+from GUI.login import Ui_login_form
 from GUI.add_service_dialog import Ui_add_service_dialog
-import GUI.nhanvien as nv
-import GUI.dichvu as dv
-import GUI.phieunhap as pn
-import GUI.duocpham as dp
+from GUI import nhanvien as nv ,dichvu as dv, thunuoi as tn, home ,khachhang as kh, hoadon,phieunhap as pn,duocpham as dp
+from DAO.serviceDAO import serviceDAO
+
+class Login(QWidget, Ui_login_form):
+    def __init__(self):
+        super().__init__()
+
+        self.window = QWidget()
+        self.setupUi(self)
+        self.show()
+        self.btnLogin.clicked.connect(self.handle_login)
+
+    def handle_login(self):
+        self.sidebar = Main_Page()
+        self.close()
+        self.sidebar.show()
 
 class Main_Page(QMainWindow, Ui_MainWindow):
     def __init__(self):
@@ -14,9 +30,11 @@ class Main_Page(QMainWindow, Ui_MainWindow):
 
         self.window = QMainWindow()
         self.setupUi(self)
-        self.show()
 
         self.icon_menu_widget.hide()
+
+        self.home_form = home.Ui_Form()
+        self.home_form.setupUi(self.home_Page)
 
         self.nv_form = nv.Ui_Form()
         self.nv_form.setupUi(self.employee_page)
@@ -30,9 +48,16 @@ class Main_Page(QMainWindow, Ui_MainWindow):
         self.dp_form = dp.Ui_Form()
         self.dp_form.setupUi(self.medicine_page)
 
+        self.kh_form = kh.Ui_Form()
+        self.kh_form.setupUi(self.customer_Page)
+
+        self.tn_form = tn.Ui_Form()
+        self.tn_form.setupUi(self.pets_Page)
+
+        self.add_service_dialog = Ui_add_service_dialog()
+
         self.eventHandling()
         self.dv_form.btnAdd.clicked.connect(self.show_add_dialog)
-        self.connection = get_sql_connection()
         self.loadServiceData()
 
     def showHome_Pages(self):
@@ -61,21 +86,10 @@ class Main_Page(QMainWindow, Ui_MainWindow):
     
     def show_add_dialog(self):
         dialog = QtWidgets.QDialog()
-        add_dialog_ui = Ui_add_service_dialog()
-        add_dialog_ui.setupUi(dialog)
+        self.add_service_dialog = Ui_add_service_dialog()
+        self.add_service_dialog.setupUi(dialog)
         dialog.exec_()
         dialog.show()
-
-    def loadServiceData(self):
-        services = getAllServices(self.connection)
-        row = 0
-        self.dv_form.table_service.setRowCount(len(services))
-        for service in services:
-            self.dv_form.table_service.setItem(row, 0, QtWidgets.QTableWidgetItem(str(service.getMaDV())))
-            self.dv_form.table_service.setItem(row, 1, QtWidgets.QTableWidgetItem(service.getTen()))
-            self.dv_form.table_service.setItem(row, 2, QtWidgets.QTableWidgetItem(str(service.getGia())))
-            self.dv_form.table_service.setItem(row, 3, QtWidgets.QTableWidgetItem(str(service.getMaLoaiDV())))
-            row = row +1
 
     # Xử lý giao diện
     def eventHandling(self):
@@ -96,4 +110,13 @@ class Main_Page(QMainWindow, Ui_MainWindow):
         self.iconPhieuNhap.clicked.connect(self.showPhieuNhap_Pages)
         self.iconMedicine.clicked.connect(self.showMedicine_Pages)
 
-
+    def loadServiceData(self):
+        dao = serviceDAO()
+        services = dao.getAllServices()
+        row = 0
+        self.dv_form.table_service.setRowCount(len(services))
+        for service in services:
+            self.dv_form.table_service.setItem(row, 0, QtWidgets.QTableWidgetItem(str(service.getMaDV())))
+            self.dv_form.table_service.setItem(row, 1, QtWidgets.QTableWidgetItem(service.getTen()))
+            self.dv_form.table_service.setItem(row, 2, QtWidgets.QTableWidgetItem(str(service.getGia())))
+            row = row +1

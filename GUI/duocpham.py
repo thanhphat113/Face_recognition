@@ -23,7 +23,7 @@ class Ui_Form(object):
         self.gridLayout_3.setObjectName("gridLayout_3")
         self.widget = QtWidgets.QWidget(Form)
         self.widget.setStyleSheet("QWidget{\n"
-"    background-color: #BDD5D7;\n"
+"    background-color: rgb(133, 255, 246);\n"
 "    border:1px solid black\n"
 "}\n"
 "QLabel{\n"
