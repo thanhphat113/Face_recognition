@@ -69,17 +69,14 @@ class customerDAO:
                 self.customer_list[i] = cus
                 
     def findByid(self,id):
+        cus = None
         try:
             self.conn.connect()
-            query = f"select * from KhachHang where makh={id}"
-            result = db.execute_fetch_all(self.conn,id)
-            
+            query = f"select * from KhachHang where makh = '{id}'"
+            result = db.execute_fetch_all(self.conn,query)
+            for kh in result:
+                cus = customer(kh[0],kh[1],kh[2],kh[3],kh[4])
+            return cus
         except mysql.connector.Error as error:
             return f'Error: {error}'
             
-
-if __name__ == "__main__":
-    dskh = customerDAO()
-    qlkh = dskh.ReadFromDatabase()
-    for cus in qlkh:
-        print(f"Mã khách hàng: {cus.get_makh()}, Tên khách hàng: {cus.get_tenkh()}, Giới tính: {cus.get_gioitinh()}, Số điện thoại: {cus.get_kh()}, Email: {cus.get_email()}")

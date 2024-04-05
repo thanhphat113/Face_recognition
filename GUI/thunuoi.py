@@ -193,7 +193,7 @@ class Ui_Form(object):
 
         pet_list = petDAO().ReadFromDatabase()
         for tn in pet_list:
-            data = [tn.get_matn(), tn.get_tentn(),tn.get_maulong() , tn.get_cannang(), tn.get_kh()]
+            data = [tn.get_matn(), tn.get_tentn(),tn.get_maulong() , tn.get_cannang(),tn.get_khachhang().get_tenkh()]
             self.add_row_to_table(data)
         
     def add_row_to_table(self, data):

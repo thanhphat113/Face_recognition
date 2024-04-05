@@ -6,12 +6,12 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from DAO.customerDAO import customerDAO
 
 class pet:
-    def __init__(self, matn : int, tentn : str, maulong : str, cannang : str, kh : int):
+    def __init__(self, matn : int, tentn : str, maulong : str, cannang : str, makh : int):
         self.__matn = matn
         self.__tentn = tentn
         self.__maulong = maulong
         self.__cannang = cannang
-        self.__kh = kh
+        self.__makh = makh
 
     
     def get_matn(self):
@@ -38,7 +38,15 @@ class pet:
     def set_cannang(self, cannang):
         self.__cannang = cannang
     
+    def get_makh(self):
+        return self.__makh
     
-    def get_kh(self):
-        return self.__kh
+    def set_makh(self,makh):
+        self.__makh=makh
+        
+    def get_khachhang(self):
+        cus = customerDAO()
+        self.__khachhang = cus.findByid(self.get_makh())
+        return self.__khachhang
+    
     

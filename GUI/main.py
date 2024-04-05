@@ -7,7 +7,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from GUI.sidebar import Ui_MainWindow
 from GUI.login import Ui_login_form
 from GUI.add_service_dialog import Ui_add_service_dialog
-from GUI import nhanvien as nv ,dichvu as dv, thunuoi as tn, home ,khachhang as kh, hoadon,phieunhap as pn,duocpham as dp
+from GUI import phongbenh as pb, nhanvien as nv ,dichvu as dv, thunuoi as tn, home ,khachhang as kh, hoadon,phieunhap as pn,duocpham as dp
 from DAO.serviceDAO import serviceDAO
 from DAO.taikhoanDAO import taikhoanDAO
 import GUI.thongbao as tb
@@ -76,6 +76,9 @@ class Main_Page(QMainWindow, Ui_MainWindow):
 
         self.tn_form = tn.Ui_Form()
         self.tn_form.setupUi(self.pets_Page)
+        
+        self.bed_form = pb.Ui_Form()
+        self.bed_form.setupUi(self.bed_Page)
 
         self.add_service_dialog = Ui_add_service_dialog()
 
@@ -98,21 +101,24 @@ class Main_Page(QMainWindow, Ui_MainWindow):
     
     def showPets_Pages(self):
         self.stackedWidget.setCurrentIndex(2)
-    
-    def showEmployee_Pages(self):
+        
+    def showBed_Pages(self):
         self.stackedWidget.setCurrentIndex(3)
     
-    def showPhieuNhap_Pages(self):
+    def showEmployee_Pages(self):
         self.stackedWidget.setCurrentIndex(4)
-
-    def showMedicine_Pages(self):
+    
+    def showPhieuNhap_Pages(self):
         self.stackedWidget.setCurrentIndex(5)
 
-    def showService_Pages(self):
+    def showMedicine_Pages(self):
         self.stackedWidget.setCurrentIndex(6)
 
-    def showChart_Pages(self):
+    def showService_Pages(self):
         self.stackedWidget.setCurrentIndex(7)
+
+    def showChart_Pages(self):
+        self.stackedWidget.setCurrentIndex(8)
     
     def show_add_dialog(self):
         dialog = QtWidgets.QDialog()
@@ -125,6 +131,7 @@ class Main_Page(QMainWindow, Ui_MainWindow):
     def eventHandling(self):
         self.btnEmployee.clicked.connect(self.showEmployee_Pages)
         self.btnCustomer.clicked.connect(self.showCustomer_Pages)
+        self.btnBed.clicked.connect(self.showBed_Pages)
         self.btnPets.clicked.connect(self.showPets_Pages)
         self.btnChart.clicked.connect(self.showChart_Pages)
         self.btnHome.clicked.connect(self.showHome_Pages)
@@ -134,6 +141,7 @@ class Main_Page(QMainWindow, Ui_MainWindow):
         self.iconEmployee.clicked.connect(self.showEmployee_Pages)
         self.iconCustomer.clicked.connect(self.showCustomer_Pages)
         self.iconPets.clicked.connect(self.showPets_Pages)
+        self.iconBed.clicked.connect(self.showBed_Pages)
         self.iconChart.clicked.connect(self.showChart_Pages)
         self.iconHome.clicked.connect(self.showHome_Pages)
         self.iconService.clicked.connect(self.showService_Pages)

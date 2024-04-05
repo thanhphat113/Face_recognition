@@ -26,18 +26,6 @@ class petDAO:
             print(f'Error: {error}')
             return None
     
-    # def WriteToDatabase(self):
-    #     conn = self.conn
-    #     try:
-    #         conn.connect()
-    #         query = "Delete from thunuoi"
-    #         db.execute_query(conn, query)
-    #         for item in 
-    #             query = f"Insert into ThuNuoi values ('{item.get_matn()}', '{item.get_tentn()}', '{item.get_maulong()}', '{item.get_cannang()}', '{item.get_kh()})"
-    #             db.insert_data(conn, query)
-    #     except mysql.connector.Error as error:
-    #         print(f'Error: {error}')
-
     def find(self, noidung : str, tuychon : str):
         conn = self.conn
         try:
@@ -69,9 +57,21 @@ class petDAO:
         for i in range(self.n):
             if self.pet_list[i].get_matn() == tn.get_matn():
                 self.pet_list[i] = tn
+                
+    def findById(self,id):
+        result = None
+        try:
+            self.conn.connect()
+            query = f"select * from ThuNuoi where matn = '{id}'"
+            list = db.execute_fetch_all(self.conn,query)
+            for subpet in list:
+                result = pet(subpet[0],subpet[1],subpet[2],subpet[3],subpet[4])
+            return result
+        except mysql.connector.Error as error:
+            return f'Lỗi: {error}'
+        
+if __name__ == "__main__":
+    pets = petDAO()
+    result = pets.findById(1)
+    print(f"{result.get_tentn()}")
 
-# if __name__ == "__main__":
-#     dstn = petDAO()
-#     qltn = dstn.ReadFromDatabase()
-#     for tn in qltn:
-#         print(f"Mã thú nuôi: {tn.get_matn()}, Tên thú nuôi: {tn.get_tentn()}, Màu lông: {tn.get_maulong()}, Cân nặng: {tn.get_cannang()}, Loài: {tn.get_loai()}, Giống: {tn.get_giong()}, Giới tính: {tn.get_gioitinh()}, Khách hàng: {tn.get_kh()}")
