@@ -42,12 +42,19 @@ class Ui_Dialog(object):
         self.label.setText(_translate("Dialog", "TextLabel"))
         self.pushButton.setText(_translate("Dialog", "OK"))
 
-
+    def thongBao(self,text):
+        Dialog = QtWidgets.QDialog()
+        ui = Ui_Dialog()
+        ui.setupUi(Dialog)
+        ui.label.setText(text)
+        Dialog.exec_()
+        
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     Dialog = QtWidgets.QDialog()
     ui = Ui_Dialog()
     ui.setupUi(Dialog)
-    Dialog.show()
+    ui.thongBao("ditmemay")
+    # Dialog.show()
     sys.exit(app.exec_())

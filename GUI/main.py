@@ -9,20 +9,44 @@ from GUI.login import Ui_login_form
 from GUI.add_service_dialog import Ui_add_service_dialog
 from GUI import nhanvien as nv ,dichvu as dv, thunuoi as tn, home ,khachhang as kh, hoadon,phieunhap as pn,duocpham as dp
 from DAO.serviceDAO import serviceDAO
+from DAO.taikhoanDAO import taikhoanDAO
+import GUI.thongbao as tb
 
 class Login(QWidget, Ui_login_form):
     def __init__(self):
         super().__init__()
         self.window = QWidget()
         self.setupUi(self)
+        self.thongbao = tb.Ui_Dialog()
         self.show()
+
         self.btnLogin.clicked.connect(self.handle_login)
+        
+    def keyPressEvent(self, event):
+                if event.key() == 16777220:
+                        self.handle_login()
 
     def handle_login(self):
-        self.sidebar = Main_Page()
-        self.close()
-        self.sidebar.show()
-
+        username = self.txtUser.text()
+        password = self.txtPass.text()
+        if not username or not password:
+            self.thongbao.thongBao("Không được bỏ trống tài khoản hoặc mật khẩu")
+        else:
+            tk = taikhoanDAO()
+            loai = tk.checkPassword(username,password)
+            if loai is None:
+                self.thongbao.thongBao("Bạn đã nhập sai mật khẩu hoặc tài khoản")
+            elif loai == 1:
+                self.sidebar = Main_Page()
+                self.close()
+                self.sidebar.show()
+            elif loai == 2:
+                self.sidebar = Main_Page()
+                self.hide()
+                self.sidebar.show()
+        
+                    
+    
 class Main_Page(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
@@ -57,7 +81,14 @@ class Main_Page(QMainWindow, Ui_MainWindow):
 
         self.eventHandling()
         self.dv_form.btnAdd.clicked.connect(self.show_add_dialog)
+        self.pushButton_12.clicked.connect(self.dangXuat)
+        self.pushButton_5.clicked.connect(self.dangXuat)
         self.loadServiceData()
+    
+    def dangXuat(self):
+        self.login = Login()
+        self.close()
+        self.login.show()
 
     def showHome_Pages(self):
         self.stackedWidget.setCurrentIndex(0)

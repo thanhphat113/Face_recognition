@@ -111,6 +111,10 @@ class Ui_login_form(object):
         def leave_cancel_event(self, event):
                 self.btnCancel.setStyleSheet("background-image: url(img/login-back.png);\nborder: 1px solid black;\nborder-radius:10px;")  # Xóa bất kỳ styleSheet nào được thiết lập
                 event.accept()
+                
+        def keyPressEvent(self, event):
+                if event.key() == 16777220:
+                        self
         
 
 

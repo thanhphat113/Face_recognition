@@ -67,6 +67,16 @@ class customerDAO:
         for i in range(self.n):
             if self.customer_list[i].get_makh() == cus.get_makh():
                 self.customer_list[i] = cus
+                
+    def findByid(self,id):
+        try:
+            self.conn.connect()
+            query = f"select * from KhachHang where makh={id}"
+            result = db.execute_fetch_all(self.conn,id)
+            
+        except mysql.connector.Error as error:
+            return f'Error: {error}'
+            
 
 if __name__ == "__main__":
     dskh = customerDAO()

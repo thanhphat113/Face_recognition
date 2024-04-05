@@ -1,3 +1,10 @@
+import sys
+import os
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from DAO.customerDAO import customerDAO
+
 class pet:
     def __init__(self, matn : int, tentn : str, maulong : str, cannang : str, kh : int):
         self.__matn = matn

@@ -2,9 +2,16 @@ class customer:
     def __init__(self, makh : int, tenkh : str, gioitinh : int, sdt : str, email : str):
         self.__makh = makh
         self.__tenkh = tenkh
-        self.__gioitinh = gioitinh
+        self.__loaigt = gioitinh
         self.__email = email
         self.__sdt = sdt
+    
+    
+    def get_loaigt(self):
+        return self.__loaigt
+    
+    def set_loaigt(self, loaigt):
+        self.__loaigt = loaigt
     
     def get_makh(self):
         return self.__makh
@@ -19,10 +26,9 @@ class customer:
         self.__tenkh = tenkh
     
     def get_gioitinh(self):
-        return self.__gioitinh
+        if self.__loaigt == 0: return "Nữ"
+        return "Nam"
     
-    def set_gioitinh(self, gioitinh):
-        self.__gioitinh = gioitinh
 
     def get_email(self):
         return self.__email

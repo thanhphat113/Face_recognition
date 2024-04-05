@@ -350,8 +350,6 @@ class Ui_MainWindow(object):
         self.stackedWidget.setCurrentIndex(0)
         self.btnMenu.toggled['bool'].connect(self.menu_widget.setVisible) # type: ignore
         self.btnMenu.toggled['bool'].connect(self.icon_menu_widget.setHidden) # type: ignore
-        self.pushButton_5.toggled['bool'].connect(MainWindow.close) # type: ignore
-        self.pushButton_12.toggled['bool'].connect(MainWindow.close) # type: ignore
         self.btnCustomer.toggled['bool'].connect(self.iconCustomer.setChecked)
         self.iconCustomer.toggled['bool'].connect(self.btnCustomer.setChecked)
         self.btnEmployee.toggled['bool'].connect(self.iconEmployee.setChecked)
@@ -384,7 +382,7 @@ class Ui_MainWindow(object):
         self.btnMedicine.setText(_translate("MainWindow", "Dược phẩm"))
         self.btnService.setText(_translate("MainWindow", "Dịch vụ"))
         self.btnChart.setText(_translate("MainWindow", "Doanh thu"))
-        self.pushButton_12.setText(_translate("MainWindow", "Thoát"))
+        self.pushButton_12.setText(_translate("MainWindow", "Đăng xuất"))
         self.label_4.setText(_translate("MainWindow", "Home"))
         self.label_5.setText(_translate("MainWindow", "Customer"))
         self.label_6.setText(_translate("MainWindow", "Pets"))
