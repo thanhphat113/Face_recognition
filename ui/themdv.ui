@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>add_service_dialog</class>
- <widget class="QDialog" name="add_service_dialog">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -101,7 +101,7 @@ border:1px solid black;</string>
     </rect>
    </property>
   </widget>
-  <widget class="QLineEdit" name="txtPrice">
+  <widget class="QLineEdit" name="txtPhone">
    <property name="geometry">
     <rect>
      <x>170</x>

@@ -39,8 +39,7 @@
     <widget class="QWidget" name="widget" native="true">
      <property name="styleSheet">
       <string notr="true">QWidget{
-	background-color: #BDD5D7;
-	border:1px solid black
+background-color: rgb(133, 255, 246);	border:1px solid black
 }
 QLabel{
 	border:none
@@ -61,6 +60,9 @@ QLabel{
         </property>
         <property name="layoutDirection">
          <enum>Qt::LeftToRight</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
         </property>
         <property name="text">
          <string>Quản lý dược phẩm</string>
@@ -98,7 +100,7 @@ QLabel{
          </spacer>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_3">
+         <widget class="QPushButton" name="btnAdd">
           <property name="minimumSize">
            <size>
             <width>90</width>
@@ -126,7 +128,7 @@ border-radius: 5px;</string>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_2">
+         <widget class="QPushButton" name="btnEdit">
           <property name="minimumSize">
            <size>
             <width>90</width>
@@ -154,7 +156,7 @@ border-radius: 5px;</string>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton">
+         <widget class="QPushButton" name="btnDelete">
           <property name="minimumSize">
            <size>
             <width>90</width>
@@ -181,6 +183,28 @@ border-radius: 5px;</string>
           </property>
          </widget>
         </item>
+        <item>
+         <widget class="QPushButton" name="btnReset">
+          <property name="minimumSize">
+           <size>
+            <width>90</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: #BDD5D7;
+border-radius: 5px;
+border: none;</string>
+          </property>
+          <property name="text">
+           <string>Reset</string>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>../img/refresh.png</normaloff>../img/refresh.png</iconset>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
      </layout>
@@ -199,7 +223,7 @@ border-radius: 5px;</string>
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit">
+         <widget class="QLineEdit" name="txtSearch">
           <property name="minimumSize">
            <size>
             <width>0</width>
@@ -209,17 +233,7 @@ border-radius: 5px;</string>
          </widget>
         </item>
         <item>
-         <widget class="QComboBox" name="comboBox">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>32</height>
-           </size>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="pushButton_4">
+         <widget class="QPushButton" name="btnSearch">
           <property name="minimumSize">
            <size>
             <width>90</width>
@@ -262,12 +276,15 @@ border: none;</string>
        </layout>
       </item>
       <item>
-       <widget class="QTableWidget" name="tableWidget">
+       <widget class="QTableWidget" name="table_medicine">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Ignored" vsizetype="Expanding">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
+        </property>
+        <property name="selectionBehavior">
+         <enum>QAbstractItemView::SelectRows</enum>
         </property>
         <property name="sortingEnabled">
          <bool>false</bool>
@@ -276,7 +293,7 @@ border: none;</string>
          <bool>false</bool>
         </property>
         <property name="columnCount">
-         <number>7</number>
+         <number>6</number>
         </property>
         <attribute name="horizontalHeaderCascadingSectionResizes">
          <bool>false</bool>
@@ -288,7 +305,7 @@ border: none;</string>
          <bool>true</bool>
         </attribute>
         <attribute name="verticalHeaderVisible">
-         <bool>true</bool>
+         <bool>false</bool>
         </attribute>
         <attribute name="verticalHeaderCascadingSectionResizes">
          <bool>false</bool>
@@ -311,6 +328,22 @@ border: none;</string>
         </column>
         <column>
          <property name="text">
+          <string>Ngày sản xuất</string>
+         </property>
+         <property name="textAlignment">
+          <set>AlignCenter</set>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Hạn sử dụng</string>
+         </property>
+         <property name="textAlignment">
+          <set>AlignCenter</set>
+         </property>
+        </column>
+        <column>
+         <property name="text">
           <string>Số lượng</string>
          </property>
          <property name="textAlignment">
@@ -320,30 +353,6 @@ border: none;</string>
         <column>
          <property name="text">
           <string>Đơn giá</string>
-         </property>
-         <property name="textAlignment">
-          <set>AlignCenter</set>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>Đơn vị tính</string>
-         </property>
-         <property name="textAlignment">
-          <set>AlignCenter</set>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>Ngày sản xuất</string>
-         </property>
-         <property name="textAlignment">
-          <set>AlignCenter</set>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>Ngày hết hạn</string>
          </property>
          <property name="textAlignment">
           <set>AlignCenter</set>

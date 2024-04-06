@@ -1,5 +1,11 @@
+import sys
+import os
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from DAO.customerDAO import customerDAO
+
 class pet:
-    max_matn = 0
     def __init__(self, matn : int, tentn : str, maulong : str, cannang : str, makh : int):
         self.__matn = matn
         self.__tentn = tentn
@@ -12,12 +18,7 @@ class pet:
         return self.__matn
     
     def set_matn(self, matn):
-        self.__matn = matn
-
-    @classmethod
-    def generate_matn(cls):
-        cls.max_matn += 1
-        return cls.max_matn
+        self.__matn=matn
     
     def get_tentn(self):
         return self.__tentn
@@ -39,3 +40,13 @@ class pet:
     
     def get_makh(self):
         return self.__makh
+    
+    def set_makh(self,makh):
+        self.__makh=makh
+        
+    def get_khachhang(self):
+        cus = customerDAO()
+        self.__khachhang = cus.findByid(self.get_makh())
+        return self.__khachhang
+    
+    

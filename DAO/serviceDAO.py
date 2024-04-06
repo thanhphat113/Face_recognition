@@ -37,3 +37,40 @@ class serviceDAO:
         except mysql.connector.Error as error:
             return 'Thêm thất bại !!!!'
         
+    def updateService(self, service):
+        conn = self.conn
+        try:
+            conn.connect()
+            query=f"update dichvu set tendv = '{service.getTen()}',giatien = '{service.getGia()}' where madv = '{service.getMaDV()}'"
+            db.execute_query(conn, query)
+            return "Sửa thành công!"
+        except mysql.connector.Error as error:
+            return "Sửa thất bại!"
+        
+    def deleteService(self, madv):
+        conn = self.conn
+        try:
+            conn.connect()
+            query=f"delete from dichvu where madv = '{madv}'"
+            db.execute_query(conn, query)
+            return "Xóa thành công!"
+        except mysql.connector.Error as error:
+            return "Xóa thất bại!"
+        
+    def searchService(self, query):
+        service_list = []
+        conn = self.conn
+        try:
+            conn.connect()
+            query=f"select * from dichvu where madv LIKE '{query}%' OR tendv LIKE '{query}%'"
+            list=db.execute_fetch_all(conn,query)
+            for dv in list:
+                service = Service(dv[0],dv[1],dv[2])
+                service_list.append(service)
+            return service_list
+        except mysql.connector.Error as error:
+            print(f'Error: {error}')
+            return None
+        finally:
+            conn.close()
+    

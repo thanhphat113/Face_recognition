@@ -39,7 +39,7 @@
     <widget class="QWidget" name="widget" native="true">
      <property name="styleSheet">
       <string notr="true">QWidget{
-	background-color: rgb(65, 255, 245);
+	background-color: rgb(0, 255, 244);
 	border:1px solid black
 }
 QLabel{
@@ -73,92 +73,6 @@ QLabel{
      </layout>
     </widget>
    </item>
-   <item row="2" column="0">
-    <widget class="QWidget" name="widget_3" native="true">
-     <layout class="QGridLayout" name="gridLayout_2">
-      <item row="0" column="0">
-       <layout class="QHBoxLayout" name="horizontalLayout">
-        <item>
-         <spacer name="horizontalSpacer">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>218</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QPushButton" name="pushButton_3">
-          <property name="styleSheet">
-           <string notr="true">background-color: rgb(159, 255, 153);
-</string>
-          </property>
-          <property name="text">
-           <string>Thêm</string>
-          </property>
-          <property name="icon">
-           <iconset>
-            <normaloff>img/add.png</normaloff>img/add.png</iconset>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>20</width>
-            <height>20</height>
-           </size>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="pushButton">
-          <property name="styleSheet">
-           <string notr="true">background-color: rgb(255, 124, 125);
-
-</string>
-          </property>
-          <property name="text">
-           <string>Xoá</string>
-          </property>
-          <property name="icon">
-           <iconset>
-            <normaloff>img/delete.png</normaloff>img/delete.png</iconset>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>20</width>
-            <height>20</height>
-           </size>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="pushButton_2">
-          <property name="styleSheet">
-           <string notr="true">background-color: rgb(188, 202, 255);</string>
-          </property>
-          <property name="text">
-           <string>Sửa</string>
-          </property>
-          <property name="icon">
-           <iconset>
-            <normaloff>img/refresh.png</normaloff>img/refresh.png</iconset>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>20</width>
-            <height>20</height>
-           </size>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-     </layout>
-    </widget>
-   </item>
    <item row="1" column="0">
     <widget class="QWidget" name="widget_2" native="true">
      <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -172,22 +86,34 @@ QLabel{
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit"/>
+         <widget class="QLineEdit" name="txtSearchService">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>32</height>
+           </size>
+          </property>
+         </widget>
         </item>
         <item>
-         <widget class="QComboBox" name="comboBox"/>
-        </item>
-        <item>
-         <widget class="QPushButton" name="pushButton_4">
+         <widget class="QPushButton" name="btnSearch">
+          <property name="minimumSize">
+           <size>
+            <width>90</width>
+            <height>32</height>
+           </size>
+          </property>
           <property name="styleSheet">
-           <string notr="true"/>
+           <string notr="true">background-color: #BDD5D7;
+border-radius: 5px;
+border: none;</string>
           </property>
           <property name="text">
            <string>Tìm</string>
           </property>
           <property name="icon">
            <iconset>
-            <normaloff>img/search.png</normaloff>img/search.png</iconset>
+            <normaloff>../../../PhongKhamThuY/ui/img/search.png</normaloff>../../../PhongKhamThuY/ui/img/search.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -213,12 +139,18 @@ QLabel{
        </layout>
       </item>
       <item>
-       <widget class="QTableWidget" name="tableWidget">
+       <widget class="QTableWidget" name="table_service">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Ignored" vsizetype="Expanding">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
+        </property>
+        <property name="selectionBehavior">
+         <enum>QAbstractItemView::SelectRows</enum>
+        </property>
+        <property name="showGrid">
+         <bool>true</bool>
         </property>
         <property name="sortingEnabled">
          <bool>false</bool>
@@ -227,7 +159,7 @@ QLabel{
          <bool>false</bool>
         </property>
         <property name="columnCount">
-         <number>4</number>
+         <number>3</number>
         </property>
         <attribute name="horizontalHeaderCascadingSectionResizes">
          <bool>false</bool>
@@ -239,7 +171,7 @@ QLabel{
          <bool>true</bool>
         </attribute>
         <attribute name="verticalHeaderVisible">
-         <bool>true</bool>
+         <bool>false</bool>
         </attribute>
         <attribute name="verticalHeaderCascadingSectionResizes">
          <bool>false</bool>
@@ -268,15 +200,142 @@ QLabel{
           <set>AlignCenter</set>
          </property>
         </column>
-        <column>
-         <property name="text">
-          <string>Loại dịch vụ</string>
-         </property>
-         <property name="textAlignment">
-          <set>AlignCenter</set>
-         </property>
-        </column>
        </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QWidget" name="widget_3" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>70</height>
+      </size>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>218</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnAdd">
+          <property name="minimumSize">
+           <size>
+            <width>90</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: #9FC899;
+border: none;
+border-radius: 5px;</string>
+          </property>
+          <property name="text">
+           <string>Thêm</string>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>../img/add.png</normaloff>../img/add.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnDelete">
+          <property name="minimumSize">
+           <size>
+            <width>90</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 124, 125);
+border: none;
+border-radius: 5px;</string>
+          </property>
+          <property name="text">
+           <string>Xoá</string>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>../img/delete.png</normaloff>../img/delete.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnUpdate">
+          <property name="minimumSize">
+           <size>
+            <width>90</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 127);
+border: none;
+border-radius: 5px;</string>
+          </property>
+          <property name="text">
+           <string>Sửa</string>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>../img/edit_48px.png</normaloff>../img/edit_48px.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnReset">
+          <property name="minimumSize">
+           <size>
+            <width>90</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: #BDD5D7;
+border-radius: 5px;
+border: none;</string>
+          </property>
+          <property name="text">
+           <string>Reset</string>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>../img/refresh.png</normaloff>../img/refresh.png</iconset>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
      </layout>
     </widget>

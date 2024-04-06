@@ -9,14 +9,13 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QTableWidgetItem, QTableView
+from PyQt5.QtWidgets import QTableWidgetItem
 
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-import GUI.TacvuTN as tv
-import GUI.thongbao as tb
+import DAO.database as db
 from  DAO.petDAO import petDAO
 
 class Ui_Form(object):
@@ -107,6 +106,12 @@ class Ui_Form(object):
         self.comboBox = QtWidgets.QComboBox(self.widget_2)
         self.comboBox.setMinimumSize(QtCore.QSize(135, 5))
         self.comboBox.setObjectName("comboBox")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
         self.horizontalLayout_2.addWidget(self.comboBox)
         self.pushButton_4 = QtWidgets.QPushButton(self.widget_2)
         self.pushButton_4.setStyleSheet("")
@@ -160,27 +165,21 @@ class Ui_Form(object):
         QtCore.QMetaObject.connectSlotsByName(Form)
 
     def retranslateUi(self, Form):
-        self._translate = QtCore.QCoreApplication.translate
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
         self.label.setText(_translate("Form", "Quản lý thú nuôi"))
         self.pushButton_3.setText(_translate("Form", "Thêm"))
         self.pushButton_3.setMinimumSize(100, 30)
-        self.pushButton_3.clicked.connect(self.TacVu_TN)
-
         self.pushButton.setText(_translate("Form", "Xoá"))
         self.pushButton.setMinimumSize(100, 30)
-        self.pushButton.clicked.connect(self.on_button_clicked)
-
         self.pushButton_2.setText(_translate("Form", "Sửa"))
         self.pushButton_2.setMinimumSize(100, 30)
-        self.pushButton_2.clicked.connect(self.update_TN)
-
         self.label_2.setText(_translate("Form", "Tìm kiếm "))
+        self.comboBox.setItemText(0, _translate("Form", "Mã thú nuôi"))
+        self.comboBox.setItemText(1, _translate("Form", "Tên thú nuôi"))
+        self.comboBox.setItemText(2, _translate("Form", "Khách hàng"))
         self.pushButton_4.setText(_translate("Form", "Tìm"))
         self.tableWidget.setSortingEnabled(False)
-        self.tableWidget.setEditTriggers(QTableView.NoEditTriggers)
-        self.tableWidget.setSelectionBehavior(QTableView.SelectRows)
         item = self.tableWidget.horizontalHeaderItem(0)
         item.setText(_translate("Form", "Mã thú nuôi"))
         item = self.tableWidget.horizontalHeaderItem(1)
@@ -191,70 +190,17 @@ class Ui_Form(object):
         item.setText(_translate("Form", "Cân nặng"))
         item = self.tableWidget.horizontalHeaderItem(4)
         item.setText(_translate("Form", "Khách hàng"))
-        self.upload_list()
-    
 
-    def upload_list(self):
-        dao = petDAO()
-        pet_list = dao.ReadFromDatabase()
-        self.tableWidget.setRowCount(0)
-        for pet in pet_list:
-            data = [pet.get_matn(), pet.get_tentn(), pet.get_maulong(), pet.get_cannang(), pet.get_makh()]
+        pet_list = petDAO().ReadFromDatabase()
+        for tn in pet_list:
+            data = [tn.get_matn(), tn.get_tentn(),tn.get_maulong() , tn.get_cannang(),tn.get_khachhang().get_tenkh()]
             self.add_row_to_table(data)
-    
-
+        
     def add_row_to_table(self, data):
         rowPosition = self.tableWidget.rowCount()
         self.tableWidget.insertRow(rowPosition)
         for column, item in enumerate(data):
-            self.tableWidget.setItem(rowPosition, column, QTableWidgetItem(str(item)))
-
-
-    def TacVu_TN(self):
-        Dialog = QtWidgets.QDialog()
-        ui = tv.Ui_Dialog()
-        ui.setupUi(Dialog,1)
-        Dialog.exec_()
-        self.upload_list()
-    
-
-    def on_button_clicked(self):
-        Dialog = QtWidgets.QDialog()
-        ui = tb.Ui_Dialog()
-        ui.setupUi(Dialog)
-        selected_items = self.tableWidget.selectedItems()
-        if selected_items:
-            selected_row = selected_items[0].row()
-            value = self.tableWidget.item(selected_row, 0).text()
-            ui.label.setText(self._translate("Dialog", self.delete_TN(value)))
-        else:
-            ui.label.setText(self._translate("Dialog", "Vui lòng hãy chọn dòng muốn xoá"))
-        Dialog.exec_()
-        self.upload_list()
-
-                
-    def delete_TN(self, value):
-        dao = petDAO()
-        return dao.delete(value)
-                
-        
-    def update_TN(self):
-        Dialog = QtWidgets.QDialog()
-        ui = tv.Ui_Dialog()
-        ui.setupUi(Dialog,2)    
-        ui.title.setText(self._translate("Dialog", "Sửa thông tin"))
-        selected_row = self.tableWidget.currentRow()
-        if selected_row  >= 0:
-            selected_items = self.tableWidget.selectedItems()
-            row_data = [item.text() for item in selected_items]
-            ui.label_visible.setText(self._translate("Dialog",row_data[0]))
-            ui.txtName.setText(self._translate("Dialog",row_data[1]))
-            ui.txtColor.setText(self._translate("Dialog",row_data[2]))
-            ui.txtWeight.setText(self._translate("Dialog",row_data[3]))
-        # ui.label.setText(self._translate("Dialog", self.update_NV()))
-        Dialog.exec_()
-        self.upload_list()
-
+                self.tableWidget.setItem(rowPosition, column, QTableWidgetItem(str(item)))
 
 if __name__ == "__main__":
     import sys
