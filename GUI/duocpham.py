@@ -9,7 +9,10 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from DAO.medicineDAO import medicineDAO
+from DTO.medicineDTO import Medicine
+import GUI.mesage_box as msg
+from GUI.medicine_dialog import Ui_medicine_dialog
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -23,8 +26,7 @@ class Ui_Form(object):
         self.gridLayout_3.setObjectName("gridLayout_3")
         self.widget = QtWidgets.QWidget(Form)
         self.widget.setStyleSheet("QWidget{\n"
-"    background-color: rgb(133, 255, 246);\n"
-"    border:1px solid black\n"
+"background-color: rgb(133, 255, 246);    border:1px solid black\n"
 "}\n"
 "QLabel{\n"
 "    border:none\n"
@@ -42,6 +44,7 @@ class Ui_Form(object):
         font.setWeight(75)
         self.label.setFont(font)
         self.label.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label.setStyleSheet("")
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
         self.verticalLayout.addWidget(self.label)
@@ -55,39 +58,49 @@ class Ui_Form(object):
         self.horizontalLayout.setObjectName("horizontalLayout")
         spacerItem = QtWidgets.QSpacerItem(218, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
-        self.pushButton_3 = QtWidgets.QPushButton(self.widget_3)
-        self.pushButton_3.setMinimumSize(QtCore.QSize(90, 40))
-        self.pushButton_3.setStyleSheet("background-color: #9FC899;\n"
+        self.btnAdd = QtWidgets.QPushButton(self.widget_3)
+        self.btnAdd.setMinimumSize(QtCore.QSize(90, 40))
+        self.btnAdd.setStyleSheet("background-color: #9FC899;\n"
 "border: none;\n"
 "border-radius: 5px;")
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("ui\\../img/add.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.pushButton_3.setIcon(icon)
-        self.pushButton_3.setIconSize(QtCore.QSize(20, 20))
-        self.pushButton_3.setObjectName("pushButton_3")
-        self.horizontalLayout.addWidget(self.pushButton_3)
-        self.pushButton_2 = QtWidgets.QPushButton(self.widget_3)
-        self.pushButton_2.setMinimumSize(QtCore.QSize(90, 40))
-        self.pushButton_2.setStyleSheet("background-color: rgb(255, 255, 127);\n"
+        self.btnAdd.setIcon(icon)
+        self.btnAdd.setIconSize(QtCore.QSize(20, 20))
+        self.btnAdd.setObjectName("btnAdd")
+        self.horizontalLayout.addWidget(self.btnAdd)
+        self.btnEdit = QtWidgets.QPushButton(self.widget_3)
+        self.btnEdit.setMinimumSize(QtCore.QSize(90, 40))
+        self.btnEdit.setStyleSheet("background-color: rgb(255, 255, 127);\n"
 "border: none;\n"
 "border-radius: 5px;")
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap("ui\\../img/edit_48px.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.pushButton_2.setIcon(icon1)
-        self.pushButton_2.setIconSize(QtCore.QSize(20, 20))
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.horizontalLayout.addWidget(self.pushButton_2)
-        self.pushButton = QtWidgets.QPushButton(self.widget_3)
-        self.pushButton.setMinimumSize(QtCore.QSize(90, 40))
-        self.pushButton.setStyleSheet("background-color: rgb(255, 124, 125);\n"
+        self.btnEdit.setIcon(icon1)
+        self.btnEdit.setIconSize(QtCore.QSize(20, 20))
+        self.btnEdit.setObjectName("btnEdit")
+        self.horizontalLayout.addWidget(self.btnEdit)
+        self.btnDelete = QtWidgets.QPushButton(self.widget_3)
+        self.btnDelete.setMinimumSize(QtCore.QSize(90, 40))
+        self.btnDelete.setStyleSheet("background-color: rgb(255, 124, 125);\n"
 "border: none;\n"
 "border-radius: 5px;")
         icon2 = QtGui.QIcon()
         icon2.addPixmap(QtGui.QPixmap("ui\\../img/delete.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.pushButton.setIcon(icon2)
-        self.pushButton.setIconSize(QtCore.QSize(20, 20))
-        self.pushButton.setObjectName("pushButton")
-        self.horizontalLayout.addWidget(self.pushButton)
+        self.btnDelete.setIcon(icon2)
+        self.btnDelete.setIconSize(QtCore.QSize(20, 20))
+        self.btnDelete.setObjectName("btnDelete")
+        self.horizontalLayout.addWidget(self.btnDelete)
+        self.btnReset = QtWidgets.QPushButton(self.widget_3)
+        self.btnReset.setMinimumSize(QtCore.QSize(90, 40))
+        self.btnReset.setStyleSheet("background-color: #BDD5D7;\n"
+"border-radius: 5px;\n"
+"border: none;")
+        icon3 = QtGui.QIcon()
+        icon3.addPixmap(QtGui.QPixmap("ui\\../img/refresh.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btnReset.setIcon(icon3)
+        self.btnReset.setObjectName("btnReset")
+        self.horizontalLayout.addWidget(self.btnReset)
         self.gridLayout_2.addLayout(self.horizontalLayout, 0, 0, 1, 1)
         self.gridLayout_3.addWidget(self.widget_3, 2, 0, 1, 1)
         self.widget_2 = QtWidgets.QWidget(Form)
@@ -99,65 +112,59 @@ class Ui_Form(object):
         self.label_2 = QtWidgets.QLabel(self.widget_2)
         self.label_2.setObjectName("label_2")
         self.horizontalLayout_2.addWidget(self.label_2)
-        self.lineEdit = QtWidgets.QLineEdit(self.widget_2)
-        self.lineEdit.setMinimumSize(QtCore.QSize(0, 32))
-        self.lineEdit.setObjectName("lineEdit")
-        self.horizontalLayout_2.addWidget(self.lineEdit)
-        self.comboBox = QtWidgets.QComboBox(self.widget_2)
-        self.comboBox.setMinimumSize(QtCore.QSize(0, 32))
-        self.comboBox.setObjectName("comboBox")
-        self.horizontalLayout_2.addWidget(self.comboBox)
-        self.pushButton_4 = QtWidgets.QPushButton(self.widget_2)
-        self.pushButton_4.setMinimumSize(QtCore.QSize(90, 32))
-        self.pushButton_4.setStyleSheet("background-color: #BDD5D7;\n"
+        self.txtSearch = QtWidgets.QLineEdit(self.widget_2)
+        self.txtSearch.setMinimumSize(QtCore.QSize(0, 32))
+        self.txtSearch.setObjectName("txtSearch")
+        self.horizontalLayout_2.addWidget(self.txtSearch)
+        self.btnSearch = QtWidgets.QPushButton(self.widget_2)
+        self.btnSearch.setMinimumSize(QtCore.QSize(90, 32))
+        self.btnSearch.setStyleSheet("background-color: #BDD5D7;\n"
 "border-radius: 5px;\n"
 "border: none;")
-        icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap("ui\\img/search.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.pushButton_4.setIcon(icon3)
-        self.pushButton_4.setIconSize(QtCore.QSize(20, 20))
-        self.pushButton_4.setObjectName("pushButton_4")
-        self.horizontalLayout_2.addWidget(self.pushButton_4)
+        icon4 = QtGui.QIcon()
+        icon4.addPixmap(QtGui.QPixmap("ui\\img/search.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btnSearch.setIcon(icon4)
+        self.btnSearch.setIconSize(QtCore.QSize(20, 20))
+        self.btnSearch.setObjectName("btnSearch")
+        self.horizontalLayout_2.addWidget(self.btnSearch)
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem1)
         self.verticalLayout_2.addLayout(self.horizontalLayout_2)
-        self.tableWidget = QtWidgets.QTableWidget(self.widget_2)
+        self.table_medicine = QtWidgets.QTableWidget(self.widget_2)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Ignored, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.tableWidget.sizePolicy().hasHeightForWidth())
-        self.tableWidget.setSizePolicy(sizePolicy)
-        self.tableWidget.setWordWrap(False)
-        self.tableWidget.setColumnCount(7)
-        self.tableWidget.setObjectName("tableWidget")
-        self.tableWidget.setRowCount(0)
+        sizePolicy.setHeightForWidth(self.table_medicine.sizePolicy().hasHeightForWidth())
+        self.table_medicine.setSizePolicy(sizePolicy)
+        self.table_medicine.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
+        self.table_medicine.setWordWrap(False)
+        self.table_medicine.setColumnCount(6)
+        self.table_medicine.setObjectName("table_medicine")
+        self.table_medicine.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
         item.setTextAlignment(QtCore.Qt.AlignCenter)
-        self.tableWidget.setHorizontalHeaderItem(0, item)
+        self.table_medicine.setHorizontalHeaderItem(0, item)
         item = QtWidgets.QTableWidgetItem()
         item.setTextAlignment(QtCore.Qt.AlignCenter)
-        self.tableWidget.setHorizontalHeaderItem(1, item)
+        self.table_medicine.setHorizontalHeaderItem(1, item)
         item = QtWidgets.QTableWidgetItem()
         item.setTextAlignment(QtCore.Qt.AlignCenter)
-        self.tableWidget.setHorizontalHeaderItem(2, item)
+        self.table_medicine.setHorizontalHeaderItem(2, item)
         item = QtWidgets.QTableWidgetItem()
         item.setTextAlignment(QtCore.Qt.AlignCenter)
-        self.tableWidget.setHorizontalHeaderItem(3, item)
+        self.table_medicine.setHorizontalHeaderItem(3, item)
         item = QtWidgets.QTableWidgetItem()
         item.setTextAlignment(QtCore.Qt.AlignCenter)
-        self.tableWidget.setHorizontalHeaderItem(4, item)
+        self.table_medicine.setHorizontalHeaderItem(4, item)
         item = QtWidgets.QTableWidgetItem()
         item.setTextAlignment(QtCore.Qt.AlignCenter)
-        self.tableWidget.setHorizontalHeaderItem(5, item)
-        item = QtWidgets.QTableWidgetItem()
-        item.setTextAlignment(QtCore.Qt.AlignCenter)
-        self.tableWidget.setHorizontalHeaderItem(6, item)
-        self.tableWidget.horizontalHeader().setCascadingSectionResizes(False)
-        self.tableWidget.horizontalHeader().setSortIndicatorShown(False)
-        self.tableWidget.horizontalHeader().setStretchLastSection(True)
-        self.tableWidget.verticalHeader().setVisible(True)
-        self.tableWidget.verticalHeader().setCascadingSectionResizes(False)
-        self.verticalLayout_2.addWidget(self.tableWidget)
+        self.table_medicine.setHorizontalHeaderItem(5, item)
+        self.table_medicine.horizontalHeader().setCascadingSectionResizes(False)
+        self.table_medicine.horizontalHeader().setSortIndicatorShown(False)
+        self.table_medicine.horizontalHeader().setStretchLastSection(True)
+        self.table_medicine.verticalHeader().setVisible(False)
+        self.table_medicine.verticalHeader().setCascadingSectionResizes(False)
+        self.verticalLayout_2.addWidget(self.table_medicine)
         self.gridLayout_3.addWidget(self.widget_2, 1, 0, 1, 1)
 
         self.retranslateUi(Form)
@@ -167,27 +174,146 @@ class Ui_Form(object):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
         self.label.setText(_translate("Form", "Quản lý dược phẩm"))
-        self.pushButton_3.setText(_translate("Form", "Thêm"))
-        self.pushButton_2.setText(_translate("Form", "Sửa"))
-        self.pushButton.setText(_translate("Form", "Xoá"))
+        self.btnAdd.setText(_translate("Form", "Thêm"))
+        self.btnEdit.setText(_translate("Form", "Sửa"))
+        self.btnDelete.setText(_translate("Form", "Xoá"))
+        self.btnReset.setText(_translate("Form", "Reset"))
         self.label_2.setText(_translate("Form", "Tìm kiếm "))
-        self.pushButton_4.setText(_translate("Form", "Tìm"))
-        self.tableWidget.setSortingEnabled(False)
-        item = self.tableWidget.horizontalHeaderItem(0)
+        self.btnSearch.setText(_translate("Form", "Tìm"))
+        self.table_medicine.setSortingEnabled(False)
+        item = self.table_medicine.horizontalHeaderItem(0)
         item.setText(_translate("Form", "Mã dược phẩm"))
-        item = self.tableWidget.horizontalHeaderItem(1)
+        item = self.table_medicine.horizontalHeaderItem(1)
         item.setText(_translate("Form", "Tên dược phẩm"))
-        item = self.tableWidget.horizontalHeaderItem(2)
-        item.setText(_translate("Form", "Số lượng"))
-        item = self.tableWidget.horizontalHeaderItem(3)
-        item.setText(_translate("Form", "Đơn giá"))
-        item = self.tableWidget.horizontalHeaderItem(4)
-        item.setText(_translate("Form", "Đơn vị tính"))
-        item = self.tableWidget.horizontalHeaderItem(5)
+        item = self.table_medicine.horizontalHeaderItem(2)
         item.setText(_translate("Form", "Ngày sản xuất"))
-        item = self.tableWidget.horizontalHeaderItem(6)
-        item.setText(_translate("Form", "Ngày hết hạn"))
+        item = self.table_medicine.horizontalHeaderItem(3)
+        item.setText(_translate("Form", "Hạn sử dụng"))
+        item = self.table_medicine.horizontalHeaderItem(4)
+        item.setText(_translate("Form", "Số lượng"))
+        item = self.table_medicine.horizontalHeaderItem(5)
+        item.setText(_translate("Form", "Đơn giá"))
+        self.loadMedicineData()
+        self.btnAdd.clicked.connect(self.show_medicine_dialog)
+        self.btnEdit.clicked.connect(self.show_update_dialog)
+        self.btnDelete.clicked.connect(self.deleteService)
+        self.btnReset.clicked.connect(self.loadMedicineData)
+        self.btnSearch.clicked.connect(self.searchMedicine)
 
+    def show_medicine_dialog(self):
+        dialog = QtWidgets.QDialog()
+        self.medicine_dialog = Ui_medicine_dialog()
+        self.medicine_dialog.setupUi(dialog)
+        self.medicine_dialog.btnAccept.clicked.connect(self.addMedicine)
+        dialog.exec_()
+        dialog.show()
+
+    def show_update_dialog(self):
+        dialog = QtWidgets.QDialog()
+        self.medicine_dialog = Ui_medicine_dialog()
+        self.medicine_dialog.setupUi(dialog)
+        self.medicine_dialog.label_4.setText("SỬA THÔNG TIN DƯỢC PHẨM")
+
+        selected_row = self.table_medicine.currentRow()
+        if selected_row < 0:
+            msg.show_warning_messagebox("Vui lòng chọn 1 dòng trong bảng dược phẩm")
+            return
+
+        selected_items = self.table_medicine.selectedItems()
+        row_data = [item.text() for item in selected_items]
+        madp = row_data[0]
+        ten = row_data[1]
+        nsx = QtCore.QDate.fromString(row_data[2], "yyyy-M-d")
+        hsd = QtCore.QDate.fromString(row_data[3], "yyyy-M-d")
+        sl = row_data[4]
+        gia = row_data[5]
+
+        self.medicine_dialog.txtName.setText(ten)
+        self.medicine_dialog.txtNSX.setDate(nsx)
+        self.medicine_dialog.txtHSD.setDate(hsd)
+        self.medicine_dialog.txtQty.setText(sl)
+        self.medicine_dialog.txtPrice.setText(gia)
+        medicine = Medicine(madp, ten, nsx, hsd, sl, gia)
+
+        self.medicine_dialog.btnAccept.clicked.connect(lambda: self.updateMedicine(medicine))
+        dialog.exec_()
+        dialog.show()
+
+    def loadMedicineData(self):
+        dao = medicineDAO()
+        medicines = dao.getAllMedicines()
+        self.fillMedicineTable(medicines)
+
+    def fillMedicineTable(self, medicines):
+        row = 0
+        self.table_medicine.setRowCount(len(medicines))
+        for medicine in medicines:
+            self.table_medicine.setItem(row, 0, QtWidgets.QTableWidgetItem(str(medicine.getMaDP())))
+            self.table_medicine.setItem(row, 1, QtWidgets.QTableWidgetItem(medicine.getTenDP()))
+            self.table_medicine.setItem(row, 2, QtWidgets.QTableWidgetItem(str(medicine.getNSX())))
+            self.table_medicine.setItem(row, 3, QtWidgets.QTableWidgetItem(str(medicine.getHSD())))
+            self.table_medicine.setItem(row, 4, QtWidgets.QTableWidgetItem(str(medicine.getSoLuong())))
+            self.table_medicine.setItem(row, 5, QtWidgets.QTableWidgetItem(str(medicine.getGia())))
+            row = row +1
+
+    def addMedicine(self):
+        tendp = self.medicine_dialog.txtName.text()
+        nsx = self.medicine_dialog.txtNSX.date().toString('MM-dd-yyyy')
+        hsd = self.medicine_dialog.txtHSD.date().toString('MM-dd-yyyy')
+        sl = self.medicine_dialog.txtQty.text()
+        gia = self.medicine_dialog.txtPrice.text()
+
+        if not tendp or not nsx or not hsd or not sl or not gia:
+            msg.show_warning_messagebox("Vui lòng nhập đầy đủ thông tin") 
+            return
+        
+        if not gia.isnumeric() or not sl.isnumeric():
+            msg.show_warning_messagebox("Vui lòng chỉ nhập số cho trường giá và số lượng")
+            return
+
+        dao = medicineDAO()
+        medicine = Medicine(None, tendp, nsx, hsd, sl, gia)
+        dao.insertMedicine(medicine)  
+        msg.show_info_messagebox("Thêm dược phẩm thành công!")
+        self.loadMedicineData()
+
+    def updateMedicine(self, medicine):
+        tendp = self.medicine_dialog.txtName.text()
+        nsx = self.medicine_dialog.txtNSX.date().toString('MM-dd-yyyy')
+        hsd = self.medicine_dialog.txtHSD.date().toString('MM-dd-yyyy')
+        sl = self.medicine_dialog.txtQty.text()
+        gia = self.medicine_dialog.txtPrice.text()
+
+        if not tendp or not nsx or not hsd or not sl or not gia:
+            msg.show_warning_messagebox("Vui lòng nhập đầy đủ thông tin") 
+            return
+        
+        if not gia.isnumeric() or not sl.isnumeric():
+            msg.show_warning_messagebox("Vui lòng chỉ nhập số cho trường giá và số lượng")
+            return
+        
+        dao = medicineDAO()
+        m = Medicine(medicine.getMaDP(), tendp, nsx, hsd, sl, gia)
+        dao.updateMedicine(m)
+        msg.show_info_messagebox("Sửa thông tin dược phẩm thành công!")
+        self.loadMedicineData()
+
+    def deleteService(self):
+        selected_items = self.table_medicine.selectedItems()
+        if selected_items:
+            selected_row = selected_items[0].row()
+            id = self.table_medicine.item(selected_row, 0).text()
+            dao = medicineDAO()
+            dao.deleteMedicine(id)
+            self.loadMedicineData()
+        else:
+            msg.show_warning_messagebox("Vui lòng chọn 1 dòng trong bảng dược phẩm")
+
+    def searchMedicine(self):
+        dao = medicineDAO()
+        query = self.txtSearch.text()
+        medicines = dao.searchMedicine(query)
+        self.fillMedicineTable(medicines)
 
 if __name__ == "__main__":
     import sys

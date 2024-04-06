@@ -6,7 +6,6 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from GUI.sidebar import Ui_MainWindow
 from GUI.login import Ui_login_form
-from GUI.add_service_dialog import Ui_add_service_dialog
 from GUI import phongbenh as pb, nhanvien as nv ,dichvu as dv, thunuoi as tn, home ,khachhang as kh, hoadon,phieunhap as pn,duocpham as dp
 from DAO.serviceDAO import serviceDAO
 from DAO.taikhoanDAO import taikhoanDAO
@@ -80,10 +79,7 @@ class Main_Page(QMainWindow, Ui_MainWindow):
         self.bed_form = pb.Ui_Form()
         self.bed_form.setupUi(self.bed_Page)
 
-        self.add_service_dialog = Ui_add_service_dialog()
-
         self.eventHandling()
-        self.dv_form.btnAdd.clicked.connect(self.show_add_dialog)
         self.pushButton_12.clicked.connect(self.dangXuat)
         self.pushButton_5.clicked.connect(self.dangXuat)
         self.loadServiceData()
@@ -120,12 +116,7 @@ class Main_Page(QMainWindow, Ui_MainWindow):
     def showChart_Pages(self):
         self.stackedWidget.setCurrentIndex(8)
     
-    def show_add_dialog(self):
-        dialog = QtWidgets.QDialog()
-        self.add_service_dialog = Ui_add_service_dialog()
-        self.add_service_dialog.setupUi(dialog)
-        dialog.exec_()
-        dialog.show()
+    
 
     # Xử lý giao diện
     def eventHandling(self):

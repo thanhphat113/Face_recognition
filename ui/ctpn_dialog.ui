@@ -1,22 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>add_service_dialog</class>
- <widget class="QDialog" name="add_service_dialog">
+ <class>ctpn_dialog</class>
+ <widget class="QDialog" name="ctpn_dialog">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>276</height>
+    <height>304</height>
    </rect>
   </property>
   <property name="minimumSize">
-   <size>
-    <width>400</width>
-    <height>276</height>
-   </size>
-  </property>
-  <property name="maximumSize">
    <size>
     <width>400</width>
     <height>276</height>
@@ -28,22 +22,22 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>60</x>
-     <y>90</y>
+     <x>50</x>
+     <y>110</y>
      <width>91</width>
      <height>16</height>
     </rect>
    </property>
    <property name="text">
-    <string>Tên dịch vụ</string>
+    <string>Mã dược phẩm</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>60</x>
-     <y>130</y>
-     <width>91</width>
+     <x>50</x>
+     <y>150</y>
+     <width>111</width>
      <height>16</height>
     </rect>
    </property>
@@ -68,9 +62,9 @@ border:1px solid black;</string>
     <property name="geometry">
      <rect>
       <x>70</x>
-      <y>20</y>
-      <width>241</width>
-      <height>31</height>
+      <y>10</y>
+      <width>271</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="font">
@@ -84,38 +78,18 @@ border:1px solid black;</string>
      <string notr="true">border:none;</string>
     </property>
     <property name="text">
-     <string>THÊM DỊCH VỤ</string>
+     <string>THÊM CTPN</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
   </widget>
-  <widget class="QLineEdit" name="txtName">
-   <property name="geometry">
-    <rect>
-     <x>170</x>
-     <y>90</y>
-     <width>181</width>
-     <height>21</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="txtPrice">
-   <property name="geometry">
-    <rect>
-     <x>170</x>
-     <y>130</y>
-     <width>181</width>
-     <height>21</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QPushButton" name="btnAccept">
    <property name="geometry">
     <rect>
-     <x>80</x>
-     <y>180</y>
+     <x>70</x>
+     <y>240</y>
      <width>113</width>
      <height>32</height>
     </rect>
@@ -130,8 +104,8 @@ border:1px solid black;</string>
   <widget class="QPushButton" name="btnDeny">
    <property name="geometry">
     <rect>
-     <x>210</x>
-     <y>180</y>
+     <x>200</x>
+     <y>240</y>
      <width>113</width>
      <height>32</height>
     </rect>
@@ -141,6 +115,55 @@ border:1px solid black;</string>
    </property>
    <property name="checkable">
     <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="cbMaDP">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>110</y>
+     <width>181</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="txtPrice">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>150</y>
+     <width>181</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="readOnly">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="txtQty">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>190</y>
+     <width>181</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>190</y>
+     <width>111</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Số lượng</string>
    </property>
   </widget>
  </widget>

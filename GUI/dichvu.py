@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'dichvu.ui'
+# Form implementation generated from reading ui file 'ui/dichvu.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.9
 #
@@ -10,6 +10,9 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from DAO.serviceDAO import serviceDAO
+from GUI.add_service_dialog import Ui_add_service_dialog
+from DTO.serviceDTO import Service
+import GUI.mesage_box as msg
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -23,7 +26,7 @@ class Ui_Form(object):
         self.gridLayout_3.setObjectName("gridLayout_3")
         self.widget = QtWidgets.QWidget(Form)
         self.widget.setStyleSheet("QWidget{\n"
-"    background-color: rgb(133, 255, 246);\n"
+"    background-color: rgb(0, 255, 244);\n"
 "    border:1px solid black\n"
 "}\n"
 "QLabel{\n"
@@ -42,87 +45,36 @@ class Ui_Form(object):
         font.setWeight(75)
         self.label.setFont(font)
         self.label.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.label.setStyleSheet("")
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
         self.verticalLayout.addWidget(self.label)
         self.gridLayout_3.addWidget(self.widget, 0, 0, 1, 1)
-        self.widget_3 = QtWidgets.QWidget(Form)
-        self.widget_3.setMinimumSize(QtCore.QSize(0, 70))
-        self.widget_3.setObjectName("widget_3")
-        self.gridLayout_2 = QtWidgets.QGridLayout(self.widget_3)
-        self.gridLayout_2.setContentsMargins(11, -1, -1, -1)
-        self.gridLayout_2.setObjectName("gridLayout_2")
-        self.horizontalLayout = QtWidgets.QHBoxLayout()
-        self.horizontalLayout.setContentsMargins(8, 5, 8, 5)
-        self.horizontalLayout.setObjectName("horizontalLayout")
-        spacerItem = QtWidgets.QSpacerItem(218, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout.addItem(spacerItem)
-        self.btnAdd = QtWidgets.QPushButton(self.widget_3)
-        self.btnAdd.setMinimumSize(QtCore.QSize(90, 40))
-        self.btnAdd.setStyleSheet("background-color: #9FC899;\n"
-"border: none;\n"
-"border-radius: 5px;")
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("img/add.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.btnAdd.setIcon(icon)
-        self.btnAdd.setIconSize(QtCore.QSize(20, 20))
-        self.btnAdd.setFlat(False)
-        self.btnAdd.setObjectName("btnAdd")
-        self.horizontalLayout.addWidget(self.btnAdd)
-        self.btnDelete = QtWidgets.QPushButton(self.widget_3)
-        self.btnDelete.setMinimumSize(QtCore.QSize(90, 40))
-        self.btnDelete.setStyleSheet("background-color: rgb(255, 124, 125);\n"
-"border: none;\n"
-"border-radius: 5px;")
-        icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("img/delete.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.btnDelete.setIcon(icon1)
-        self.btnDelete.setIconSize(QtCore.QSize(20, 20))
-        self.btnDelete.setObjectName("btnDelete")
-        self.horizontalLayout.addWidget(self.btnDelete)
-        self.btnUpdate = QtWidgets.QPushButton(self.widget_3)
-        self.btnUpdate.setMinimumSize(QtCore.QSize(90, 40))
-        self.btnUpdate.setStyleSheet("background-color: rgb(188, 202, 255);\n"
-"border: none;\n"
-"border-radius: 5px;")
-        icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("img/refresh.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.btnUpdate.setIcon(icon2)
-        self.btnUpdate.setIconSize(QtCore.QSize(20, 20))
-        self.btnUpdate.setObjectName("btnUpdate")
-        self.horizontalLayout.addWidget(self.btnUpdate)
-        self.gridLayout_2.addLayout(self.horizontalLayout, 0, 0, 1, 1)
-        self.gridLayout_3.addWidget(self.widget_3, 2, 0, 1, 1)
         self.widget_2 = QtWidgets.QWidget(Form)
         self.widget_2.setObjectName("widget_2")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.widget_2)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_2.setContentsMargins(8, 5, 8, 5)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.label_2 = QtWidgets.QLabel(self.widget_2)
         self.label_2.setObjectName("label_2")
         self.horizontalLayout_2.addWidget(self.label_2)
-        self.input_search = QtWidgets.QLineEdit(self.widget_2)
-        self.input_search.setObjectName("input_search")
-        self.horizontalLayout_2.addWidget(self.input_search)
-        self.comboBox = QtWidgets.QComboBox(self.widget_2)
-        self.comboBox.setObjectName("comboBox")
-        self.horizontalLayout_2.addWidget(self.comboBox)
+        self.txtSearchService = QtWidgets.QLineEdit(self.widget_2)
+        self.txtSearchService.setMinimumSize(QtCore.QSize(0, 32))
+        self.txtSearchService.setObjectName("txtSearchService")
+        self.horizontalLayout_2.addWidget(self.txtSearchService)
         self.btnSearch = QtWidgets.QPushButton(self.widget_2)
-        self.btnSearch.setMinimumSize(QtCore.QSize(90, 40))
+        self.btnSearch.setMinimumSize(QtCore.QSize(90, 32))
         self.btnSearch.setStyleSheet("background-color: #BDD5D7;\n"
-"border: none;\n"
-"border-radius: 5px;")
-        icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap("img/search.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.btnSearch.setIcon(icon3)
+"border-radius: 5px;\n"
+"border: none;")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("ui\\../../../PhongKhamThuY/ui/img/search.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btnSearch.setIcon(icon)
         self.btnSearch.setIconSize(QtCore.QSize(20, 20))
         self.btnSearch.setObjectName("btnSearch")
         self.horizontalLayout_2.addWidget(self.btnSearch)
-        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_2.addItem(spacerItem1)
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem)
         self.verticalLayout_2.addLayout(self.horizontalLayout_2)
         self.table_service = QtWidgets.QTableWidget(self.widget_2)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Ignored, QtWidgets.QSizePolicy.Expanding)
@@ -130,6 +82,8 @@ class Ui_Form(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.table_service.sizePolicy().hasHeightForWidth())
         self.table_service.setSizePolicy(sizePolicy)
+        self.table_service.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
+        self.table_service.setShowGrid(True)
         self.table_service.setWordWrap(False)
         self.table_service.setColumnCount(3)
         self.table_service.setObjectName("table_service")
@@ -143,9 +97,6 @@ class Ui_Form(object):
         item = QtWidgets.QTableWidgetItem()
         item.setTextAlignment(QtCore.Qt.AlignCenter)
         self.table_service.setHorizontalHeaderItem(2, item)
-        item = QtWidgets.QTableWidgetItem()
-        item.setTextAlignment(QtCore.Qt.AlignCenter)
-        self.table_service.setHorizontalHeaderItem(3, item)
         self.table_service.horizontalHeader().setCascadingSectionResizes(False)
         self.table_service.horizontalHeader().setSortIndicatorShown(False)
         self.table_service.horizontalHeader().setStretchLastSection(True)
@@ -153,6 +104,60 @@ class Ui_Form(object):
         self.table_service.verticalHeader().setCascadingSectionResizes(False)
         self.verticalLayout_2.addWidget(self.table_service)
         self.gridLayout_3.addWidget(self.widget_2, 1, 0, 1, 1)
+        self.widget_3 = QtWidgets.QWidget(Form)
+        self.widget_3.setMinimumSize(QtCore.QSize(0, 70))
+        self.widget_3.setObjectName("widget_3")
+        self.gridLayout_2 = QtWidgets.QGridLayout(self.widget_3)
+        self.gridLayout_2.setObjectName("gridLayout_2")
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        spacerItem1 = QtWidgets.QSpacerItem(218, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(spacerItem1)
+        self.btnAdd = QtWidgets.QPushButton(self.widget_3)
+        self.btnAdd.setMinimumSize(QtCore.QSize(90, 40))
+        self.btnAdd.setStyleSheet("background-color: #9FC899;\n"
+"border: none;\n"
+"border-radius: 5px;")
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap("ui\\../img/add.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btnAdd.setIcon(icon1)
+        self.btnAdd.setIconSize(QtCore.QSize(20, 20))
+        self.btnAdd.setObjectName("btnAdd")
+        self.horizontalLayout.addWidget(self.btnAdd)
+        self.btnDelete = QtWidgets.QPushButton(self.widget_3)
+        self.btnDelete.setMinimumSize(QtCore.QSize(90, 40))
+        self.btnDelete.setStyleSheet("background-color: rgb(255, 124, 125);\n"
+"border: none;\n"
+"border-radius: 5px;")
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap("ui\\../img/delete.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btnDelete.setIcon(icon2)
+        self.btnDelete.setIconSize(QtCore.QSize(20, 20))
+        self.btnDelete.setObjectName("btnDelete")
+        self.horizontalLayout.addWidget(self.btnDelete)
+        self.btnUpdate = QtWidgets.QPushButton(self.widget_3)
+        self.btnUpdate.setMinimumSize(QtCore.QSize(90, 40))
+        self.btnUpdate.setStyleSheet("background-color: rgb(255, 255, 127);\n"
+"border: none;\n"
+"border-radius: 5px;")
+        icon3 = QtGui.QIcon()
+        icon3.addPixmap(QtGui.QPixmap("ui\\../img/edit_48px.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btnUpdate.setIcon(icon3)
+        self.btnUpdate.setIconSize(QtCore.QSize(20, 20))
+        self.btnUpdate.setObjectName("btnUpdate")
+        self.horizontalLayout.addWidget(self.btnUpdate)
+        self.btnReset = QtWidgets.QPushButton(self.widget_3)
+        self.btnReset.setMinimumSize(QtCore.QSize(90, 40))
+        self.btnReset.setStyleSheet("background-color: #BDD5D7;\n"
+"border-radius: 5px;\n"
+"border: none;")
+        icon4 = QtGui.QIcon()
+        icon4.addPixmap(QtGui.QPixmap("ui\\../img/refresh.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btnReset.setIcon(icon4)
+        self.btnReset.setObjectName("btnReset")
+        self.horizontalLayout.addWidget(self.btnReset)
+        self.gridLayout_2.addLayout(self.horizontalLayout, 0, 0, 1, 1)
+        self.gridLayout_3.addWidget(self.widget_3, 2, 0, 1, 1)
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -161,9 +166,6 @@ class Ui_Form(object):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
         self.label.setText(_translate("Form", "Quản lý dịch vụ"))
-        self.btnAdd.setText(_translate("Form", "Thêm"))
-        self.btnDelete.setText(_translate("Form", "Xoá"))
-        self.btnUpdate.setText(_translate("Form", "Sửa"))
         self.label_2.setText(_translate("Form", "Tìm kiếm "))
         self.btnSearch.setText(_translate("Form", "Tìm"))
         self.table_service.setSortingEnabled(False)
@@ -173,11 +175,55 @@ class Ui_Form(object):
         item.setText(_translate("Form", "Tên dịch vụ"))
         item = self.table_service.horizontalHeaderItem(2)
         item.setText(_translate("Form", "Giá"))
+        self.btnAdd.setText(_translate("Form", "Thêm"))
+        self.btnDelete.setText(_translate("Form", "Xoá"))
+        self.btnUpdate.setText(_translate("Form", "Sửa"))
+        self.btnReset.setText(_translate("Form", "Reset"))
         self.loadServiceData()
+        self.btnAdd.clicked.connect(self.show_add_dialog)
+        self.btnUpdate.clicked.connect(self.show_update_dialog)
+        self.btnDelete.clicked.connect(self.deleteService)
+        self.btnSearch.clicked.connect(self.searchService)
+        self.btnReset.clicked.connect(self.loadServiceData)
+
+    def show_add_dialog(self):
+        dialog = QtWidgets.QDialog()
+        self.add_service_dialog = Ui_add_service_dialog()
+        self.add_service_dialog.setupUi(dialog)
+        self.add_service_dialog.btnAccept.clicked.connect(self.addService)
+        dialog.exec_()
+        dialog.show()
+
+    def show_update_dialog(self):
+        dialog = QtWidgets.QDialog()
+        self.add_service_dialog = Ui_add_service_dialog()
+        self.add_service_dialog.setupUi(dialog)
+        self.add_service_dialog.label_4.setText("SỬA DỊCH VỤ")
+
+        selected_row = self.table_service.currentRow()
+        if selected_row < 0:
+            msg.show_warning_messagebox("Vui lòng chọn 1 dòng trong bảng dịch vụ")
+            return
+
+        selected_items = self.table_service.selectedItems()
+        row_data = [item.text() for item in selected_items]
+        id = row_data[0]
+        name = row_data[1]
+        price = row_data[2]
+        self.add_service_dialog.txtName.setText(name)
+        self.add_service_dialog.txtPrice.setText(price)
+        service = Service(id, name, price)
+
+        self.add_service_dialog.btnAccept.clicked.connect(lambda: self.updateService(service))
+        dialog.exec_()
+        dialog.show()
 
     def loadServiceData(self):
         dao =serviceDAO()
         services = dao.getAllServices()
+        self.fillServiceTable(services)
+
+    def fillServiceTable(self, services):
         row = 0
         self.table_service.setRowCount(len(services))
         for service in services:
@@ -186,7 +232,61 @@ class Ui_Form(object):
             self.table_service.setItem(row, 2, QtWidgets.QTableWidgetItem(str(service.getGia())))
             row = row +1
 
+    def addService(self):
+        tendv = self.add_service_dialog.txtName.text()
+        gia = self.add_service_dialog.txtPrice.text()
 
+        if not tendv or not gia:
+            print(f"{tendv} {gia}")
+            msg.show_warning_messagebox("Vui lòng nhập đầy đủ thông tin") 
+            return
+        
+        if not gia.isnumeric():
+            msg.show_warning_messagebox("Vui lòng chỉ nhập số cho trường giá")
+            return
+
+        dao = serviceDAO()
+        service = Service(None, tendv, gia)
+        dao.insertService(service)  
+        msg.show_info_messagebox("Thêm dịch vụ thành công!")
+        self.loadServiceData()
+
+    def updateService(self, service):
+        tendv = self.add_service_dialog.txtName.text()
+        gia = self.add_service_dialog.txtPrice.text()
+
+        if not tendv or not gia:
+            print(f"{tendv} {gia}")
+            msg.show_warning_messagebox("Vui lòng nhập đầy đủ thông tin") 
+            return
+        
+        if not gia.isnumeric():
+            msg.show_warning_messagebox("Vui lòng chỉ nhập số cho trường giá")
+            return
+        
+        dao = serviceDAO()
+        service.setTen(tendv)
+        service.setGia(gia)
+        dao.updateService(service)
+        msg.show_info_messagebox("Sửa thông tin dịch vụ thành công!")
+        self.loadServiceData()
+
+    def deleteService(self):
+        selected_items = self.table_service.selectedItems()
+        if selected_items:
+            selected_row = selected_items[0].row()
+            id = self.table_service.item(selected_row, 0).text()
+            dao = serviceDAO()
+            dao.deleteService(id)
+            self.loadServiceData()
+        else:
+            msg.show_warning_messagebox("Vui lòng chọn 1 dòng trong bảng dịch vụ")
+
+    def searchService(self):
+        dao = serviceDAO()
+        query = self.txtSearchService.text()
+        services = dao.searchService(query)
+        self.fillServiceTable(services)
 
 if __name__ == "__main__":
     import sys

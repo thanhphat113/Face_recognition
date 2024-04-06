@@ -16,7 +16,7 @@
   <property name="styleSheet">
    <string notr="true">background-color: rgb(255, 255, 255);</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout_3" rowstretch="0,3,0">
+  <layout class="QGridLayout" name="gridLayout_3" rowstretch="0,0,0">
    <property name="leftMargin">
     <number>0</number>
    </property>
@@ -35,6 +35,197 @@
    <property name="verticalSpacing">
     <number>0</number>
    </property>
+   <item row="1" column="0">
+    <widget class="QWidget" name="widget_2" native="true">
+     <layout class="QHBoxLayout" name="horizontalLayout_4">
+      <item>
+       <widget class="QGroupBox" name="groupBox_2">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="title">
+         <string>THÔNG TIN PHIẾU NHẬP</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_3">
+         <property name="topMargin">
+          <number>20</number>
+         </property>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_5">
+           <item>
+            <widget class="QLineEdit" name="txtSearchPN">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>32</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="btnSearchPN">
+             <property name="minimumSize">
+              <size>
+               <width>40</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: #BDD5D7;
+border-radius: 5px;
+border: none;</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset>
+               <normaloff>../img/search.png</normaloff>../img/search.png</iconset>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QTableWidget" name="table_phieunhap">
+           <property name="selectionBehavior">
+            <enum>QAbstractItemView::SelectRows</enum>
+           </property>
+           <attribute name="horizontalHeaderStretchLastSection">
+            <bool>true</bool>
+           </attribute>
+           <attribute name="verticalHeaderVisible">
+            <bool>false</bool>
+           </attribute>
+           <column>
+            <property name="text">
+             <string>Mã phiếu nhập</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Mã nhân viên</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Mã nhà cung cấp</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Ngày lập</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Tổng tiền</string>
+            </property>
+           </column>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupBox">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="title">
+         <string>CHI TIẾT PHIẾU NHẬP</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <property name="topMargin">
+          <number>20</number>
+         </property>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_6">
+           <item>
+            <spacer name="horizontalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="btnAddCTNP">
+             <property name="minimumSize">
+              <size>
+               <width>40</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: #9FC899;
+border-radius: 5px;
+border: none;</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset>
+               <normaloff>../img/add.png</normaloff>../img/add.png</iconset>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QTableWidget" name="table_ctpn">
+           <property name="selectionBehavior">
+            <enum>QAbstractItemView::SelectRows</enum>
+           </property>
+           <attribute name="horizontalHeaderStretchLastSection">
+            <bool>true</bool>
+           </attribute>
+           <attribute name="verticalHeaderVisible">
+            <bool>false</bool>
+           </attribute>
+           <column>
+            <property name="text">
+             <string>Mã phiếu nhập</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Mã dược phẩm</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Số lượng</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Đơn giá</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Thành tiền</string>
+            </property>
+           </column>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
    <item row="0" column="0">
     <widget class="QWidget" name="widget" native="true">
      <property name="cursor">
@@ -159,264 +350,28 @@ border-radius: 5px;</string>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="btnUpdate">
+         <widget class="QPushButton" name="pushButton">
           <property name="minimumSize">
            <size>
             <width>90</width>
             <height>40</height>
            </size>
           </property>
-          <property name="cursor">
-           <cursorShape>PointingHandCursor</cursorShape>
-          </property>
           <property name="styleSheet">
-           <string notr="true">background-color: rgb(255, 255, 127);
-border: none;
-border-radius: 5px;</string>
+           <string notr="true">background-color: #BDD5D7;
+border-radius: 5px;
+border: none;</string>
           </property>
           <property name="text">
-           <string>Sửa</string>
+           <string>Reset</string>
           </property>
           <property name="icon">
            <iconset>
-            <normaloff>../img/edit_48px.png</normaloff>../img/edit_48px.png</iconset>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>20</width>
-            <height>20</height>
-           </size>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="btnDelete">
-          <property name="minimumSize">
-           <size>
-            <width>90</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="cursor">
-           <cursorShape>PointingHandCursor</cursorShape>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">background-color: rgb(255, 124, 125);
-border: none;
-border-radius: 5px;</string>
-          </property>
-          <property name="text">
-           <string>Xoá</string>
-          </property>
-          <property name="icon">
-           <iconset>
-            <normaloff>../img/delete.png</normaloff>../img/delete.png</iconset>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>20</width>
-            <height>20</height>
-           </size>
+            <normaloff>../img/refresh.png</normaloff>../img/refresh.png</iconset>
           </property>
          </widget>
         </item>
        </layout>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="1" column="0">
-    <widget class="QWidget" name="widget_2" native="true">
-     <layout class="QHBoxLayout" name="horizontalLayout_4">
-      <item>
-       <widget class="QGroupBox" name="groupBox_2">
-        <property name="font">
-         <font>
-          <pointsize>10</pointsize>
-         </font>
-        </property>
-        <property name="title">
-         <string>THÔNG TIN PHIẾU NHẬP</string>
-        </property>
-        <layout class="QVBoxLayout" name="verticalLayout_3">
-         <property name="topMargin">
-          <number>20</number>
-         </property>
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_5">
-           <item>
-            <widget class="QLineEdit" name="txtSearchPN">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>32</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="btnSearchPN">
-             <property name="minimumSize">
-              <size>
-               <width>40</width>
-               <height>40</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background-color: #BDD5D7;
-border-radius: 5px;
-border: none;</string>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-             <property name="icon">
-              <iconset>
-               <normaloff>../img/search.png</normaloff>../img/search.png</iconset>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <widget class="QTableWidget" name="table_phieunhap">
-           <attribute name="horizontalHeaderStretchLastSection">
-            <bool>true</bool>
-           </attribute>
-           <column>
-            <property name="text">
-             <string>Mã phiếu nhập</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>Mã nhân viên</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>Mã nhà cung cấp</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>Ngày lập</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>Tổng tiền</string>
-            </property>
-           </column>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-      </item>
-      <item>
-       <widget class="QGroupBox" name="groupBox">
-        <property name="font">
-         <font>
-          <pointsize>10</pointsize>
-         </font>
-        </property>
-        <property name="title">
-         <string>CHI TIẾT PHIẾU NHẬP</string>
-        </property>
-        <layout class="QVBoxLayout" name="verticalLayout_2">
-         <property name="topMargin">
-          <number>20</number>
-         </property>
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_6">
-           <item>
-            <spacer name="horizontalSpacer_2">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item>
-            <widget class="QPushButton" name="btnAddCTNP">
-             <property name="minimumSize">
-              <size>
-               <width>40</width>
-               <height>40</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background-color: #9FC899;
-border-radius: 5px;
-border: none;</string>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-             <property name="icon">
-              <iconset>
-               <normaloff>../img/add.png</normaloff>../img/add.png</iconset>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="btnEditCTPN">
-             <property name="minimumSize">
-              <size>
-               <width>40</width>
-               <height>40</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background-color: rgb(255, 255, 127);
-border-radius: 5px;
-border: none;</string>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-             <property name="icon">
-              <iconset>
-               <normaloff>../img/edit_48px.png</normaloff>../img/edit_48px.png</iconset>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <widget class="QTableWidget" name="table_ctpn">
-           <attribute name="horizontalHeaderStretchLastSection">
-            <bool>true</bool>
-           </attribute>
-           <column>
-            <property name="text">
-             <string>Mã phiếu nhập</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>Mã dược phẩm</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>Số lượng</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>Thành tiền</string>
-            </property>
-           </column>
-          </widget>
-         </item>
-        </layout>
-       </widget>
       </item>
      </layout>
     </widget>
