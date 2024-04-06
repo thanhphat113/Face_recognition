@@ -20,6 +20,7 @@ from  DAO.employeeDAO import employeeDAO
         
 class Ui_Form(object):
         def setupUi(self, Form):
+                self.empDAO = employeeDAO()
                 Form.setObjectName("Form")
                 Form.resize(800, 500)
                 Form.setStyleSheet("background-color: rgb(255, 255, 255);")
@@ -107,6 +108,11 @@ class Ui_Form(object):
                 self.comboBox = QtWidgets.QComboBox(parent=self.widget_2)
                 self.comboBox.setObjectName("comboBox")
                 self.comboBox.setMinimumSize(150,20)
+                self.comboBox.addItem("Tất cả")
+                self.comboBox.addItem("Mã nhân viên")
+                self.comboBox.addItem("Tên nhân viên")
+                self.comboBox.addItem("Số điện thoại")
+                self.comboBox.addItem("Email")
                 self.horizontalLayout_2.addWidget(self.comboBox)
                 self.pushButton_4 = QtWidgets.QPushButton(parent=self.widget_2)
                 self.pushButton_4.setStyleSheet("")
@@ -116,6 +122,7 @@ class Ui_Form(object):
                 self.pushButton_4.setIconSize(QtCore.QSize(20, 20))
                 self.pushButton_4.setObjectName("pushButton_4")
                 self.pushButton_4.setMinimumSize(80,20)
+                self.pushButton_4.clicked.connect(self.findByCondition)
                 self.horizontalLayout_2.addWidget(self.pushButton_4)
                 spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
                 self.horizontalLayout_2.addItem(spacerItem1)
@@ -220,10 +227,31 @@ class Ui_Form(object):
 
                 
         def delete_NV(self,value):
-                empDAO = employeeDAO()
-                return empDAO.delete(value)
-                
-        
+                return self.empDAO.delete(value)
+
+        def findByCondition(self):
+                type = self.comboBox.currentIndex()
+                print(type)
+                condition = self.lineEdit.text()
+                type_choise = ''
+                if type == 0:
+                        type_choise = 'all'
+                elif type == 1:
+                        type_choise = 'manv'
+                elif type == 2:
+                        type_choise = 'tennv'
+                elif type == 3:
+                        type_choise = 'sdt'
+                elif type == 4:
+                        type_choise = 'email'
+                if type_choise != 'all':
+                        result = self.empDAO.findByCondition(type_choise,condition)
+                        self.tableWidget.setRowCount(0)
+                        for emp in result:
+                                data = [emp.manv,emp.tennv,emp.sdt,emp.email]
+                                self.add_row_to_table(data)
+                else: self.upload_list()
+                        
         def update_NV(self):
                 Dialog = QtWidgets.QDialog()
                 ui = tv.Ui_Dialog()
@@ -237,7 +265,6 @@ class Ui_Form(object):
                         ui.txtName.setText(self._translate("Dialog",row_data[1]))
                         ui.txtPhone.setText(self._translate("Dialog",row_data[2]))
                         ui.txtEmail.setText(self._translate("Dialog",row_data[3]))
-                        # ui.label.setText(self._translate("Dialog", self.update_NV()))
                 Dialog.exec_()
                 self.upload_list()
                 

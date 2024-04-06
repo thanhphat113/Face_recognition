@@ -47,16 +47,41 @@ class petDAO:
             print(f'Error: {error}')
         
 
-    def add(self, tn : pet):
-        self.pet_list.append(tn)
+    def insert(self, pet : pet):
+        conn = self.conn
+        try:
+            conn.connect()
+            query=f"insert into thunuoi(tentn, mau, cannang) values ('{pet.get_tentn()}','{pet.get_maulong()}','{pet.get_cannang()}')"
+            db.execute_query(conn,query)
+            return 'Thêm thành công !!!!'
+        except mysql.connector.Error as error:
+            return 'Thêm thất bại !!!!'
+        finally:
+            conn.close()
 
-    def remove(self, tn : pet):
-        self.pet_list.remove(tn)
+    def delete(self, id):
+        conn = self.conn
+        try:
+            conn.connect()
+            query=f"delete from thunuoi where matn = '{id}'"
+            db.execute_query(conn,query)
+            return 'Xoá thành công !!!!'
+        except mysql.connector.Error as error:
+            return f'Lỗi: {error}'
+        finally:
+            conn.close()
 
-    def edit(self, tn : pet):
-        for i in range(self.n):
-            if self.pet_list[i].get_matn() == tn.get_matn():
-                self.pet_list[i] = tn
+    def update(self, pet : pet):
+        conn = self.conn
+        try:
+            conn.connect()
+            query=f"update thunuoi set tentn = '{pet.get_tentn()}', mau = '{pet.get_maulong()}', cannang = '{pet.get_cannang()}' where matn = '{pet.get_matn()}'"
+            db.execute_query(conn,query)
+            return 'Cập nhật thành công !!!!'
+        except mysql.connector.Error as error:
+            return f'Lỗi: {error}'
+        finally:
+            conn.close()
                 
     def findById(self,id):
         result = None
@@ -67,6 +92,31 @@ class petDAO:
             for subpet in list:
                 result = pet(subpet[0],subpet[1],subpet[2],subpet[3],subpet[4])
             return result
+        except mysql.connector.Error as error:
+            return f'Lỗi: {error}'
+        
+    def findByName(self,name):
+        result = None
+        try:
+            self.conn.connect()
+            query = f"select * from ThuNuoi where tentn = '{name}'"
+            list = db.execute_fetch_all(self.conn,query)
+            for subpet in list:
+                result = pet(subpet[0],subpet[1],subpet[2],subpet[3],subpet[4])
+            return result
+        except mysql.connector.Error as error:
+            return f'Lỗi: {error}'
+    
+    def findPetDontUseBed(self):
+        pet_list = []
+        try:
+            self.conn.connect()
+            query = 'SELECT ThuNuoi.* FROM ThuNuoi LEFT JOIN PhongBenh ON PhongBenh.matn = ThuNuoi.matn WHERE PhongBenh.matn IS NULL'
+            result = db.execute_fetch_all(self.conn,query)
+            for subpet in result:
+                tn = pet(subpet[0],subpet[1],subpet[2],subpet[3],subpet[4])
+                pet_list.append(tn)
+            return pet_list
         except mysql.connector.Error as error:
             return f'Lỗi: {error}'
         

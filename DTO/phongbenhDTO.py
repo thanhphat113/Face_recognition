@@ -5,10 +5,11 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from DAO.petDAO import petDAO
 
 class phongbenh:
-    def __init__(self,mapb,tenpb,tinhtrang,matn):
+    def __init__(self,mapb,tenpb,loaitinhtrang,matn):
         self.__mapb = mapb
         self.__tenpb = tenpb
-        self.__tinhtrang = tinhtrang
+        self.__loaitinhtrang = loaitinhtrang
+        self.__tinhtrang = None
         self.__matn = matn
         self.__thunuoi = None
     
@@ -29,8 +30,16 @@ class phongbenh:
         self.__tenpb=tenpb
     
     @property
+    def loaitinhtrang(self):
+        return self.__loaitinhtrang
+    
+    @loaitinhtrang.setter
+    def loaitinhtrang(self,loaitinhtrang):
+        self.__loaitinhtrang = loaitinhtrang
+    
+    @property
     def tinhtrang(self):
-        if self.__tinhtrang == 0: return "<Đang sử dụng>"
+        if self.__loaitinhtrang == 0: return "<Đang sử dụng>"
         return "<Còn trống>"
     
     @tinhtrang.setter
