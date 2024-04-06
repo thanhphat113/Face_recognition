@@ -13,20 +13,23 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from DAO.employeeDAO import employeeDAO
-from DTO.employeeDTO import employee
+from DAO.phongbenhDAO import phongbenhDAO
+from DAO.petDAO import petDAO
+from DTO.phongbenhDTO import phongbenh
 import GUI.thongbao as tb
 
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog, type):
+        self.pbDAO=phongbenhDAO()
         self.type=type
+        self.pDAO = petDAO()
         Dialog.setObjectName("Dialog")
         Dialog.resize(400, 276)
         Dialog.setMinimumSize(QtCore.QSize(400, 276))
         Dialog.setMaximumSize(QtCore.QSize(400, 276))
         self.label = QtWidgets.QLabel(Dialog)
-        self.label.setGeometry(QtCore.QRect(60, 90, 91, 16))
+        self.label.setGeometry(QtCore.QRect(60, 90, 101, 16))
         self.label.setObjectName("label")
         self.label_visible = QtWidgets.QLabel(Dialog)
         self.label_visible.setGeometry(QtCore.QRect(60, 90, 91, 16))
@@ -54,14 +57,21 @@ class Ui_Dialog(object):
         self.title.setAlignment(QtCore.Qt.AlignCenter)
         self.title.setObjectName("title")
         self.txtName = QtWidgets.QLineEdit(Dialog)
-        self.txtName.setGeometry(QtCore.QRect(170, 90, 181, 21))
+        self.txtName.setGeometry(QtCore.QRect(180, 90, 171, 21))
         self.txtName.setObjectName("txtName")
-        self.txtPhone = QtWidgets.QLineEdit(Dialog)
-        self.txtPhone.setGeometry(QtCore.QRect(170, 130, 181, 21))
-        self.txtPhone.setObjectName("txtPhone")
-        self.txtEmail = QtWidgets.QLineEdit(Dialog)
-        self.txtEmail.setGeometry(QtCore.QRect(170, 170, 181, 21))
-        self.txtEmail.setObjectName("txtEmail")
+        self.cbbTinhTrang = QtWidgets.QComboBox(Dialog)
+        self.cbbTinhTrang.setGeometry(QtCore.QRect(170, 130, 181, 21))
+        self.cbbTinhTrang.setObjectName("cbbTinhTrang")
+        self.cbbTinhTrang.addItem("<Đang sử dụng>")
+        self.cbbTinhTrang.addItem("<Còn trống>")
+        
+        self.cbbThuNuoi = QtWidgets.QComboBox(Dialog)
+        self.cbbThuNuoi.setGeometry(QtCore.QRect(170, 170, 181, 21))
+        self.cbbThuNuoi.setObjectName("cbbThuNuoi")
+        self.cbbThuNuoi.addItem("<Rỗng>")
+        result = self.pDAO.findPetDontUseBed()
+        for pet in result:
+            self.cbbThuNuoi.addItem(pet.get_tentn())
         self.btnAccept = QtWidgets.QPushButton(Dialog)
         self.btnAccept.setGeometry(QtCore.QRect(80, 220, 113, 32))
         self.btnAccept.setCheckable(True)
@@ -78,17 +88,19 @@ class Ui_Dialog(object):
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
+        
 
     def retranslateUi(self, Dialog):
         self._translate = QtCore.QCoreApplication.translate
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
-        self.label.setText(_translate("Dialog", "Tên nhân viên"))
-        self.label_2.setText(_translate("Dialog", "Số điện thoại"))
-        self.label_3.setText(_translate("Dialog", "Email"))
-        self.title.setText(_translate("Dialog", "THÊM NHÂN VIÊN"))
+        self.label.setText(_translate("Dialog", "Tên phòng bệnh"))
+        self.label_2.setText(_translate("Dialog", "Tình trạng"))
+        self.label_3.setText(_translate("Dialog", "Thú nuôi"))
+        self.title.setText(_translate("Dialog", "THÊM PHÒNG BỆNH"))
         self.btnAccept.setText(_translate("Dialog", "Xác nhận"))
         self.btnDeny.setText(_translate("Dialog", "Huỷ"))
+        self.typeTacVu(self.type)
         
     def show_dialog_update(self,id):
         Dialog = QtWidgets.QDialog()
@@ -97,7 +109,7 @@ class Ui_Dialog(object):
         ui.label.setText(self._translate("Dialog", self.update_data(id)))
         Dialog.exec_()
         
-    
+        
     def show_dialog_insert(self):
         Dialog = QtWidgets.QDialog()
         ui = tb.Ui_Dialog()
@@ -105,33 +117,39 @@ class Ui_Dialog(object):
         ui.label.setText(self._translate("Dialog", self.insert_data()))
         Dialog.exec_()
         
+    def typeTacVu(self,type):
+        if type == 1:
+            self.label_2.setVisible(False)
+            self.label_3.setVisible(False)
+            self.cbbTinhTrang.setVisible(False)
+            self.cbbThuNuoi.setVisible(False)
+        
         
     def insert_data(self):
-        ten=self.txtName.text()
-        email=self.txtEmail.text()
-        sdt=self.txtPhone.text()
-        empDAO= employeeDAO()
-        if ten and sdt:
-            emp = employee("",ten,sdt,email)
-            result = empDAO.insert(emp)
+        ten = self.txtName.text()
+        pbDAO = phongbenhDAO()
+        if ten:
+            pb = phongbenh("",ten,1,"")
+            print(pb.tenpb)
+            result = pbDAO.insert(pb)
             if result == "Thêm thành công !!!!":
                 self.txtName.setText("")
-                self.txtEmail.setText("")
-                self.txtPhone.setText("")
             return result
-            
         else: 
-            return 'Tên và số điện thoại không được rỗng !!!!'
+            return 'Tên không được rỗng !!!!'
         
     def update_data(self,id):
-        ten=self.txtName.text()
-        email=self.txtEmail.text()
-        sdt=self.txtPhone.text()
-        empDAO= employeeDAO()
-        if ten and sdt:
-            emp = employee(id,ten,sdt,email)
-            return empDAO.update(emp)  
+        ten = self.txtName.text()
+        thunuoi = self.cbbThuNuoi.currentText()
+        pet = None  
+        tinhtrang = self.cbbTinhTrang.currentIndex()
+        pb = phongbenh(id, ten, tinhtrang, None)
+        if ten:
+            if thunuoi != "<Rỗng>":
+                pet = self.pDAO.findByName(thunuoi)
+                pb = phongbenh(id, ten, tinhtrang, pet.get_matn())
+            return self.pbDAO.update(pb)  
         else: 
-            return 'Tên và số điện thoại không được rỗng !!!!'
+            return 'Tên không được rỗng !!!!'
 
 

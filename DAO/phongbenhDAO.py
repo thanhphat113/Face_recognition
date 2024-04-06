@@ -33,7 +33,7 @@ class phongbenhDAO:
         conn=self.conn
         try:
             conn.connect()
-            query=f"insert into phongbenh(tenpb,tinhtrang,matn) values ('{emp.mapb}','{emp.tinhtrang}','{emp.matn}')"
+            query=f"insert into phongbenh(tenpb,tinhtrang) values ('{emp.tenpb}','{emp.loaitinhtrang}')"
             db.execute_query(conn,query)
             return 'Thêm thành công !!!!'
         except mysql.connector.Error as error:
@@ -57,7 +57,7 @@ class phongbenhDAO:
         conn=self.conn
         try:
             conn.connect()
-            query=f"update PhongBenh set tennpb = '{emp.tenpb}',tinhtrang = '{emp.tinhtrang}', matn = '{emp.matn}' where manv = '{emp.mapb}'"
+            query=f"update PhongBenh set tenpb = '{emp.tenpb}',tinhtrang = '{emp.loaitinhtrang}', matn = '{emp.matn}' where mapb = '{emp.mapb}'"
             db.execute_query(conn,query)
             return 'Cập nhật thành công !!!!'
         except mysql.connector.Error as error:

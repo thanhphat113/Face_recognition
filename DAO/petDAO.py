@@ -69,6 +69,31 @@ class petDAO:
             return result
         except mysql.connector.Error as error:
             return f'Lỗi: {error}'
+    
+    def findByName(self,name):
+        result = None
+        try:
+            self.conn.connect()
+            query = f"select * from ThuNuoi where tentn = '{name}'"
+            list = db.execute_fetch_all(self.conn,query)
+            for subpet in list:
+                result = pet(subpet[0],subpet[1],subpet[2],subpet[3],subpet[4])
+            return result
+        except mysql.connector.Error as error:
+            return f'Lỗi: {error}'
+    
+    def findPetDontUseBed(self):
+        pet_list = []
+        try:
+            self.conn.connect()
+            query = 'SELECT ThuNuoi.* FROM ThuNuoi LEFT JOIN PhongBenh ON PhongBenh.matn = ThuNuoi.matn WHERE PhongBenh.matn IS NULL'
+            result = db.execute_fetch_all(self.conn,query)
+            for subpet in result:
+                tn = pet(subpet[0],subpet[1],subpet[2],subpet[3],subpet[4])
+                pet_list.append(tn)
+            return pet_list
+        except mysql.connector.Error as error:
+            return f'Lỗi: {error}'
         
 if __name__ == "__main__":
     pets = petDAO()

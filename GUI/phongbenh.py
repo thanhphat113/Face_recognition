@@ -13,13 +13,14 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-import GUI.TacvuNV as tv
+import GUI.TacvuPB as pb
 import GUI.thongbao as tb
 from  DAO.phongbenhDAO import phongbenhDAO
 
         
 class Ui_Form(object):
         def setupUi(self, Form):
+                self.tb = tb.Ui_Dialog()
                 Form.setObjectName("Form")
                 Form.resize(800, 500)
                 Form.setStyleSheet("background-color: rgb(255, 255, 255);")
@@ -68,7 +69,7 @@ class Ui_Form(object):
                 self.btnAccept.setIcon(icon)
                 self.btnAccept.setIconSize(QtCore.QSize(20, 20))
                 self.btnAccept.setObjectName("btnAccept")
-                self.btnAccept.clicked.connect(self.TacVu_NV)
+                self.btnAccept.clicked.connect(self.TacVu_PB)
                 self.horizontalLayout.addWidget(self.btnAccept)
                 self.pushButton = QtWidgets.QPushButton(parent=self.widget_3)
                 self.pushButton.setStyleSheet("background-color: rgb(255, 124, 125);\n"
@@ -87,7 +88,7 @@ class Ui_Form(object):
                 self.btnUpdate.setIcon(icon2)
                 self.btnUpdate.setIconSize(QtCore.QSize(20, 20))
                 self.btnUpdate.setObjectName("btnUpdate")
-                self.btnUpdate.clicked.connect(self.update_NV)
+                self.btnUpdate.clicked.connect(self.update_PB)
                 self.horizontalLayout.addWidget(self.btnUpdate)
                 self.gridLayout_2.addLayout(self.horizontalLayout, 0, 0, 1, 1)
                 self.gridLayout_3.addWidget(self.widget_3, 2, 0, 1, 1)
@@ -201,26 +202,29 @@ class Ui_Form(object):
                 for column, item in enumerate(data):
                         self.tableWidget.setItem(rowPosition, column, QTableWidgetItem(str(item)))
                         
-        def TacVu_NV(self):
+        def TacVu_PB(self):
                 Dialog = QtWidgets.QDialog()
-                ui = tv.Ui_Dialog()
+                ui = pb.Ui_Dialog()
                 ui.setupUi(Dialog,1)
                 Dialog.exec_()
                 self.upload_list()
         
+        # def showDialog(self,text):
+        #         Dialog = QtWidgets.QDialog()
+        #         ui = tb.Ui_Dialog()
+        #         ui.label.setText(text)
+        #         ui.setupUi(Dialog)
+        #         Dialog.exec_()
+                
         
         def on_button_clicked(self):
-                Dialog = QtWidgets.QDialog()
-                ui = tb.Ui_Dialog()
-                ui.setupUi(Dialog)
                 selected_items = self.tableWidget.selectedItems()
                 if selected_items:
                         selected_row = selected_items[0].row()
                         value = self.tableWidget.item(selected_row, 0).text()
-                        ui.label.setText(self._translate("Dialog", self.delete_PB(value)))
+                        self.tb.thongBao(self.delete_PB(value))
                 else:
-                        ui.label.setText(self._translate("Dialog", "Vui lòng hãy chọn dòng muốn xoá"))
-                Dialog.exec_()
+                        self.tb.thongBao("Vui lòng hãy chọn dòng muốn xoá")
                 self.upload_list()
 
                 
@@ -229,10 +233,10 @@ class Ui_Form(object):
                 return pbDAO.delete(value)
                 
         
-        def update_NV(self):
+        def update_PB(self):
                 Dialog = QtWidgets.QDialog()
-                ui = tv.Ui_Dialog()
-                ui.setupUi(Dialog,2)    
+                ui = pb.Ui_Dialog()
+                ui.setupUi(Dialog,2,)    
                 ui.title.setText(self._translate("Dialog", "Sửa thông tin"))
                 selected_row = self.tableWidget.currentRow()
                 if selected_row  >= 0:
@@ -240,11 +244,16 @@ class Ui_Form(object):
                         row_data = [item.text() for item in selected_items]
                         ui.label_visible.setText(self._translate("Dialog",row_data[0]))
                         ui.txtName.setText(self._translate("Dialog",row_data[1]))
-                        ui.txtPhone.setText(self._translate("Dialog",row_data[2]))
-                        ui.txtEmail.setText(self._translate("Dialog",row_data[3]))
-                        # ui.label.setText(self._translate("Dialog", self.update_NV()))
-                Dialog.exec_()
-                self.upload_list()
+                        ui.cbbTinhTrang.setCurrentText(row_data[2])
+                        if row_data[3] != '<Rỗng>':
+                                ui.cbbThuNuoi.addItem(row_data[3])
+                        ui.cbbThuNuoi.setCurrentText(row_data[3])
+                        Dialog.exec_()
+                        self.upload_list()
+                else: 
+                        self.tb.thongBao("Vui lòng chọn 1 dòng để thực hiện sửa")
+
+
                 
 
 if __name__ == "__main__":
