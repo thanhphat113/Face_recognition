@@ -258,7 +258,6 @@ class Ui_Form(object):
         
         def timKiemTheoThuNuoi(self):
                 condition = self.lineEdit.text()
-                # self.lineEdit.setText("")
                 result = self.pbDAO.findByPetName(condition)
                 self.tableWidget.setRowCount(0)
                 for pb in result:

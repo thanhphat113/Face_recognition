@@ -105,6 +105,7 @@ class Ui_Form(object):
                 self.horizontalLayout_2.addWidget(self.label_2)
                 self.lineEdit = QtWidgets.QLineEdit(parent=self.widget_2)
                 self.lineEdit.setObjectName("lineEdit")
+                self.lineEdit.setEnabled(False)
                 self.horizontalLayout_2.addWidget(self.lineEdit)
                 self.comboBox = QtWidgets.QComboBox(parent=self.widget_2)
                 self.comboBox.setObjectName("comboBox")
@@ -114,6 +115,7 @@ class Ui_Form(object):
                 self.comboBox.addItem("Tên nhân viên")
                 self.comboBox.addItem("Số điện thoại")
                 self.comboBox.addItem("Email")
+                self.comboBox.currentIndexChanged.connect(self.changeEnable)
                 self.horizontalLayout_2.addWidget(self.comboBox)
                 self.pushButton_4 = QtWidgets.QPushButton(parent=self.widget_2)
                 self.pushButton_4.setStyleSheet("")
@@ -225,13 +227,26 @@ class Ui_Form(object):
                 
         def delete_NV(self,value):
                 return self.empDAO.delete(value)
+        
+        def changeEnable(self):
+                type = self.comboBox.currentIndex()
+                if type == 0:
+                        self.lineEdit.setEnabled(False)
+                if type == 1:
+                        self.lineEdit.setEnabled(True)
+                if type == 2:
+                        self.lineEdit.setEnabled(True)
+                if type == 3:
+                        self.lineEdit.setEnabled(True)
+                if type == 4:
+                        self.lineEdit.setEnabled(True)
+                        
 
         def findByCondition(self):
                 type = self.comboBox.currentIndex()
                 condition = self.lineEdit.text()
                 type_choise = ''
                 if type == 0:
-                        self.lineEdit.setEnabled(False)
                         type_choise = 'all'
                 elif type == 1:
                         self.lineEdit.setEnabled(True)
