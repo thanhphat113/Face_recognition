@@ -27,6 +27,17 @@ class serviceDAO:
         finally:
             conn.close()
     
+    def getServiceById(self, id):
+        conn=self.conn
+        try:
+            conn.connect()
+            query=f"Select * from dichvu where madv = '{id}'"
+            result = db.execute_fetch_one(conn,query)
+            service = Service(result[0],result[1],result[2])
+            return service
+        except mysql.connector.Error as error:
+            return 'Excute thất bại !!!!'
+        
     def insertService(self, service):
         conn=self.conn
         try:

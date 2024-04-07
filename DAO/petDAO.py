@@ -26,32 +26,14 @@ class petDAO:
             print(f'Error: {error}')
             return None
     
-    def find(self, noidung : str, tuychon : str):
-        conn = self.conn
-        try:
-            conn.connect()
-            if tuychon == "matn":
-                query = f"Select * from thunuoi where matn = {noidung}"
-            elif tuychon == "tentn":
-                query = f"Select * from thunuoi where tentn = {noidung}"
-            elif tuychon == "mau":
-                query = f"Select * from thunuoi where mau = {noidung}"
-            elif tuychon == "loai":
-                query = f"Select * from thunuoi where loai = {noidung}"
-            elif tuychon == "giong":
-                query = f"Select * from thunuoi where giong = {noidung}"
-            elif tuychon == "makh":
-                query = f"Select * from thunuoi where makh = {noidung}"
-            db.execute_fetch_all(conn, query)
-        except mysql.connector.Error as error:
-            print(f'Error: {error}')
+    
         
 
     def insert(self, pet : pet):
         conn = self.conn
         try:
             conn.connect()
-            query=f"insert into thunuoi(tentn, mau, cannang) values ('{pet.get_tentn()}','{pet.get_maulong()}','{pet.get_cannang()}')"
+            query=f"insert into thunuoi(tentn, mau, cannang, makh) values ('{pet.get_tentn()}','{pet.get_maulong()}','{pet.get_cannang()}','{pet.get_makh()}')"
             db.execute_query(conn,query)
             return 'Thêm thành công !!!!'
         except mysql.connector.Error as error:
@@ -75,7 +57,7 @@ class petDAO:
         conn = self.conn
         try:
             conn.connect()
-            query=f"update thunuoi set tentn = '{pet.get_tentn()}', mau = '{pet.get_maulong()}', cannang = '{pet.get_cannang()}' where matn = '{pet.get_matn()}'"
+            query=f"update thunuoi set tentn = '{pet.get_tentn()}', mau = '{pet.get_maulong()}', cannang = '{pet.get_cannang()}', makh = '{pet.get_makh()}' where matn = '{pet.get_matn()}'"
             db.execute_query(conn,query)
             return 'Cập nhật thành công !!!!'
         except mysql.connector.Error as error:

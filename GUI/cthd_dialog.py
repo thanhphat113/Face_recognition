@@ -1,0 +1,75 @@
+from PyQt5 import QtCore, QtGui, QtWidgets
+
+
+class Ui_cthd_dialog(object):
+    def setupUi(self, cthd_dialog):
+        cthd_dialog.setObjectName("cthd_dialog")
+        cthd_dialog.resize(400, 304)
+        cthd_dialog.setMinimumSize(QtCore.QSize(400, 276))
+        self.label = QtWidgets.QLabel(cthd_dialog)
+        self.label.setGeometry(QtCore.QRect(50, 110, 91, 16))
+        self.label.setObjectName("label")
+        self.label_2 = QtWidgets.QLabel(cthd_dialog)
+        self.label_2.setGeometry(QtCore.QRect(50, 150, 111, 16))
+        self.label_2.setObjectName("label_2")
+        self.widget = QtWidgets.QWidget(cthd_dialog)
+        self.widget.setGeometry(QtCore.QRect(0, -1, 401, 61))
+        self.widget.setStyleSheet("background-color: rgb(0, 255, 244);\n"
+"border:1px solid black;")
+        self.widget.setObjectName("widget")
+        self.label_4 = QtWidgets.QLabel(self.widget)
+        self.label_4.setGeometry(QtCore.QRect(70, 10, 271, 41))
+        font = QtGui.QFont()
+        font.setPointSize(16)
+        font.setBold(True)
+        font.setWeight(75)
+        self.label_4.setFont(font)
+        self.label_4.setStyleSheet("border:none;")
+        self.label_4.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_4.setObjectName("label_4")
+        self.btnAccept = QtWidgets.QPushButton(cthd_dialog)
+        self.btnAccept.setGeometry(QtCore.QRect(70, 240, 113, 32))
+        self.btnAccept.setCheckable(True)
+        self.btnAccept.setObjectName("btnAccept")
+        self.btnDeny = QtWidgets.QPushButton(cthd_dialog)
+        self.btnDeny.setGeometry(QtCore.QRect(200, 240, 113, 32))
+        self.btnDeny.setCheckable(True)
+        self.btnDeny.setObjectName("btnDeny")
+        self.cbMaDV = QtWidgets.QComboBox(cthd_dialog)
+        self.cbMaDV.setGeometry(QtCore.QRect(170, 110, 181, 22))
+        self.cbMaDV.setObjectName("cbMaDV")
+        self.txtPrice = QtWidgets.QLineEdit(cthd_dialog)
+        self.txtPrice.setEnabled(False)
+        self.txtPrice.setGeometry(QtCore.QRect(170, 150, 181, 22))
+        self.txtPrice.setReadOnly(False)
+        self.txtPrice.setObjectName("txtPrice")
+        self.txtQty = QtWidgets.QLineEdit(cthd_dialog)
+        self.txtQty.setGeometry(QtCore.QRect(170, 190, 181, 22))
+        self.txtQty.setObjectName("txtQty")
+        self.label_3 = QtWidgets.QLabel(cthd_dialog)
+        self.label_3.setGeometry(QtCore.QRect(50, 190, 111, 16))
+        self.label_3.setObjectName("label_3")
+        self.btnDeny.toggled['bool'].connect(cthd_dialog.close)
+
+        self.retranslateUi(cthd_dialog)
+        QtCore.QMetaObject.connectSlotsByName(cthd_dialog)
+
+    def retranslateUi(self, cthd_dialog):
+        _translate = QtCore.QCoreApplication.translate
+        cthd_dialog.setWindowTitle(_translate("cthd_dialog", "Dialog"))
+        self.label.setText(_translate("cthd_dialog", "Mã dịch vụ"))
+        self.label_2.setText(_translate("cthd_dialog", "Giá"))
+        self.label_4.setText(_translate("cthd_dialog", "THÊM CTHD"))
+        self.btnAccept.setText(_translate("cthd_dialog", "Xác nhận"))
+        self.btnDeny.setText(_translate("cthd_dialog", "Huỷ"))
+        self.label_3.setText(_translate("cthd_dialog", "Số lượng"))
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    cthd_dialog = QtWidgets.QDialog()
+    ui = Ui_cthd_dialog()
+    ui.setupUi(cthd_dialog)
+    cthd_dialog.show()
+    sys.exit(app.exec_())

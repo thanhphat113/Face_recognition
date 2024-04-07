@@ -16,8 +16,10 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 import GUI.TacvuTN as tv
-import DAO.database as db
+import GUI.thongbao as tb
 from  DAO.petDAO import petDAO
+from  DAO.customerDAO import customerDAO
+from  DTO.customerDTO import customer
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -196,11 +198,16 @@ class Ui_Form(object):
 
     def upload_list(self):
         dao = petDAO()
+        cusDAO = customerDAO()
+        customer = cusDAO.ReadFromDatabase()
         pet_list = dao.ReadFromDatabase()
         self.tableWidget.setRowCount(0)
         for pet in pet_list:
-            data = [pet.get_matn(), pet.get_tentn(), pet.get_maulong(), pet.get_cannang(), pet.get_khachhang().get_tenkh()]
-            self.add_row_to_table(data)
+            for cus in customer:
+                if cus.get_makh() == pet.get_makh():
+                    data = [pet.get_matn(), pet.get_tentn(), pet.get_maulong(), pet.get_cannang(), cus.get_tenkh()]
+                    self.add_row_to_table(data)
+                continue
     
 
     def add_row_to_table(self, data):
@@ -208,12 +215,17 @@ class Ui_Form(object):
         self.tableWidget.insertRow(rowPosition)
         for column, item in enumerate(data):
             self.tableWidget.setItem(rowPosition, column, QTableWidgetItem(str(item)))
-
+    
+        
 
     def TacVu_TN(self):
         Dialog = QtWidgets.QDialog()
         ui = tv.Ui_Dialog()
         ui.setupUi(Dialog,1)
+        dao = customerDAO()
+        customer = dao.ReadFromDatabase()
+        for cus in customer:
+            ui.cbMaKH.addItem(f"{cus.get_makh()} - {cus.get_tenkh()}")
         Dialog.exec_()
         self.upload_list()
     
@@ -243,6 +255,12 @@ class Ui_Form(object):
         ui = tv.Ui_Dialog()
         ui.setupUi(Dialog,2)    
         ui.title.setText(self._translate("Dialog", "Sửa thông tin"))
+        dao = customerDAO()
+        customer = dao.ReadFromDatabase()
+        for cus in customer:
+            ui.cbMaKH.addItem(f"{cus.get_makh()} - {cus.get_tenkh()}")
+        
+
         selected_row = self.tableWidget.currentRow()
         if selected_row  >= 0:
             selected_items = self.tableWidget.selectedItems()
@@ -251,8 +269,12 @@ class Ui_Form(object):
             ui.txtName.setText(self._translate("Dialog",row_data[1]))
             ui.txtColor.setText(self._translate("Dialog",row_data[2]))
             ui.txtWeight.setText(self._translate("Dialog",row_data[3]))
+            
         Dialog.exec_()
         self.upload_list()
+
+
+
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)

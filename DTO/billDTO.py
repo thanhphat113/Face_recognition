@@ -1,4 +1,5 @@
 class bill:
+    max_mahd = 0
     def __init__(self, mahd : int, ngaytao : str, tongtien : int, manv : int, makh : int):
         self.__mahd = mahd
         self.__ngaytao = ngaytao
@@ -11,6 +12,11 @@ class bill:
     
     def set_mahd(self, mahd):
         self.__mahd = mahd
+    
+    @classmethod
+    def generate_mahd(cls):
+        cls.max_mahd += 1
+        return cls.max_mahd
     
     def get_ngaytao(self):
         return self.__ngaytao

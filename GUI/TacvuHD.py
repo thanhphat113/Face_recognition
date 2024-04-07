@@ -71,7 +71,7 @@ class Ui_Dialog(object):
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
         self.label.setText(_translate("Dialog", "Ngày tạo"))
         self.label_2.setText(_translate("Dialog", "Tổng tiền"))
-        self.title.setText(_translate("Dialog", "THÊM HÓA ĐƠN"))
+        self.title.setText(_translate("Dialog", "SỬA THÔNG TIN"))
         self.btnAccept.setText(_translate("Dialog", "Xác nhận"))
         self.btnDeny.setText(_translate("Dialog", "Huỷ"))
         
@@ -116,5 +116,4 @@ class Ui_Dialog(object):
             return dao.update(subPet)  
         else: 
             return 'Ngày tạo và tổng tiền không được rỗng !!!!'
-
 
