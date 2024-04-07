@@ -37,14 +37,24 @@ class ctpnDAO:
         except mysql.connector.Error as error:
             return 'Thêm thất bại !!!!'
         
-    # def updateCTPN(self, ctpn):
-    #     conn = self.conn
-    #     try:
-    #         conn.connect()
-    #         query=f"update chitiet_pn set madp = '{ctpn.getMaDP()}', soluong = {ctpn.getSoLuong()} where madp = '{ctpn.getMaPN()}'"
-    #         db.execute_query(conn, query)
-    #         return "Sửa thành công!"
-    #     except mysql.connector.Error as error:
-    #         return "Sửa thất bại!"
+    def updateCTPN(self, ctpn):
+        conn = self.conn
+        try:
+            conn.connect()
+            query=f"update chitiet_pn set madp = '{ctpn.getMaDP()}', soluong = {ctpn.getSoLuong()}, gia = '{ctpn.getGia()}', thanhtien = '{ctpn.getThanhTien()}' where mapn = '{ctpn.getMaPN()}'"
+            db.execute_query(conn, query)
+            return "Sửa thành công!"
+        except mysql.connector.Error as error:
+            return "Sửa thất bại!"
+        
+    def deleteCTPN(self, mapn, madp):
+        conn = self.conn
+        try:
+            conn.connect()
+            query=f"delete from chitiet_pn where mapn = '{mapn}' and madp = '{madp}'"
+            db.execute_query(conn, query)
+            return "Xóa thành công!"
+        except mysql.connector.Error as error:
+            return "Xóa thất bại!"
 
     

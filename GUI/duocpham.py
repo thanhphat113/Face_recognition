@@ -50,7 +50,7 @@ class Ui_Form(object):
         self.verticalLayout.addWidget(self.label)
         self.gridLayout_3.addWidget(self.widget, 0, 0, 1, 1)
         self.widget_3 = QtWidgets.QWidget(Form)
-        self.widget_3.setMinimumSize(QtCore.QSize(0, 70))
+        self.widget_3.setMinimumSize(QtCore.QSize(0, 0))
         self.widget_3.setObjectName("widget_3")
         self.gridLayout_2 = QtWidgets.QGridLayout(self.widget_3)
         self.gridLayout_2.setObjectName("gridLayout_2")
@@ -59,10 +59,9 @@ class Ui_Form(object):
         spacerItem = QtWidgets.QSpacerItem(218, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
         self.btnAdd = QtWidgets.QPushButton(self.widget_3)
-        self.btnAdd.setMinimumSize(QtCore.QSize(90, 40))
-        self.btnAdd.setStyleSheet("background-color: #9FC899;\n"
-"border: none;\n"
-"border-radius: 5px;")
+        self.btnAdd.setMinimumSize(QtCore.QSize(100, 30))
+        self.btnAdd.setStyleSheet("background-color: rgb(159, 255, 153);\n"
+"")
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("ui\\../img/add.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btnAdd.setIcon(icon)
@@ -70,10 +69,9 @@ class Ui_Form(object):
         self.btnAdd.setObjectName("btnAdd")
         self.horizontalLayout.addWidget(self.btnAdd)
         self.btnEdit = QtWidgets.QPushButton(self.widget_3)
-        self.btnEdit.setMinimumSize(QtCore.QSize(90, 40))
+        self.btnEdit.setMinimumSize(QtCore.QSize(100, 30))
         self.btnEdit.setStyleSheet("background-color: rgb(255, 255, 127);\n"
-"border: none;\n"
-"border-radius: 5px;")
+"")
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap("ui\\../img/edit_48px.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btnEdit.setIcon(icon1)
@@ -81,10 +79,9 @@ class Ui_Form(object):
         self.btnEdit.setObjectName("btnEdit")
         self.horizontalLayout.addWidget(self.btnEdit)
         self.btnDelete = QtWidgets.QPushButton(self.widget_3)
-        self.btnDelete.setMinimumSize(QtCore.QSize(90, 40))
+        self.btnDelete.setMinimumSize(QtCore.QSize(100, 30))
         self.btnDelete.setStyleSheet("background-color: rgb(255, 124, 125);\n"
-"border: none;\n"
-"border-radius: 5px;")
+"")
         icon2 = QtGui.QIcon()
         icon2.addPixmap(QtGui.QPixmap("ui\\../img/delete.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btnDelete.setIcon(icon2)
@@ -92,10 +89,8 @@ class Ui_Form(object):
         self.btnDelete.setObjectName("btnDelete")
         self.horizontalLayout.addWidget(self.btnDelete)
         self.btnReset = QtWidgets.QPushButton(self.widget_3)
-        self.btnReset.setMinimumSize(QtCore.QSize(90, 40))
-        self.btnReset.setStyleSheet("background-color: #BDD5D7;\n"
-"border-radius: 5px;\n"
-"border: none;")
+        self.btnReset.setMinimumSize(QtCore.QSize(100, 30))
+        self.btnReset.setStyleSheet("background-color: #BDD5D7;")
         icon3 = QtGui.QIcon()
         icon3.addPixmap(QtGui.QPixmap("ui\\../img/refresh.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btnReset.setIcon(icon3)
@@ -113,16 +108,20 @@ class Ui_Form(object):
         self.label_2.setObjectName("label_2")
         self.horizontalLayout_2.addWidget(self.label_2)
         self.txtSearch = QtWidgets.QLineEdit(self.widget_2)
-        self.txtSearch.setMinimumSize(QtCore.QSize(0, 32))
+        self.txtSearch.setMinimumSize(QtCore.QSize(0, 0))
         self.txtSearch.setObjectName("txtSearch")
         self.horizontalLayout_2.addWidget(self.txtSearch)
+        self.cbSearch = QtWidgets.QComboBox(self.widget_2)
+        self.cbSearch.setMinimumSize(QtCore.QSize(120, 0))
+        self.cbSearch.setObjectName("cbSearch")
+        self.cbSearch.addItem("")
+        self.cbSearch.addItem("")
+        self.horizontalLayout_2.addWidget(self.cbSearch)
         self.btnSearch = QtWidgets.QPushButton(self.widget_2)
-        self.btnSearch.setMinimumSize(QtCore.QSize(90, 32))
-        self.btnSearch.setStyleSheet("background-color: #BDD5D7;\n"
-"border-radius: 5px;\n"
-"border: none;")
+        self.btnSearch.setMinimumSize(QtCore.QSize(90, 0))
+        self.btnSearch.setStyleSheet("")
         icon4 = QtGui.QIcon()
-        icon4.addPixmap(QtGui.QPixmap("ui\\img/search.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon4.addPixmap(QtGui.QPixmap("ui\\../img/search.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btnSearch.setIcon(icon4)
         self.btnSearch.setIconSize(QtCore.QSize(20, 20))
         self.btnSearch.setObjectName("btnSearch")
@@ -179,6 +178,8 @@ class Ui_Form(object):
         self.btnDelete.setText(_translate("Form", "Xoá"))
         self.btnReset.setText(_translate("Form", "Reset"))
         self.label_2.setText(_translate("Form", "Tìm kiếm "))
+        self.cbSearch.setItemText(0, _translate("Form", "Mã dược phẩm"))
+        self.cbSearch.setItemText(1, _translate("Form", "Tên dược phẩm"))
         self.btnSearch.setText(_translate("Form", "Tìm"))
         self.table_medicine.setSortingEnabled(False)
         item = self.table_medicine.horizontalHeaderItem(0)
@@ -305,14 +306,16 @@ class Ui_Form(object):
             id = self.table_medicine.item(selected_row, 0).text()
             dao = medicineDAO()
             dao.deleteMedicine(id)
+            msg.show_warning_messagebox("Xóa dược phẩm đã chọn thành công")
             self.loadMedicineData()
         else:
             msg.show_warning_messagebox("Vui lòng chọn 1 dòng trong bảng dược phẩm")
 
     def searchMedicine(self):
         dao = medicineDAO()
-        query = self.txtSearch.text()
-        medicines = dao.searchMedicine(query)
+        search = self.txtSearch.text()
+        choice = self.cbSearch.currentIndex()
+        medicines = dao.searchMedicine(search, choice)
         self.fillMedicineTable(medicines)
 
 if __name__ == "__main__":
