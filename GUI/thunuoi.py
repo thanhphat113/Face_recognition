@@ -253,6 +253,7 @@ class Ui_Form(object):
             ui.txtWeight.setText(self._translate("Dialog",row_data[3]))
         Dialog.exec_()
         self.upload_list()
+        
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)

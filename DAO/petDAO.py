@@ -96,14 +96,15 @@ class petDAO:
             return f'Lỗi: {error}'
         
     def findByName(self,name):
-        result = None
+        pets_list = []
         try:
             self.conn.connect()
             query = f"select * from ThuNuoi where tentn = '{name}'"
             list = db.execute_fetch_all(self.conn,query)
             for subpet in list:
                 result = pet(subpet[0],subpet[1],subpet[2],subpet[3],subpet[4])
-            return result
+                pets_list.append(result)
+            return pets_list
         except mysql.connector.Error as error:
             return f'Lỗi: {error}'
     
@@ -119,6 +120,7 @@ class petDAO:
             return pet_list
         except mysql.connector.Error as error:
             return f'Lỗi: {error}'
+        
         
 if __name__ == "__main__":
     pets = petDAO()

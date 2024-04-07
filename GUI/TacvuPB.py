@@ -144,6 +144,7 @@ class Ui_Dialog(object):
         pet = None  
         tinhtrang = self.cbbTinhTrang.currentIndex()
         pb = phongbenh(id, ten, tinhtrang, None)
+        print(pb.matn)
         if ten:
             if thunuoi != "<Rỗng>":
                 pet = self.pDAO.findByName(thunuoi)

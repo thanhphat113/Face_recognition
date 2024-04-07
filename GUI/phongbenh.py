@@ -16,10 +16,13 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import GUI.TacvuPB as pb
 import GUI.thongbao as tb
 from  DAO.phongbenhDAO import phongbenhDAO
+from DAO.petDAO import petDAO
 
         
 class Ui_Form(object):
         def setupUi(self, Form):
+                self.petDAO = petDAO()
+                self.pbDAO = phongbenhDAO()
                 self.tb = tb.Ui_Dialog()
                 Form.setObjectName("Form")
                 Form.resize(800, 500)
@@ -61,26 +64,27 @@ class Ui_Form(object):
                 self.horizontalLayout.setObjectName("horizontalLayout")
                 spacerItem = QtWidgets.QSpacerItem(218, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
                 self.horizontalLayout.addItem(spacerItem)
-                self.btnAccept = QtWidgets.QPushButton(parent=self.widget_3)
-                self.btnAccept.setStyleSheet("background-color: rgb(159, 255, 153);\n"
+                self.btnAdd = QtWidgets.QPushButton(parent=self.widget_3)
+                self.btnAdd.setStyleSheet("background-color: rgb(159, 255, 153);\n"
         "")
                 icon = QtGui.QIcon()
                 icon.addPixmap(QtGui.QPixmap("img/add.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-                self.btnAccept.setIcon(icon)
-                self.btnAccept.setIconSize(QtCore.QSize(20, 20))
-                self.btnAccept.setObjectName("btnAccept")
-                self.btnAccept.clicked.connect(self.TacVu_PB)
-                self.horizontalLayout.addWidget(self.btnAccept)
-                self.pushButton = QtWidgets.QPushButton(parent=self.widget_3)
-                self.pushButton.setStyleSheet("background-color: rgb(255, 124, 125);\n"
+                self.btnAdd.setIcon(icon)
+                self.btnAdd.setIconSize(QtCore.QSize(20, 20))
+                self.btnAdd.setObjectName("btnAdd")
+                self.btnAdd.clicked.connect(self.TacVu_PB)
+                self.horizontalLayout.addWidget(self.btnAdd)
+                
+                self.btnDelete = QtWidgets.QPushButton(parent=self.widget_3)
+                self.btnDelete.setStyleSheet("background-color: rgb(255, 124, 125);\n"
         "\n"
         "")
                 icon1 = QtGui.QIcon()
                 icon1.addPixmap(QtGui.QPixmap("img/delete.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-                self.pushButton.setIcon(icon1)
-                self.pushButton.setIconSize(QtCore.QSize(20, 20))
-                self.pushButton.setObjectName("pushButton")
-                self.horizontalLayout.addWidget(self.pushButton)
+                self.btnDelete.setIcon(icon1)
+                self.btnDelete.setIconSize(QtCore.QSize(20, 20))
+                self.btnDelete.setObjectName("btnDelete")
+                self.horizontalLayout.addWidget(self.btnDelete)
                 self.btnUpdate = QtWidgets.QPushButton(parent=self.widget_3)
                 self.btnUpdate.setStyleSheet("background-color: rgb(188, 202, 255);")
                 icon2 = QtGui.QIcon()
@@ -104,11 +108,29 @@ class Ui_Form(object):
                 self.horizontalLayout_2.addWidget(self.label_2)
                 self.lineEdit = QtWidgets.QLineEdit(parent=self.widget_2)
                 self.lineEdit.setObjectName("lineEdit")
+                self.lineEdit.setEnabled(False)
                 self.horizontalLayout_2.addWidget(self.lineEdit)
-                self.comboBox = QtWidgets.QComboBox(parent=self.widget_2)
-                self.comboBox.setObjectName("comboBox")
-                self.comboBox.setMinimumSize(150,20)
-                self.horizontalLayout_2.addWidget(self.comboBox)
+                
+                self.cbbType_choise = QtWidgets.QComboBox(parent=self.widget_2)
+                self.cbbType_choise.setObjectName("comboBox")
+                self.cbbType_choise.addItem("Đang sử dụng")
+                self.cbbType_choise.addItem("Còn trống")
+                self.cbbType_choise.setMinimumSize(150,20)
+                self.cbbType_choise.setVisible(False)
+                self.horizontalLayout_2.addWidget(self.cbbType_choise)
+                
+                self.cbbType = QtWidgets.QComboBox(parent=self.widget_2)
+                self.cbbType.setObjectName("comboBox")
+                self.cbbType.setMinimumSize(150,20)
+                self.cbbType.addItem("All")
+                self.cbbType.addItem("Mã phòng bệnh")
+                self.cbbType.addItem("Tên phòng bệnh")
+                self.cbbType.addItem("Tình trạng")
+                self.cbbType.addItem("Thú nuôi")
+                self.horizontalLayout_2.addWidget(self.cbbType)
+                self.cbbType.currentIndexChanged.connect(self.handleIndexChanged)
+                
+                
                 self.pushButton_4 = QtWidgets.QPushButton(parent=self.widget_2)
                 self.pushButton_4.setStyleSheet("")
                 icon3 = QtGui.QIcon()
@@ -159,11 +181,11 @@ class Ui_Form(object):
                 _translate = QtCore.QCoreApplication.translate
                 Form.setWindowTitle(_translate("Form", "Form"))
                 self.label.setText(_translate("Form", "Quản lý phòng bệnh"))
-                self.btnAccept.setText(_translate("Form", "Thêm"))
-                self.btnAccept.setMinimumSize(100, 30)
-                self.pushButton.setText(_translate("Form", "Xoá"))
-                self.pushButton.setMinimumSize(100, 30)
-                self.pushButton.clicked.connect(self.on_button_clicked)
+                self.btnAdd.setText(_translate("Form", "Thêm"))
+                self.btnAdd.setMinimumSize(100, 30)
+                self.btnDelete.setText(_translate("Form", "Xoá"))
+                self.btnDelete.setMinimumSize(100, 30)
+                self.btnDelete.clicked.connect(self.on_button_clicked)
                 self.btnUpdate.setText(_translate("Form", "Sửa"))
                 self.btnUpdate.setMinimumSize(100, 30)
                 self.label_2.setText(_translate("Form", "Tìm kiếm "))
@@ -183,15 +205,93 @@ class Ui_Form(object):
                 item.setText(_translate("Form", "Thú nuôi"))
                 self.upload_list()
                 
+        def handleIndexChanged(self):
+                choiseIndex = self.cbbType.currentIndex()
+                type_choise = ''
+                if choiseIndex == 3:
+                        self.showCbbType_choise()
+                        self.pushButton_4.clicked.connect(self.timKiemTheoTinhTrang)
+                elif choiseIndex == 0:
+                        self.lineEdit.setEnabled(False)
+                        self.hideCbbType_choise()
+                        type_choise = 'all'
+                        self.pushButton_4.clicked.connect(lambda: self.timKiemTheoDieuKienKhac(type_choise))
+                elif choiseIndex == 1:
+                        self.lineEdit.setEnabled(True)
+                        self.hideCbbType_choise()
+                        type_choise = 'mapb'
+                        self.pushButton_4.clicked.connect(lambda: self.timKiemTheoDieuKienKhac(type_choise))
+                elif choiseIndex == 2:
+                        self.lineEdit.setEnabled(True)
+                        self.hideCbbType_choise()
+                        type_choise = 'tenpb'
+                        self.pushButton_4.clicked.connect(lambda: self.timKiemTheoDieuKienKhac(type_choise))
+                elif choiseIndex == 4:
+                        self.lineEdit.setEnabled(True)
+                        self.hideCbbType_choise()
+                        self.pushButton_4.clicked.connect(self.timKiemTheoThuNuoi)
+                        
+                        
+        def showCbbType_choise(self):
+                self.lineEdit.setVisible(False)
+                self.cbbType_choise.setVisible(True)
+        
+        def hideCbbType_choise(self):
+                self.lineEdit.setVisible(True)
+                self.cbbType_choise.setVisible(False)
+                        
+        def timKiemTheoDieuKienKhac(self,type_choise):
+                condition = self.lineEdit.text()
+                if type_choise != 'all':
+                        result = self.pbDAO.findByCondition(type_choise,condition)
+                        self.tableWidget.setRowCount(0)
+                        for pb in result:
+                                data = None
+                                pet = pb.thunuoi
+                                if pet is not None:
+                                        data = [pb.mapb,pb.tenpb,pb.tinhtrang, pet.get_tentn()]
+                                else:
+                                        data = [pb.mapb,pb.tenpb,pb.tinhtrang,'<Rỗng>']
+                                self.add_row_to_table(data)
+                else: self.upload_list()
+                self.lineEdit.setText("")
+        
+        def timKiemTheoThuNuoi(self):
+                condition = self.lineEdit.text()
+                # self.lineEdit.setText("")
+                result = self.pbDAO.findByPetName(condition)
+                self.tableWidget.setRowCount(0)
+                for pb in result:
+                        data = None
+                        pet = pb.thunuoi
+                        if pet is not None:
+                                data = [pb.mapb,pb.tenpb,pb.tinhtrang, pet.get_tentn()]
+                        else:
+                                data = [pb.mapb,pb.tenpb,pb.tinhtrang,'<Rỗng>']
+                        self.add_row_to_table(data)
+                self.lineEdit.setText("")
+                
+        def timKiemTheoTinhTrang(self):
+                value = self.cbbType_choise.currentIndex()
+                result = self.pbDAO.findByCondition('tinhtrang',value)
+                self.tableWidget.setRowCount(0)
+                for pb in result:
+                        data = None
+                        pet = pb.thunuoi
+                        if pet is not None:
+                                data = [pb.mapb,pb.tenpb,pb.tinhtrang, pet.get_tentn()]
+                        else:
+                                data = [pb.mapb,pb.tenpb,pb.tinhtrang,'<Rỗng>']
+                        self.add_row_to_table(data)
+                
         def upload_list(self):
-                pbDAO = phongbenhDAO()
-                phongbenh_list=pbDAO.find_All()
+                phongbenh_list=self.pbDAO.find_All()
                 self.tableWidget.setRowCount(0)
                 for emp in phongbenh_list:
                         data = None
                         pet = emp.thunuoi
                         if pet is not None:
-                                data = [emp.mapb,emp.tenpb,emp.tinhtrang,pet.get_tentn()]
+                                data = [emp.mapb,emp.tenpb,emp.tinhtrang, pet.get_tentn()]
                         else:
                                 data = [emp.mapb,emp.tenpb,emp.tinhtrang,'<Rỗng>']
                         self.add_row_to_table(data)
@@ -209,12 +309,6 @@ class Ui_Form(object):
                 Dialog.exec_()
                 self.upload_list()
         
-        # def showDialog(self,text):
-        #         Dialog = QtWidgets.QDialog()
-        #         ui = tb.Ui_Dialog()
-        #         ui.label.setText(text)
-        #         ui.setupUi(Dialog)
-        #         Dialog.exec_()
                 
         
         def on_button_clicked(self):
@@ -226,17 +320,37 @@ class Ui_Form(object):
                 else:
                         self.tb.thongBao("Vui lòng hãy chọn dòng muốn xoá")
                 self.upload_list()
-
+                
                 
         def delete_PB(self,value):
-                pbDAO = phongbenhDAO()
-                return pbDAO.delete(value)
+                return self.pbDAO.delete(value)
                 
+        def findByCondition(self):
+                type = self.cbbType.currentIndex()
+                condition = self.lineEdit.text()
+                type_choise = ''
+                if type == 0:
+                        type_choise = 'all'
+                elif type == 1:
+                        type_choise = 'mapb'
+                elif type == 2:
+                        type_choise = 'tenpb'
+                elif type == 3:
+                        type_choise = 'tinhtrang'
+                elif type == 4:
+                        type_choise = 'email'
+                if type_choise != 'all':
+                        result = self.empDAO.findByCondition(type_choise,condition)
+                        self.tableWidget.setRowCount(0)
+                        for emp in result:
+                                data = [emp.manv,emp.tennv,emp.sdt,emp.email]
+                                self.add_row_to_table(data)
+                else: self.upload_list()
         
         def update_PB(self):
                 Dialog = QtWidgets.QDialog()
                 ui = pb.Ui_Dialog()
-                ui.setupUi(Dialog,2,)    
+                ui.setupUi(Dialog,2)    
                 ui.title.setText(self._translate("Dialog", "Sửa thông tin"))
                 selected_row = self.tableWidget.currentRow()
                 if selected_row  >= 0:
