@@ -20,6 +20,7 @@ import GUI.thongbao as tb
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog, type):
+        self.tb = tb.Ui_Dialog()
         self.type=type
         Dialog.setObjectName("Dialog")
         Dialog.resize(400, 276)
@@ -91,19 +92,11 @@ class Ui_Dialog(object):
         self.btnDeny.setText(_translate("Dialog", "Huỷ"))
         
     def show_dialog_update(self,id):
-        Dialog = QtWidgets.QDialog()
-        ui = tb.Ui_Dialog()
-        ui.setupUi(Dialog)
-        ui.label.setText(self._translate("Dialog", self.update_data(id)))
-        Dialog.exec_()
+        self.tb.thongBao(self.update_data(id))
         
     
     def show_dialog_insert(self):
-        Dialog = QtWidgets.QDialog()
-        ui = tb.Ui_Dialog()
-        ui.setupUi(Dialog)
-        ui.label.setText(self._translate("Dialog", self.insert_data()))
-        Dialog.exec_()
+        self.tb.thongBao(self.insert_data())
         
         
     def insert_data(self):

@@ -40,29 +40,29 @@ class Ui_login_form(object):
                 self.label.setObjectName("label")
                 self.label_2 = QtWidgets.QLabel(self.widget)
                 self.label_2.setGeometry(QtCore.QRect(60, 340, 91, 16))
-                self.label_2.setStyleSheet("background-image: url(:/newPrefix/login-back.png);\n"
+                self.label_2.setStyleSheet("background-image: url(img/login-back.png);\n"
         "")
                 self.label_2.setObjectName("label_2")
                 self.label_3 = QtWidgets.QLabel(self.widget)
                 self.label_3.setGeometry(QtCore.QRect(60, 370, 91, 16))
-                self.label_3.setStyleSheet("background-image: url(:/newPrefix/login-back.png);\n"
+                self.label_3.setStyleSheet("background-image: url(img/login-back.png);\n"
         "")
                 self.label_3.setObjectName("label_3")
                 self.txtUser = QtWidgets.QLineEdit(self.widget)
                 self.txtUser.setGeometry(QtCore.QRect(170, 340, 181, 21))
-                self.txtUser.setStyleSheet("background-image: url(:/newPrefix/white.png);")
+                self.txtUser.setStyleSheet("background-image: url(img/white.png);")
                 self.txtUser.setText("")
                 self.txtUser.setObjectName("lineEdit")
                 self.txtPass = QtWidgets.QLineEdit(self.widget)
                 self.txtPass.setGeometry(QtCore.QRect(170, 370, 181, 21))
                 self.txtPass.setStyleSheet("\n"
-        "background-image: url(:/newPrefix/white.png);")
+        "background-image: url(img/white.png);")
                 self.txtPass.setText("")
                 self.txtPass.setObjectName("lineEdit_2")
                 self.txtPass.setEchoMode(QLineEdit.Password)
                 self.btnLogin = QtWidgets.QPushButton(self.widget)
                 self.btnLogin.setGeometry(QtCore.QRect(80, 410, 113, 32))
-                self.btnLogin.setStyleSheet("background-image: url(:/newPrefix/login-back.png);\n"
+                self.btnLogin.setStyleSheet("background-image: url(img/login-back.png);\n"
         "border: 1px solid black;\n"
         "border-radius:10px;\n"
         "")
@@ -72,7 +72,7 @@ class Ui_login_form(object):
                 self.btnLogin.setObjectName("btnLogin")
                 self.btnCancel = QtWidgets.QPushButton(self.widget)
                 self.btnCancel.setGeometry(QtCore.QRect(220, 410, 113, 32))
-                self.btnCancel.setStyleSheet("background-image: url(:/newPrefix/login-back.png);\n"
+                self.btnCancel.setStyleSheet("background-image: url(img/login-back.png);\n"
         "border: 1px solid black;\n"
         "border-radius:10px;")
                 self.btnCancel.setCheckable(True)

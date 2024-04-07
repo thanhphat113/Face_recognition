@@ -68,12 +68,16 @@ class serviceDAO:
         except mysql.connector.Error as error:
             return "Xóa thất bại!"
         
-    def searchService(self, query):
+    def searchService(self, search, choice):
         service_list = []
         conn = self.conn
         try:
             conn.connect()
-            query=f"select * from dichvu where madv LIKE '{query}%' OR tendv LIKE '{query}%'"
+            if choice == 0:
+                query=f"select * from dichvu where madv LIKE '%{search}%'"
+            elif choice == 1:
+                query=f"select * from dichvu where tendv LIKE '%{search}%'"
+
             list=db.execute_fetch_all(conn,query)
             for dv in list:
                 service = Service(dv[0],dv[1],dv[2])

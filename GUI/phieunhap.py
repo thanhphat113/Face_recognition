@@ -48,11 +48,16 @@ class Ui_Form(object):
         self.txtSearchPN.setMinimumSize(QtCore.QSize(0, 32))
         self.txtSearchPN.setObjectName("txtSearchPN")
         self.horizontalLayout_5.addWidget(self.txtSearchPN)
+        self.cbSearchPN = QtWidgets.QComboBox(self.groupBox_2)
+        self.cbSearchPN.setMinimumSize(QtCore.QSize(0, 32))
+        self.cbSearchPN.setObjectName("cbSearchPN")
+        self.cbSearchPN.addItem("")
+        self.cbSearchPN.addItem("")
+        self.cbSearchPN.addItem("")
+        self.horizontalLayout_5.addWidget(self.cbSearchPN)
         self.btnSearchPN = QtWidgets.QPushButton(self.groupBox_2)
         self.btnSearchPN.setMinimumSize(QtCore.QSize(40, 40))
-        self.btnSearchPN.setStyleSheet("background-color: #BDD5D7;\n"
-"border-radius: 5px;\n"
-"border: none;")
+        self.btnSearchPN.setStyleSheet("background-color: #BDD5D7;")
         self.btnSearchPN.setText("")
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("ui\\../img/search.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -93,15 +98,35 @@ class Ui_Form(object):
         self.horizontalLayout_6.addItem(spacerItem)
         self.btnAddCTNP = QtWidgets.QPushButton(self.groupBox)
         self.btnAddCTNP.setMinimumSize(QtCore.QSize(40, 40))
-        self.btnAddCTNP.setStyleSheet("background-color: #9FC899;\n"
-"border-radius: 5px;\n"
-"border: none;")
+        self.btnAddCTNP.setStyleSheet("background-color: rgb(159, 255, 153);\n"
+"")
         self.btnAddCTNP.setText("")
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap("ui\\../img/add.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btnAddCTNP.setIcon(icon1)
         self.btnAddCTNP.setObjectName("btnAddCTNP")
         self.horizontalLayout_6.addWidget(self.btnAddCTNP)
+        self.btnEditCTPN = QtWidgets.QPushButton(self.groupBox)
+        self.btnEditCTPN.setMinimumSize(QtCore.QSize(40, 40))
+        self.btnEditCTPN.setStyleSheet("background-color: rgb(255, 255, 127);\n"
+"")
+        self.btnEditCTPN.setText("")
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap("ui\\../img/edit_48px.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btnEditCTPN.setIcon(icon2)
+        self.btnEditCTPN.setObjectName("btnEditCTPN")
+        self.horizontalLayout_6.addWidget(self.btnEditCTPN)
+        self.btnDeleteCTPN = QtWidgets.QPushButton(self.groupBox)
+        self.btnDeleteCTPN.setMinimumSize(QtCore.QSize(40, 40))
+        self.btnDeleteCTPN.setStyleSheet("background-color: rgb(255, 124, 125);\n"
+"\n"
+"")
+        self.btnDeleteCTPN.setText("")
+        icon3 = QtGui.QIcon()
+        icon3.addPixmap(QtGui.QPixmap("ui\\../img/delete.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btnDeleteCTPN.setIcon(icon3)
+        self.btnDeleteCTPN.setObjectName("btnDeleteCTPN")
+        self.horizontalLayout_6.addWidget(self.btnDeleteCTPN)
         self.verticalLayout_2.addLayout(self.horizontalLayout_6)
         self.table_ctpn = QtWidgets.QTableWidget(self.groupBox)
         self.table_ctpn.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
@@ -126,8 +151,7 @@ class Ui_Form(object):
         self.widget = QtWidgets.QWidget(Form)
         self.widget.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
         self.widget.setStyleSheet("QWidget{\n"
-"    background-color: #BDD5D7;\n"
-"    border:1px solid black\n"
+"background-color: rgb(133, 255, 246);    border:1px solid black\n"
 "}\n"
 "QLabel{\n"
 "    border:none\n"
@@ -152,7 +176,7 @@ class Ui_Form(object):
         self.verticalLayout.addWidget(self.label)
         self.gridLayout_3.addWidget(self.widget, 0, 0, 1, 1)
         self.widget_3 = QtWidgets.QWidget(Form)
-        self.widget_3.setMinimumSize(QtCore.QSize(0, 70))
+        self.widget_3.setMinimumSize(QtCore.QSize(0, 0))
         self.widget_3.setObjectName("widget_3")
         self.gridLayout_2 = QtWidgets.QGridLayout(self.widget_3)
         self.gridLayout_2.setContentsMargins(11, -1, -1, -1)
@@ -163,26 +187,37 @@ class Ui_Form(object):
         spacerItem1 = QtWidgets.QSpacerItem(218, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem1)
         self.btnAdd = QtWidgets.QPushButton(self.widget_3)
-        self.btnAdd.setMinimumSize(QtCore.QSize(90, 40))
+        self.btnAdd.setMinimumSize(QtCore.QSize(100, 30))
         self.btnAdd.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.btnAdd.setStyleSheet("background-color: #9FC899;\n"
-"border: none;\n"
-"border-radius: 5px;")
+        self.btnAdd.setStyleSheet("background-color: rgb(159, 255, 153);")
         self.btnAdd.setIcon(icon1)
         self.btnAdd.setIconSize(QtCore.QSize(20, 20))
         self.btnAdd.setFlat(False)
         self.btnAdd.setObjectName("btnAdd")
         self.horizontalLayout.addWidget(self.btnAdd)
-        self.pushButton = QtWidgets.QPushButton(self.widget_3)
-        self.pushButton.setMinimumSize(QtCore.QSize(90, 40))
-        self.pushButton.setStyleSheet("background-color: #BDD5D7;\n"
-"border-radius: 5px;\n"
-"border: none;")
-        icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("ui\\../img/refresh.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.pushButton.setIcon(icon2)
-        self.pushButton.setObjectName("pushButton")
-        self.horizontalLayout.addWidget(self.pushButton)
+        self.btnEdit = QtWidgets.QPushButton(self.widget_3)
+        self.btnEdit.setMinimumSize(QtCore.QSize(100, 30))
+        self.btnEdit.setStyleSheet("background-color: rgb(255, 255, 127);\n"
+"")
+        self.btnEdit.setIcon(icon2)
+        self.btnEdit.setObjectName("btnEdit")
+        self.horizontalLayout.addWidget(self.btnEdit)
+        self.btnDelete = QtWidgets.QPushButton(self.widget_3)
+        self.btnDelete.setMinimumSize(QtCore.QSize(100, 30))
+        self.btnDelete.setStyleSheet("background-color: rgb(255, 124, 125);\n"
+"\n"
+"")
+        self.btnDelete.setIcon(icon3)
+        self.btnDelete.setObjectName("btnDelete")
+        self.horizontalLayout.addWidget(self.btnDelete)
+        self.btnReset = QtWidgets.QPushButton(self.widget_3)
+        self.btnReset.setMinimumSize(QtCore.QSize(100, 30))
+        self.btnReset.setStyleSheet("background-color: #BDD5D7;")
+        icon4 = QtGui.QIcon()
+        icon4.addPixmap(QtGui.QPixmap("ui\\../img/refresh.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btnReset.setIcon(icon4)
+        self.btnReset.setObjectName("btnReset")
+        self.horizontalLayout.addWidget(self.btnReset)
         self.gridLayout_2.addLayout(self.horizontalLayout, 0, 0, 1, 1)
         self.gridLayout_3.addWidget(self.widget_3, 2, 0, 1, 1)
 
@@ -193,6 +228,9 @@ class Ui_Form(object):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
         self.groupBox_2.setTitle(_translate("Form", "THÔNG TIN PHIẾU NHẬP"))
+        self.cbSearchPN.setItemText(0, _translate("Form", "Mã phiếu nhập"))
+        self.cbSearchPN.setItemText(1, _translate("Form", "Mã nhân viên"))
+        self.cbSearchPN.setItemText(2, _translate("Form", "Mã nhà cung cấp"))
         item = self.table_phieunhap.horizontalHeaderItem(0)
         item.setText(_translate("Form", "Mã phiếu nhập"))
         item = self.table_phieunhap.horizontalHeaderItem(1)
@@ -216,11 +254,19 @@ class Ui_Form(object):
         item.setText(_translate("Form", "Thành tiền"))
         self.label.setText(_translate("Form", "Quản lý phiếu nhập"))
         self.btnAdd.setText(_translate("Form", "Thêm"))
-        self.pushButton.setText(_translate("Form", "Reset"))
+        self.btnEdit.setText(_translate("Form", "Sửa"))
+        self.btnDelete.setText(_translate("Form", "Xóa"))
+        self.btnReset.setText(_translate("Form", "Reset"))
         self.loadPhieuNhapData()
         self.table_phieunhap.itemClicked.connect(self.on_table_phieunhap_clicked)
         self.btnAdd.clicked.connect(self.show_add_pn_dialog)
         self.btnAddCTNP.clicked.connect(self.show_add_ctpn_dialog)
+        self.btnEdit.clicked.connect(self.show_update_pn_dialog)
+        self.btnEditCTPN.clicked.connect(self.show_update_ctpn_dialog)
+        self.btnDelete.clicked.connect(self.deletePhieuNhap)
+        self.btnDeleteCTPN.clicked.connect(self.deleteCTPN)
+        self.btnSearchPN.clicked.connect(self.searchPhieuNhap)
+        self.btnReset.clicked.connect(self.loadPhieuNhapData)
 
     def fillTablePhieuNhap(self, pn_list):
         row = 0
@@ -268,6 +314,46 @@ class Ui_Form(object):
         dialog.exec_()
         dialog.show()
 
+    def show_update_pn_dialog(self):
+        dialog = QtWidgets.QDialog()
+        self.phieunhap_dialog = Ui_phieunhap_dialog()
+        self.phieunhap_dialog.setupUi(dialog)
+        self.phieunhap_dialog.label_4.setText("SỬA PHIẾU NHẬP")
+        self.loadComboboxMaNV()
+        self.loadComboboxMaNCC()
+
+        selected_row = self.table_phieunhap.currentRow()
+        if selected_row < 0:
+            msg.show_warning_messagebox("Vui lòng chọn 1 dòng trong bảng phiếu nhập")
+            return
+
+        selected_items = self.table_phieunhap.selectedItems()
+        row_data = [item.text() for item in selected_items]
+        mapn = row_data[0]
+        manv = row_data[1]
+        mancc = row_data[2]
+        ngaytao = QtCore.QDate.fromString(row_data[3], "yyyy-M-d")   
+        tongtien = row_data[4]   
+        cbNV = self.phieunhap_dialog.cbMaNV
+        cbNCC = self.phieunhap_dialog.cbMaNCC  
+        for count in range(cbNV.count()):
+            if manv in cbNV.itemText(count):
+                indexNV = count
+
+        for count in range(cbNCC.count()):
+            if mancc in cbNCC.itemText(count):
+                indexNCC = count
+
+        self.phieunhap_dialog.cbMaNV.setCurrentIndex(indexNV)
+        self.phieunhap_dialog.cbMaNCC.setCurrentIndex(indexNCC)
+        self.phieunhap_dialog.txtTotalPrice.setText(tongtien)
+        self.phieunhap_dialog.dateNgayTao.setDate(ngaytao)
+        pn = PhieuNhap(mapn, manv, mancc, ngaytao, tongtien)
+
+        self.phieunhap_dialog.btnAccept.clicked.connect(lambda: self.updatePhieuNhap(pn))
+        dialog.exec_()
+        dialog.show()
+
     def show_add_ctpn_dialog(self):
         dialog = QtWidgets.QDialog()
         self.ctpn_dialog = Ui_ctpn_dialog()
@@ -276,14 +362,50 @@ class Ui_Form(object):
 
         selected_items = self.table_phieunhap.selectedItems()
         if not selected_items:
-            msg.show_warning_messagebox("Vui lòng chọn 1 dòng trong bảng dược phẩm")
+            msg.show_warning_messagebox("Vui lòng chọn 1 dòng trong bảng phiếu nhập")
             return
         
         selected_row = selected_items[0].row()
         id = self.table_phieunhap.item(selected_row, 0).text()
+        totalprice = self.table_phieunhap.item(selected_row, 4).text()
         
         self.ctpn_dialog.cbMaDP.currentIndexChanged.connect(self.loadPriceOfMedicine)
-        self.ctpn_dialog.btnAccept.clicked.connect(lambda: self.addCTPN(id))
+        self.ctpn_dialog.btnAccept.clicked.connect(lambda: self.addCTPN(id, int(totalprice)))
+        dialog.exec_()
+        dialog.show()
+
+    def show_update_ctpn_dialog(self):
+        dialog = QtWidgets.QDialog()
+        self.ctpn_dialog = Ui_ctpn_dialog()
+        self.ctpn_dialog.setupUi(dialog)
+        self.ctpn_dialog.label_4.setText("SỬA CHI TIẾT PHIẾU NHẬP")
+        self.loadComboboxMaDP()
+
+        selected_pn = self.table_phieunhap.selectedItems()
+        if not selected_pn:
+            msg.show_warning_messagebox("Vui lòng chọn 1 dòng trong bảng phiếu nhập")
+            return
+        
+        items_ctpn = self.table_ctpn.selectedItems()
+        if not items_ctpn:
+            msg.show_warning_messagebox("Vui lòng chọn 1 dòng trong bảng chi tiết phiếu nhập")
+            return
+        
+        selected_row = items_ctpn[0].row()
+        mapn = self.table_ctpn.item(selected_row, 0).text()
+        madp = self.table_ctpn.item(selected_row, 1).text()
+        sl = self.table_ctpn.item(selected_row, 2).text()
+        gia = self.table_ctpn.item(selected_row, 3).text()
+        cbDP = self.ctpn_dialog.cbMaDP
+        for count in range(cbDP.count()):
+            if madp in cbDP.itemText(count):
+                index = count
+        self.ctpn_dialog.cbMaDP.setCurrentIndex(index)
+        self.ctpn_dialog.txtQty.setText(sl)
+        self.ctpn_dialog.txtPrice.setText(gia)
+        
+        self.ctpn_dialog.cbMaDP.currentIndexChanged.connect(self.loadPriceOfMedicine)
+        self.ctpn_dialog.btnAccept.clicked.connect(lambda: self.updateCTPN(mapn))
         dialog.exec_()
         dialog.show()
 
@@ -325,7 +447,41 @@ class Ui_Form(object):
         msg.show_info_messagebox("Thêm phiếu nhập thành công")
         self.loadPhieuNhapData()
 
-    def addCTPN(self, mapn):
+    def addCTPN(self, mapn, totalprice):
+        madp = self.ctpn_dialog.cbMaDP.currentText().split("-")[0]
+        gia = self.ctpn_dialog.txtPrice.text()
+        sl = self.ctpn_dialog.txtQty.text()
+        thanhtien = int(gia) * int(sl)
+        totalprice += thanhtien
+
+        if not sl:
+            msg.show_warning_messagebox("Vui lòng nhập đầy đủ dữ liệu")
+            return
+    
+        ctdao = ctpnDAO()
+        pndao = phieunhapDAO()
+        ctdao.insertCTPN(CTPN(mapn, madp, sl, gia, thanhtien))
+        pndao.updateTotalPrice(mapn, totalprice)
+        msg.show_info_messagebox("Thêm phiếu nhập thành công")
+        self.on_table_phieunhap_clicked()
+        self.loadPhieuNhapData()
+
+    def updatePhieuNhap(self, pn):
+        manv = self.phieunhap_dialog.cbMaNV.currentText().split("-")[0]
+        mancc = self.phieunhap_dialog.cbMaNCC.currentText().split("-")[0]
+        ngaytao = self.phieunhap_dialog.dateNgayTao.date().toString('MM-dd-yyyy')
+        tongtien = self.phieunhap_dialog.txtTotalPrice.text()
+
+        if not tongtien:
+            msg.show_warning_messagebox("Vui lòng nhập đầy đủ dữ liệu")
+            return
+        
+        dao = phieunhapDAO()
+        dao.updatePhieuNhap(PhieuNhap(pn.getMaPN(), manv, mancc, ngaytao, tongtien))
+        msg.show_info_messagebox("Sửa phiếu nhập thành công")
+        self.on_table_phieunhap_clicked()
+
+    def updateCTPN(self, mapn):
         madp = self.ctpn_dialog.cbMaDP.currentText().split("-")[0]
         gia = self.ctpn_dialog.txtPrice.text()
         sl = self.ctpn_dialog.txtQty.text()
@@ -334,11 +490,50 @@ class Ui_Form(object):
         if not sl:
             msg.show_warning_messagebox("Vui lòng nhập đầy đủ dữ liệu")
             return
-    
+        
         dao = ctpnDAO()
-        dao.insertCTPN(CTPN(mapn, madp, sl, gia, thanhtien))
-        msg.show_info_messagebox("Thêm phiếu nhập thành công")
+        dao.updateCTPN(CTPN(mapn, madp, sl, gia, thanhtien))
+        msg.show_info_messagebox("Sửa phiếu nhập thành công")
         self.on_table_phieunhap_clicked()
+
+    def deletePhieuNhap(self):
+        selected_items = self.table_phieunhap.selectedItems()
+        if selected_items:
+            selected_row = selected_items[0].row()
+            id = self.table_phieunhap.item(selected_row, 0).text()
+            dao = phieunhapDAO()
+            dao.deletePhieuNhap(id)
+            msg.show_warning_messagebox("Xóa phiếu nhập đã chọn thành công")
+            self.loadPhieuNhapData()
+            self.on_table_phieunhap_clicked()
+        else:
+            msg.show_warning_messagebox("Vui lòng chọn 1 dòng trong bảng phiếu nhập")
+
+    def deleteCTPN(self):
+        items_pn = self.table_phieunhap.selectedItems()
+        if not items_pn:
+            msg.show_warning_messagebox("Vui lòng chọn 1 dòng trong bảng phiếu nhập")
+            return
+        
+        items_ctpn = self.table_ctpn.selectedItems()
+        if items_ctpn:
+            selected_row = items_ctpn[0].row()
+            mapn = self.table_ctpn.item(selected_row, 0).text()
+            madp = self.table_ctpn.item(selected_row, 1).text()
+            dao = ctpnDAO()
+            dao.deleteCTPN(mapn, madp)
+            msg.show_warning_messagebox("Xóa chi tiết phiếu nhập đã chọn thành công")
+            self.on_table_phieunhap_clicked()
+        else:
+            msg.show_warning_messagebox("Vui lòng chọn 1 dòng trong bảng chi tiết phiếu nhập")
+
+    def searchPhieuNhap(self):
+        dao = phieunhapDAO()
+        search = self.txtSearchPN.text()
+        choice = self.cbSearchPN.currentIndex()
+        pn = dao.searchPhieuNhap(search, choice)
+        self.fillTablePhieuNhap(pn)
+
 
 if __name__ == "__main__":
     import sys

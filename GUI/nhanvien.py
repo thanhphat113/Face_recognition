@@ -20,6 +20,7 @@ from  DAO.employeeDAO import employeeDAO
         
 class Ui_Form(object):
         def setupUi(self, Form):
+                self.tb = tb.Ui_Dialog()
                 self.empDAO = employeeDAO()
                 Form.setObjectName("Form")
                 Form.resize(800, 500)
@@ -61,26 +62,26 @@ class Ui_Form(object):
                 self.horizontalLayout.setObjectName("horizontalLayout")
                 spacerItem = QtWidgets.QSpacerItem(218, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
                 self.horizontalLayout.addItem(spacerItem)
-                self.btnAccept = QtWidgets.QPushButton(parent=self.widget_3)
-                self.btnAccept.setStyleSheet("background-color: rgb(159, 255, 153);\n"
+                self.btnAdd = QtWidgets.QPushButton(parent=self.widget_3)
+                self.btnAdd.setStyleSheet("background-color: rgb(159, 255, 153);\n"
         "")
                 icon = QtGui.QIcon()
                 icon.addPixmap(QtGui.QPixmap("img/add.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-                self.btnAccept.setIcon(icon)
-                self.btnAccept.setIconSize(QtCore.QSize(20, 20))
-                self.btnAccept.setObjectName("btnAccept")
-                self.btnAccept.clicked.connect(self.TacVu_NV)
-                self.horizontalLayout.addWidget(self.btnAccept)
-                self.pushButton = QtWidgets.QPushButton(parent=self.widget_3)
-                self.pushButton.setStyleSheet("background-color: rgb(255, 124, 125);\n"
+                self.btnAdd.setIcon(icon)
+                self.btnAdd.setIconSize(QtCore.QSize(20, 20))
+                self.btnAdd.setObjectName("btnAdd")
+                self.btnAdd.clicked.connect(self.TacVu_NV)
+                self.horizontalLayout.addWidget(self.btnAdd)
+                self.btnDelete = QtWidgets.QPushButton(parent=self.widget_3)
+                self.btnDelete.setStyleSheet("background-color: rgb(255, 124, 125);\n"
         "\n"
         "")
                 icon1 = QtGui.QIcon()
                 icon1.addPixmap(QtGui.QPixmap("img/delete.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-                self.pushButton.setIcon(icon1)
-                self.pushButton.setIconSize(QtCore.QSize(20, 20))
-                self.pushButton.setObjectName("pushButton")
-                self.horizontalLayout.addWidget(self.pushButton)
+                self.btnDelete.setIcon(icon1)
+                self.btnDelete.setIconSize(QtCore.QSize(20, 20))
+                self.btnDelete.setObjectName("btnDelete")
+                self.horizontalLayout.addWidget(self.btnDelete)
                 self.btnUpdate = QtWidgets.QPushButton(parent=self.widget_3)
                 self.btnUpdate.setStyleSheet("background-color: rgb(188, 202, 255);")
                 icon2 = QtGui.QIcon()
@@ -104,6 +105,7 @@ class Ui_Form(object):
                 self.horizontalLayout_2.addWidget(self.label_2)
                 self.lineEdit = QtWidgets.QLineEdit(parent=self.widget_2)
                 self.lineEdit.setObjectName("lineEdit")
+                self.lineEdit.setEnabled(False)
                 self.horizontalLayout_2.addWidget(self.lineEdit)
                 self.comboBox = QtWidgets.QComboBox(parent=self.widget_2)
                 self.comboBox.setObjectName("comboBox")
@@ -113,6 +115,7 @@ class Ui_Form(object):
                 self.comboBox.addItem("Tên nhân viên")
                 self.comboBox.addItem("Số điện thoại")
                 self.comboBox.addItem("Email")
+                self.comboBox.currentIndexChanged.connect(self.changeEnable)
                 self.horizontalLayout_2.addWidget(self.comboBox)
                 self.pushButton_4 = QtWidgets.QPushButton(parent=self.widget_2)
                 self.pushButton_4.setStyleSheet("")
@@ -165,11 +168,11 @@ class Ui_Form(object):
                 _translate = QtCore.QCoreApplication.translate
                 Form.setWindowTitle(_translate("Form", "Form"))
                 self.label.setText(_translate("Form", "Quản lý nhân viên"))
-                self.btnAccept.setText(_translate("Form", "Thêm"))
-                self.btnAccept.setMinimumSize(100, 30)
-                self.pushButton.setText(_translate("Form", "Xoá"))
-                self.pushButton.setMinimumSize(100, 30)
-                self.pushButton.clicked.connect(self.on_button_clicked)
+                self.btnAdd.setText(_translate("Form", "Thêm"))
+                self.btnAdd.setMinimumSize(100, 30)
+                self.btnDelete.setText(_translate("Form", "Xoá"))
+                self.btnDelete.setMinimumSize(100, 30)
+                self.btnDelete.clicked.connect(self.on_button_clicked)
                 self.btnUpdate.setText(_translate("Form", "Sửa"))
                 self.btnUpdate.setMinimumSize(100, 30)
                 self.label_2.setText(_translate("Form", "Tìm kiếm "))
@@ -212,37 +215,50 @@ class Ui_Form(object):
         
         
         def on_button_clicked(self):
-                Dialog = QtWidgets.QDialog()
-                ui = tb.Ui_Dialog()
-                ui.setupUi(Dialog)
                 selected_items = self.tableWidget.selectedItems()
                 if selected_items:
                         selected_row = selected_items[0].row()
                         value = self.tableWidget.item(selected_row, 0).text()
-                        ui.label.setText(self._translate("Dialog", self.delete_NV(value)))
+                        self.tb.thongBao(self.delete_NV(value))
                 else:
-                        ui.label.setText(self._translate("Dialog", "Vui lòng hãy chọn dòng muốn xoá"))
-                Dialog.exec_()
+                        self.tb.thongBao("Vui lòng hãy chọn dòng muốn xoá")
                 self.upload_list()
 
                 
         def delete_NV(self,value):
                 return self.empDAO.delete(value)
+        
+        def changeEnable(self):
+                type = self.comboBox.currentIndex()
+                if type == 0:
+                        self.lineEdit.setEnabled(False)
+                if type == 1:
+                        self.lineEdit.setEnabled(True)
+                if type == 2:
+                        self.lineEdit.setEnabled(True)
+                if type == 3:
+                        self.lineEdit.setEnabled(True)
+                if type == 4:
+                        self.lineEdit.setEnabled(True)
+                        
 
         def findByCondition(self):
                 type = self.comboBox.currentIndex()
-                print(type)
                 condition = self.lineEdit.text()
                 type_choise = ''
                 if type == 0:
                         type_choise = 'all'
                 elif type == 1:
+                        self.lineEdit.setEnabled(True)
                         type_choise = 'manv'
                 elif type == 2:
+                        self.lineEdit.setEnabled(True)
                         type_choise = 'tennv'
                 elif type == 3:
+                        self.lineEdit.setEnabled(True)
                         type_choise = 'sdt'
                 elif type == 4:
+                        self.lineEdit.setEnabled(True)
                         type_choise = 'email'
                 if type_choise != 'all':
                         result = self.empDAO.findByCondition(type_choise,condition)
@@ -251,6 +267,7 @@ class Ui_Form(object):
                                 data = [emp.manv,emp.tennv,emp.sdt,emp.email]
                                 self.add_row_to_table(data)
                 else: self.upload_list()
+                self.lineEdit.setText("")
                         
         def update_NV(self):
                 Dialog = QtWidgets.QDialog()
@@ -265,6 +282,8 @@ class Ui_Form(object):
                         ui.txtName.setText(self._translate("Dialog",row_data[1]))
                         ui.txtPhone.setText(self._translate("Dialog",row_data[2]))
                         ui.txtEmail.setText(self._translate("Dialog",row_data[3]))
+                else: 
+                        self.tb.thongBao("Vui lòng chọn 1 dòng để thực hiện sửa")
                 Dialog.exec_()
                 self.upload_list()
                 

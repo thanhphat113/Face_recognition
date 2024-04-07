@@ -68,12 +68,16 @@ class medicineDAO:
         except mysql.connector.Error as error:
             return "Xóa thất bại!"
         
-    def searchMedicine(self, query):
+    def searchMedicine(self, search, choice):
         medicine_list = []
         conn = self.conn
         try:
             conn.connect()
-            query=f"select * from duocpham where madp LIKE '{query}%' OR tendp LIKE '{query}%'"
+            if choice == 0:
+                query=f"select * from duocpham where madp LIKE '%{search}%'"
+            elif choice == 1:
+                query=f"select * from duocpham where tendp LIKE '%{search}%'"
+
             list=db.execute_fetch_all(conn,query)
             for dp in list:
                 medicine = Medicine(dp[0],dp[1],dp[2],dp[3],dp[4],dp[5])
