@@ -74,9 +74,9 @@ class medicineDAO:
         try:
             conn.connect()
             if choice == 0:
-                query=f"select * from duocpham where madp LIKE '{search}%'"
+                query=f"select * from duocpham where madp LIKE '%{search}%'"
             elif choice == 1:
-                query=f"select * from duocpham where tendp LIKE '{search}%'"
+                query=f"select * from duocpham where tendp LIKE '%{search}%'"
 
             list=db.execute_fetch_all(conn,query)
             for dp in list:

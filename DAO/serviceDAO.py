@@ -63,9 +63,9 @@ class serviceDAO:
         try:
             conn.connect()
             if choice == 0:
-                query=f"select * from dichvu where madv LIKE '{search}%'"
+                query=f"select * from dichvu where madv LIKE '%{search}%'"
             elif choice == 1:
-                query=f"select * from dichvu where tendv LIKE '{search}%'"
+                query=f"select * from dichvu where tendv LIKE '%{search}%'"
 
             list=db.execute_fetch_all(conn,query)
             for dv in list:
