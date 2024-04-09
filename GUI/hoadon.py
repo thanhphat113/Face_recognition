@@ -309,6 +309,7 @@ class Ui_Form(object):
         self.hoadon_dialog.btnAccept.clicked.connect(self.addHoaDon)
         dialog.exec_()
         dialog.show()
+        self.upload_hoadon()
     
     def show_add_cthd_dialog(self):
         dialog = QtWidgets.QDialog()
@@ -328,6 +329,7 @@ class Ui_Form(object):
         self.cthd_dialog.btnAccept.clicked.connect(lambda: self.addCTHD(id))
         dialog.exec_()
         dialog.show()
+        self.upload_hoadon()
     
     def loadPriceOfService(self):
         madv = self.cthd_dialog.cbMaDV.currentText().split("-")[0]
@@ -357,15 +359,16 @@ class Ui_Form(object):
 
 
     def addHoaDon(self):
-        manv = self.hoadon_dialog.cbMaNV.currentText().split("-")[0]
-        makh = self.hoadon_dialog.cbMaKH.currentText().split("-")[0]
+        manv = int(self.hoadon_dialog.cbMaNV.currentText().split("-")[0])
+        makh = int(self.hoadon_dialog.cbMaKH.currentText().split("-")[0])
         ngaytao = self.hoadon_dialog.dateNgayTao.date().toString('yyyy-MM-dd')
-        tongtien = self.hoadon_dialog.txtTotalPrice.text()
+        tongtien = int(self.hoadon_dialog.txtTotalPrice.text())
 
-        dao = billDAO()
-        dao.insert(bill("", ngaytao, int(tongtien), int(manv), int(makh)))
+        hdDAO = billDAO()
+        subBill = bill("", ngaytao, tongtien, manv, makh)
+        hdDAO.insert(subBill)
         msg.show_info_messagebox("Thêm hóa đơn thành công")
-        self.upload_hoadon()
+
     
     def addCTHD(self, mahd):
         madv = self.cthd_dialog.cbMaDV.currentText().split("-")[0]
@@ -403,17 +406,19 @@ class Ui_Form(object):
 
 
     def update_HD(self):
-        Dialog = QtWidgets.QDialog()
-        ui = tv.Ui_Dialog()
-        ui.setupUi(Dialog,2)
+        dialog = QtWidgets.QDialog()
+        self.hoadon_dialog = Ui_hoadon_dialog()
+        self.hoadon_dialog.setupUi(dialog)
+        self.loadComboboxMaNV()
+        self.loadComboboxMaKH()
         selected_row = self.table_hoadon.currentRow()
         if selected_row  >= 0:
             selected_items = self.table_hoadon.selectedItems()
             row_data = [item.text() for item in selected_items]
-            ui.label_visible.setText(self._translate("Dialog",row_data[0]))
-            ui.txtTime.setText(self._translate("Dialog",row_data[1]))
-            ui.txtPrice.setText(self._translate("Dialog",row_data[2]))
-        Dialog.exec_()
+            self.hoadon_dialog.dateNgayTao.date()
+            self.hoadon_dialog.txtTotalPrice.setText(self._translate("dialog",row_data[2]))
+        dialog.exec_()
+        dialog.show()
         self.upload_hoadon()
         
 

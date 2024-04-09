@@ -1,5 +1,7 @@
 class taikhoan:
-    def __init__(self,matk,username,password,trangthai,maloai):
+    max_matk = 0
+
+    def __init__(self, matk : int, username : str, password : str, trangthai : int, maloai : int):
         self.__matk = matk
         self.__username = username
         self.__password = password
@@ -45,3 +47,8 @@ class taikhoan:
     @maloai.setter
     def maloai(self,maloai):
         self.__maloai=maloai
+
+    @classmethod
+    def generate_manv(cls):
+        cls.max_matk += 1
+        return cls.max_matk

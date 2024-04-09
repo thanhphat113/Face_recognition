@@ -34,7 +34,7 @@ class billDAO:
         conn = self.conn
         try:
             conn.connect()
-            query=f"insert into hoadon(ngaytao, tongtien) values ('{bill.get_ngaytao()}','{bill.get_tongtien()}')"
+            query=f"insert into hoadon(ngaytao, tongtien, manv, makh) values ('{bill.get_ngaytao()}','{bill.get_tongtien()}','{bill.get_manv()}','{bill.get_makh()}')"
             db.execute_query(conn,query)
             return 'Thêm thành công !!!!'
         except mysql.connector.Error as error:
@@ -58,7 +58,7 @@ class billDAO:
         conn = self.conn
         try:
             conn.connect()
-            query=f"update hoadon set ngaytao = '{bill.get_ngaytao()}', tongtien = '{bill.get_tongtien()}' where mahd = '{bill.get_mahd()}'"
+            query=f"update hoadon set ngaytao = '{bill.get_ngaytao()}', tongtien = '{bill.get_tongtien()}', manv = '{bill.get_manv()}', makh = '{bill.get_makh()}' where mahd = '{bill.get_mahd()}'"
             db.execute_query(conn, query)
             return 'Cập nhật thành công !!!!'
         except mysql.connector.Error as error:

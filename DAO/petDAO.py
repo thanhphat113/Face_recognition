@@ -66,30 +66,50 @@ class petDAO:
             conn.close()
                 
     def findById(self,id):
-        result = None
+        pets_list = []
         try:
             self.conn.connect()
             query = f"select * from ThuNuoi where matn = '{id}'"
             list = db.execute_fetch_all(self.conn,query)
-            for subpet in list:
-                result = pet(subpet[0],subpet[1],subpet[2],subpet[3],subpet[4])
-            return result
+            if list is not None:
+                for subpet in list:
+                    result = pet(subpet[0],subpet[1],subpet[2],subpet[3],subpet[4])
+                    pets_list.append(result)
+            return pets_list
         except mysql.connector.Error as error:
             return f'Lỗi: {error}'
+     
         
     def findByName(self,name):
         pets_list = []
         try:
             self.conn.connect()
-            query = f"select * from ThuNuoi where tentn = '{name}'"
+            query = f"select * from ThuNuoi where tentn like '%{name}%'"
             list = db.execute_fetch_all(self.conn,query)
-            for subpet in list:
-                result = pet(subpet[0],subpet[1],subpet[2],subpet[3],subpet[4])
-                pets_list.append(result)
+            if list is not None:
+                for subpet in list:
+                    result = pet(subpet[0],subpet[1],subpet[2],subpet[3],subpet[4])
+                    pets_list.append(result)
+            return pets_list
+        except mysql.connector.Error as error:
+            return f'Lỗi: {error}'
+        
+
+    def findByColor(self,color):
+        pets_list = []
+        try:
+            self.conn.connect()
+            query = f"select * from ThuNuoi where mau = '{color}'"
+            list = db.execute_fetch_all(self.conn,query)
+            if list is not None:
+                for subpet in list:
+                    result = pet(subpet[0],subpet[1],subpet[2],subpet[3],subpet[4])
+                    pets_list.append(result)
             return pets_list
         except mysql.connector.Error as error:
             return f'Lỗi: {error}'
     
+
     def findPetDontUseBed(self):
         pet_list = []
         try:
