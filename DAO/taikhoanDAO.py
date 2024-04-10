@@ -69,13 +69,13 @@ class taikhoanDAO:
     def checkPassword(self,username,password):
         try:
             self.conn.connect()
-            query = f"Select * from TaiKhoan where username = '{username}' and password = '{password}'"
+            query = f"Select * from TaiKhoan where username = BINARY '{username}' and password = BINARY '{password}'"
             result = db.execute_fetch_all(self.conn,query)
             if not result:
-                return None
+                return None,None
             for tk in result:
                 account = taikhoan(tk[0],tk[1],tk[2],tk[3],tk[4])
-            return account.maloai
+            return account.matk,account.maloai
         except mysql.connector.Error as error:
             return error
         finally:
@@ -152,7 +152,31 @@ class taikhoanDAO:
             return account_list
         except mysql.connector.Error as error:
             return f'Lỗi: {error}'
-
+        
+    def checkOldPass(self,manv,Oldpass):
+        tk = None
+        try:
+            self.conn.connect()
+            query =f"SELECT tk.matk FROM TaiKhoan as tk join NhanVien as nv on tk.matk=nv.matk where tk.password = '{Oldpass}' and nv.manv ='{manv}'"
+            tk = db.execute_fetch_one(self.conn,query)
+            if tk is not None:
+                return tk[0]
+            else: return None
+        except mysql.connector.Error as error:
+            return f'Lỗi: {error}'  
+    
+    def doiMK(self,matk,newPass,reNewPass):
+        if newPass != reNewPass:
+            return "Mật khẩu mới không giống nhau"
+        else:
+            try:
+                self.conn.connect()
+                query = f"update TaiKhoan set password = '{newPass}' where matk = '{matk}'"
+                db.execute_query(self.conn,query)
+                return "Đổi mật khẩu thành công"
+            except mysql.connector.Error as error:
+                return f'Lỗi: {error}'
+        
 if __name__ == "__main__":
     example = 'admin'
     passw = 'admin'

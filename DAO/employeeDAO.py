@@ -20,7 +20,7 @@ class employeeDAO:
             query="Select * from nhanvien"
             list=db.execute_fetch_all(conn,query)
             for nv in list:
-                emp=employee(nv[0],nv[1],nv[2],nv[3])
+                emp=employee(nv[0],nv[1],nv[2],nv[3],nv[4])
                 employee_list.append(emp)
             return employee_list
         except mysql.connector.Error as error:
@@ -35,7 +35,7 @@ class employeeDAO:
             conn.connect()
             query=f"Select * from nhanvien where manv = '{id}'"
             result = db.execute_fetch_one(conn,query)
-            emp = employee(result[0],result[1],result[2],result[3])
+            emp = employee(result[0],result[1],result[2],result[3],result[4])
             return emp
         except mysql.connector.Error as error:
             return 'Excute thất bại !!!!'
@@ -84,9 +84,23 @@ class employeeDAO:
                         result = db.execute_fetch_all(self.conn,query)
                         if result is not None:
                                 for nv in result:
-                                        emp = employee(nv[0],nv[1],nv[2],nv[3])
+                                        emp = employee(nv[0],nv[1],nv[2],nv[3],nv[4])
                                         employee_list.append(emp)
                         return employee_list
+                except mysql.connector.Error as error:
+                        return f'Lỗi: {error}'
+                finally:
+                        self.conn.close()
+                        
+    def findByMatk(self, condition):
+                emp = None
+                try:
+                        self.conn.connect()
+                        query = f"select * from NhanVien where matk = '{condition}'"
+                        result = db.execute_fetch_one(self.conn,query)
+                        if result is not None:
+                                emp = employee(result[0], result[1], result[2], result[3], result[4])
+                        return emp
                 except mysql.connector.Error as error:
                         return f'Lỗi: {error}'
                 finally:

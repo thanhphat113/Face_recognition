@@ -6,13 +6,16 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from GUI.sidebar import Ui_MainWindow
 from GUI.login import Ui_login_form
-from GUI import phongbenh as pb, nhanvien as nv ,dichvu as dv, thunuoi as tn, home ,khachhang as kh, hoadon,phieunhap as pn,duocpham as dp,taikhoan as tk,nhacungcap as ncc
+from GUI import phongbenh as pb, nhanvien as nv ,dichvu as dv, thunuoi as tn, home ,khachhang as kh, hoadon,phieunhap as pn,duocpham as dp,taikhoan as tk,nhacungcap as ncc,thongtin as tt,doimk as mk
 from DAO.serviceDAO import serviceDAO
 from DAO.taikhoanDAO import taikhoanDAO
+from DAO.employeeDAO import employeeDAO
+from DTO.employeeDTO import employee
 import GUI.thongbao as tb
 
 class Login(QWidget, Ui_login_form):
     def __init__(self):
+        self.empDAO = employeeDAO()
         super().__init__()
         self.window = QWidget()
         self.setupUi(self)
@@ -32,27 +35,34 @@ class Login(QWidget, Ui_login_form):
             self.thongbao.thongBao("Không được bỏ trống tài khoản hoặc mật khẩu")
         else:
             tk = taikhoanDAO()
-            loai = tk.checkPassword(username,password)
+            matk,loai = tk.checkPassword(username,password)
+            nhanvien = self.empDAO.findByMatk(matk)
             if loai is None:
                 self.thongbao.thongBao("Bạn đã nhập sai mật khẩu hoặc tài khoản")
             elif loai == 1:
-                self.sidebar = Main_Page(1)
+                self.sidebar = Main_Page(1,nhanvien)
                 self.close()
                 self.sidebar.show()
             elif loai == 2:
-                self.sidebar = Main_Page(2)
+                self.sidebar = Main_Page(2,nhanvien)
                 self.hide()
                 self.sidebar.show()
         
                     
     
 class Main_Page(QMainWindow, Ui_MainWindow):
-    def __init__(self,type):
+    def __init__(self,type, nhanvien:employee):
+        self.nhanvien = nhanvien
         super().__init__()
 
         self.window = QMainWindow()
         self.setupUi(self)
-
+        
+        if self.nhanvien is None:
+            self.btnAcc.setVisible(False)
+            
+        self.btnAcc.clicked.connect(lambda: self.showInfor(self.nhanvien))
+            
         self.icon_menu_widget.hide()
 
         self.home_form = home.Ui_Form()
@@ -95,8 +105,6 @@ class Main_Page(QMainWindow, Ui_MainWindow):
         
        
         if type == 2:
-            self.btnChart.setVisible(False)
-            self.iconChart.setVisible(False)
             self.btnService.setVisible(False)
             self.iconService.setVisible(False)
             self.btnEmployee.setVisible(False)
@@ -177,3 +185,20 @@ class Main_Page(QMainWindow, Ui_MainWindow):
             self.dv_form.table_service.setItem(row, 1, QtWidgets.QTableWidgetItem(service.getTen()))
             self.dv_form.table_service.setItem(row, 2, QtWidgets.QTableWidgetItem(str(service.getGia())))
             row = row +1
+            
+    def showInfor(self,nv:employee):
+        Dialog = QtWidgets.QDialog()
+        ui = tt.Ui_Dialog()
+        ui.setupUi(Dialog)
+        ui.txtName.setText(nv.tennv)
+        ui.txtSdt.setText(nv.sdt)
+        ui.txtEmail.setText(nv.email)
+        ui.pushButton.clicked.connect(lambda: self.doiMatKhau(str(nv.manv)))
+        Dialog.exec_()
+        
+    def doiMatKhau(self,manv):
+        Dialog = QtWidgets.QDialog()
+        ui = mk.Ui_Dialog()
+        ui.setupUi(Dialog)
+        ui.manv.setText(manv)
+        Dialog.exec_()
