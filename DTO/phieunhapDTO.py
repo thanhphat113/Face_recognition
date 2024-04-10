@@ -1,10 +1,18 @@
+import sys
+import os
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from DAO.employeeDAO import employeeDAO 
+from DAO.supplierDAO import supplierDAO 
 class PhieuNhap:
-    def __init__(self, mapn, manv, mancc, ngaytao, tongtien):
+    def __init__(self, mapn, ngaytao, mancc,manv,tongtien):
         self.mapn = mapn
         self.manv = manv
         self.mancc = mancc
         self.ngaytao = ngaytao
         self.tongtien = tongtien
+        self.ncc = None
+        self.nhanvien = None
 
     def getMaPN(self):
         return self.mapn
@@ -35,3 +43,14 @@ class PhieuNhap:
     
     def setTongTien(self, tongtien):
         self.tongtien = tongtien
+    
+    def getNhanVien(self):
+        empDAO = employeeDAO()
+        self.nhanvien = empDAO.getEmployeeById(self.getMaNV())
+        return self.nhanvien
+    
+    def getNCC(self):
+        supDAO = supplierDAO()
+        self.ncc = supDAO.getSupplierById(self.getMaNCC())
+        return self.ncc
+

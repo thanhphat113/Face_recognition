@@ -20,7 +20,7 @@ from GUI import nhanvien as nv ,dichvu as dv, thunuoi as tn, home ,khachhang as 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1055, 638)
+        MainWindow.resize(1200, 750)
         MainWindow.setAutoFillBackground(False)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setStyleSheet("\n"
@@ -333,8 +333,21 @@ class Ui_MainWindow(object):
         self.btnMenu.setChecked(False)
         self.btnMenu.setObjectName("btnMenu")
         self.horizontalLayout_2.addWidget(self.btnMenu)
+        
         spacerItem3 = QtWidgets.QSpacerItem(451, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem3)
+        
+        self.btnAcc = QtWidgets.QPushButton(self.widget_4)
+        self.btnAcc.setText("")
+        icon9 = QtGui.QIcon()
+        icon9.addPixmap(QtGui.QPixmap("img/employee.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btnAcc.setIcon(icon9)
+        self.btnAcc.setIconSize(QtCore.QSize(20, 20))
+        self.btnAcc.setCheckable(True)
+        self.btnAcc.setChecked(False)
+        self.btnAcc.setObjectName("btnAcc")
+        self.horizontalLayout_2.addWidget(self.btnAcc)
+        
         self.verticalLayout_5.addWidget(self.widget_4)
         self.stackedWidget = QtWidgets.QStackedWidget(self.widget_3)
         self.stackedWidget.setStyleSheet("background-color: rgb(255, 255, 255);\n"

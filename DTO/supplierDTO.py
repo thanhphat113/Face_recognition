@@ -1,41 +1,51 @@
 class Supplier:
     max_mancc = 0
     def __init__(self, mancc, tenncc, email, diachi, sdt):
-        self.mancc = mancc
-        self.tenncc = tenncc
-        self.email = email
-        self.diachi = diachi
-        self.sdt = sdt
+        self.__mancc = mancc
+        self.__tenncc = tenncc
+        self.__email = email
+        self.__diachi = diachi
+        self.__sdt = sdt
 
-    def getMaNCC(self):
-        return self.mancc
+    @property
+    def mancc(self):
+        return self.__mancc
     
-    def setMaNCC(self, mancc):
-        self.mancc = mancc
+    @mancc.setter
+    def mancc(self,mancc):
+        self.__mancc=mancc
     
-    def getTenNCC(self):
-        return self.tenncc
+    @property
+    def tenncc(self):
+        return self.__tenncc
     
-    def setTenNCC(self, tenncc):
-        self.tenncc = tenncc
-
-    def getEmail(self):
-        return self.email
+    @tenncc.setter
+    def manv(self,tenncc):
+        self.__tenncc=tenncc
+        
+    @property
+    def email(self):
+        return self.__email
     
-    def setEmail(self, email):
-        self.email = email
-
-    def getDiaChi(self):
-        return self.diachi
+    @email.setter
+    def manv(self,email):
+        self.__email=email
+        
+    @property
+    def sdt(self):
+        return self.__sdt
     
-    def setDiaChi(self, diachi):
-        self.diachi = diachi
-
-    def getSdt(self):
-        return self.sdt
+    @sdt.setter
+    def sdt(self,sdt):
+        self.__sdt=sdt
+        
+    @property
+    def diachi(self):
+        return self.__diachi
     
-    def setSdt(self, sdt):
-        self.sdt = sdt
+    @diachi.setter
+    def diachi(self,diachi):
+        self.__diachi=diachi 
 
     @classmethod
     def generate_mancc(cls):

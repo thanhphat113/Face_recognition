@@ -57,16 +57,41 @@ class customerDAO:
             print(f'Error: {error}')
         
 
-    def add(self, cus : customer):
-        self.customer_list.append(cus)
+    def insert(self, cus:customer):
+        conn=self.conn
+        try:
+            conn.connect()
+            query=f"insert into KhachHang(tenkh,gioitinh,sdt,email) values ('{cus.get_tenkh}','{cus.get_gioitinh}','{cus.get_sdt}','{cus.get_email}')"
+            db.execute_query(conn,query)
+            return 'Thêm thành công !!!!'
+        except mysql.connector.Error as error:
+            return 'Thêm thất bại !!!!'
+        finally:
+            conn.close()
 
-    def remove(self, cus : customer):
-        self.customer_list.remove(cus)
+    def delete(self,id):
+        conn=self.conn
+        try:
+            conn.connect()
+            query=f"delete from KhachHang where makh = '{id}'"
+            db.execute_query(conn,query)
+            return 'Xoá thành công !!!!'
+        except mysql.connector.Error as error:
+            return f'Lỗi: {error}'
+        finally:
+            conn.close()
 
-    def edit(self, cus : customer):
-        for i in range(self.n):
-            if self.customer_list[i].get_makh() == cus.get_makh():
-                self.customer_list[i] = cus
+    def update(self,cus:customer):
+        conn=self.conn
+        try:
+            conn.connect()
+            query=f"update KhachHang set tenkh = '{cus.get_tenkh}',sdt = '{cus.get_sdt}', email = '{cus.get_email}', gioitinh = '{cus.get_gioitinh}' where manv = '{cus.get_makh}'"
+            db.execute_query(conn,query)
+            return 'Cập nhật thành công !!!!'
+        except mysql.connector.Error as error:
+            return f'Lỗi: {error}'
+        finally:
+            conn.close()
                 
     def findByid(self,id):
         cus = None

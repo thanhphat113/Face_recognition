@@ -107,7 +107,7 @@ class Ui_Dialog(object):
         name = self.txtName.text()
         pwd = self.txtPwd.text()
         status = self.txtStatus.text()
-        accType = self.cbMaLTK.currentText().split("-")[0]
+        accType = self.cbMaLTK.currentIndex()+1
 
         accDAO = taikhoanDAO()
         if name and pwd:
