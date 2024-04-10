@@ -26,4 +26,15 @@ class supplierDAO:
             return None
         finally:
             conn.close()
+
+    def getSupplierById(self, id):
+        conn=self.conn
+        try:
+            conn.connect()
+            query=f"Select * from nhacungcap where mancc = '{id}'"
+            result = db.execute_fetch_one(conn,query)
+            supplier = Supplier(result[0],result[1],result[2],result[3],result[4])
+            return supplier
+        except mysql.connector.Error as error:
+            return 'Excute thất bại !!!!'
     

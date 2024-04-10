@@ -19,6 +19,7 @@ from DTO.ctpnDTO import CTPN
 from GUI.phieunhap_dialog import Ui_phieunhap_dialog
 from GUI.ctpn_dialog import Ui_ctpn_dialog
 import GUI.mesage_box as msg
+from utils.handleFilePdf import PDF
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -55,13 +56,23 @@ class Ui_Form(object):
         self.cbSearchPN.addItem("")
         self.cbSearchPN.addItem("")
         self.horizontalLayout_5.addWidget(self.cbSearchPN)
+        self.btnExportPDF = QtWidgets.QPushButton(self.groupBox_2)
+        self.btnExportPDF.setMinimumSize(QtCore.QSize(40, 40))
+        self.btnExportPDF.setStyleSheet("background-color: rgb(255, 85, 0);")
+        self.btnExportPDF.setText("")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("ui\\../img/pdf_60px.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btnExportPDF.setIcon(icon)
+        self.btnExportPDF.setIconSize(QtCore.QSize(30, 30))
+        self.btnExportPDF.setObjectName("btnExportPDF")
+        self.horizontalLayout_5.addWidget(self.btnExportPDF)
         self.btnSearchPN = QtWidgets.QPushButton(self.groupBox_2)
         self.btnSearchPN.setMinimumSize(QtCore.QSize(40, 40))
         self.btnSearchPN.setStyleSheet("background-color: #BDD5D7;")
         self.btnSearchPN.setText("")
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("ui\\../img/search.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.btnSearchPN.setIcon(icon)
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap("ui\\../img/search.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btnSearchPN.setIcon(icon1)
         self.btnSearchPN.setObjectName("btnSearchPN")
         self.horizontalLayout_5.addWidget(self.btnSearchPN)
         self.verticalLayout_3.addLayout(self.horizontalLayout_5)
@@ -101,9 +112,9 @@ class Ui_Form(object):
         self.btnAddCTNP.setStyleSheet("background-color: rgb(159, 255, 153);\n"
 "")
         self.btnAddCTNP.setText("")
-        icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("img/add.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.btnAddCTNP.setIcon(icon1)
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap("ui\\../img/add.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btnAddCTNP.setIcon(icon2)
         self.btnAddCTNP.setObjectName("btnAddCTNP")
         self.horizontalLayout_6.addWidget(self.btnAddCTNP)
         self.btnEditCTPN = QtWidgets.QPushButton(self.groupBox)
@@ -111,9 +122,9 @@ class Ui_Form(object):
         self.btnEditCTPN.setStyleSheet("background-color: rgb(255, 255, 127);\n"
 "")
         self.btnEditCTPN.setText("")
-        icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("img/edit_48px.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.btnEditCTPN.setIcon(icon2)
+        icon3 = QtGui.QIcon()
+        icon3.addPixmap(QtGui.QPixmap("ui\\../img/edit_48px.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btnEditCTPN.setIcon(icon3)
         self.btnEditCTPN.setObjectName("btnEditCTPN")
         self.horizontalLayout_6.addWidget(self.btnEditCTPN)
         self.btnDeleteCTPN = QtWidgets.QPushButton(self.groupBox)
@@ -122,9 +133,9 @@ class Ui_Form(object):
 "\n"
 "")
         self.btnDeleteCTPN.setText("")
-        icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap("img/delete.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.btnDeleteCTPN.setIcon(icon3)
+        icon4 = QtGui.QIcon()
+        icon4.addPixmap(QtGui.QPixmap("ui\\../img/delete.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btnDeleteCTPN.setIcon(icon4)
         self.btnDeleteCTPN.setObjectName("btnDeleteCTPN")
         self.horizontalLayout_6.addWidget(self.btnDeleteCTPN)
         self.verticalLayout_2.addLayout(self.horizontalLayout_6)
@@ -190,7 +201,7 @@ class Ui_Form(object):
         self.btnAdd.setMinimumSize(QtCore.QSize(100, 30))
         self.btnAdd.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.btnAdd.setStyleSheet("background-color: rgb(159, 255, 153);")
-        self.btnAdd.setIcon(icon1)
+        self.btnAdd.setIcon(icon2)
         self.btnAdd.setIconSize(QtCore.QSize(20, 20))
         self.btnAdd.setFlat(False)
         self.btnAdd.setObjectName("btnAdd")
@@ -199,7 +210,7 @@ class Ui_Form(object):
         self.btnEdit.setMinimumSize(QtCore.QSize(100, 30))
         self.btnEdit.setStyleSheet("background-color: rgb(255, 255, 127);\n"
 "")
-        self.btnEdit.setIcon(icon2)
+        self.btnEdit.setIcon(icon3)
         self.btnEdit.setObjectName("btnEdit")
         self.horizontalLayout.addWidget(self.btnEdit)
         self.btnDelete = QtWidgets.QPushButton(self.widget_3)
@@ -207,15 +218,15 @@ class Ui_Form(object):
         self.btnDelete.setStyleSheet("background-color: rgb(255, 124, 125);\n"
 "\n"
 "")
-        self.btnDelete.setIcon(icon3)
+        self.btnDelete.setIcon(icon4)
         self.btnDelete.setObjectName("btnDelete")
         self.horizontalLayout.addWidget(self.btnDelete)
         self.btnReset = QtWidgets.QPushButton(self.widget_3)
         self.btnReset.setMinimumSize(QtCore.QSize(100, 30))
         self.btnReset.setStyleSheet("background-color: #BDD5D7;")
-        icon4 = QtGui.QIcon()
-        icon4.addPixmap(QtGui.QPixmap("ui\\../img/refresh.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.btnReset.setIcon(icon4)
+        icon5 = QtGui.QIcon()
+        icon5.addPixmap(QtGui.QPixmap("ui\\../img/refresh.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btnReset.setIcon(icon5)
         self.btnReset.setObjectName("btnReset")
         self.horizontalLayout.addWidget(self.btnReset)
         self.gridLayout_2.addLayout(self.horizontalLayout, 0, 0, 1, 1)
@@ -245,7 +256,7 @@ class Ui_Form(object):
         item = self.table_ctpn.horizontalHeaderItem(0)
         item.setText(_translate("Form", "Mã phiếu nhập"))
         item = self.table_ctpn.horizontalHeaderItem(1)
-        item.setText(_translate("Form", "Mã dược phẩm"))
+        item.setText(_translate("Form", "Tên dược phẩm"))
         item = self.table_ctpn.horizontalHeaderItem(2)
         item.setText(_translate("Form", "Số lượng"))
         item = self.table_ctpn.horizontalHeaderItem(3)
@@ -267,6 +278,7 @@ class Ui_Form(object):
         self.btnDeleteCTPN.clicked.connect(self.deleteCTPN)
         self.btnSearchPN.clicked.connect(self.searchPhieuNhap)
         self.btnReset.clicked.connect(self.loadPhieuNhapData)
+        self.btnExportPDF.clicked.connect(self.exportFilePDF)
 
     def fillTablePhieuNhap(self, pn_list):
         row = 0
@@ -282,9 +294,11 @@ class Ui_Form(object):
     def fillTableCTPN(self, ctpn_list):
         row = 0
         self.table_ctpn.setRowCount(len(ctpn_list))
+        dao = medicineDAO()
         for ctpn in ctpn_list:
+            medicine = dao.getMedicineById(ctpn.getMaDP())
             self.table_ctpn.setItem(row, 0, QtWidgets.QTableWidgetItem(str(ctpn.getMaPN())))
-            self.table_ctpn.setItem(row, 1, QtWidgets.QTableWidgetItem(str(ctpn.getMaDP())))
+            self.table_ctpn.setItem(row, 1, QtWidgets.QTableWidgetItem(str(medicine.getTenDP())))
             self.table_ctpn.setItem(row, 2, QtWidgets.QTableWidgetItem(str(ctpn.getSoLuong())))
             self.table_ctpn.setItem(row, 3, QtWidgets.QTableWidgetItem(str(ctpn.getGia())))
             self.table_ctpn.setItem(row, 4, QtWidgets.QTableWidgetItem(str(ctpn.getThanhTien())))
@@ -299,9 +313,9 @@ class Ui_Form(object):
         selected_items = self.table_phieunhap.selectedItems()
         if selected_items:
             selected_row = selected_items[0].row()
-            id = self.table_phieunhap.item(selected_row, 0).text()
-            dao = ctpnDAO()
-            ctpn_list = dao.getCTPNById(id)
+            mapn = self.table_phieunhap.item(selected_row, 0).text()
+            ctdao = ctpnDAO()
+            ctpn_list = ctdao.getCTPNById(mapn)
             self.fillTableCTPN(ctpn_list)
 
     def show_add_pn_dialog(self):
@@ -310,6 +324,7 @@ class Ui_Form(object):
         self.phieunhap_dialog.setupUi(dialog)
         self.loadComboboxMaNV()
         self.loadComboboxMaNCC()
+        self.phieunhap_dialog.txtTotalPrice.setEnabled(False)
         self.phieunhap_dialog.btnAccept.clicked.connect(self.addPhieuNhap)
         dialog.exec_()
         dialog.show()
@@ -534,7 +549,26 @@ class Ui_Form(object):
         pn = dao.searchPhieuNhap(search, choice)
         self.fillTablePhieuNhap(pn)
 
+    def exportFilePDF(self):
+        selected_row = self.table_phieunhap.currentRow()
+        if selected_row < 0:
+            msg.show_warning_messagebox("Vui lòng chọn 1 dòng trong bảng phiếu nhập")
+            return
 
+        selected_items = self.table_phieunhap.selectedItems()
+        row_data = [item.text() for item in selected_items]
+        phieunhap = PhieuNhap(row_data[0], row_data[1], row_data[2], row_data[3], row_data[4])
+        dao = ctpnDAO()
+        ctpn_list = dao.getCTPNById(row_data[0])
+        pdf = PDF("P", "mm", "A4")
+        pdf.add_font('DejaVuSansCondensed', '', r"C:\fonts\DejaVuSansCondensed.ttf")
+        pdf.set_font('DejaVuSansCondensed', size=30)
+        pdf.add_page()
+
+        pdf.contentOfPhieuNhap(phieunhap, ctpn_list)
+        pdf.output('test.pdf')
+        msg.show_info_messagebox("Xuất file pdf thành công!")
+    
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)

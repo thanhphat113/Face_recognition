@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_phieunhap_dialog(object):
     def setupUi(self, phieunhap_dialog):
         phieunhap_dialog.setObjectName("phieunhap_dialog")
-        phieunhap_dialog.resize(400, 322)
+        phieunhap_dialog.resize(400, 318)
         phieunhap_dialog.setMinimumSize(QtCore.QSize(400, 276))
         self.label = QtWidgets.QLabel(phieunhap_dialog)
         self.label.setGeometry(QtCore.QRect(50, 90, 91, 16))
