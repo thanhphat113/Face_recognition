@@ -110,6 +110,18 @@ class Ui_MainWindow(object):
         self.iconEmployee.setAutoExclusive(True)
         self.iconEmployee.setObjectName("iconEmployee")
         self.verticalLayout.addWidget(self.iconEmployee)
+        
+        self.iconAccount = QtWidgets.QPushButton(self.icon_menu_widget)
+        self.iconEmployee.setText("")
+        icon4 = QtGui.QIcon()
+        icon4.addPixmap(QtGui.QPixmap("img/employee.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.iconAccount.setIcon(icon4)
+        self.iconAccount.setIconSize(QtCore.QSize(20, 20))
+        self.iconEmployee.setCheckable(True)
+        self.iconEmployee.setAutoExclusive(True)
+        self.iconEmployee.setObjectName("iconEmployee")
+        self.verticalLayout.addWidget(self.iconEmployee)
+        
         self.iconPhieuNhap = QtWidgets.QPushButton(self.icon_menu_widget)
         self.iconPhieuNhap.setText("")
         icon5 = QtGui.QIcon()

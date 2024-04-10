@@ -57,7 +57,7 @@ class phongbenh:
     @property
     def thunuoi(self):
         pet = petDAO()
-        self.__thunuoi = pet.findById(self.__matn)
+        self.__thunuoi = pet.findById1(self.__matn)
         return self.__thunuoi
     
     @thunuoi.setter

@@ -36,18 +36,18 @@ class Login(QWidget, Ui_login_form):
             if loai is None:
                 self.thongbao.thongBao("Bạn đã nhập sai mật khẩu hoặc tài khoản")
             elif loai == 1:
-                self.sidebar = Main_Page()
+                self.sidebar = Main_Page(1)
                 self.close()
                 self.sidebar.show()
             elif loai == 2:
-                self.sidebar = Main_Page()
+                self.sidebar = Main_Page(2)
                 self.hide()
                 self.sidebar.show()
         
                     
     
 class Main_Page(QMainWindow, Ui_MainWindow):
-    def __init__(self):
+    def __init__(self,type):
         super().__init__()
 
         self.window = QMainWindow()
@@ -83,6 +83,19 @@ class Main_Page(QMainWindow, Ui_MainWindow):
         self.pushButton_12.clicked.connect(self.dangXuat)
         self.pushButton_5.clicked.connect(self.dangXuat)
         self.loadServiceData()
+        
+       
+        if type == 2:
+            self.btnChart.setVisible(False)
+            self.iconChart.setVisible(False)
+            self.btnService.setVisible(False)
+            self.iconService.setVisible(False)
+            self.btnEmployee.setVisible(False)
+            self.iconEmployee.setVisible(False)
+            self.btnPhieuNhap.setVisible(False)
+            self.iconPhieuNhap.setVisible(False)
+    
+    
     
     def dangXuat(self):
         self.login = Login()
