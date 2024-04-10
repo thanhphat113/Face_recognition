@@ -1,4 +1,5 @@
 class Supplier:
+    max_mancc = 0
     def __init__(self, mancc, tenncc, email, diachi, sdt):
         self.mancc = mancc
         self.tenncc = tenncc
@@ -35,3 +36,8 @@ class Supplier:
     
     def setSdt(self, sdt):
         self.sdt = sdt
+
+    @classmethod
+    def generate_mancc(cls):
+        cls.max_mancc += 1
+        return cls.max_mancc
