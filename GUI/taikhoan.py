@@ -198,7 +198,7 @@ class Ui_Form(object):
         for taikhoan in taikhoan_list:
             for accType in accType_list:
                 if accType.maloai == taikhoan.maloai:
-                    data = [taikhoan.maloai, taikhoan.username, taikhoan.password, taikhoan.trangthai, accType.tenloai]
+                    data = [taikhoan.matk, taikhoan.username, taikhoan.password, taikhoan.trangthai, accType.tenloai]
                     self.add_row_to_table(data)
                     break
                 
@@ -295,7 +295,7 @@ class Ui_Form(object):
             for taikhoan in result:
                 for accType in accType_list:
                     if accType.maloai == taikhoan.maloai:
-                        data = [taikhoan.maloai, taikhoan.username, taikhoan.password, taikhoan.trangthai, accType.tenloai]
+                        data = [taikhoan.matk, taikhoan.username, taikhoan.password, taikhoan.trangthai, accType.tenloai]
                         self.add_row_to_table(data)
                         break
         else:

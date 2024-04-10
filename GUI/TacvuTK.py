@@ -110,14 +110,17 @@ class Ui_Dialog(object):
         accType = self.cbMaLTK.currentText().split("-")[0]
         accDAO = taikhoanDAO()
         if name and pwd:
-            account = taikhoan("", name, pwd, status, accType)
-            result = accDAO.insert(account)
-            if result == "Thêm thành công !!!!":
-                self.txtName.setText("")
-                self.txtPwd.setText("")
-                self.txtStatus.setText("")
-                self.cbMaLTK.setCurrentText("")
-            return result 
+            if int(status) == 0 or int(status) == 1:
+                account = taikhoan("", name, pwd, status, accType)
+                result = accDAO.insert(account)
+                if result == "Thêm thành công !!!!":
+                    self.txtName.setText("")
+                    self.txtPwd.setText("")
+                    self.txtStatus.setText("")
+                    self.cbMaLTK.setCurrentText("")
+                return result
+            else:
+                return 'Trạng thái phải có giá trị là 1 hoặc 0 !!!!'
         else: 
             return 'Username và Password không được rỗng !!!!'
         
@@ -128,8 +131,11 @@ class Ui_Dialog(object):
         accType = self.cbMaLTK.currentText().split("-")[0]
         dao = taikhoanDAO()
         if name and pwd:
-            account = taikhoan(id, name, pwd, status, accType)
-            return dao.update(account)  
+            if int(status) == 0 or int(status) == 1:
+                account = taikhoan(id, name, pwd, status, accType)
+                return dao.update(account)
+            else:
+                return 'Trạng thái phải có giá trị là 1 hoặc 0 !!!!'
         else: 
             return 'Username và Password không được rỗng !!!!'
 
