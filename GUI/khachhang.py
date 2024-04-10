@@ -9,7 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QTableWidgetItem
+from PyQt5.QtWidgets import QTableWidgetItem,QTableWidget
 
 import sys
 import os
@@ -18,197 +18,304 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import GUI.TacVuKH as tv
 import DAO.database as db
 from  DAO.customerDAO import customerDAO
+import GUI.thongbao as tb
 
 
 class Ui_Form(object):
     def setupUi(self, Form):
-        Form.setObjectName("Form")
-        Form.resize(800, 500)
-        Form.setStyleSheet("background-color: rgb(255, 255, 255);")
-        self.gridLayout_3 = QtWidgets.QGridLayout(Form)
-        self.gridLayout_3.setContentsMargins(0, 0, 0, 0)
-        self.gridLayout_3.setHorizontalSpacing(6)
-        self.gridLayout_3.setVerticalSpacing(0)
-        self.gridLayout_3.setObjectName("gridLayout_3")
-        self.widget = QtWidgets.QWidget(Form)
-        self.widget.setStyleSheet("QWidget{\n"
-"    background-color: rgb(65, 255, 245);\n"
-"    border:1px solid black\n"
-"}\n"
-"QLabel{\n"
-"    border:none\n"
-"}\n"
-"\n"
-"\n"
-"")
-        self.widget.setObjectName("widget")
-        self.verticalLayout = QtWidgets.QVBoxLayout(self.widget)
-        self.verticalLayout.setObjectName("verticalLayout")
-        self.label = QtWidgets.QLabel(self.widget)
-        font = QtGui.QFont()
-        font.setPointSize(25)
-        font.setBold(True)
-        font.setWeight(75)
-        self.label.setFont(font)
-        self.label.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.label.setAlignment(QtCore.Qt.AlignCenter)
-        self.label.setObjectName("label")
-        self.verticalLayout.addWidget(self.label)
-        self.gridLayout_3.addWidget(self.widget, 0, 0, 1, 1)
-        self.widget_3 = QtWidgets.QWidget(Form)
-        self.widget_3.setObjectName("widget_3")
-        self.gridLayout_2 = QtWidgets.QGridLayout(self.widget_3)
-        self.gridLayout_2.setObjectName("gridLayout_2")
-        self.horizontalLayout = QtWidgets.QHBoxLayout()
-        self.horizontalLayout.setObjectName("horizontalLayout")
-        spacerItem = QtWidgets.QSpacerItem(218, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout.addItem(spacerItem)
-        self.pushButton_3 = QtWidgets.QPushButton(self.widget_3)
-        self.pushButton_3.setStyleSheet("background-color: rgb(159, 255, 153);\n"
-"")
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("img/add.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.pushButton_3.setIcon(icon)
-        self.pushButton_3.clicked.connect(self.TacVu_KH)
-        self.pushButton_3.setIconSize(QtCore.QSize(20, 20))
-        self.pushButton_3.setObjectName("pushButton_3")
-        self.horizontalLayout.addWidget(self.pushButton_3)
-        self.pushButton = QtWidgets.QPushButton(self.widget_3)
-        self.pushButton.setStyleSheet("background-color: rgb(255, 124, 125);\n"
-"\n"
-"")
-        icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("img/delete.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.pushButton.setIcon(icon1)
-        self.pushButton.setIconSize(QtCore.QSize(20, 20))
-        self.pushButton.setObjectName("pushButton")
-        self.horizontalLayout.addWidget(self.pushButton)
-        self.pushButton_2 = QtWidgets.QPushButton(self.widget_3)
-        self.pushButton_2.setStyleSheet("background-color: rgb(188, 202, 255);")
-        icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("img/refresh.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.pushButton_2.setIcon(icon2)
-        self.pushButton_2.setIconSize(QtCore.QSize(20, 20))
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.horizontalLayout.addWidget(self.pushButton_2)
-        self.gridLayout_2.addLayout(self.horizontalLayout, 0, 0, 1, 1)
-        self.gridLayout_3.addWidget(self.widget_3, 2, 0, 1, 1)
-        self.widget_2 = QtWidgets.QWidget(Form)
-        self.widget_2.setObjectName("widget_2")
-        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.widget_2)
-        self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.label_2 = QtWidgets.QLabel(self.widget_2)
-        self.label_2.setObjectName("label_2")
-        self.horizontalLayout_2.addWidget(self.label_2)
-        self.lineEdit = QtWidgets.QLineEdit(self.widget_2)
-        self.lineEdit.setObjectName("lineEdit")
-        self.horizontalLayout_2.addWidget(self.lineEdit)
-        self.comboBox = QtWidgets.QComboBox(self.widget_2)
-        self.comboBox.setMinimumSize(QtCore.QSize(135, 5))
-        self.comboBox.setObjectName("comboBox")
-        self.comboBox.addItem("")
-        self.comboBox.addItem("")
-        self.comboBox.addItem("")
-        self.comboBox.addItem("")
-        self.horizontalLayout_2.addWidget(self.comboBox)
-        self.pushButton_4 = QtWidgets.QPushButton(self.widget_2)
-        self.pushButton_4.setStyleSheet("")
-        icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap("img/search.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.pushButton_4.setIcon(icon3)
-        self.pushButton_4.setIconSize(QtCore.QSize(20, 20))
-        self.pushButton_4.setObjectName("pushButton_4")
-        self.horizontalLayout_2.addWidget(self.pushButton_4)
-        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_2.addItem(spacerItem1)
-        self.verticalLayout_2.addLayout(self.horizontalLayout_2)
-        self.tableWidget = QtWidgets.QTableWidget(self.widget_2)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Ignored, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.tableWidget.sizePolicy().hasHeightForWidth())
-        self.tableWidget.setSizePolicy(sizePolicy)
-        self.tableWidget.setWordWrap(False)
-        self.tableWidget.setColumnCount(5)
-        self.tableWidget.setObjectName("tableWidget")
-        self.tableWidget.setRowCount(0)
-        item = QtWidgets.QTableWidgetItem()
-        item.setTextAlignment(QtCore.Qt.AlignCenter)
-        self.tableWidget.setHorizontalHeaderItem(0, item)
-        item = QtWidgets.QTableWidgetItem()
-        item.setTextAlignment(QtCore.Qt.AlignCenter)
-        self.tableWidget.setHorizontalHeaderItem(1, item)
-        item = QtWidgets.QTableWidgetItem()
-        item.setTextAlignment(QtCore.Qt.AlignCenter)
-        self.tableWidget.setHorizontalHeaderItem(2, item)
-        item = QtWidgets.QTableWidgetItem()
-        item.setTextAlignment(QtCore.Qt.AlignCenter)
-        self.tableWidget.setHorizontalHeaderItem(3, item)
-        item = QtWidgets.QTableWidgetItem()
-        item.setTextAlignment(QtCore.Qt.AlignCenter)
-        self.tableWidget.setHorizontalHeaderItem(4, item)
-        self.tableWidget.horizontalHeader().setCascadingSectionResizes(False)
-        self.tableWidget.horizontalHeader().setDefaultSectionSize(200)
-        self.tableWidget.horizontalHeader().setSortIndicatorShown(False)
-        self.tableWidget.horizontalHeader().setStretchLastSection(True)
-        self.tableWidget.verticalHeader().setVisible(True)
-        self.tableWidget.verticalHeader().setCascadingSectionResizes(False)
-        self.tableWidget.verticalHeader().setDefaultSectionSize(30)
-        self.tableWidget.verticalHeader().setMinimumSectionSize(28)
-        self.verticalLayout_2.addWidget(self.tableWidget)
-        self.gridLayout_3.addWidget(self.widget_2, 1, 0, 1, 1)
-
-        self.retranslateUi(Form)
-        QtCore.QMetaObject.connectSlotsByName(Form)
+            self.tb = tb.Ui_Dialog()
+            self.cusDAO = customerDAO()
+            Form.setObjectName("Form")
+            Form.resize(800, 500)
+            Form.setStyleSheet("background-color: rgb(255, 255, 255);")
+            self.gridLayout_3 = QtWidgets.QGridLayout(Form)
+            self.gridLayout_3.setContentsMargins(0, 0, 0, 0)
+            self.gridLayout_3.setHorizontalSpacing(6)
+            self.gridLayout_3.setVerticalSpacing(0)
+            self.gridLayout_3.setObjectName("gridLayout_3")
+            self.widget = QtWidgets.QWidget(Form)
+            self.widget.setStyleSheet("QWidget{\n"
+    "    background-color: rgb(65, 255, 245);\n"
+    "    border:1px solid black\n"
+    "}\n"
+    "QLabel{\n"
+    "    border:none\n"
+    "}\n"
+    "\n"
+    "\n"
+    "")
+            self.widget.setObjectName("widget")
+            self.verticalLayout = QtWidgets.QVBoxLayout(self.widget)
+            self.verticalLayout.setObjectName("verticalLayout")
+            self.label = QtWidgets.QLabel(self.widget)
+            font = QtGui.QFont()
+            font.setPointSize(25)
+            font.setBold(True)
+            font.setWeight(75)
+            self.label.setFont(font)
+            self.label.setLayoutDirection(QtCore.Qt.LeftToRight)
+            self.label.setAlignment(QtCore.Qt.AlignCenter)
+            self.label.setObjectName("label")
+            self.verticalLayout.addWidget(self.label)
+            self.gridLayout_3.addWidget(self.widget, 0, 0, 1, 1)
+            self.widget_3 = QtWidgets.QWidget(Form)
+            self.widget_3.setObjectName("widget_3")
+            self.gridLayout_2 = QtWidgets.QGridLayout(self.widget_3)
+            self.gridLayout_2.setObjectName("gridLayout_2")
+            self.horizontalLayout = QtWidgets.QHBoxLayout()
+            self.horizontalLayout.setObjectName("horizontalLayout")
+            spacerItem = QtWidgets.QSpacerItem(218, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+            self.horizontalLayout.addItem(spacerItem)
+            self.btnThem = QtWidgets.QPushButton(self.widget_3)
+            self.btnThem.setStyleSheet("background-color: rgb(159, 255, 153);\n"
+    "")
+            icon = QtGui.QIcon()
+            icon.addPixmap(QtGui.QPixmap("img/add.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+            self.btnThem.setIcon(icon)
+            self.btnThem.setIconSize(QtCore.QSize(20, 20))
+            self.btnThem.setObjectName("btnThem")
+            self.btnThem.clicked.connect(self.TacVu_KH)
+            self.horizontalLayout.addWidget(self.btnThem)
+            self.btnXoa = QtWidgets.QPushButton(self.widget_3)
+            self.btnXoa.setStyleSheet("background-color: rgb(255, 124, 125);\n"
+    "\n"
+    "")
+            icon1 = QtGui.QIcon()
+            icon1.addPixmap(QtGui.QPixmap("img/delete.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+            self.btnXoa.setIcon(icon1)
+            self.btnXoa.setIconSize(QtCore.QSize(20, 20))
+            self.btnXoa.setObjectName("btnXoa")
+            self.horizontalLayout.addWidget(self.btnXoa)
+            self.btnXoa.clicked.connect(self.on_button_clicked)
+            self.btnSua = QtWidgets.QPushButton(self.widget_3)
+            self.btnSua.setStyleSheet("background-color: rgb(188, 202, 255);")
+            self.btnSua.clicked.connect(self.update_PB)
+            icon2 = QtGui.QIcon()
+            icon2.addPixmap(QtGui.QPixmap("img/refresh.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+            self.btnSua.setIcon(icon2)
+            self.btnSua.setIconSize(QtCore.QSize(20, 20))
+            self.btnSua.setObjectName("btnSua")
+            self.horizontalLayout.addWidget(self.btnSua)
+            self.gridLayout_2.addLayout(self.horizontalLayout, 0, 0, 1, 1)
+            self.gridLayout_3.addWidget(self.widget_3, 2, 0, 1, 1)
+            self.widget_2 = QtWidgets.QWidget(Form)
+            self.widget_2.setObjectName("widget_2")
+            self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.widget_2)
+            self.verticalLayout_2.setObjectName("verticalLayout_2")
+            self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
+            self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+            self.label_2 = QtWidgets.QLabel(self.widget_2)
+            self.label_2.setObjectName("label_2")
+            self.horizontalLayout_2.addWidget(self.label_2)
+            self.lineEdit = QtWidgets.QLineEdit(self.widget_2)
+            self.lineEdit.setObjectName("lineEdit")
+            self.horizontalLayout_2.addWidget(self.lineEdit)
+            self.lineEdit.setEnabled(False)
+            self.cbbgt = QtWidgets.QComboBox(self.widget_2)
+            self.cbbgt.addItem("Nữ")
+            self.cbbgt.addItem("Nam")
+            self.cbbgt.setMinimumSize(QtCore.QSize(135, 5))
+            self.cbbgt.setVisible(False)
+            self.horizontalLayout_2.addWidget(self.cbbgt)
+            self.comboBox = QtWidgets.QComboBox(self.widget_2)
+            self.comboBox.setMinimumSize(QtCore.QSize(135, 5))
+            self.comboBox.setObjectName("comboBox")
+            self.comboBox.addItem("")
+            self.comboBox.addItem("")
+            self.comboBox.addItem("")
+            self.comboBox.addItem("")
+            self.comboBox.addItem("")
+            self.comboBox.addItem("")
+            self.comboBox.currentIndexChanged.connect(self.handleIndexChanged)
+            self.horizontalLayout_2.addWidget(self.comboBox)
+            self.pushButton_4 = QtWidgets.QPushButton(self.widget_2)
+            self.pushButton_4.setStyleSheet("")
+            icon3 = QtGui.QIcon()
+            icon3.addPixmap(QtGui.QPixmap("img/search.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+            self.pushButton_4.setIcon(icon3)
+            self.pushButton_4.setIconSize(QtCore.QSize(20, 20))
+            self.pushButton_4.setObjectName("pushButton_4")
+            self.horizontalLayout_2.addWidget(self.pushButton_4)
+            spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+            self.horizontalLayout_2.addItem(spacerItem1)
+            self.verticalLayout_2.addLayout(self.horizontalLayout_2)
+            self.tableWidget = QtWidgets.QTableWidget(self.widget_2)
+            sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Ignored, QtWidgets.QSizePolicy.Expanding)
+            sizePolicy.setHorizontalStretch(0)
+            sizePolicy.setVerticalStretch(0)
+            sizePolicy.setHeightForWidth(self.tableWidget.sizePolicy().hasHeightForWidth())
+            self.tableWidget.setSizePolicy(sizePolicy)
+            self.tableWidget.setWordWrap(False)
+            self.tableWidget.setColumnCount(5)
+            self.tableWidget.setObjectName("tableWidget")
+            self.tableWidget.setRowCount(0)
+            item = QtWidgets.QTableWidgetItem()
+            item.setTextAlignment(QtCore.Qt.AlignCenter)
+            self.tableWidget.setHorizontalHeaderItem(0, item)
+            item = QtWidgets.QTableWidgetItem()
+            item.setTextAlignment(QtCore.Qt.AlignCenter)
+            self.tableWidget.setHorizontalHeaderItem(1, item)
+            item = QtWidgets.QTableWidgetItem()
+            item.setTextAlignment(QtCore.Qt.AlignCenter)
+            self.tableWidget.setHorizontalHeaderItem(2, item)
+            item = QtWidgets.QTableWidgetItem()
+            item.setTextAlignment(QtCore.Qt.AlignCenter)
+            self.tableWidget.setHorizontalHeaderItem(3, item)
+            item = QtWidgets.QTableWidgetItem()
+            item.setTextAlignment(QtCore.Qt.AlignCenter)
+            self.tableWidget.setHorizontalHeaderItem(4, item)
+            self.tableWidget.horizontalHeader().setCascadingSectionResizes(False)
+            self.tableWidget.horizontalHeader().setDefaultSectionSize(200)
+            self.tableWidget.horizontalHeader().setSortIndicatorShown(False)
+            self.tableWidget.horizontalHeader().setStretchLastSection(True)
+            self.tableWidget.verticalHeader().setVisible(True)
+            self.tableWidget.verticalHeader().setCascadingSectionResizes(False)
+            self.tableWidget.verticalHeader().setDefaultSectionSize(30)
+            self.tableWidget.verticalHeader().setMinimumSectionSize(28)
+            self.verticalLayout_2.addWidget(self.tableWidget)
+            self.gridLayout_3.addWidget(self.widget_2, 1, 0, 1, 1)
+            self.retranslateUi(Form)
+            self.upload_list()
+            QtCore.QMetaObject.connectSlotsByName(Form)
 
     def retranslateUi(self, Form):
-        _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.label.setText(_translate("Form", "Quản lý khách hàng"))
-        self.pushButton_3.setText(_translate("Form", "Thêm"))
-        self.pushButton.setText(_translate("Form", "Xoá"))
-        self.pushButton_2.setText(_translate("Form", "Sửa"))
-        self.label_2.setText(_translate("Form", "Tìm kiếm "))
-        self.comboBox.setItemText(0, _translate("Form", "Mã khách hàng"))
-        self.comboBox.setItemText(1, _translate("Form", "Tên khách hàng"))
-        self.comboBox.setItemText(2, _translate("Form", "Số điện thoại"))
-        self.comboBox.setItemText(3, _translate("Form", "Email"))
-        self.pushButton_4.setText(_translate("Form", "Tìm"))
-        self.tableWidget.setSortingEnabled(False)
-        item = self.tableWidget.horizontalHeaderItem(0)
-        item.setText(_translate("Form", "Mã khách hàng"))
-        item = self.tableWidget.horizontalHeaderItem(1)
-        item.setText(_translate("Form", "Tên khách hàng"))
-        item = self.tableWidget.horizontalHeaderItem(2)
-        item.setText(_translate("Form", "Giới tính"))
-        item = self.tableWidget.horizontalHeaderItem(3)
-        item.setText(_translate("Form", "Số điện thoại"))
-        item = self.tableWidget.horizontalHeaderItem(4)
-        item.setText(_translate("Form", "Email"))
-        self.upload_list()
-        #-------------------------------------------------------------------------------------
-    
+            self._translate = QtCore.QCoreApplication.translate
+            _translate = QtCore.QCoreApplication.translate
+            Form.setWindowTitle(_translate("Form", "Form"))
+            self.label.setText(_translate("Form", "Quản lý khách hàng"))
+            self.btnThem.setText(_translate("Form", "Thêm"))
+            self.btnXoa.setText(_translate("Form", "Xoá"))
+            self.btnSua.setText(_translate("Form", "Sửa"))
+            self.label_2.setText(_translate("Form", "Tìm kiếm "))
+            self.comboBox.setItemText(0, _translate("Form", "Tất cả"))
+            self.comboBox.setItemText(1, _translate("Form", "Mã khách hàng"))
+            self.comboBox.setItemText(2, _translate("Form", "Giới tính"))
+            self.comboBox.setItemText(3, _translate("Form", "Tên khách hàng"))
+            self.comboBox.setItemText(4, _translate("Form", "Số điện thoại"))
+            self.comboBox.setItemText(5, _translate("Form", "Email"))
+            self.pushButton_4.setText(_translate("Form", "Tìm"))
+            
+            self.tableWidget.setSortingEnabled(False)
+            self.tableWidget.setSelectionBehavior(QTableWidget.SelectRows)
+            self.tableWidget.setEditTriggers(QTableWidget.NoEditTriggers)
+            
+            item = self.tableWidget.horizontalHeaderItem(0)
+            item.setText(_translate("Form", "Mã khách hàng"))
+            item = self.tableWidget.horizontalHeaderItem(1)
+            item.setText(_translate("Form", "Tên khách hàng"))
+            item = self.tableWidget.horizontalHeaderItem(2)
+            item.setText(_translate("Form", "Giới tính"))
+            item = self.tableWidget.horizontalHeaderItem(3)
+            item.setText(_translate("Form", "Số điện thoại"))
+            item = self.tableWidget.horizontalHeaderItem(4)
+            item.setText(_translate("Form", "Email"))
+            #-------------------------------------------------------------------------------------
+        
     def upload_list(self):
-        cusDAO = customerDAO()
-        customer_list = cusDAO.ReadFromDatabase()
-        for cus in customer_list:
+        list = self.cusDAO.ReadFromDatabase()
+        self.tableWidget.setRowCount(0)
+        for cus in list:
             data = [cus.get_makh(), cus.get_tenkh(), cus.get_gioitinh(), cus.get_sdt(), cus.get_email()]
             self.add_row_to_table(data)
         
     def add_row_to_table(self, data):
-        rowPosition = self.tableWidget.rowCount()
-        self.tableWidget.insertRow(rowPosition)
-        for column, item in enumerate(data):
-                self.tableWidget.setItem(rowPosition, column, QTableWidgetItem(str(item)))
-
+                rowPosition = self.tableWidget.rowCount()
+                self.tableWidget.insertRow(rowPosition)
+                for column, item in enumerate(data):
+                        self.tableWidget.setItem(rowPosition, column, QTableWidgetItem(str(item)))
     def TacVu_KH(self):
-        Dialog = QtWidgets.QDialog()
-        ui = tv.Ui_Dialog()
-        ui.setupUi(Dialog,1)
-        Dialog.exec_()
-        self.upload_list()
+            Dialog = QtWidgets.QDialog()
+            ui = tv.Ui_Dialog()
+            ui.setupUi(Dialog,1)
+            Dialog.exec_()
+            self.upload_list()
+    
+    def update_PB(self):
+                Dialog = QtWidgets.QDialog()
+                ui = tv.Ui_Dialog()
+                ui.setupUi(Dialog,2)    
+                ui.label_4.setText(self._translate("Dialog", "Sửa thông tin"))
+                selected_row = self.tableWidget.currentRow()
+                if selected_row  >= 0:
+                        selected_items = self.tableWidget.selectedItems()
+                        row_data = [item.text() for item in selected_items]
+                        ui.visible.setText(self._translate("Dialog",row_data[0]))
+                        ui.txtName.setText(self._translate("Dialog",row_data[1]))
+                        ui.txtEmail.setText(self._translate("Dialog",row_data[4]))
+                        ui.txtPhone.setText(self._translate("Dialog",row_data[3]))
+                        ui.comboBox.setCurrentText(row_data[2])
+                        Dialog.exec_()
+                        self.upload_list()
+                else: 
+                        self.tb.thongBao("Vui lòng chọn 1 dòng để thực hiện sửa")
+        
+    def on_button_clicked(self):
+            selected_items = self.tableWidget.selectedItems()
+            if selected_items:
+                selected_row = selected_items[0].row()
+                value = self.tableWidget.item(selected_row, 0).text()
+                self.tb.thongBao(self.delete_KH(value))
+            else:
+                self.tb.thongBao("Vui lòng hãy chọn dòng muốn xoá")
+            self.upload_list()
+                
+    def delete_KH(self,id):
+            return self.cusDAO.delete(id)
+    
+    def handleIndexChanged(self):
+                choiseIndex = self.comboBox.currentIndex()
+                if choiseIndex == 2:
+                    self.showCbbType_choise()
+                    self.pushButton_4.clicked.connect(self.timKiemTheoGioiTinh)
+                elif choiseIndex == 0:
+                    self.lineEdit.setEnabled(False)
+                    self.pushButton_4.clicked.connect(self.findByCondition)
+                else:
+                    self.hideCbbType_choise()
+                    self.lineEdit.setEnabled(True)
+                    self.pushButton_4.clicked.connect(self.findByCondition)
+                    
+    
+    def showCbbType_choise(self):
+                self.lineEdit.setVisible(False)
+                self.cbbgt.setVisible(True)
+                
+    def hideCbbType_choise(self):
+                self.lineEdit.setVisible(True)
+                self.cbbgt.setVisible(False)
+                
+    def timKiemTheoGioiTinh(self):
+        selected = self.cbbgt.currentIndex()
+        list = self.cusDAO.findByCondition('gioitinh',selected)
+        self.tableWidget.setRowCount(0)
+        for cus in list:
+            data = [cus.get_makh(), cus.get_tenkh(), cus.get_gioitinh(), cus.get_sdt(), cus.get_email()]
+            self.add_row_to_table(data)
+            
+            
+    def findByCondition(self):
+                type = self.comboBox.currentIndex()
+                condition = self.lineEdit.text()
+                type_choise = ''
+                if type == 0:
+                        type_choise = 'all'
+                elif type == 1:
+                        type_choise = 'makh'
+                elif type == 3:
+                        type_choise = 'tenkh'
+                elif type == 4:
+                        type_choise = 'sdt'
+                elif type == 5:
+                        type_choise = 'email'
+                if type_choise != 'all':
+                        result = self.cusDAO.findByCondition(type_choise,condition)
+                        self.tableWidget.setRowCount(0)
+                        for cus in result:
+                                data = [cus.get_makh(), cus.get_tenkh(), cus.get_gioitinh(), cus.get_sdt(), cus.get_email()]
+                                self.add_row_to_table(data)
+                else:
+                    self.upload_list()
+                self.lineEdit.setText("")
 
 if __name__ == "__main__":
     import sys

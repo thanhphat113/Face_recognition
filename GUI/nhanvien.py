@@ -159,6 +159,7 @@ class Ui_Form(object):
                 self.tableWidget.verticalHeader().setCascadingSectionResizes(False)
                 self.verticalLayout_2.addWidget(self.tableWidget)
                 self.gridLayout_3.addWidget(self.widget_2, 1, 0, 1, 1)
+                
 
                 self.retranslateUi(Form)
                 QtCore.QMetaObject.connectSlotsByName(Form)

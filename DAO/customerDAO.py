@@ -61,7 +61,7 @@ class customerDAO:
         conn=self.conn
         try:
             conn.connect()
-            query=f"insert into KhachHang(tenkh,gioitinh,sdt,email) values ('{cus.get_tenkh}','{cus.get_gioitinh}','{cus.get_sdt}','{cus.get_email}')"
+            query=f"insert into KhachHang(tenkh,gioitinh,sdt,email) values ('{cus.get_tenkh()}','{cus.get_loaigt()}','{cus.get_sdt()}','{cus.get_email()}')"
             db.execute_query(conn,query)
             return 'Thêm thành công !!!!'
         except mysql.connector.Error as error:
@@ -104,4 +104,19 @@ class customerDAO:
             return cus
         except mysql.connector.Error as error:
             return f'Error: {error}'
-            
+    
+    def findByCondition(self, type, condition):
+                cus_list = []
+                try:
+                        self.conn.connect()
+                        query = f"select * from KhachHang where {type} like '%{condition}%'"
+                        result = db.execute_fetch_all(self.conn,query)
+                        if result is not None:
+                                for kh in result:
+                                        emp = customer(kh[0],kh[1],kh[2],kh[3],kh[4])
+                                        cus_list.append(emp)
+                        return cus_list
+                except mysql.connector.Error as error:
+                        return f'Lỗi: {error}'
+                finally:
+                        self.conn.close()

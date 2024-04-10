@@ -19,6 +19,7 @@ import GUI.thongbao as tb
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog,type):
+        self.tb = tb.Ui_Dialog()
         Dialog.setObjectName("Dialog")
         Dialog.resize(400, 300)
         Dialog.setMinimumSize(QtCore.QSize(400, 300))
@@ -47,6 +48,9 @@ class Ui_Dialog(object):
         self.label_4.setStyleSheet("border:none;")
         self.label_4.setAlignment(QtCore.Qt.AlignCenter)
         self.label_4.setObjectName("label_4")
+        self.visible = QtWidgets.QLabel(self.widget)
+        self.visible.setGeometry(QtCore.QRect(100, 20, 191, 31))
+        self.visible.setVisible(False)
         self.txtName = QtWidgets.QLineEdit(Dialog)
         self.txtName.setGeometry(QtCore.QRect(170, 90, 181, 21))
         self.txtName.setObjectName("txtName")
@@ -60,10 +64,15 @@ class Ui_Dialog(object):
         self.btnAccept.setGeometry(QtCore.QRect(80, 250, 113, 32))
         self.btnAccept.setCheckable(True)
         self.btnAccept.setObjectName("btnAccept")
+        if type == 1:
+            self.btnAccept.clicked.connect(self.show_dialog_insert)
+        else :
+            self.btnAccept.clicked.connect(self.show_dialog_update)
         self.btnDeny = QtWidgets.QPushButton(Dialog)
         self.btnDeny.setGeometry(QtCore.QRect(210, 250, 113, 32))
         self.btnDeny.setCheckable(True)
         self.btnDeny.setObjectName("btnDeny")
+        self.btnDeny.toggled['bool'].connect(Dialog.close)
         self.label_5 = QtWidgets.QLabel(Dialog)
         self.label_5.setGeometry(QtCore.QRect(50, 210, 101, 20))
         self.label_5.setObjectName("label_5")
@@ -72,6 +81,7 @@ class Ui_Dialog(object):
         self.comboBox.setObjectName("comboBox")
         self.comboBox.addItem("Nữ")
         self.comboBox.addItem("Nam")
+            
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -92,10 +102,10 @@ class Ui_Dialog(object):
         email=self.txtEmail.text()
         sdt=self.txtPhone.text()
         gioitinh = self.comboBox.currentIndex()
-        empDAO= customerDAO()
+        cusDAO= customerDAO()
         if ten and sdt:
-            emp = customer("",ten,gioitinh,sdt,email)
-            result = empDAO.insert(emp)
+            cus = customer("",ten,gioitinh,sdt,email)
+            result = cusDAO.insert(cus)
             if result == "Thêm thành công !!!!":
                 self.txtName.setText("")
                 self.txtEmail.setText("")
@@ -106,6 +116,30 @@ class Ui_Dialog(object):
         else: 
             return 'Tên và số điện thoại không được rỗng !!!!'
 
+    def update_data(self):
+        id = self.visible.text()
+        ten=self.txtName.text()
+        email=self.txtEmail.text()
+        sdt=self.txtPhone.text()
+        gioitinh = self.comboBox.currentIndex()
+        cusDAO= customerDAO()
+        if ten and sdt:
+            cus = customer(id,ten,gioitinh,sdt,email)
+            result = cusDAO.update(cus)
+            if result == "Cập nhật thành công !!!!":
+                self.txtName.setText("")
+                self.txtEmail.setText("")
+                self.txtPhone.setText("")
+                self.comboBox.setCurrentIndex(0)
+            return result
+        else: 
+            return 'Tên và số điện thoại không được rỗng !!!!'
+    
+    def show_dialog_update(self):
+        self.tb.thongBao(self.update_data())    
+        
+    def show_dialog_insert(self):
+        self.tb.thongBao(self.insert_data())
 
 if __name__ == "__main__":
     import sys
