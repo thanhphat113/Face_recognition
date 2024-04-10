@@ -6,7 +6,7 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from GUI.sidebar import Ui_MainWindow
 from GUI.login import Ui_login_form
-from GUI import phongbenh as pb, nhanvien as nv ,dichvu as dv, thunuoi as tn, home ,khachhang as kh, hoadon,phieunhap as pn,duocpham as dp,taikhoan as tk
+from GUI import phongbenh as pb, nhanvien as nv ,dichvu as dv, thunuoi as tn, home ,khachhang as kh, hoadon,phieunhap as pn,duocpham as dp,taikhoan as tk,nhacungcap as ncc
 from DAO.serviceDAO import serviceDAO
 from DAO.taikhoanDAO import taikhoanDAO
 import GUI.thongbao as tb
@@ -69,6 +69,9 @@ class Main_Page(QMainWindow, Ui_MainWindow):
 
         self.pn_form = pn.Ui_Form()
         self.pn_form.setupUi(self.phieunhap_page)
+        
+        self.ncc_form = ncc.Ui_Form()
+        self.ncc_form.setupUi(self.ncc_page)
 
         self.dp_form = dp.Ui_Form()
         self.dp_form.setupUi(self.medicine_page)
@@ -128,15 +131,16 @@ class Main_Page(QMainWindow, Ui_MainWindow):
            
     def showPhieuNhap_Pages(self):
         self.stackedWidget.setCurrentIndex(6)
-
-    def showMedicine_Pages(self):
+        
+    def showNcc_Pages(self):
         self.stackedWidget.setCurrentIndex(7)
 
-    def showService_Pages(self):
+    def showMedicine_Pages(self):
         self.stackedWidget.setCurrentIndex(8)
-        
-    def showChart_Pages(self):
+
+    def showService_Pages(self):
         self.stackedWidget.setCurrentIndex(9)
+        
 
     
 
@@ -147,7 +151,7 @@ class Main_Page(QMainWindow, Ui_MainWindow):
         self.btnAccount.clicked.connect(self.showAccount_Pages)
         self.btnBed.clicked.connect(self.showBed_Pages)
         self.btnPets.clicked.connect(self.showPets_Pages)
-        self.btnChart.clicked.connect(self.showChart_Pages)
+        self.btnNcc.clicked.connect(self.showNcc_Pages)
         self.btnHome.clicked.connect(self.showHome_Pages)
         self.btnService.clicked.connect(self.showService_Pages)
         self.btnPhieuNhap.clicked.connect(self.showPhieuNhap_Pages)
@@ -156,8 +160,8 @@ class Main_Page(QMainWindow, Ui_MainWindow):
         self.iconCustomer.clicked.connect(self.showCustomer_Pages)
         self.iconAccount.clicked.connect(self.showAccount_Pages)
         self.iconPets.clicked.connect(self.showPets_Pages)
+        self.iconNcc.clicked.connect(self.showNcc_Pages)
         self.iconBed.clicked.connect(self.showBed_Pages)
-        self.iconChart.clicked.connect(self.showChart_Pages)
         self.iconHome.clicked.connect(self.showHome_Pages)
         self.iconService.clicked.connect(self.showService_Pages)
         self.iconPhieuNhap.clicked.connect(self.showPhieuNhap_Pages)

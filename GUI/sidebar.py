@@ -58,6 +58,8 @@ class Ui_MainWindow(object):
         self.verticalLayout.setContentsMargins(0, 15, -1, 0)
         self.verticalLayout.setSpacing(15)
         self.verticalLayout.setObjectName("verticalLayout")
+        
+        #Icon home
         self.iconHome = QtWidgets.QPushButton(self.icon_menu_widget)
         self.iconHome.setText("")
         icon = QtGui.QIcon()
@@ -68,6 +70,8 @@ class Ui_MainWindow(object):
         self.iconHome.setAutoExclusive(True)
         self.iconHome.setObjectName("iconHome")
         self.verticalLayout.addWidget(self.iconHome)
+        
+        #Icon khách hàng
         self.iconCustomer = QtWidgets.QPushButton(self.icon_menu_widget)
         self.iconCustomer.setText("")
         icon1 = QtGui.QIcon()
@@ -78,6 +82,8 @@ class Ui_MainWindow(object):
         self.iconCustomer.setAutoExclusive(True)
         self.iconCustomer.setObjectName("iconCustomer")
         self.verticalLayout.addWidget(self.iconCustomer)
+        
+        #Icon thú nuôi
         self.iconPets = QtWidgets.QPushButton(self.icon_menu_widget)
         self.iconPets.setText("")
         icon2 = QtGui.QIcon()
@@ -89,6 +95,7 @@ class Ui_MainWindow(object):
         self.iconPets.setObjectName("iconPets")
         self.verticalLayout.addWidget(self.iconPets)
         
+        #Icon giường bệnh
         self.iconBed = QtWidgets.QPushButton(self.icon_menu_widget)
         self.iconBed.setText("")
         icon3 = QtGui.QIcon()
@@ -100,6 +107,7 @@ class Ui_MainWindow(object):
         self.iconBed.setObjectName("iconBed")
         self.verticalLayout.addWidget(self.iconBed)
         
+        #Icon Nhân viên
         self.iconEmployee = QtWidgets.QPushButton(self.icon_menu_widget)
         self.iconEmployee.setText("")
         icon4 = QtGui.QIcon()
@@ -111,6 +119,7 @@ class Ui_MainWindow(object):
         self.iconEmployee.setObjectName("iconEmployee")
         self.verticalLayout.addWidget(self.iconEmployee)
         
+        #Icon tài khoản
         self.iconAccount = QtWidgets.QPushButton(self.icon_menu_widget)
         self.iconAccount.setText("")
         icon5 = QtGui.QIcon()
@@ -122,6 +131,7 @@ class Ui_MainWindow(object):
         self.iconAccount.setObjectName("iconAccount")
         self.verticalLayout.addWidget(self.iconAccount)
         
+        #Icon phiếu nhập
         self.iconPhieuNhap = QtWidgets.QPushButton(self.icon_menu_widget)
         self.iconPhieuNhap.setText("")
         icon6 = QtGui.QIcon()
@@ -132,36 +142,44 @@ class Ui_MainWindow(object):
         self.iconPhieuNhap.setAutoExclusive(True)
         self.iconPhieuNhap.setObjectName("iconPhieuNhap")
         self.verticalLayout.addWidget(self.iconPhieuNhap)
+        
+        #Icon nhà cung cấp
+        self.iconNcc = QtWidgets.QPushButton(self.icon_menu_widget)
+        self.iconNcc.setText("")
+        icon7 = QtGui.QIcon()
+        icon7.addPixmap(QtGui.QPixmap("img/supplier.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.iconNcc.setIcon(icon7)
+        self.iconNcc.setIconSize(QtCore.QSize(20, 20))
+        self.iconNcc.setCheckable(True)
+        self.iconNcc.setAutoExclusive(True)
+        self.iconNcc.setObjectName("iconNcc")
+        self.verticalLayout.addWidget(self.iconNcc)
+        
+        #Icon dược phẩm
         self.iconMedicine = QtWidgets.QPushButton(self.icon_menu_widget)
         self.iconMedicine.setText("")
-        icon7 = QtGui.QIcon()
-        icon7.addPixmap(QtGui.QPixmap("img/medical_bag_100px.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.iconMedicine.setIcon(icon7)
+        icon8 = QtGui.QIcon()
+        icon8.addPixmap(QtGui.QPixmap("img/medical_bag_100px.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.iconMedicine.setIcon(icon8)
         self.iconMedicine.setIconSize(QtCore.QSize(20, 20))
         self.iconMedicine.setCheckable(True)
         self.iconMedicine.setAutoExclusive(True)
         self.iconMedicine.setObjectName("iconMedicine")
         self.verticalLayout.addWidget(self.iconMedicine)
+        
+        #Icon dịch vụ
         self.iconService = QtWidgets.QPushButton(self.icon_menu_widget)
         self.iconService.setText("")
-        icon8 = QtGui.QIcon()
-        icon8.addPixmap(QtGui.QPixmap("img/service.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.iconService.setIcon(icon8)
+        icon9 = QtGui.QIcon()
+        icon9.addPixmap(QtGui.QPixmap("img/service.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.iconService.setIcon(icon9)
         self.iconService.setIconSize(QtCore.QSize(20, 20))
         self.iconService.setCheckable(True)
         self.iconService.setAutoExclusive(True)
         self.iconService.setObjectName("iconService")
         self.verticalLayout.addWidget(self.iconService)
-        self.iconChart = QtWidgets.QPushButton(self.icon_menu_widget)
-        self.iconChart.setText("")
-        icon9 = QtGui.QIcon()
-        icon9.addPixmap(QtGui.QPixmap("img/chart.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.iconChart.setIcon(icon9)
-        self.iconChart.setIconSize(QtCore.QSize(20, 20))
-        self.iconChart.setCheckable(True)
-        self.iconChart.setAutoExclusive(True)
-        self.iconChart.setObjectName("iconChart")
-        self.verticalLayout.addWidget(self.iconChart)
+        
+        
         self.verticalLayout_3.addLayout(self.verticalLayout)
         spacerItem = QtWidgets.QSpacerItem(20, 133, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout_3.addItem(spacerItem)
@@ -227,6 +245,8 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.setContentsMargins(10, 15, -1, -1)
         self.verticalLayout_2.setSpacing(15)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
+        
+        #Nút home
         self.btnHome = QtWidgets.QPushButton(self.menu_widget)
         self.btnHome.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.btnHome.setAutoFillBackground(False)
@@ -236,6 +256,8 @@ class Ui_MainWindow(object):
         self.btnHome.setAutoExclusive(True)
         self.btnHome.setObjectName("btnHome")
         self.verticalLayout_2.addWidget(self.btnHome)
+        
+        #Nút khách hàng
         self.btnCustomer = QtWidgets.QPushButton(self.menu_widget)
         self.btnCustomer.setIcon(icon1)
         self.btnCustomer.setIconSize(QtCore.QSize(20, 20))
@@ -243,6 +265,8 @@ class Ui_MainWindow(object):
         self.btnCustomer.setAutoExclusive(True)
         self.btnCustomer.setObjectName("btnCustomer")
         self.verticalLayout_2.addWidget(self.btnCustomer)
+        
+        #Nút thú nuôi
         self.btnPets = QtWidgets.QPushButton(self.menu_widget)
         self.btnPets.setIcon(icon2)
         self.btnPets.setIconSize(QtCore.QSize(20, 20))
@@ -250,6 +274,8 @@ class Ui_MainWindow(object):
         self.btnPets.setAutoExclusive(True)
         self.btnPets.setObjectName("btnPets")
         self.verticalLayout_2.addWidget(self.btnPets)
+        
+        #Nút phòng khám
         self.btnBed = QtWidgets.QPushButton(self.menu_widget)
         self.btnBed.setIcon(icon3)
         self.btnBed.setIconSize(QtCore.QSize(20, 20))
@@ -258,7 +284,7 @@ class Ui_MainWindow(object):
         self.btnBed.setObjectName("btnBed")
         self.verticalLayout_2.addWidget(self.btnBed)
         
-        
+        #Nút nhân viên
         self.btnEmployee = QtWidgets.QPushButton(self.menu_widget)
         self.btnEmployee.setIcon(icon4)
         self.btnEmployee.setIconSize(QtCore.QSize(20, 20))
@@ -267,6 +293,7 @@ class Ui_MainWindow(object):
         self.btnEmployee.setObjectName("btnEmployee")
         self.verticalLayout_2.addWidget(self.btnEmployee)
         
+        #Nút tài khoản
         self.btnAccount = QtWidgets.QPushButton(self.menu_widget)
         self.btnAccount.setIcon(icon5)
         self.btnAccount.setIconSize(QtCore.QSize(20, 20))
@@ -275,6 +302,7 @@ class Ui_MainWindow(object):
         self.btnAccount.setObjectName("btnAccount")
         self.verticalLayout_2.addWidget(self.btnAccount)
         
+        #Nút phiếu nhập
         self.btnPhieuNhap = QtWidgets.QPushButton(self.menu_widget)
         self.btnPhieuNhap.setIcon(icon6)
         self.btnPhieuNhap.setIconSize(QtCore.QSize(20, 20))
@@ -282,27 +310,36 @@ class Ui_MainWindow(object):
         self.btnPhieuNhap.setAutoExclusive(True)
         self.btnPhieuNhap.setObjectName("btnPhieuNhap")
         self.verticalLayout_2.addWidget(self.btnPhieuNhap)
+        
+        #Nút nhà cung cấp
+        self.btnNcc = QtWidgets.QPushButton(self.menu_widget)
+        self.btnNcc.setIcon(icon7)
+        self.btnNcc.setIconSize(QtCore.QSize(20, 20))
+        self.btnNcc.setCheckable(True)
+        self.btnNcc.setAutoExclusive(True)
+        self.btnNcc.setObjectName("btnNcc")
+        self.verticalLayout_2.addWidget(self.btnNcc)
+        
+        #Nút dược phẩm
         self.btnMedicine = QtWidgets.QPushButton(self.menu_widget)
-        self.btnMedicine.setIcon(icon7)
+        self.btnMedicine.setIcon(icon8)
         self.btnMedicine.setIconSize(QtCore.QSize(20, 20))
         self.btnMedicine.setCheckable(True)
         self.btnMedicine.setAutoExclusive(True)
         self.btnMedicine.setObjectName("btnMedicine")
         self.verticalLayout_2.addWidget(self.btnMedicine)
+        
+        #nút dịch vụ
         self.btnService = QtWidgets.QPushButton(self.menu_widget)
-        self.btnService.setIcon(icon8)
+        self.btnService.setIcon(icon9)
         self.btnService.setIconSize(QtCore.QSize(20, 20))
         self.btnService.setCheckable(True)
         self.btnService.setAutoExclusive(True)
         self.btnService.setObjectName("btnService")
         self.verticalLayout_2.addWidget(self.btnService)
-        self.btnChart = QtWidgets.QPushButton(self.menu_widget)
-        self.btnChart.setIcon(icon9)
-        self.btnChart.setIconSize(QtCore.QSize(20, 20))
-        self.btnChart.setCheckable(True)
-        self.btnChart.setAutoExclusive(True)
-        self.btnChart.setObjectName("btnChart")
-        self.verticalLayout_2.addWidget(self.btnChart)
+        
+        
+        
         self.verticalLayout_4.addLayout(self.verticalLayout_2)
         spacerItem2 = QtWidgets.QSpacerItem(20, 129, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout_4.addItem(spacerItem2)
@@ -389,6 +426,11 @@ class Ui_MainWindow(object):
         self.phieunhap_page.setObjectName("phieunhap_page")
         self.stackedWidget.addWidget(self.phieunhap_page)
         
+        #Nhà cung cấp
+        self.ncc_page = QtWidgets.QWidget()
+        self.ncc_page.setObjectName("ncc_page")
+        self.stackedWidget.addWidget(self.ncc_page)
+        
         # Dược phẩm
         self.medicine_page = QtWidgets.QWidget()
         self.medicine_page.setObjectName("medicine_page")
@@ -412,28 +454,46 @@ class Ui_MainWindow(object):
         self.stackedWidget.setCurrentIndex(0)
         self.btnMenu.toggled['bool'].connect(self.menu_widget.setVisible) # type: ignore
         self.btnMenu.toggled['bool'].connect(self.icon_menu_widget.setHidden) # type: ignore
+        
+        #Sự kiện khách hàng
         self.btnCustomer.toggled['bool'].connect(self.iconCustomer.setChecked)
         self.iconCustomer.toggled['bool'].connect(self.btnCustomer.setChecked)
+        
+        #Sự kiện nhân viên
         self.btnEmployee.toggled['bool'].connect(self.iconEmployee.setChecked)
         self.iconEmployee.toggled['bool'].connect(self.btnEmployee.setChecked)
         
+        #Sự kiện tài khoản
         self.btnAccount.toggled['bool'].connect(self.iconAccount.setChecked)
         self.iconAccount.toggled['bool'].connect(self.btnAccount.setChecked)
         
+        #Sự kiện gường bệnh
         self.btnBed.toggled['bool'].connect(self.iconBed.setChecked)
         self.iconBed.toggled['bool'].connect(self.btnBed.setChecked)
+        
+        #Sự kiện thú nuôi
         self.btnPets.toggled['bool'].connect(self.iconPets.setChecked)
         self.iconPets.toggled['bool'].connect(self.btnPets.setChecked)
-        self.btnChart.toggled['bool'].connect(self.iconChart.setChecked)
-        self.iconChart.toggled['bool'].connect(self.btnChart.setChecked)
+        
+        #Sự kiện nút home
         self.btnHome.toggled['bool'].connect(self.iconHome.setChecked)
         self.iconHome.toggled['bool'].connect(self.btnHome.setChecked)
+        
+        #Sự kiện dịch vụ
         self.btnService.toggled['bool'].connect(self.iconService.setChecked)
         self.iconService.toggled['bool'].connect(self.btnService.setChecked)
+        
+        #Sự kiện dược phẩm
         self.btnMedicine.toggled['bool'].connect(self.iconMedicine.setChecked)
         self.iconMedicine.toggled['bool'].connect(self.btnMedicine.setChecked)
+        
+        #Sự kiện phiếu nhập
         self.btnPhieuNhap.toggled['bool'].connect(self.iconPhieuNhap.setChecked)
         self.iconPhieuNhap.toggled['bool'].connect(self.btnPhieuNhap.setChecked)
+        
+        #Sự kiện nhà cung cấp
+        self.btnNcc.toggled['bool'].connect(self.iconNcc.setChecked)
+        self.iconNcc.toggled['bool'].connect(self.btnNcc.setChecked)
         
         
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -451,7 +511,7 @@ class Ui_MainWindow(object):
         self.btnPhieuNhap.setText(_translate("MainWindow", "Phiếu nhập"))
         self.btnMedicine.setText(_translate("MainWindow", "Dược phẩm"))
         self.btnService.setText(_translate("MainWindow", "Dịch vụ"))
-        self.btnChart.setText(_translate("MainWindow", "Doanh thu"))
+        self.btnNcc.setText(_translate("MainWindow", "Nhà cung cấp"))
         self.pushButton_12.setText(_translate("MainWindow", "Đăng xuất"))
 
 if __name__ == "__main__":

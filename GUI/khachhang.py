@@ -15,6 +15,7 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
+import GUI.TacVuKH as tv
 import DAO.database as db
 from  DAO.customerDAO import customerDAO
 
@@ -68,6 +69,7 @@ class Ui_Form(object):
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("img/add.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pushButton_3.setIcon(icon)
+        self.pushButton_3.clicked.connect(self.TacVu_KH)
         self.pushButton_3.setIconSize(QtCore.QSize(20, 20))
         self.pushButton_3.setObjectName("pushButton_3")
         self.horizontalLayout.addWidget(self.pushButton_3)
@@ -185,8 +187,12 @@ class Ui_Form(object):
         item.setText(_translate("Form", "Số điện thoại"))
         item = self.tableWidget.horizontalHeaderItem(4)
         item.setText(_translate("Form", "Email"))
+        self.upload_list()
         #-------------------------------------------------------------------------------------
-        customer_list = customerDAO().ReadFromDatabase()
+    
+    def upload_list(self):
+        cusDAO = customerDAO()
+        customer_list = cusDAO.ReadFromDatabase()
         for cus in customer_list:
             data = [cus.get_makh(), cus.get_tenkh(), cus.get_gioitinh(), cus.get_sdt(), cus.get_email()]
             self.add_row_to_table(data)
@@ -197,6 +203,12 @@ class Ui_Form(object):
         for column, item in enumerate(data):
                 self.tableWidget.setItem(rowPosition, column, QTableWidgetItem(str(item)))
 
+    def TacVu_KH(self):
+        Dialog = QtWidgets.QDialog()
+        ui = tv.Ui_Dialog()
+        ui.setupUi(Dialog,1)
+        Dialog.exec_()
+        self.upload_list()
 
 if __name__ == "__main__":
     import sys
