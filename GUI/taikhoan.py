@@ -96,6 +96,13 @@ class Ui_Form(object):
         self.lineEdit.setObjectName("lineEdit")
         self.lineEdit.setEnabled(False)
         self.horizontalLayout_2.addWidget(self.lineEdit)
+        self.cbbType_choise = QtWidgets.QComboBox(parent=self.widget_2)
+        self.cbbType_choise.setObjectName("comboBox")
+        self.cbbType_choise.addItem("Admin")
+        self.cbbType_choise.addItem("Nhân viên")
+        self.cbbType_choise.setMinimumSize(150,20)
+        self.cbbType_choise.setVisible(False)
+        self.horizontalLayout_2.addWidget(self.cbbType_choise)
         self.comboBox = QtWidgets.QComboBox(self.widget_2)
         self.comboBox.setMinimumSize(QtCore.QSize(135, 5))
         self.comboBox.setObjectName("comboBox")
@@ -104,6 +111,7 @@ class Ui_Form(object):
         self.comboBox.addItem("Mã tài khoản")
         self.comboBox.addItem("Username")
         self.comboBox.addItem("Trạng thái")
+        self.comboBox.addItem("Loại tài khoản")
         self.comboBox.currentIndexChanged.connect(self.changeEnable)
         self.horizontalLayout_2.addWidget(self.comboBox)
         self.pushButton_4 = QtWidgets.QPushButton(self.widget_2)
@@ -198,7 +206,11 @@ class Ui_Form(object):
         for taikhoan in taikhoan_list:
             for accType in accType_list:
                 if accType.maloai == taikhoan.maloai:
-                    data = [taikhoan.matk, taikhoan.username, taikhoan.password, taikhoan.trangthai, accType.tenloai]
+                    if taikhoan.trangthai == 1:
+                        temp = "Hoạt động"
+                    else:
+                        temp = "Không hoạt động"
+                    data = [taikhoan.matk, taikhoan.username, taikhoan.password, temp, accType.tenloai]
                     self.add_row_to_table(data)
                     break
                 
@@ -218,7 +230,7 @@ class Ui_Form(object):
         ui.setupUi(Dialog,1)
         accType_list = loaitaikhoanDAO().find_All()
         for accType in accType_list:
-            ui.cbMaLTK.addItem(f"{accType.maloai} - {accType.tenloai}")
+            ui.cbMaLTK.addItem(f"{accType.tenloai}")
         Dialog.exec_()
         self.upload_list()
     
@@ -250,7 +262,7 @@ class Ui_Form(object):
         ui.title.setText(self._translate("Dialog", "Sửa thông tin"))
         accType_list = loaitaikhoanDAO().find_All()
         for accType in accType_list:
-            ui.cbMaLTK.addItem(f"{accType.maloai} - {accType.tenloai}")
+            ui.cbMaLTK.addItem(f"{accType.tenloai}")
         selected_row = self.tableWidget.currentRow()
         if selected_row  >= 0:
             selected_items = self.tableWidget.selectedItems()
@@ -258,7 +270,10 @@ class Ui_Form(object):
             ui.label_visible.setText(self._translate("Dialog",row_data[0]))
             ui.txtName.setText(self._translate("Dialog",row_data[1]))
             ui.txtPwd.setText(self._translate("Dialog",row_data[2]))
-            ui.txtStatus.setText(self._translate("Dialog",row_data[3]))   
+            ui.txtStatus.setText(self._translate("Dialog",row_data[3]))
+            temp = taikhoanDAO().findByAccTypeName(row_data[4])
+            for account in temp:
+                ui.cbMaLTK.setCurrentIndex(account.maloai - 1)
         Dialog.exec_()
         self.upload_list()
 
@@ -267,12 +282,26 @@ class Ui_Form(object):
         type = self.comboBox.currentIndex()
         if type == 0:
             self.lineEdit.setEnabled(False)
+            self.hideCbbType_choise()
         if type == 1:
             self.lineEdit.setEnabled(True)
+            self.hideCbbType_choise()
         if type == 2:
             self.lineEdit.setEnabled(True)
+            self.hideCbbType_choise()
         if type == 3:
             self.lineEdit.setEnabled(True)
+            self.hideCbbType_choise()
+        if type == 4:
+            self.showCbbType_choise()
+    
+    def showCbbType_choise(self):
+        self.lineEdit.setVisible(False)
+        self.cbbType_choise.setVisible(True)
+        
+    def hideCbbType_choise(self):
+        self.lineEdit.setVisible(True)
+        self.cbbType_choise.setVisible(False)
 
 
     def findByCondition(self):
@@ -288,6 +317,9 @@ class Ui_Form(object):
         elif type == 3:
             self.lineEdit.setEnabled(True)
             result = taikhoanDAO().findByStatus(condition)
+        elif type == 4:
+            value = self.cbbType_choise.currentIndex() + 1
+            result = taikhoanDAO().findByAccTypeID(value)
 
         if type != 0:
             accType_list = loaitaikhoanDAO().find_All()

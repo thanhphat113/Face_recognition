@@ -108,6 +108,7 @@ class Ui_Dialog(object):
         pwd = self.txtPwd.text()
         status = self.txtStatus.text()
         accType = self.cbMaLTK.currentText().split("-")[0]
+
         accDAO = taikhoanDAO()
         if name and pwd:
             if int(status) == 0 or int(status) == 1:
@@ -120,7 +121,7 @@ class Ui_Dialog(object):
                     self.cbMaLTK.setCurrentText("")
                 return result
             else:
-                return 'Trạng thái phải có giá trị là 1 hoặc 0 !!!!'
+                return 'Trạng thái phải có giá trị là 1 (hoạt động) hoặc 0 (không hoạt động) !!!!'
         else: 
             return 'Username và Password không được rỗng !!!!'
         
@@ -135,7 +136,7 @@ class Ui_Dialog(object):
                 account = taikhoan(id, name, pwd, status, accType)
                 return dao.update(account)
             else:
-                return 'Trạng thái phải có giá trị là 1 hoặc 0 !!!!'
+                return 'Trạng thái phải có giá trị là 1 (hoạt động) hoặc 0 (không hoạt động) !!!!'
         else: 
             return 'Username và Password không được rỗng !!!!'
 

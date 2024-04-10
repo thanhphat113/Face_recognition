@@ -124,8 +124,35 @@ class taikhoanDAO:
             return account_list
         except mysql.connector.Error as error:
             return f'Lỗi: {error}'
+    
+    def findByAccTypeID(self,accType):
+        account_list = []
+        try:
+            self.conn.connect()
+            query = f"select * from taikhoan where maloai = '{accType}'"
+            list = db.execute_fetch_all(self.conn,query)
+            if list is not None:
+                for account in list:
+                    result = taikhoan(account[0],account[1],account[2],account[3],account[4])
+                    account_list.append(result)
+            return account_list
+        except mysql.connector.Error as error:
+            return f'Lỗi: {error}'
         
-            
+    def findByAccTypeName(self,name):
+        account_list = []
+        try:
+            self.conn.connect()
+            query = f"select tk.* from taikhoan as tk inner join loaitaikhoan as ltk where tk.maloai = ltk.maloai and ltk.tenloai like '%{name}%';"
+            list = db.execute_fetch_all(self.conn,query)
+            if list is not None:
+                for account in list:
+                    result = taikhoan(account[0],account[1],account[2],account[3],account[4])
+                    account_list.append(result)
+            return account_list
+        except mysql.connector.Error as error:
+            return f'Lỗi: {error}'
+
 if __name__ == "__main__":
     example = 'admin'
     passw = 'admin'

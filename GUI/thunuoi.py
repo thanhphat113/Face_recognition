@@ -113,6 +113,7 @@ class Ui_Form(object):
         self.comboBox.addItem("Mã thú nuôi")
         self.comboBox.addItem("Tên thú nuôi")
         self.comboBox.addItem("Màu lông")
+        self.comboBox.addItem("Khách hàng")
         self.comboBox.currentIndexChanged.connect(self.changeEnable)
         self.horizontalLayout_2.addWidget(self.comboBox)
         self.pushButton_4 = QtWidgets.QPushButton(self.widget_2)
@@ -230,7 +231,7 @@ class Ui_Form(object):
         dao = customerDAO()
         customer = dao.ReadFromDatabase()
         for cus in customer:
-            ui.cbMaKH.addItem(f"{cus.get_makh()} - {cus.get_tenkh()}")
+            ui.cbMaKH.addItem(f"{cus.get_tenkh()}")
         Dialog.exec_()
         self.upload_list()
     
@@ -263,7 +264,7 @@ class Ui_Form(object):
         dao = customerDAO()
         customer = dao.ReadFromDatabase()
         for cus in customer:
-            ui.cbMaKH.addItem(f"{cus.get_makh()} - {cus.get_tenkh()}")
+            ui.cbMaKH.addItem(f"{cus.get_tenkh()}")
         selected_row = self.tableWidget.currentRow()
         if selected_row  >= 0:
             selected_items = self.tableWidget.selectedItems()
@@ -271,7 +272,10 @@ class Ui_Form(object):
             ui.label_visible.setText(self._translate("Dialog",row_data[0]))
             ui.txtName.setText(self._translate("Dialog",row_data[1]))
             ui.txtColor.setText(self._translate("Dialog",row_data[2]))
-            ui.txtWeight.setText(self._translate("Dialog",row_data[3]))    
+            ui.txtWeight.setText(self._translate("Dialog",row_data[3]))
+            temp = petDAO().findByCustomer(row_data[4])
+            for pet in temp:
+                ui.cbMaKH.setCurrentIndex(pet.get_makh() - 1)
         Dialog.exec_()
         self.upload_list()
 
@@ -286,13 +290,16 @@ class Ui_Form(object):
             self.lineEdit.setEnabled(True)
         if type == 3:
             self.lineEdit.setEnabled(True)
+        if type == 4:
+            self.lineEdit.setEnabled(True)
 
 
     def findByCondition(self):
         type = self.comboBox.currentIndex()
         condition = self.lineEdit.text()
         customer = customerDAO().ReadFromDatabase()
-        
+        result = None
+
         if type == 1:
             self.lineEdit.setEnabled(True)
             result = petDAO().findById(condition)
@@ -302,8 +309,11 @@ class Ui_Form(object):
         elif type == 3:
             self.lineEdit.setEnabled(True)
             result = petDAO().findByColor(condition)
+        elif type == 4:
+            self.lineEdit.setEnabled(True)
+            result = petDAO().findByCustomer(condition)
 
-        if type != 0:
+        if type != 0 and result is not None:
             self.tableWidget.setRowCount(0)
             for subPet in result:
                 for cus in customer:
