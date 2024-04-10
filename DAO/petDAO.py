@@ -26,9 +26,6 @@ class petDAO:
             print(f'Error: {error}')
             return None
     
-    
-        
-
     def insert(self, pet : pet):
         conn = self.conn
         try:
@@ -40,6 +37,20 @@ class petDAO:
             return 'Thêm thất bại !!!!'
         finally:
             conn.close()
+
+    def findById1(self,id):
+        result = None
+        try:
+            self.conn.connect()
+            query = f"select * from ThuNuoi where matn = '{id}'"
+            list = db.execute_fetch_all(self.conn,query)
+            for subpet in list:
+                result = pet(subpet[0],subpet[1],subpet[2],subpet[3],subpet[4])
+            return result
+        except mysql.connector.Error as error:
+            return f'Lỗi: {error}'
+        finally:
+            self.conn.close()
 
     def delete(self, id):
         conn = self.conn
@@ -90,6 +101,8 @@ class petDAO:
             return pets_list
         except mysql.connector.Error as error:
             return f'Lỗi: {error}'
+        finally:
+            self.conn.close()
      
         
     def findByName(self,name):
@@ -105,6 +118,8 @@ class petDAO:
             return pets_list
         except mysql.connector.Error as error:
             return f'Lỗi: {error}'
+        finally:
+            self.conn.close()
         
 
     def findByColor(self,color):
@@ -120,6 +135,8 @@ class petDAO:
             return pets_list
         except mysql.connector.Error as error:
             return f'Lỗi: {error}'
+        finally:
+            self.conn.close()
     
 
     def findByCustomer(self,name):
@@ -149,7 +166,7 @@ class petDAO:
             return pet_list
         except mysql.connector.Error as error:
             return f'Lỗi: {error}'
-    
+        
         
 if __name__ == "__main__":
     pets = petDAO()

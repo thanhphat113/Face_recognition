@@ -28,6 +28,17 @@ class employeeDAO:
             return None
         finally:
             conn.close()
+
+    def getEmployeeById(self, id):
+        conn=self.conn
+        try:
+            conn.connect()
+            query=f"Select * from nhanvien where manv = '{id}'"
+            result = db.execute_fetch_one(conn,query)
+            emp = employee(result[0],result[1],result[2],result[3])
+            return emp
+        except mysql.connector.Error as error:
+            return 'Excute thất bại !!!!'
     
     def insert(self, emp:employee):
         conn=self.conn
@@ -64,28 +75,4 @@ class employeeDAO:
             return f'Lỗi: {error}'
         finally:
             conn.close()
-            
-    def findByCondition(self, type, condition):
-        employee_list = []
-        try:
-            self.conn.connect()
-            query = f"select * from NhanVien where {type} like '%{condition}%'"
-            result = db.execute_fetch_all(self.conn,query)
-            if result is not None:
-                for nv in result:
-                    emp = employee(nv[0],nv[1],nv[2],nv[3])
-                    employee_list.append(emp)
-                return employee_list
-            else:
-                return employee_list
-        except mysql.connector.Error as error:
-            return f'Lỗi: {error}'
-        finally:
-            self.conn.close()
-            
-# if __name__ == "__main__":
-#     emp = employeeDAO()
-#     result = emp.findByCondition('tennv','an')
-#     for nv in result:
-#         print(f'{nv.manv}, {nv.tennv}')
-            
+        

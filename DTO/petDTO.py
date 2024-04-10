@@ -1,3 +1,9 @@
+import sys
+import os
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from DAO.customerDAO import customerDAO
 class pet:
     max_matn = 0
 
@@ -7,6 +13,7 @@ class pet:
         self.__maulong = maulong
         self.__cannang = cannang
         self.__makh = makh
+        self.__khachhang = None
 
     
     def get_matn(self):
@@ -38,6 +45,11 @@ class pet:
     
     def set_makh(self,makh):
         self.__makh=makh
+        
+    def get_khachhang(self):
+        cus = customerDAO()
+        self.__khachhang = cus.findByid(self.get_makh())
+        return self.__khachhang
     
     @classmethod
     def generate_manv(cls):
