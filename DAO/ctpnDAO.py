@@ -31,7 +31,7 @@ class ctpnDAO:
         conn=self.conn
         try:
             conn.connect()
-            query=f"insert into chitiet_pn(mapn, madp, soluong, gia, thanhtien) values ('{ctpn.getMaPN()}', '{ctpn.getMaDP()}', '{ctpn.getSoLuong()}', '{ctpn.getGia()}', '{ctpn.getThanhTien()}')"
+            query=f"insert into chitiet_pn(mapn, madp, soluong, tonggia, thanhtien) values ('{ctpn.getMaPN()}', '{ctpn.getMaDP()}', '{ctpn.getSoLuong()}', '{ctpn.getGia()}', '{ctpn.getThanhTien()}')"
             db.execute_query(conn,query)
             return 'Thêm thành công !!!!'
         except mysql.connector.Error as error:
@@ -41,7 +41,7 @@ class ctpnDAO:
         conn = self.conn
         try:
             conn.connect()
-            query=f"update chitiet_pn set madp = '{ctpn.getMaDP()}', soluong = {ctpn.getSoLuong()}, gia = '{ctpn.getGia()}', thanhtien = '{ctpn.getThanhTien()}' where mapn = '{ctpn.getMaPN()}'"
+            query=f"update chitiet_pn set madp = '{ctpn.getMaDP()}', soluong = {ctpn.getSoLuong()}, tonggia = '{ctpn.getGia()}', thanhtien = '{ctpn.getThanhTien()}' where mapn = '{ctpn.getMaPN()}'"
             db.execute_query(conn, query)
             return "Sửa thành công!"
         except mysql.connector.Error as error:
