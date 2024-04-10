@@ -49,6 +49,8 @@ class petDAO:
             return result
         except mysql.connector.Error as error:
             return f'Lỗi: {error}'
+        finally:
+            self.conn.close()
 
     def delete(self, id):
         conn = self.conn
@@ -87,6 +89,8 @@ class petDAO:
             return pets_list
         except mysql.connector.Error as error:
             return f'Lỗi: {error}'
+        finally:
+            self.conn.close()
      
         
     def findByName(self,name):
@@ -102,6 +106,8 @@ class petDAO:
             return pets_list
         except mysql.connector.Error as error:
             return f'Lỗi: {error}'
+        finally:
+            self.conn.close()
         
 
     def findByColor(self,color):
@@ -117,6 +123,8 @@ class petDAO:
             return pets_list
         except mysql.connector.Error as error:
             return f'Lỗi: {error}'
+        finally:
+            self.conn.close()
     
 
     def findPetDontUseBed(self):
@@ -131,6 +139,8 @@ class petDAO:
             return pet_list
         except mysql.connector.Error as error:
             return f'Lỗi: {error}'
+        finally:
+            self.conn.close()
         
         
 if __name__ == "__main__":
