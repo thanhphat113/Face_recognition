@@ -274,8 +274,8 @@ class Ui_Form(object):
         self.table_phieunhap.setRowCount(len(pn_list))
         for pn in pn_list:
             self.table_phieunhap.setItem(row, 0, QtWidgets.QTableWidgetItem(str(pn.getMaPN())))
-            self.table_phieunhap.setItem(row, 1, QtWidgets.QTableWidgetItem(str(pn.getMaNV())))
-            self.table_phieunhap.setItem(row, 2, QtWidgets.QTableWidgetItem(str(pn.getMaNCC())))
+            self.table_phieunhap.setItem(row, 1, QtWidgets.QTableWidgetItem(str(pn.getNhanVien().tennv)))
+            self.table_phieunhap.setItem(row, 2, QtWidgets.QTableWidgetItem(str(pn.getNCC().tenncc)))
             self.table_phieunhap.setItem(row, 3, QtWidgets.QTableWidgetItem(str(pn.getNgayTao())))
             self.table_phieunhap.setItem(row, 4, QtWidgets.QTableWidgetItem(str(pn.getTongTien())))
             row = row +1

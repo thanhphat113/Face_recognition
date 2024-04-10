@@ -32,7 +32,6 @@ def execute_fetch_all(connection, query):
         return None
         
 def execute_fetch_one(connection, query):
-    # Thực thi truy vấn và trả về kết quả (nếu có)
     cursor = connection.cursor()
     try:
         cursor.execute(query)
