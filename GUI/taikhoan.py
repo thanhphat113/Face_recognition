@@ -252,7 +252,6 @@ class Ui_Form(object):
         conn = db.connect_to_database()
         conn.connect()
         db.execute_query(conn, query)
-        conn.close()
 
         accDAO = taikhoanDAO()
         return accDAO.delete(value)
