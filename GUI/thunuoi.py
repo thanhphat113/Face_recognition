@@ -84,12 +84,14 @@ class Ui_Form(object):
         self.horizontalLayout.addWidget(self.pushButton)
         self.pushButton_2 = QtWidgets.QPushButton(self.widget_3)
         self.pushButton_2.setStyleSheet("background-color: rgb(188, 202, 255);")
+
         icon2 = QtGui.QIcon()
         icon2.addPixmap(QtGui.QPixmap("img/refresh.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.pushButton_2.setIcon(icon2)
         self.pushButton_2.setIconSize(QtCore.QSize(20, 20))
         self.pushButton_2.setObjectName("pushButton_2")
         self.horizontalLayout.addWidget(self.pushButton_2)
+        
         self.gridLayout_2.addLayout(self.horizontalLayout, 0, 0, 1, 1)
         self.gridLayout_3.addWidget(self.widget_3, 2, 0, 1, 1)
         self.widget_2 = QtWidgets.QWidget(Form)
@@ -284,6 +286,7 @@ class Ui_Form(object):
         type = self.comboBox.currentIndex()
         if type == 0:
             self.lineEdit.setEnabled(False)
+            self.upload_list()
         if type == 1:
             self.lineEdit.setEnabled(True)
         if type == 2:
