@@ -140,4 +140,3 @@ class Ui_Dialog(object):
         else: 
             return 'Username và Password không được rỗng !!!!'
 
-

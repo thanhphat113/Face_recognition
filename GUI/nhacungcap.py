@@ -238,6 +238,7 @@ class Ui_Form(object):
                 type = self.comboBox.currentIndex()
                 if type == 0:
                         self.lineEdit.setEnabled(False)
+                        self.upload_list()
                 if type == 1:
                         self.lineEdit.setEnabled(True)
                 if type == 2:

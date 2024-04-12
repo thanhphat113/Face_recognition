@@ -9,6 +9,7 @@ import GUI.TacvuTK as tv
 import GUI.thongbao as tb
 from  DAO.taikhoanDAO import taikhoanDAO
 from  DAO.loaitaikhoanDAO import loaitaikhoanDAO
+import DAO.database as db
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -72,14 +73,7 @@ class Ui_Form(object):
         self.pushButton.setIconSize(QtCore.QSize(20, 20))
         self.pushButton.setObjectName("pushButton")
         self.horizontalLayout.addWidget(self.pushButton)
-        self.pushButton_2 = QtWidgets.QPushButton(self.widget_3)
-        self.pushButton_2.setStyleSheet("background-color: rgb(188, 202, 255);")
-        icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("img/refresh.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.pushButton_2.setIcon(icon2)
-        self.pushButton_2.setIconSize(QtCore.QSize(20, 20))
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.horizontalLayout.addWidget(self.pushButton_2)
+
         self.gridLayout_2.addLayout(self.horizontalLayout, 0, 0, 1, 1)
         self.gridLayout_3.addWidget(self.widget_3, 2, 0, 1, 1)
         self.widget_2 = QtWidgets.QWidget(Form)
@@ -96,7 +90,7 @@ class Ui_Form(object):
         self.lineEdit.setObjectName("lineEdit")
         self.lineEdit.setEnabled(False)
         self.horizontalLayout_2.addWidget(self.lineEdit)
-        self.cbbType_choise = QtWidgets.QComboBox(parent=self.widget_2)
+        self.cbbType_choise = QtWidgets.QComboBox(self.widget_2)
         self.cbbType_choise.setObjectName("comboBox")
         self.cbbType_choise.addItem("Admin")
         self.cbbType_choise.addItem("Nhân viên")
@@ -114,7 +108,7 @@ class Ui_Form(object):
         self.comboBox.addItem("Loại tài khoản")
         self.comboBox.currentIndexChanged.connect(self.changeEnable)
         self.horizontalLayout_2.addWidget(self.comboBox)
-        self.pushButton_4 = QtWidgets.QPushButton(self.widget_2)
+        self.pushButton_4 = QtWidgets.QPushButton(parent=self.widget_2)
         self.pushButton_4.setStyleSheet("")
         icon3 = QtGui.QIcon()
         icon3.addPixmap(QtGui.QPixmap("img/search.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
@@ -134,7 +128,7 @@ class Ui_Form(object):
         self.tableWidget.setSizePolicy(sizePolicy)
         self.tableWidget.setMinimumSize(QtCore.QSize(0, 0))
         self.tableWidget.setWordWrap(False)
-        self.tableWidget.setColumnCount(5)
+        self.tableWidget.setColumnCount(6)
         self.tableWidget.setObjectName("tableWidget")
         self.tableWidget.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
@@ -152,6 +146,9 @@ class Ui_Form(object):
         item = QtWidgets.QTableWidgetItem()
         item.setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.tableWidget.setHorizontalHeaderItem(4, item)
+        item = QtWidgets.QTableWidgetItem()
+        item.setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.tableWidget.setHorizontalHeaderItem(5, item)
         item = QtWidgets.QTableWidgetItem()
         item.setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.tableWidget.setHorizontalHeaderItem(8, item)
@@ -177,9 +174,6 @@ class Ui_Form(object):
         self.pushButton.setText(_translate("Form", "Xoá"))
         self.pushButton.setMinimumSize(100, 30)
         self.pushButton.clicked.connect(self.on_button_clicked)
-        self.pushButton_2.setText(_translate("Form", "Sửa"))
-        self.pushButton_2.setMinimumSize(100, 30)
-        self.pushButton_2.clicked.connect(self.update_TK)
         self.label_2.setText(_translate("Form", "Tìm kiếm "))
 
         self.pushButton_4.setText(_translate("Form", "Tìm"))
@@ -196,6 +190,8 @@ class Ui_Form(object):
         item.setText(_translate("Form", "Trạng thái"))
         item = self.tableWidget.horizontalHeaderItem(4)
         item.setText(_translate("Form", "Loại tài khoản"))
+        item = self.tableWidget.horizontalHeaderItem(5)
+        item.setText(_translate("Form", "Nhân viên"))
         self.upload_list()
     
 
@@ -213,6 +209,7 @@ class Ui_Form(object):
                     data = [taikhoan.matk, taikhoan.username, taikhoan.password, temp, accType.tenloai]
                     self.add_row_to_table(data)
                     break
+                    
                 
     
 
@@ -251,31 +248,13 @@ class Ui_Form(object):
 
                 
     def delete_TK(self, value):
+        query = f"update nhanvien set matk = NULL where matk = {value}"
+        conn = db.connect_to_database()
+        conn.connect()
+        db.execute_query(conn, query)
+
         accDAO = taikhoanDAO()
         return accDAO.delete(value)
-                
-        
-    def update_TK(self):
-        Dialog = QtWidgets.QDialog()
-        ui = tv.Ui_Dialog()
-        ui.setupUi(Dialog,2)    
-        ui.title.setText(self._translate("Dialog", "Sửa thông tin"))
-        accType_list = loaitaikhoanDAO().find_All()
-        for accType in accType_list:
-            ui.cbMaLTK.addItem(f"{accType.tenloai}")
-        selected_row = self.tableWidget.currentRow()
-        if selected_row  >= 0:
-            selected_items = self.tableWidget.selectedItems()
-            row_data = [item.text() for item in selected_items]
-            ui.label_visible.setText(self._translate("Dialog",row_data[0]))
-            ui.txtName.setText(self._translate("Dialog",row_data[1]))
-            ui.txtPwd.setText(self._translate("Dialog",row_data[2]))
-            ui.txtStatus.setText(self._translate("Dialog",row_data[3]))
-            temp = taikhoanDAO().findByAccTypeName(row_data[4])
-            for account in temp:
-                ui.cbMaLTK.setCurrentIndex(account.maloai - 1)
-        Dialog.exec_()
-        self.upload_list()
 
     
     def changeEnable(self):
@@ -283,6 +262,7 @@ class Ui_Form(object):
         if type == 0:
             self.lineEdit.setEnabled(False)
             self.hideCbbType_choise()
+            self.upload_list()
         if type == 1:
             self.lineEdit.setEnabled(True)
             self.hideCbbType_choise()
