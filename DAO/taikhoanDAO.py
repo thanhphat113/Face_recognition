@@ -6,6 +6,8 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 import DAO.database as db
 from DTO.taikhoanDTO import taikhoan
+from DTO.employeeDTO import employee
+from DAO.employeeDAO import employeeDAO
 
 
 
@@ -150,6 +152,20 @@ class taikhoanDAO:
                     result = taikhoan(account[0],account[1],account[2],account[3],account[4])
                     account_list.append(result)
             return account_list
+        except mysql.connector.Error as error:
+            return f'Lỗi: {error}'
+        
+    def findByEmployeeName(self,name):
+        employee_list = []
+        try:
+            self.conn.connect()
+            query = f"select nv.* from taikhoan as tk inner join nhanvien as nv where tk.matk = nv.matk and nv.tennv like '%{name}%';"
+            list = db.execute_fetch_all(self.conn,query)
+            if list is not None:
+                for emp in list:
+                    result = employee(emp[0],emp[1],emp[2],emp[3],emp[4])
+                    employee_list.append(result)
+            return employee_list
         except mysql.connector.Error as error:
             return f'Lỗi: {error}'
         

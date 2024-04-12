@@ -278,6 +278,8 @@ class Ui_Form(object):
             temp = petDAO().findByCustomer(row_data[4])
             for pet in temp:
                 ui.cbMaKH.setCurrentIndex(pet.get_makh() - 1)
+        else: 
+            tb.Ui_Dialog.thongBao("Vui lòng chọn 1 dòng để thực hiện sửa")
         Dialog.exec_()
         self.upload_list()
 
