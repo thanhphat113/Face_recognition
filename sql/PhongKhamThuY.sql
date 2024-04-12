@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost
--- Thời gian đã tạo: Th4 04, 2024 lúc 06:19 PM
+-- Thời gian đã tạo: Th4 12, 2024 lúc 05:45 AM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.0.28
 
@@ -28,6 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `ChiTiet_HD` (
+  `mact_hd` int(11) NOT NULL,
   `mahd` int(11) DEFAULT NULL,
   `madv` int(11) DEFAULT NULL,
   `soluong` int(11) DEFAULT NULL,
@@ -41,10 +42,12 @@ CREATE TABLE `ChiTiet_HD` (
 --
 
 CREATE TABLE `ChiTiet_PN` (
+  `mact_pn` int(11) NOT NULL,
   `mapn` int(11) DEFAULT NULL,
   `madp` int(11) DEFAULT NULL,
   `soluong` int(11) DEFAULT NULL,
-  `tonggia` int(11) DEFAULT NULL
+  `tonggia` int(11) DEFAULT NULL,
+  `thanhtien` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -120,10 +123,9 @@ INSERT INTO `DuocPham` (`madp`, `tendp`, `ngaysanxuat`, `ngayhethan`, `soluong`,
 (4, 'Thuốc D', '2023-02-20', '2024-02-20', 120, 45000),
 (5, 'Thuốc E', '2022-11-11', '2023-11-11', 70, 70000),
 (6, 'Thuốc F', '2022-09-05', '2023-09-05', 90, 55000),
-(7, 'Thuốc G', '2023-07-20', '2024-07-20', 110, 65000),
+(7, 'Thuốc G', '2023-07-20', '2024-07-20', 10, 65000),
 (8, 'Thuốc H', '2023-04-25', '2024-04-25', 60, 80000),
-(9, 'Thuốc I', '2022-12-12', '2023-12-12', 85, 70000),
-(10, 'Thuốc K', '2023-10-30', '2024-10-30', 95, 60000);
+(11, 'Thuốc giảm đau', '2023-05-01', '2024-08-01', 10, 50000);
 
 -- --------------------------------------------------------
 
@@ -138,6 +140,13 @@ CREATE TABLE `HoaDon` (
   `manv` int(11) DEFAULT NULL,
   `makh` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `HoaDon`
+--
+
+INSERT INTO `HoaDon` (`mahd`, `ngaytao`, `tongtien`, `manv`, `makh`) VALUES
+(2, '2000-01-01', 11111, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -167,7 +176,8 @@ INSERT INTO `KhachHang` (`makh`, `tenkh`, `gioitinh`, `sdt`, `email`) VALUES
 (7, 'Vũ Văn G', 1, '0956789012', 'vuvang@example.com'),
 (8, 'Lương Thị H', 0, '0967890123', 'luongthih@example.com'),
 (9, 'Đặng Văn I', 1, '0978901234', 'dangvani@example.com'),
-(10, 'Lê Thị K', 0, '0989012345', 'lethik@example.com');
+(10, 'Lê Thị K', 0, '0989012345', 'lethik@example.com'),
+(13, 'Quyên', 0, '123', '@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -215,8 +225,7 @@ INSERT INTO `NhaCungCap` (`mancc`, `tenncc`, `email`, `diachi`, `sdt`) VALUES
 (6, 'Nhà cung cấp F', 'nhacungcapF@example.com', 'Địa chỉ F', '0987654321'),
 (7, 'Nhà cung cấp G', 'nhacungcapG@example.com', 'Địa chỉ G', '0123987654'),
 (8, 'Nhà cung cấp H', 'nhacungcapH@example.com', 'Địa chỉ H', '0987123456'),
-(9, 'Nhà cung cấp I', 'nhacungcapI@example.com', 'Địa chỉ I', '0123456789'),
-(10, 'Nhà cung cấp J', 'nhacungcapJ@example.com', 'Địa chỉ J', '0987654321');
+(9, 'Nhà cung cấp I', 'nhacungcapI@example.com', '44444', '0123456789');
 
 -- --------------------------------------------------------
 
@@ -241,13 +250,12 @@ INSERT INTO `NhanVien` (`manv`, `tennv`, `sdt`, `email`, `matk`) VALUES
 (2, 'Nguyễn Văn X', '0987654321', 'nguyenvanx@example.com', 2),
 (3, 'Trần Thị Y', '0901234567', 'tranthiy@example.com', 3),
 (4, 'Lê Văn Z', '0912345678', 'levanz@example.com', 4),
-(5, 'Phạm Thị T', '0923456789', 'phamthit@example.com', 5),
-(6, 'Hoàng Văn S', '0934567890', 'hoangvans@example.com', 6),
-(7, 'Mai Thị R', '0945678901', 'maithir@example.com', 7),
+(5, 'Phạm Thị Tha', '0923456789', 'phamthit@example.com', 5),
 (8, 'Vũ Văn Q', '0956789012', 'vuvanq@example.com', 8),
 (9, 'Lương Thị P', '0967890123', 'luongthip@example.com', 9),
 (10, 'Đặng Văn O', '0978901234', 'dangvano@example.com', 10),
-(11, 'Lê Thị N', '0989012345', 'lethin@example.com', 11);
+(11, 'Lê Thị N', '0989012345', 'lethin@example.com', 11),
+(19, 'Thanh Dũng', '021214', 'thanhdung@gmailc.com', NULL);
 
 -- --------------------------------------------------------
 
@@ -257,11 +265,19 @@ INSERT INTO `NhanVien` (`manv`, `tennv`, `sdt`, `email`, `matk`) VALUES
 
 CREATE TABLE `PhieuNhap` (
   `mapn` int(11) NOT NULL,
-  `ngaytao` date DEFAULT NULL,
-  `mancc` int(11) DEFAULT NULL,
   `manv` int(11) DEFAULT NULL,
+  `mancc` int(11) DEFAULT NULL,
+  `ngaytao` date DEFAULT NULL,
   `tongtien` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `PhieuNhap`
+--
+
+INSERT INTO `PhieuNhap` (`mapn`, `manv`, `mancc`, `ngaytao`, `tongtien`) VALUES
+(3, 1, 4, '2024-01-01', 135000),
+(5, 1, 1, '2024-04-12', 120000);
 
 -- --------------------------------------------------------
 
@@ -281,16 +297,17 @@ CREATE TABLE `PhongBenh` (
 --
 
 INSERT INTO `PhongBenh` (`mapb`, `tenpb`, `tinhtrang`, `matn`) VALUES
-(1, 'Phòng A', 1, NULL),
+(1, 'Phòng A', 0, 1),
 (2, 'Phòng B', 0, 2),
 (3, 'Phòng C', 0, 3),
 (4, 'Phòng D', 0, 4),
 (5, 'Phòng E', 1, NULL),
-(6, 'Phòng F', 1, 6),
-(7, 'Phòng G', 0, 7),
+(6, 'Phòng F', 0, 6),
+(7, 'Phòng G', 1, NULL),
 (8, 'Phòng H', 0, 8),
 (9, 'Phòng I', 1, NULL),
-(10, 'Phòng J', 1, NULL);
+(11, 'Phòng E', 0, NULL),
+(13, 'Phòng E12', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -312,17 +329,17 @@ CREATE TABLE `TaiKhoan` (
 
 INSERT INTO `TaiKhoan` (`matk`, `username`, `password`, `trangthai`, `maloai`) VALUES
 (1, 'thanhphat', '123', 1, 1),
-(2, 'nguyenvanx', 'password1', 1, 2),
+(2, 'nguyenvanx', '1', 1, 2),
 (3, 'tranthiy', 'password2', 1, 2),
 (4, 'levanz', 'password3', 1, 2),
 (5, 'phamthit', 'password4', 1, 2),
 (6, 'hoangvans', 'password5', 1, 2),
 (7, 'maithir', 'password6', 1, 2),
-(8, 'vuvanq', 'password7', 1, 2),
+(8, 'vuvanq', 'password7', 1, 1),
 (9, 'luongthip', 'password8', 1, 2),
 (10, 'dangvano', 'password9', 1, 2),
 (11, 'lethin', 'password10', 1, 2),
-(12, 'admin', 'admin', 1, 1);
+(13, 'admin', 'admin', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -352,7 +369,9 @@ INSERT INTO `ThuNuoi` (`matn`, `tentn`, `mau`, `cannang`, `makh`) VALUES
 (7, 'Hươu Cao Cổ', 'Nâu', '100 kg', 7),
 (8, 'Khỉ Đuôi Dài', 'Nâu', '15 kg', 8),
 (9, 'Gấu Trúc', 'Trắng đen', '80 kg', 9),
-(10, 'Sư Tử', 'Vàng', '150 kg', 10);
+(10, 'Sư Tử', 'Vàng', '150 kg', 10),
+(12, 'shiba', 'Vàng', '35', NULL),
+(13, 'Chó Shiba', 'Vàng Đen', '45', 1);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -362,6 +381,7 @@ INSERT INTO `ThuNuoi` (`matn`, `tentn`, `mau`, `cannang`, `makh`) VALUES
 -- Chỉ mục cho bảng `ChiTiet_HD`
 --
 ALTER TABLE `ChiTiet_HD`
+  ADD PRIMARY KEY (`mact_hd`),
   ADD KEY `fk_hoadon` (`mahd`),
   ADD KEY `fk_hoadon_dichvu` (`madv`);
 
@@ -369,6 +389,7 @@ ALTER TABLE `ChiTiet_HD`
 -- Chỉ mục cho bảng `ChiTiet_PN`
 --
 ALTER TABLE `ChiTiet_PN`
+  ADD PRIMARY KEY (`mact_pn`),
   ADD KEY `fk_ncc_duocpham` (`madp`),
   ADD KEY `fk_pn` (`mapn`);
 
@@ -456,28 +477,40 @@ ALTER TABLE `ThuNuoi`
 --
 
 --
+-- AUTO_INCREMENT cho bảng `ChiTiet_HD`
+--
+ALTER TABLE `ChiTiet_HD`
+  MODIFY `mact_hd` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `ChiTiet_PN`
+--
+ALTER TABLE `ChiTiet_PN`
+  MODIFY `mact_pn` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT cho bảng `DichVu`
 --
 ALTER TABLE `DichVu`
-  MODIFY `madv` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `madv` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT cho bảng `DuocPham`
 --
 ALTER TABLE `DuocPham`
-  MODIFY `madp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `madp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT cho bảng `HoaDon`
 --
 ALTER TABLE `HoaDon`
-  MODIFY `mahd` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `mahd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `KhachHang`
 --
 ALTER TABLE `KhachHang`
-  MODIFY `makh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `makh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT cho bảng `LoaiTaiKhoan`
@@ -495,31 +528,31 @@ ALTER TABLE `NhaCungCap`
 -- AUTO_INCREMENT cho bảng `NhanVien`
 --
 ALTER TABLE `NhanVien`
-  MODIFY `manv` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `manv` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT cho bảng `PhieuNhap`
 --
 ALTER TABLE `PhieuNhap`
-  MODIFY `mapn` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `mapn` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `PhongBenh`
 --
 ALTER TABLE `PhongBenh`
-  MODIFY `mapb` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `mapb` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT cho bảng `TaiKhoan`
 --
 ALTER TABLE `TaiKhoan`
-  MODIFY `matk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `matk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT cho bảng `ThuNuoi`
 --
 ALTER TABLE `ThuNuoi`
-  MODIFY `matn` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `matn` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Các ràng buộc cho các bảng đã đổ

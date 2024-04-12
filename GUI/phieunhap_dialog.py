@@ -12,7 +12,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_phieunhap_dialog(object):
-    def setupUi(self, phieunhap_dialog):
+    def setupUi(self, phieunhap_dialog,type:int):
         phieunhap_dialog.setObjectName("phieunhap_dialog")
         phieunhap_dialog.resize(400, 318)
         phieunhap_dialog.setMinimumSize(QtCore.QSize(400, 276))
@@ -40,6 +40,7 @@ class Ui_phieunhap_dialog(object):
         self.txtTotalPrice = QtWidgets.QLineEdit(phieunhap_dialog)
         self.txtTotalPrice.setGeometry(QtCore.QRect(170, 210, 181, 21))
         self.txtTotalPrice.setObjectName("txtTotalPrice")
+        self.txtTotalPrice.setVisible(False)
         self.btnAccept = QtWidgets.QPushButton(phieunhap_dialog)
         self.btnAccept.setGeometry(QtCore.QRect(80, 260, 113, 32))
         self.btnAccept.setCheckable(True)
@@ -54,6 +55,7 @@ class Ui_phieunhap_dialog(object):
         self.dateNgayTao = QtWidgets.QDateEdit(phieunhap_dialog)
         self.dateNgayTao.setGeometry(QtCore.QRect(170, 170, 181, 22))
         self.dateNgayTao.setObjectName("dateNgayTao")
+        self.dateNgayTao.setVisible(False)
         self.label_5 = QtWidgets.QLabel(phieunhap_dialog)
         self.label_5.setGeometry(QtCore.QRect(50, 210, 91, 16))
         self.label_5.setObjectName("label_5")
@@ -64,6 +66,7 @@ class Ui_phieunhap_dialog(object):
         self.cbMaNCC.setGeometry(QtCore.QRect(170, 130, 181, 22))
         self.cbMaNCC.setObjectName("cbMaNCC")
         self.btnDeny.toggled['bool'].connect(phieunhap_dialog.close)
+        self.changeType(type)
 
         self.retranslateUi(phieunhap_dialog)
         QtCore.QMetaObject.connectSlotsByName(phieunhap_dialog)
@@ -77,8 +80,17 @@ class Ui_phieunhap_dialog(object):
         self.btnAccept.setText(_translate("phieunhap_dialog", "Xác nhận"))
         self.btnDeny.setText(_translate("phieunhap_dialog", "Huỷ"))
         self.label_3.setText(_translate("phieunhap_dialog", "Ngày lập"))
+        self.label_3.setVisible(False)
         self.label_5.setText(_translate("phieunhap_dialog", "Tổng tiền"))
-
+        self.label_5.setVisible(False)
+    
+    def changeType(self,type):
+        if type == 2:
+            self.label_3.setVisible(True)
+            self.label_5.setVisible(True)
+            self.dateNgayTao.setVisible(True)
+            self.txtTotalPrice.setVisible(True)
+            
 
 if __name__ == "__main__":
     import sys

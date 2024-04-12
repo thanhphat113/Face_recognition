@@ -5,7 +5,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from DAO.employeeDAO import employeeDAO 
 from DAO.supplierDAO import supplierDAO 
 class PhieuNhap:
-    def __init__(self, mapn, ngaytao, mancc,manv,tongtien):
+    def __init__(self, mapn, manv, mancc, ngaytao, tongtien):
         self.mapn = mapn
         self.manv = manv
         self.mancc = mancc

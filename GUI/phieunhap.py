@@ -310,7 +310,7 @@ class Ui_Form(object):
     def show_add_pn_dialog(self):
         dialog = QtWidgets.QDialog()
         self.phieunhap_dialog = Ui_phieunhap_dialog()
-        self.phieunhap_dialog.setupUi(dialog)
+        self.phieunhap_dialog.setupUi(dialog,1)
         self.loadComboboxMaNV()
         self.loadComboboxMaNCC()
         self.phieunhap_dialog.txtTotalPrice.setEnabled(False)
@@ -322,7 +322,7 @@ class Ui_Form(object):
     def show_update_pn_dialog(self):
         dialog = QtWidgets.QDialog()
         self.phieunhap_dialog = Ui_phieunhap_dialog()
-        self.phieunhap_dialog.setupUi(dialog)
+        self.phieunhap_dialog.setupUi(dialog,2)
         self.phieunhap_dialog.label_4.setText("SỬA PHIẾU NHẬP")
         self.loadComboboxMaNV()
         self.loadComboboxMaNCC()
@@ -432,7 +432,7 @@ class Ui_Form(object):
         suppliers = dao.getAllSuppliers()
 
         for supplier in suppliers:
-            self.phieunhap_dialog.cbMaNCC.addItem(f"{supplier.getMaNCC()} - {supplier.getTenNCC()}")
+            self.phieunhap_dialog.cbMaNCC.addItem(f"{supplier.mancc} - {supplier.tenncc}")
 
     def loadComboboxMaDP(self):
         dao = medicineDAO()
@@ -445,8 +445,7 @@ class Ui_Form(object):
     def addPhieuNhap(self):
         manv = self.phieunhap_dialog.cbMaNV.currentText().split("-")[0]
         mancc = self.phieunhap_dialog.cbMaNCC.currentText().split("-")[0]
-        ngaytao = datetime.today().strftime('%Y-%m-%d')
-
+        ngaytao = datetime.today().strftime('%Y/%m/%d')
         dao = phieunhapDAO()
         dao.insertPhieuNhap(PhieuNhap(None, manv, mancc, ngaytao, 0))
         msg.show_info_messagebox("Thêm phiếu nhập thành công")

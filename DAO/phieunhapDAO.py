@@ -31,11 +31,13 @@ class phieunhapDAO:
         conn=self.conn
         try:
             conn.connect()
-            query=f"insert into phieunhap(manv, mancc, ngaytao, tongtien) values ('{pn.getMaNV()}', '{pn.getMaNCC()}', STR_TO_DATE('{pn.getNgayTao()}', '%m-%d-%Y'), '{pn.getTongTien()}')"
+            query=f"insert into phieunhap(manv, mancc, ngaytao, tongtien) values ('{pn.getMaNV()}', '{pn.getMaNCC()}', '{pn.getNgayTao()}', '{pn.getTongTien()}')"
             db.execute_query(conn,query)
             return 'Thêm thành công !!!!'
         except mysql.connector.Error as error:
             return 'Thêm thất bại !!!!'
+        finally:
+            conn.close()
         
     def updateTotalPrice(self, mapn, totalprice):
         conn = self.conn

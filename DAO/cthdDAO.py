@@ -43,10 +43,37 @@ class cthdDAO:
         conn = self.conn
         try:
             conn.connect()
-            query=f"update chitiet_pn set madv = '{cthd.get_madv()}', soluong = {cthd.get_soLuong()} where madp = '{cthd.get_gia()}'"
+            query=f"update chitiet_hd set madv = '{cthd.get_madv()}', soluong = {cthd.get_soLuong()}, gia = {cthd.get_gia()} where mahd = '{cthd.get_mahd()}'"
             db.execute_query(conn, query)
             return "Sửa thành công!"
         except mysql.connector.Error as error:
             return "Sửa thất bại!"
         finally:
             conn.close()
+            
+            
+    def deleteCTHD(self,mahd):
+        conn = self.conn
+        try:
+            conn.connect()
+            query=f"delete from chitiet_hd where mahd = '{mahd}'"
+
+            db.execute_query(conn, query)
+            return "Xóa thành công!"
+        except mysql.connector.Error as error:
+            return "Xóa thất bại!"
+    
+    def updateCTHD(self, cthd):
+        conn = self.conn
+        try:
+            conn.connect()
+            query=f"update chitiet_hd set madv = '{cthd.get_madv()}', soluong = {cthd.get_soLuong()}, gia = {cthd.get_gia()} where mahd = '{cthd.get_mahd()}'"
+            db.execute_query(conn, query)
+            query=f"update hoadon set tongtien = '{cthd.get_soLuong() * cthd.get_gia()}'"
+            db.execute_query(conn,query)
+            return "Sửa thành công!"
+        except mysql.connector.Error as error:
+            return "Sửa thất bại!"
+        finally:
+            conn.close()
+        
