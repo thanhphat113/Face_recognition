@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost
--- Thời gian đã tạo: Th4 12, 2024 lúc 05:45 AM
+-- Thời gian đã tạo: Th4 12, 2024 lúc 06:15 AM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.0.28
 
@@ -49,6 +49,13 @@ CREATE TABLE `ChiTiet_PN` (
   `tonggia` int(11) DEFAULT NULL,
   `thanhtien` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `ChiTiet_PN`
+--
+
+INSERT INTO `ChiTiet_PN` (`mact_pn`, `mapn`, `madp`, `soluong`, `tonggia`, `thanhtien`) VALUES
+(3, 5, 3, 3, 60000, 180000);
 
 -- --------------------------------------------------------
 
@@ -237,25 +244,24 @@ CREATE TABLE `NhanVien` (
   `manv` int(11) NOT NULL,
   `tennv` varchar(255) DEFAULT NULL,
   `sdt` varchar(255) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `matk` int(11) DEFAULT NULL
+  `email` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `NhanVien`
 --
 
-INSERT INTO `NhanVien` (`manv`, `tennv`, `sdt`, `email`, `matk`) VALUES
-(1, 'Thanh phát', '089842525', 'thanhphat9523@gmail.com', 1),
-(2, 'Nguyễn Văn X', '0987654321', 'nguyenvanx@example.com', 2),
-(3, 'Trần Thị Y', '0901234567', 'tranthiy@example.com', 3),
-(4, 'Lê Văn Z', '0912345678', 'levanz@example.com', 4),
-(5, 'Phạm Thị Tha', '0923456789', 'phamthit@example.com', 5),
-(8, 'Vũ Văn Q', '0956789012', 'vuvanq@example.com', 8),
-(9, 'Lương Thị P', '0967890123', 'luongthip@example.com', 9),
-(10, 'Đặng Văn O', '0978901234', 'dangvano@example.com', 10),
-(11, 'Lê Thị N', '0989012345', 'lethin@example.com', 11),
-(19, 'Thanh Dũng', '021214', 'thanhdung@gmailc.com', NULL);
+INSERT INTO `NhanVien` (`manv`, `tennv`, `sdt`, `email`) VALUES
+(1, 'Thanh phát', '089842525', 'thanhphat9523@gmail.com'),
+(2, 'Nguyễn Văn X', '0987654321', 'nguyenvanx@example.com'),
+(3, 'Trần Thị Y', '0901234567', 'tranthiy@example.com'),
+(4, 'Lê Văn Z', '0912345678', 'levanz@example.com'),
+(5, 'Phạm Thị Tha', '0923456789', 'phamthit@example.com'),
+(8, 'Vũ Văn Q', '0956789012', 'vuvanq@example.com'),
+(9, 'Lương Thị P', '0967890123', 'luongthip@example.com'),
+(10, 'Đặng Văn O', '0978901234', 'dangvano@example.com'),
+(11, 'Lê Thị N', '0989012345', 'lethin@example.com'),
+(19, 'Thanh Dũng', '021214', 'thanhdung@gmailc.com');
 
 -- --------------------------------------------------------
 
@@ -277,7 +283,7 @@ CREATE TABLE `PhieuNhap` (
 
 INSERT INTO `PhieuNhap` (`mapn`, `manv`, `mancc`, `ngaytao`, `tongtien`) VALUES
 (3, 1, 4, '2024-01-01', 135000),
-(5, 1, 1, '2024-04-12', 120000);
+(5, 1, 1, '2024-04-12', 300000);
 
 -- --------------------------------------------------------
 
@@ -320,26 +326,26 @@ CREATE TABLE `TaiKhoan` (
   `username` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `trangthai` tinyint(1) DEFAULT NULL,
-  `maloai` int(11) DEFAULT NULL
+  `maloai` int(11) DEFAULT NULL,
+  `manv` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `TaiKhoan`
 --
 
-INSERT INTO `TaiKhoan` (`matk`, `username`, `password`, `trangthai`, `maloai`) VALUES
-(1, 'thanhphat', '123', 1, 1),
-(2, 'nguyenvanx', '1', 1, 2),
-(3, 'tranthiy', 'password2', 1, 2),
-(4, 'levanz', 'password3', 1, 2),
-(5, 'phamthit', 'password4', 1, 2),
-(6, 'hoangvans', 'password5', 1, 2),
-(7, 'maithir', 'password6', 1, 2),
-(8, 'vuvanq', 'password7', 1, 1),
-(9, 'luongthip', 'password8', 1, 2),
-(10, 'dangvano', 'password9', 1, 2),
-(11, 'lethin', 'password10', 1, 2),
-(13, 'admin', 'admin', 1, 1);
+INSERT INTO `TaiKhoan` (`matk`, `username`, `password`, `trangthai`, `maloai`, `manv`) VALUES
+(2, 'nguyenvanx', '1', 1, 2, 2),
+(3, 'tranthiy', 'password2', 1, 2, 3),
+(4, 'levanz', 'password3', 1, 2, 4),
+(5, 'phamthit', 'password4', 1, 2, 5),
+(6, 'hoangvans', 'password5', 1, 2, 3),
+(7, 'maithir', 'password6', 1, 2, 3),
+(8, 'vuvanq', 'password7', 1, 1, 3),
+(9, 'luongthip', 'password8', 1, 2, 3),
+(10, 'dangvano', 'password9', 1, 2, 3),
+(11, 'lethin', 'password10', 1, 2, 3),
+(13, 'admin', 'admin', 1, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -440,8 +446,7 @@ ALTER TABLE `NhaCungCap`
 -- Chỉ mục cho bảng `NhanVien`
 --
 ALTER TABLE `NhanVien`
-  ADD PRIMARY KEY (`manv`),
-  ADD KEY `FK_nhanvien_taikhoan` (`matk`);
+  ADD PRIMARY KEY (`manv`);
 
 --
 -- Chỉ mục cho bảng `PhieuNhap`
@@ -463,7 +468,8 @@ ALTER TABLE `PhongBenh`
 --
 ALTER TABLE `TaiKhoan`
   ADD PRIMARY KEY (`matk`),
-  ADD KEY `fk_loaitaikhoan` (`maloai`);
+  ADD KEY `fk_loaitaikhoan` (`maloai`),
+  ADD KEY `fk_tk_nv` (`manv`);
 
 --
 -- Chỉ mục cho bảng `ThuNuoi`
@@ -486,7 +492,7 @@ ALTER TABLE `ChiTiet_HD`
 -- AUTO_INCREMENT cho bảng `ChiTiet_PN`
 --
 ALTER TABLE `ChiTiet_PN`
-  MODIFY `mact_pn` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `mact_pn` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `DichVu`
@@ -580,12 +586,6 @@ ALTER TABLE `DichVu_DuocPham`
   ADD CONSTRAINT `fk_duocpham` FOREIGN KEY (`madp`) REFERENCES `DuocPham` (`madp`);
 
 --
--- Các ràng buộc cho bảng `NhanVien`
---
-ALTER TABLE `NhanVien`
-  ADD CONSTRAINT `FK_nhanvien_taikhoan` FOREIGN KEY (`matk`) REFERENCES `TaiKhoan` (`matk`);
-
---
 -- Các ràng buộc cho bảng `PhieuNhap`
 --
 ALTER TABLE `PhieuNhap`
@@ -602,7 +602,8 @@ ALTER TABLE `PhongBenh`
 -- Các ràng buộc cho bảng `TaiKhoan`
 --
 ALTER TABLE `TaiKhoan`
-  ADD CONSTRAINT `fk_loaitaikhoan` FOREIGN KEY (`maloai`) REFERENCES `LoaiTaiKhoan` (`maloai`);
+  ADD CONSTRAINT `fk_loaitaikhoan` FOREIGN KEY (`maloai`) REFERENCES `LoaiTaiKhoan` (`maloai`),
+  ADD CONSTRAINT `fk_tk_nv` FOREIGN KEY (`manv`) REFERENCES `NhanVien` (`manv`);
 
 --
 -- Các ràng buộc cho bảng `ThuNuoi`
