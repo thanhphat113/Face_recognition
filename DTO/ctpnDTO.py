@@ -1,10 +1,17 @@
 class CTPN:
-    def __init__(self, mapn, madp, soluong, gia, thanhtien):
+    def __init__(self, mactpn, mapn, madp, soluong, gia, thanhtien):
+        self.mactpn = mactpn
         self.mapn = mapn
         self.madp = madp
         self.soluong = soluong
         self.gia = gia
         self.thanhtien = thanhtien
+
+    def getMaCTPN(self):
+        return self.mactpn
+    
+    def setMaCTPN(self, mactpn):
+        self.mactpn = mactpn
 
     def getMaPN(self):
         return self.mapn

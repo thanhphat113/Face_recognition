@@ -132,7 +132,7 @@ class Ui_Form(object):
         self.table_ctpn = QtWidgets.QTableWidget(self.groupBox)
         self.table_ctpn.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
         self.table_ctpn.setObjectName("table_ctpn")
-        self.table_ctpn.setColumnCount(5)
+        self.table_ctpn.setColumnCount(6)
         self.table_ctpn.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
         self.table_ctpn.setHorizontalHeaderItem(0, item)
@@ -144,6 +144,8 @@ class Ui_Form(object):
         self.table_ctpn.setHorizontalHeaderItem(3, item)
         item = QtWidgets.QTableWidgetItem()
         self.table_ctpn.setHorizontalHeaderItem(4, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.table_ctpn.setHorizontalHeaderItem(5, item)
         self.table_ctpn.horizontalHeader().setStretchLastSection(True)
         self.table_ctpn.verticalHeader().setVisible(False)
         self.verticalLayout_2.addWidget(self.table_ctpn)
@@ -191,7 +193,7 @@ class Ui_Form(object):
         self.btnAdd.setMinimumSize(QtCore.QSize(100, 30))
         self.btnAdd.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.btnAdd.setStyleSheet("background-color: rgb(159, 255, 153);")
-        self.btnAdd.setIcon(icon)
+        self.btnAdd.setIcon(icon2)
         self.btnAdd.setIconSize(QtCore.QSize(20, 20))
         self.btnAdd.setFlat(False)
         self.btnAdd.setObjectName("btnAdd")
@@ -199,14 +201,14 @@ class Ui_Form(object):
         self.btnEdit = QtWidgets.QPushButton(self.widget_3)
         self.btnEdit.setStyleSheet("background-color: rgb(255, 255, 127);\n"
 "")
-        self.btnEdit.setIcon(icon2)
+        self.btnEdit.setIcon(icon3)
         self.btnEdit.setObjectName("btnEdit")
         self.horizontalLayout.addWidget(self.btnEdit)
         self.btnDelete = QtWidgets.QPushButton(self.widget_3)
         self.btnDelete.setStyleSheet("background-color: rgb(255, 124, 125);\n"
 "\n"
 "")
-        self.btnDelete.setIcon(icon3)
+        self.btnDelete.setIcon(icon4)
         self.btnDelete.setObjectName("btnDelete")
         self.horizontalLayout.addWidget(self.btnDelete)
         self.btnReset = QtWidgets.QPushButton(self.widget_3)
@@ -242,14 +244,16 @@ class Ui_Form(object):
         item.setText(_translate("Form", "Tổng tiền"))
         self.groupBox.setTitle(_translate("Form", "CHI TIẾT PHIẾU NHẬP"))
         item = self.table_ctpn.horizontalHeaderItem(0)
-        item.setText(_translate("Form", "Mã phiếu nhập"))
+        item.setText(_translate("Form", "Mã chi tiết phiếu nhập"))
         item = self.table_ctpn.horizontalHeaderItem(1)
-        item.setText(_translate("Form", "Mã dược phẩm"))
+        item.setText(_translate("Form", "Mã phiếu nhập"))
         item = self.table_ctpn.horizontalHeaderItem(2)
-        item.setText(_translate("Form", "Số lượng"))
+        item.setText(_translate("Form", "Mã dược phẩm"))
         item = self.table_ctpn.horizontalHeaderItem(3)
-        item.setText(_translate("Form", "Đơn giá"))
+        item.setText(_translate("Form", "Số lượng"))
         item = self.table_ctpn.horizontalHeaderItem(4)
+        item.setText(_translate("Form", "Đơn giá"))
+        item = self.table_ctpn.horizontalHeaderItem(5)
         item.setText(_translate("Form", "Thành tiền"))
         self.label.setText(_translate("Form", "Quản lý phiếu nhập"))
         self.btnAdd.setText(_translate("Form", "Thêm"))
@@ -286,11 +290,12 @@ class Ui_Form(object):
         dao = medicineDAO()
         for ctpn in ctpn_list:
             medicine = dao.getMedicineById(ctpn.getMaDP())
-            self.table_ctpn.setItem(row, 0, QtWidgets.QTableWidgetItem(str(ctpn.getMaPN())))
-            self.table_ctpn.setItem(row, 1, QtWidgets.QTableWidgetItem(str(medicine.getTenDP())))
-            self.table_ctpn.setItem(row, 2, QtWidgets.QTableWidgetItem(str(ctpn.getSoLuong())))
-            self.table_ctpn.setItem(row, 3, QtWidgets.QTableWidgetItem(str(ctpn.getGia())))
-            self.table_ctpn.setItem(row, 4, QtWidgets.QTableWidgetItem(str(ctpn.getThanhTien())))
+            self.table_ctpn.setItem(row, 0, QtWidgets.QTableWidgetItem(str(ctpn.getMaCTPN())))
+            self.table_ctpn.setItem(row, 1, QtWidgets.QTableWidgetItem(str(ctpn.getMaPN())))
+            self.table_ctpn.setItem(row, 2, QtWidgets.QTableWidgetItem(str(medicine.getTenDP())))
+            self.table_ctpn.setItem(row, 3, QtWidgets.QTableWidgetItem(str(ctpn.getSoLuong())))
+            self.table_ctpn.setItem(row, 4, QtWidgets.QTableWidgetItem(str(ctpn.getGia())))
+            self.table_ctpn.setItem(row, 5, QtWidgets.QTableWidgetItem(str(ctpn.getThanhTien())))
             row = row +1
 
     def loadPhieuNhapData(self):
@@ -397,10 +402,13 @@ class Ui_Form(object):
             return
         
         selected_row = items_ctpn[0].row()
-        mapn = self.table_ctpn.item(selected_row, 0).text()
-        madp = self.table_ctpn.item(selected_row, 1).text()
-        sl = self.table_ctpn.item(selected_row, 2).text()
-        gia = self.table_ctpn.item(selected_row, 3).text()
+        mactpn = self.table_ctpn.item(selected_row, 0).text()
+        mapn = self.table_ctpn.item(selected_row, 1).text()
+        madp = self.table_ctpn.item(selected_row, 2).text()
+        sl = self.table_ctpn.item(selected_row, 3).text()
+        gia = self.table_ctpn.item(selected_row, 4).text()
+        thanhtien = self.table_ctpn.item(selected_row, 5).text()
+        tongtien = self.table_phieunhap.item(selected_pn[0].row(), 4).text()
         cbDP = self.ctpn_dialog.cbMaDP
         for count in range(cbDP.count()):
             if madp in cbDP.itemText(count):
@@ -410,7 +418,7 @@ class Ui_Form(object):
         self.ctpn_dialog.txtPrice.setText(gia)
         
         self.ctpn_dialog.cbMaDP.currentIndexChanged.connect(self.loadPriceOfMedicine)
-        self.ctpn_dialog.btnAccept.clicked.connect(lambda: self.updateCTPN(mapn))
+        self.ctpn_dialog.btnAccept.clicked.connect(lambda: self.updateCTPN(CTPN(mactpn, mapn, madp, sl, gia, thanhtien), tongtien))
         dialog.exec_()
         dialog.show()
 
@@ -464,9 +472,9 @@ class Ui_Form(object):
     
         ctdao = ctpnDAO()
         pndao = phieunhapDAO()
-        ctdao.insertCTPN(CTPN(mapn, madp, sl, gia, thanhtien))
+        ctdao.insertCTPN(CTPN(None, mapn, madp, sl, gia, thanhtien))
         pndao.updateTotalPrice(mapn, totalprice)
-        msg.show_info_messagebox("Thêm phiếu nhập thành công")
+        msg.show_info_messagebox("Thêm chi tiết phiếu nhập thành công")
         self.on_table_phieunhap_clicked()
         self.loadPhieuNhapData()
 
@@ -483,22 +491,25 @@ class Ui_Form(object):
         dao = phieunhapDAO()
         dao.updatePhieuNhap(PhieuNhap(pn.getMaPN(), manv, mancc, ngaytao, tongtien))
         msg.show_info_messagebox("Sửa phiếu nhập thành công")
-        self.on_table_phieunhap_clicked()
+        self.loadPhieuNhapData()
 
-    def updateCTPN(self, mapn):
+    def updateCTPN(self, ctpn, tongtien):
         madp = self.ctpn_dialog.cbMaDP.currentText().split("-")[0]
         gia = self.ctpn_dialog.txtPrice.text()
         sl = self.ctpn_dialog.txtQty.text()
         thanhtien = int(gia) * int(sl)
-
+        ttmoi = int(tongtien) - int(ctpn.getThanhTien()) + int(thanhtien)
         if not sl:
             msg.show_warning_messagebox("Vui lòng nhập đầy đủ dữ liệu")
             return
         
-        dao = ctpnDAO()
-        dao.updateCTPN(CTPN(mapn, madp, sl, gia, thanhtien))
-        msg.show_info_messagebox("Sửa phiếu nhập thành công")
+        ctdao = ctpnDAO()
+        pndao = phieunhapDAO()
+        ctdao.updateCTPN(CTPN(ctpn.getMaCTPN(), None, madp, sl, gia, thanhtien))
+        pndao.updateTotalPrice(ctpn.getMaPN(), ttmoi)
+        msg.show_info_messagebox("Sửa chi tiết phiếu nhập thành công")
         self.on_table_phieunhap_clicked()
+        self.loadPhieuNhapData()
 
     def deletePhieuNhap(self):
         selected_items = self.table_phieunhap.selectedItems()
@@ -521,13 +532,22 @@ class Ui_Form(object):
         
         items_ctpn = self.table_ctpn.selectedItems()
         if items_ctpn:
-            selected_row = items_ctpn[0].row()
-            mapn = self.table_ctpn.item(selected_row, 0).text()
-            madp = self.table_ctpn.item(selected_row, 1).text()
-            dao = ctpnDAO()
-            dao.deleteCTPN(mapn, madp)
+            selected_row_ctpn = items_ctpn[0].row()
+            selected_row_pn = items_pn[0].row()
+            mactpn = self.table_ctpn.item(selected_row_ctpn, 0).text()
+            mapn = self.table_ctpn.item(selected_row_ctpn, 1).text()
+            thanhtien = self.table_ctpn.item(selected_row_ctpn, 5).text()
+
+            tongtien = self.table_phieunhap.item(selected_row_pn, 4).text()
+            ttmoi = int(tongtien) - int(thanhtien)
+
+            ctdao = ctpnDAO()
+            pndao = phieunhapDAO()
+            ctdao.deleteCTPN(mactpn)
+            pndao.updateTotalPrice(mapn, ttmoi)
             msg.show_warning_messagebox("Xóa chi tiết phiếu nhập đã chọn thành công")
             self.on_table_phieunhap_clicked()
+            self.loadPhieuNhapData()
         else:
             msg.show_warning_messagebox("Vui lòng chọn 1 dòng trong bảng chi tiết phiếu nhập")
 

@@ -18,7 +18,7 @@ class ctpnDAO:
             query=f"select * from chitiet_pn where mapn = {mapn}"
             list=db.execute_fetch_all(conn,query)
             for ct in list:
-                ctpn = CTPN(ct[0],ct[1],ct[2],ct[3],ct[4])
+                ctpn = CTPN(ct[0],ct[1],ct[2],ct[3],ct[4],ct[5])
                 ctpn_list.append(ctpn)
             return ctpn_list
         except mysql.connector.Error as error:
@@ -41,17 +41,17 @@ class ctpnDAO:
         conn = self.conn
         try:
             conn.connect()
-            query=f"update chitiet_pn set madp = '{ctpn.getMaDP()}', soluong = {ctpn.getSoLuong()}, tonggia = '{ctpn.getGia()}', thanhtien = '{ctpn.getThanhTien()}' where mapn = '{ctpn.getMaPN()}'"
+            query=f"update chitiet_pn set madp = '{ctpn.getMaDP()}', soluong = {ctpn.getSoLuong()}, tonggia = '{ctpn.getGia()}', thanhtien = '{ctpn.getThanhTien()}' where mact_pn = '{ctpn.getMaCTPN()}'"
             db.execute_query(conn, query)
             return "Sửa thành công!"
         except mysql.connector.Error as error:
             return "Sửa thất bại!"
         
-    def deleteCTPN(self, mapn, madp):
+    def deleteCTPN(self, mactpn):
         conn = self.conn
         try:
             conn.connect()
-            query=f"delete from chitiet_pn where mapn = '{mapn}' and madp = '{madp}'"
+            query=f"delete from chitiet_pn where mact_pn = '{mactpn}'"
             db.execute_query(conn, query)
             return "Xóa thành công!"
         except mysql.connector.Error as error:
