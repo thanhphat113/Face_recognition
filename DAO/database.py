@@ -49,3 +49,4 @@ def execute_query(connection, query):
         connection.commit()
     except mysql.connector.Error as error:
         print("Error execute query: {}".format(error))
+        

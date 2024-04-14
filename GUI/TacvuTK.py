@@ -53,15 +53,21 @@ class Ui_Dialog(object):
         self.title.setStyleSheet("border:none;")
         self.title.setAlignment(QtCore.Qt.AlignLeft)
         self.title.setObjectName("title")
+        self.txtMaNV = QtWidgets.QLineEdit(Dialog)
+        self.txtMaNV.setGeometry(QtCore.QRect(170, 90, 181, 22))
+        self.txtMaNV.setObjectName("txtMaNV")
+        self.txtMaNV.setEnabled(False)
         self.txtName = QtWidgets.QLineEdit(Dialog)
         self.txtName.setGeometry(QtCore.QRect(170, 170, 181, 21))
         self.txtName.setObjectName("txtName")
         self.txtPwd = QtWidgets.QLineEdit(Dialog)
         self.txtPwd.setGeometry(QtCore.QRect(170, 210, 181, 21))
         self.txtPwd.setObjectName("txtPwd")
-        self.txtStatus = QtWidgets.QLineEdit(Dialog)
-        self.txtStatus.setGeometry(QtCore.QRect(170, 250, 181, 21))
-        self.txtStatus.setObjectName("txtStatus")
+        self.cbbStatus = QtWidgets.QComboBox(Dialog)
+        self.cbbStatus.addItem("Không hoạt động")
+        self.cbbStatus.addItem("Hoạt động")
+        self.cbbStatus.setGeometry(QtCore.QRect(170, 250, 181, 21))
+        self.cbbStatus.setObjectName("cbbStatus")
         self.btnAccept = QtWidgets.QPushButton(Dialog)
         self.btnAccept.setGeometry(QtCore.QRect(80, 300, 113, 32))
         self.btnAccept.setCheckable(True)
@@ -80,9 +86,6 @@ class Ui_Dialog(object):
         self.cbMaLTK.setGeometry(QtCore.QRect(170, 130, 181, 22))
         self.cbMaLTK.setObjectName("cbMaLTK")
 
-        self.cbMaNV = QtWidgets.QComboBox(Dialog)
-        self.cbMaNV.setGeometry(QtCore.QRect(170, 90, 181, 22))
-        self.cbMaNV.setObjectName("cbMaNV")
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -114,54 +117,19 @@ class Ui_Dialog(object):
         ui.label.setText(self._translate("Dialog", self.insert_data()))
         Dialog.exec_()
         
-        
-    def insert_data(self):
-        name = self.txtName.text()
-        pwd = self.txtPwd.text()
-        status = self.txtStatus.text()
-        accType = self.cbMaLTK.currentIndex()+1
-
-        accDAO = taikhoanDAO()
-        if name and pwd:
-            if int(status) == 0 or int(status) == 1:
-                account = taikhoan("", name, pwd, status, accType)
-                result = accDAO.insert(account)
-                if result == "Thêm thành công !!!!":
-                    self.txtName.setText("")
-                    self.txtPwd.setText("")
-                    self.txtStatus.setText("")
-                    self.cbMaLTK.setCurrentText("")
-                return result
-            else:
-                return 'Trạng thái phải có giá trị là 1 (hoạt động) hoặc 0 (không hoạt động) !!!!'
-        else: 
-            return 'Username và Password không được rỗng !!!!'
-        
     def update_data(self, id):
         conn = db.connect_to_database()
         try:
             name = self.txtName.text()
             pwd = self.txtPwd.text()
-            status = self.txtStatus.text()
+            matk = self.label_visible.text()
+            status = self.cbbStatus.currentIndex()
             accType = self.cbMaLTK.currentIndex()+1
-            empID = self.cbMaNV.currentIndex()+1
 
             conn.connect()
-            query = f"update nhanvien set matk = '{id}' where manv = '{empID}'"
+            query = f"update TaiKhoan set username = '{name}',password = '{pwd}', trangthai = '{status}', maloai ='{accType}' where matk = '{matk}'"
             db.execute_query(conn,query)
-
-            accDAO = taikhoanDAO()
-            if name and pwd:
-                if status == "Hoạt động":
-                    status = 1
-                elif status == "Không hoạt động":
-                    status = 0
-                elif status != "1" and status != "0":
-                    return 'Trạng thái phải có giá trị là 1 (hoạt động) hoặc 0 (không hoạt động) !!!!'
-                account = taikhoan(id, name, pwd, status, accType)
-                return accDAO.update(account)
-            else: 
-                return 'Username và Password không được rỗng !!!!'
+            return "Cập nhật thành công"
         except mysql.connector.Error as error:
             return f'Lỗi: {error}'
         finally:

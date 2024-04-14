@@ -14,6 +14,7 @@ import DAO.database as db
 
 class Ui_Form(object):
     def setupUi(self, Form):
+        self.tb = tb.Ui_Dialog()
         Form.setObjectName("Form")
         Form.resize(800, 500)
         Form.setStyleSheet("background-color: rgb(255, 255, 255);")
@@ -63,6 +64,13 @@ class Ui_Form(object):
         self.btnUpdate.setIconSize(QtCore.QSize(20, 20))
         self.btnUpdate.setObjectName("btnUpdate")
         self.btnUpdate.clicked.connect(self.update_NV)
+        self.btnRefesh = QtWidgets.QPushButton(parent=self.widget_3)
+        self.btnRefesh.setStyleSheet("background-color: rgb(188, 100, 255);")
+        # self.btnRefesh.setIcon(icon2)
+        self.btnRefesh.setIconSize(QtCore.QSize(20, 20))
+        self.btnRefesh.setObjectName("btnRefesh")
+        
+        self.horizontalLayout.addWidget(self.btnRefesh)
         self.horizontalLayout.addWidget(self.btnUpdate)
 
         self.gridLayout_2.addLayout(self.horizontalLayout, 0, 0, 1, 1)
@@ -160,7 +168,10 @@ class Ui_Form(object):
         Form.setWindowTitle(_translate("Form", "Form"))
         self.label.setText(_translate("Form", "Quản lý tài khoản"))
         self.btnUpdate.setText(_translate("Form", "Sửa"))
+        self.btnRefesh.setText(_translate("Form", "Reload"))
         self.btnUpdate.setMinimumSize(100, 30)
+        self.btnRefesh.setMinimumSize(100, 30)
+        self.btnRefesh.clicked.connect(self.upload_list)
         self.label_2.setText(_translate("Form", "Tìm kiếm "))
 
         self.pushButton_4.setText(_translate("Form", "Tìm"))
@@ -183,25 +194,15 @@ class Ui_Form(object):
     
 
     def upload_list(self):
-        accType_list = loaitaikhoanDAO().find_All()
         taikhoan_list = taikhoanDAO().find_All()
-        employee_list = employeeDAO().find_All()
         self.tableWidget.setRowCount(0)
-        for taikhoan in taikhoan_list:
-            for accType in accType_list:
-                if accType.maloai == taikhoan.maloai:
-                    if taikhoan.trangthai == 1:
-                        temp = "Hoạt động"
-                    else:
-                        temp = "Không hoạt động"
-                    for emp in employee_list:
-                        if emp.matk == taikhoan.matk:
-                            data = [taikhoan.matk, taikhoan.username, taikhoan.password, temp, accType.tenloai, emp.tennv]
-                            self.add_row_to_table(data)
-                            break
-                    break
+        for tk in taikhoan_list:
+            trangthai = 'Không hoạt động'
+            if tk.trangthai == 1 :
+                trangthai = 'Hoạt động'
+            data = [tk.matk, tk.username, tk.password, trangthai, tk.loai[1], tk.nhanvien.tennv]
+            self.add_row_to_table(data)
                     
-                
     
 
     def add_row_to_table(self, data):
@@ -216,9 +217,6 @@ class Ui_Form(object):
         ui = tv.Ui_Dialog()
         ui.setupUi(Dialog,2)    
         ui.title.setText(self._translate("Dialog", "Sửa thông tin"))
-        employee_list = employeeDAO().find_All()
-        for emp in employee_list:
-            ui.cbMaNV.addItem(f"{emp.tennv}")
         accType_list = loaitaikhoanDAO().find_All()
         for accType in accType_list:
             ui.cbMaLTK.addItem(f"{accType.tenloai}")
@@ -229,17 +227,16 @@ class Ui_Form(object):
             ui.label_visible.setText(self._translate("Dialog",row_data[0]))
             ui.txtName.setText(self._translate("Dialog",row_data[1]))
             ui.txtPwd.setText(self._translate("Dialog",row_data[2]))
-            ui.txtStatus.setText(self._translate("Dialog",row_data[3]))
+            ui.cbbStatus.setCurrentText(self._translate("Dialog",row_data[3]))
+            ui.txtMaNV.setText(self._translate("Dialog",row_data[5]))
             account_list = taikhoanDAO().findByAccTypeName(row_data[4])
             for acc in account_list:
-                ui.cbMaLTK.setCurrentIndex(acc.maloai - 1)
-            sub_employee_list = taikhoanDAO().findByEmployeeName(row_data[5])
-            for sub_emp in sub_employee_list:
-                ui.cbMaNV.setCurrentIndex(sub_emp.manv - 1)    
+                ui.cbMaLTK.setCurrentIndex(acc.maloai - 1)   
+            Dialog.exec_()
+            self.upload_list()
         else: 
-            tb.Ui_Dialog.thongBao("Vui lòng chọn 1 dòng để thực hiện sửa")
-        Dialog.exec_()
-        self.upload_list()
+            self.tb.thongBao('Vui lòng chọn 1 dòng để thực hiện sửa')
+        
 
     
     def changeEnable(self):

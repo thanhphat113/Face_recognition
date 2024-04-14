@@ -35,15 +35,18 @@ class Login(QWidget, Ui_login_form):
             self.thongbao.thongBao("Không được bỏ trống tài khoản hoặc mật khẩu")
         else:
             tk = taikhoanDAO()
-            matk,loai = tk.checkPassword(username,password)
-            nhanvien = self.empDAO.findByMatk(matk)
-            if loai is None:
+            taikhoan = tk.checkPassword(username,password)
+            nhanvien = self.empDAO.getEmployeeById(taikhoan[5])
+            
+            if taikhoan[3] == 0:
+                self.thongbao.thongBao("Tài khoản của bạn đã bị ngưng hoạt động")
+            elif taikhoan[5] is None:
                 self.thongbao.thongBao("Bạn đã nhập sai mật khẩu hoặc tài khoản")
-            elif loai == 1:
+            elif taikhoan[4] == 1:
                 self.sidebar = Main_Page(1,nhanvien)
                 self.close()
                 self.sidebar.show()
-            elif loai == 2:
+            elif taikhoan[4] == 2:
                 self.sidebar = Main_Page(2,nhanvien)
                 self.hide()
                 self.sidebar.show()
@@ -58,8 +61,6 @@ class Main_Page(QMainWindow, Ui_MainWindow):
         self.window = QMainWindow()
         self.setupUi(self)
         
-        if self.nhanvien is None:
-            self.btnAcc.setVisible(False)
             
         self.btnAcc.clicked.connect(lambda: self.showInfor(self.nhanvien))
             

@@ -1,10 +1,9 @@
 class employee:
-    def __init__(self,manv,tennv,sdt ,email,matk):
+    def __init__(self,manv,tennv,sdt ,email):
         self.__manv=manv
         self.__tennv=tennv
         self.__email=email
         self.__sdt=sdt
-        self.__matk=matk
     
     @property
     def manv(self):
@@ -38,11 +37,4 @@ class employee:
     def sdt(self,sdt):
         self.__sdt=sdt
         
-    @property
-    def matk(self):
-        return self.__matk
-    
-    @matk.setter
-    def matk(self,matk):
-        self.__matk=matk
         

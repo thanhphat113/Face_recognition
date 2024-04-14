@@ -7,7 +7,6 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import DAO.database as db
 from DTO.taikhoanDTO import taikhoan
 from DTO.employeeDTO import employee
-from DAO.employeeDAO import employeeDAO
 
 
 
@@ -24,7 +23,7 @@ class taikhoanDAO:
             query = "Select * from TaiKhoan"
             list = db.execute_fetch_all(conn, query)
             for item in list:
-                account = taikhoan(item[0], item[1], item[2], item[3], item[4])
+                account = taikhoan(item[0], item[1], item[2], item[3], item[4],item[5])
                 taikhoan_list.append(account)
             return taikhoan_list
         except mysql.connector.Error as error:
@@ -72,12 +71,8 @@ class taikhoanDAO:
         try:
             self.conn.connect()
             query = f"Select * from TaiKhoan where username = BINARY '{username}' and password = BINARY '{password}'"
-            result = db.execute_fetch_all(self.conn,query)
-            if not result:
-                return None,None
-            for tk in result:
-                account = taikhoan(tk[0],tk[1],tk[2],tk[3],tk[4])
-            return account.matk,account.maloai
+            result = db.execute_fetch_one(self.conn,query)
+            return result
         except mysql.connector.Error as error:
             return error
         finally:
@@ -91,7 +86,7 @@ class taikhoanDAO:
             list = db.execute_fetch_all(self.conn,query)
             if list is not None:
                 for account in list:
-                    result = taikhoan(account[0],account[1],account[2],account[3],account[4])
+                    result = taikhoan(account[0],account[1],account[2],account[3],account[4],account[5])
                     account_list.append(result)
             return account_list
         except mysql.connector.Error as error:
@@ -106,7 +101,7 @@ class taikhoanDAO:
             list = db.execute_fetch_all(self.conn,query)
             if list is not None:
                 for account in list:
-                    result = taikhoan(account[0],account[1],account[2],account[3],account[4])
+                    result = taikhoan(account[0],account[1],account[2],account[3],account[4],account[5])
                     account_list.append(result)
             return account_list
         except mysql.connector.Error as error:
@@ -121,7 +116,7 @@ class taikhoanDAO:
             list = db.execute_fetch_all(self.conn,query)
             if list is not None:
                 for account in list:
-                    result = taikhoan(account[0],account[1],account[2],account[3],account[4])
+                    result = taikhoan(account[0],account[1],account[2],account[3],account[4],account[5])
                     account_list.append(result)
             return account_list
         except mysql.connector.Error as error:
@@ -135,7 +130,7 @@ class taikhoanDAO:
             list = db.execute_fetch_all(self.conn,query)
             if list is not None:
                 for account in list:
-                    result = taikhoan(account[0],account[1],account[2],account[3],account[4])
+                    result = taikhoan(account[0],account[1],account[2],account[3],account[4],account[5])
                     account_list.append(result)
             return account_list
         except mysql.connector.Error as error:
@@ -149,7 +144,7 @@ class taikhoanDAO:
             list = db.execute_fetch_all(self.conn,query)
             if list is not None:
                 for account in list:
-                    result = taikhoan(account[0],account[1],account[2],account[3],account[4])
+                    result = taikhoan(account[0],account[1],account[2],account[3],account[4],account[5])
                     account_list.append(result)
             return account_list
         except mysql.connector.Error as error:
@@ -163,7 +158,7 @@ class taikhoanDAO:
             list = db.execute_fetch_all(self.conn,query)
             if list is not None:
                 for emp in list:
-                    result = employee(emp[0],emp[1],emp[2],emp[3],emp[4])
+                    result = employee(emp[0],emp[1],emp[2],emp[3])
                     employee_list.append(result)
             return employee_list
         except mysql.connector.Error as error:
@@ -173,7 +168,7 @@ class taikhoanDAO:
         tk = None
         try:
             self.conn.connect()
-            query =f"SELECT tk.matk FROM TaiKhoan as tk join NhanVien as nv on tk.matk=nv.matk where tk.password = '{Oldpass}' and nv.manv ='{manv}'"
+            query =f"SELECT matk FROM TaiKhoan where password = '{Oldpass}' and manv ='{manv}'"
             tk = db.execute_fetch_one(self.conn,query)
             if tk is not None:
                 return tk[0]
