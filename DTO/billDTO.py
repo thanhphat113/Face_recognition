@@ -1,3 +1,6 @@
+from DAO.employeeDAO import employeeDAO 
+from DAO.customerDAO import customerDAO 
+
 class bill:
     max_mahd = 0
     def __init__(self, mahd : int, ngaytao : str, tongtien : int, manv : int, makh : int):
@@ -35,3 +38,13 @@ class bill:
 
     def get_makh(self):
         return self.__makh
+    
+    def getNhanVien(self):
+        empDAO = employeeDAO()
+        self.nhanvien = empDAO.getEmployeeById(self.get_manv())
+        return self.nhanvien
+    
+    def getKH(self):
+        cusDao = customerDAO()
+        self.kh = cusDao.findByid(self.get_makh())
+        return self.kh

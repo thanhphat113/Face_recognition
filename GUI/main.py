@@ -6,7 +6,7 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from GUI.sidebar import Ui_MainWindow
 from GUI.login import Ui_login_form
-from GUI import phongbenh as pb, nhanvien as nv ,dichvu as dv, thunuoi as tn, home ,khachhang as kh, phieunhap as pn,duocpham as dp,taikhoan as tk,nhacungcap as ncc,thongtin as tt,doimk as mk
+from GUI import phongbenh as pb, nhanvien as nv ,dichvu as dv, thunuoi as tn, home ,khachhang as kh, hoadon,phieunhap as pn,duocpham as dp,taikhoan as tk,nhacungcap as ncc,thongtin as tt,doimk as mk
 from DAO.serviceDAO import serviceDAO
 from DAO.taikhoanDAO import taikhoanDAO
 from DAO.employeeDAO import employeeDAO
@@ -99,6 +99,9 @@ class Main_Page(QMainWindow, Ui_MainWindow):
         self.taikhoan_form = tk.Ui_Form()
         self.taikhoan_form.setupUi(self.account_page)
 
+        self.hd_form = hoadon.Ui_Form()
+        self.hd_form.setupUi(self.bill_page)
+
         self.eventHandling()
         self.pushButton_12.clicked.connect(self.dangXuat)
         self.pushButton_5.clicked.connect(self.dangXuat)
@@ -137,20 +140,22 @@ class Main_Page(QMainWindow, Ui_MainWindow):
         
     def showAccount_Pages(self):
         self.stackedWidget.setCurrentIndex(5)
-           
-    def showPhieuNhap_Pages(self):
+
+    def showHoaDon_Pages(self):
         self.stackedWidget.setCurrentIndex(6)
+
+    def showPhieuNhap_Pages(self):
+        self.stackedWidget.setCurrentIndex(7)
         
     def showNcc_Pages(self):
-        self.stackedWidget.setCurrentIndex(7)
-
-    def showMedicine_Pages(self):
         self.stackedWidget.setCurrentIndex(8)
 
-    def showService_Pages(self):
+    def showMedicine_Pages(self):
         self.stackedWidget.setCurrentIndex(9)
-        
 
+    def showService_Pages(self):
+        self.stackedWidget.setCurrentIndex(10)
+        
     # Xử lý giao diện
     def eventHandling(self):
         self.btnEmployee.clicked.connect(self.showEmployee_Pages)
@@ -163,6 +168,7 @@ class Main_Page(QMainWindow, Ui_MainWindow):
         self.btnService.clicked.connect(self.showService_Pages)
         self.btnPhieuNhap.clicked.connect(self.showPhieuNhap_Pages)
         self.btnMedicine.clicked.connect(self.showMedicine_Pages)
+        self.btnBill.clicked.connect(self.showHoaDon_Pages)
         self.iconEmployee.clicked.connect(self.showEmployee_Pages)
         self.iconCustomer.clicked.connect(self.showCustomer_Pages)
         self.iconAccount.clicked.connect(self.showAccount_Pages)
@@ -173,6 +179,7 @@ class Main_Page(QMainWindow, Ui_MainWindow):
         self.iconService.clicked.connect(self.showService_Pages)
         self.iconPhieuNhap.clicked.connect(self.showPhieuNhap_Pages)
         self.iconMedicine.clicked.connect(self.showMedicine_Pages)
+        self.iconBill.clicked.connect(self.showHoaDon_Pages)
 
     def loadServiceData(self):
         dao = serviceDAO()
