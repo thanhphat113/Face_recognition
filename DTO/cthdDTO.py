@@ -1,9 +1,16 @@
 class CTHD:
-    def __init__(self, mahd, madv, soluong, gia):
+    def __init__(self, macthd, mahd, madv, soluong, gia):
+        self.macthd = macthd
         self.mahd = mahd
         self.madv = madv
         self.soluong = soluong
         self.gia = gia
+
+    def get_macthd(self):
+        return self.macthd
+    
+    def set_macthd(self, macthd):
+        self.macthd = macthd
 
     def get_mahd(self):
         return self.mahd
