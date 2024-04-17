@@ -137,6 +137,19 @@ class Ui_Form(object):
                         # face_image = cv2.cvtColor(face_image,cv2.COLOR_BAYER_BRG2)
                         self.count += 1  
                         cv2.imwrite(f'{self.parent_directory}/{self.id}_{self.count}.png',face_image)
+                        
+                        img1 = self.phongTo(face_image)
+                        cv2.imwrite(f'{self.parent_directory}/{self.id}_phongto_{self.count}.png',img1)
+                        
+                        img2 = self.doimau(face_image)
+                        cv2.imwrite(f'{self.parent_directory}/{self.id}_doimau_{self.count}.png',img2)
+                        
+                        img3 = self.doChoi(face_image)
+                        cv2.imwrite(f'{self.parent_directory}/{self.id}_dochoi_{self.count}.png',img3)
+                        
+                        img4 = self.latNgang(face_image)
+                        cv2.imwrite(f'{self.parent_directory}/{self.id}_latngang_{self.count}.png',img4)
+                        
             
         
     def check_directory(self):
@@ -156,6 +169,38 @@ class Ui_Form(object):
             self.tb.thongBao(f"Lỗi: {self.parent_directory} - {e.strerror}")
         
         
+    def xoayAnh(self,img):
+        angle = 30
+        rows, cols = img.shape[:2]
+        M = cv2.getRotationMatrix2D((cols / 2, rows / 2), angle, 1)
+        rotated_img = cv2.warpAffine(img, M, (cols, rows))
+        return rotated_img
+
+    def phongTo(self,img):
+        scale_percent = 200  
+        width = int(img.shape[1] * scale_percent / 100)
+        height = int(img.shape[0] * scale_percent / 100)
+        resized_img = cv2.resize(img, (width, height))
+        return resized_img
+
+    def latNgang(self,img):
+        flipped_img = cv2.flip(img, 1)  # Lật theo chiều ngang
+        return flipped_img
+
+    def doChoi(self,img):
+        brightness = 80
+        contrast = 0.5
+        adjusted_img = cv2.convertScaleAbs(img, alpha=contrast, beta=brightness)
+        return adjusted_img
+
+    def doimau(self,img):
+        hsv_img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+        hue_shift = 20
+        hsv_img[:, :, 0] = (hsv_img[:, :, 0] + hue_shift) % 180
+        color_shifted_img = cv2.cvtColor(hsv_img, cv2.COLOR_HSV2BGR)  
+        return color_shifted_img      
+
+
 
 if __name__ == "__main__":
     import sys

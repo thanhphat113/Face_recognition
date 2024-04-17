@@ -36,25 +36,27 @@ class Login(QWidget, Ui_login_form):
         else:
             tk = taikhoanDAO()
             taikhoan = tk.checkPassword(username,password)
-            nhanvien = self.empDAO.getEmployeeById(taikhoan[5])
+            if taikhoan is not None:
+                nhanvien = self.empDAO.getEmployeeById(taikhoan[5])
             
-            if taikhoan[3] == 0:
-                self.thongbao.thongBao("Tài khoản của bạn đã bị ngưng hoạt động")
-            elif taikhoan[5] is None:
-                self.thongbao.thongBao("Bạn đã nhập sai mật khẩu hoặc tài khoản")
-            elif taikhoan[4] == 1:
-                self.sidebar = Main_Page(1,nhanvien)
-                self.close()
-                self.sidebar.show()
-            elif taikhoan[4] == 2:
-                self.sidebar = Main_Page(2,nhanvien)
-                self.hide()
-                self.sidebar.show()
+                if taikhoan[3] == 0:
+                    self.thongbao.thongBao("Tài khoản của bạn đã bị ngưng hoạt động")
+                # elif taikhoan[5] is None:
+                #     self.thongbao.thongBao("Bạn đã nhập sai mật khẩu hoặc tài khoản")
+                elif taikhoan[4] == 1:
+                    self.sidebar = Main_Page(nhanvien)
+                    self.close()
+                    self.sidebar.show()
+                elif taikhoan[4] == 2:
+                    self.sidebar = Main_Page(nhanvien,2)
+                    self.hide()
+                    self.sidebar.show()
+            else: self.thongbao.thongBao("Bạn đã nhập sai mật khẩu hoặc tài khoản")
         
                     
     
 class Main_Page(QMainWindow, Ui_MainWindow):
-    def __init__(self,type, nhanvien:employee):
+    def __init__(self, nhanvien:employee, type=1):
         self.nhanvien = nhanvien
         super().__init__()
 
@@ -115,8 +117,13 @@ class Main_Page(QMainWindow, Ui_MainWindow):
             self.iconEmployee.setVisible(False)
             self.btnPhieuNhap.setVisible(False)
             self.iconPhieuNhap.setVisible(False)
-    
-    
+            self.btnAccount.setVisible(False)
+            self.iconAccount.setVisible(False)
+            self.btnBill.setVisible(False)
+            self.iconBill.setVisible(False)
+            self.btnNcc.setVisible(False)
+            self.iconNcc.setVisible(False)
+            
     
     def dangXuat(self):
         self.login = Login()
