@@ -131,6 +131,18 @@ class Ui_MainWindow(object):
         self.iconAccount.setObjectName("iconAccount")
         self.verticalLayout.addWidget(self.iconAccount)
         
+        #Icon hóa đơn
+        self.iconBill = QtWidgets.QPushButton(self.icon_menu_widget)
+        self.iconBill.setText("")
+        icon11 = QtGui.QIcon()
+        icon11.addPixmap(QtGui.QPixmap("img/bill_52px.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.iconBill.setIcon(icon11)
+        self.iconBill.setIconSize(QtCore.QSize(20, 20))
+        self.iconBill.setCheckable(True)
+        self.iconBill.setAutoExclusive(True)
+        self.iconBill.setObjectName("iconBill")
+        self.verticalLayout.addWidget(self.iconBill)
+
         #Icon phiếu nhập
         self.iconPhieuNhap = QtWidgets.QPushButton(self.icon_menu_widget)
         self.iconPhieuNhap.setText("")
@@ -142,6 +154,7 @@ class Ui_MainWindow(object):
         self.iconPhieuNhap.setAutoExclusive(True)
         self.iconPhieuNhap.setObjectName("iconPhieuNhap")
         self.verticalLayout.addWidget(self.iconPhieuNhap)
+        
         
         #Icon nhà cung cấp
         self.iconNcc = QtWidgets.QPushButton(self.icon_menu_widget)
@@ -301,6 +314,15 @@ class Ui_MainWindow(object):
         self.btnAccount.setAutoExclusive(True)
         self.btnAccount.setObjectName("btnAccount")
         self.verticalLayout_2.addWidget(self.btnAccount)
+
+        #Nút hóa đơn
+        self.btnBill = QtWidgets.QPushButton(self.menu_widget)
+        self.btnBill.setIcon(icon11)
+        self.btnBill.setIconSize(QtCore.QSize(20, 20))
+        self.btnBill.setCheckable(True)
+        self.btnBill.setAutoExclusive(True)
+        self.btnBill.setObjectName("btnBill")
+        self.verticalLayout_2.addWidget(self.btnBill)
         
         #Nút phiếu nhập
         self.btnPhieuNhap = QtWidgets.QPushButton(self.menu_widget)
@@ -421,6 +443,11 @@ class Ui_MainWindow(object):
         self.account_page.setObjectName("account_page")
         self.stackedWidget.addWidget(self.account_page)
         
+        #Hóa đơn
+        self.bill_page = QtWidgets.QWidget()
+        self.bill_page.setObjectName("bill_page")
+        self.stackedWidget.addWidget(self.bill_page)
+
         #Phiếu nhập
         self.phieunhap_page = QtWidgets.QWidget()
         self.phieunhap_page.setObjectName("phieunhap_page")
@@ -441,10 +468,6 @@ class Ui_MainWindow(object):
         self.service_Page.setObjectName("service_Page")
         self.stackedWidget.addWidget(self.service_Page)
         
-        # Doanh thu
-        self.chart_Page = QtWidgets.QWidget()
-        self.chart_Page.setObjectName("chart_Page")
-        self.stackedWidget.addWidget(self.chart_Page)
         
         self.verticalLayout_5.addWidget(self.stackedWidget)
         self.gridLayout.addWidget(self.widget_3, 0, 2, 1, 1)
@@ -487,6 +510,10 @@ class Ui_MainWindow(object):
         self.btnMedicine.toggled['bool'].connect(self.iconMedicine.setChecked)
         self.iconMedicine.toggled['bool'].connect(self.btnMedicine.setChecked)
         
+        #Sự kiện hóa đơn
+        self.btnBill.toggled['bool'].connect(self.iconBill.setChecked)
+        self.iconBill.toggled['bool'].connect(self.btnBill.setChecked)
+
         #Sự kiện phiếu nhập
         self.btnPhieuNhap.toggled['bool'].connect(self.iconPhieuNhap.setChecked)
         self.iconPhieuNhap.toggled['bool'].connect(self.btnPhieuNhap.setChecked)
@@ -508,6 +535,7 @@ class Ui_MainWindow(object):
         self.btnBed.setText(_translate("MainWindow", "Phòng bệnh"))
         self.btnEmployee.setText(_translate("MainWindow", "Nhân viên"))
         self.btnAccount.setText(_translate("MainWindow", "Tài khoản"))
+        self.btnBill.setText(_translate("MainWindow", "Hóa đơn"))
         self.btnPhieuNhap.setText(_translate("MainWindow", "Phiếu nhập"))
         self.btnMedicine.setText(_translate("MainWindow", "Dược phẩm"))
         self.btnService.setText(_translate("MainWindow", "Dịch vụ"))

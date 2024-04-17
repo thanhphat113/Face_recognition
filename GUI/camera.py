@@ -13,7 +13,6 @@ import cv2
 
 import sys
 import os
-import shutil
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 import GUI.thongbao as tb
@@ -100,11 +99,16 @@ class Ui_Form(object):
         self.btnDelete.setText(_translate("Dialog", "Xoá dữ liệu"))
 
     def update_frame(self):
+        self.face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
         ret, frame = self.camera.read()
         if ret:
             # Chuyển đổi hình ảnh từ BGR sang RGB để hiển thị trong PyQt5
             frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             frame_rgb = cv2.resize(frame_rgb,(900,600))
+            
+            self.faces = self.face_cascade.detectMultiScale(frame_rgb, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
+            for (x, y, w, h) in self.faces:
+                cv2.rectangle(frame_rgb, (x, y), (x+w, y+h), (255, 0, 0), 2)
             
             image = QImage(frame_rgb.data, frame_rgb.shape[1], frame_rgb.shape[0], QImage.Format_RGB888)
             pixmap = QPixmap.fromImage(image)
@@ -116,16 +120,37 @@ class Ui_Form(object):
         self.timer_capture.start(300)
             
     def chup_anh(self):
+        self.btnStart.setText("Đang lưu ảnh....!")
         ret , frame = self.camera.read()
         self.check_directory()
         if ret:
-            self.count += 1     
-            cv2.imwrite(f'{self.parent_directory}/{self.id}_{self.count}.png',frame)
+            self.faces = self.face_cascade.detectMultiScale(frame, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
+            if len(self.faces) !=0:
+                if self.count == 50:
+                    self.tb.thongBao("Đã lưu dữ liệu gương mặt hoàn tất!")
+                    self.count= 0
+                    self.timer_capture.stop()
+                    self.btnStart.setText("Bắt đầu")
+                else:
+                    for (x, y, w, h) in self.faces:
+                        face_image = frame[y:y+h, x:x+w]
+                        # face_image = cv2.cvtColor(face_image,cv2.COLOR_BAYER_BRG2)
+                        self.count += 1  
+                        cv2.imwrite(f'{self.parent_directory}/{self.id}_{self.count}.png',face_image)
+                        
+                        img1 = self.phongTo(face_image)
+                        cv2.imwrite(f'{self.parent_directory}/{self.id}_phongto_{self.count}.png',img1)
+                        
+                        img2 = self.doimau(face_image)
+                        cv2.imwrite(f'{self.parent_directory}/{self.id}_doimau_{self.count}.png',img2)
+                        
+                        img3 = self.doChoi(face_image)
+                        cv2.imwrite(f'{self.parent_directory}/{self.id}_dochoi_{self.count}.png',img3)
+                        
+                        img4 = self.latNgang(face_image)
+                        cv2.imwrite(f'{self.parent_directory}/{self.id}_latngang_{self.count}.png',img4)
+                        
             
-        if self.count == 50:
-            self.tb.thongBao("Đã lưu dữ liệu gương mặt hoàn tất!")
-            self.count= 0
-            self.timer_capture.stop()
         
     def check_directory(self):
         if not os.path.exists(self.parent_directory):
@@ -138,12 +163,44 @@ class Ui_Form(object):
         
     def delete_directory(self):
         try:
-            shutil.rmtree(self.parent_directory)
+            os.remove(self.parent_directory)
             self.tb.thongBao("Đã xoá thư mục thành công !")
         except OSError as e:
             self.tb.thongBao(f"Lỗi: {self.parent_directory} - {e.strerror}")
         
         
+    def xoayAnh(self,img):
+        angle = 30
+        rows, cols = img.shape[:2]
+        M = cv2.getRotationMatrix2D((cols / 2, rows / 2), angle, 1)
+        rotated_img = cv2.warpAffine(img, M, (cols, rows))
+        return rotated_img
+
+    def phongTo(self,img):
+        scale_percent = 200  
+        width = int(img.shape[1] * scale_percent / 100)
+        height = int(img.shape[0] * scale_percent / 100)
+        resized_img = cv2.resize(img, (width, height))
+        return resized_img
+
+    def latNgang(self,img):
+        flipped_img = cv2.flip(img, 1)  # Lật theo chiều ngang
+        return flipped_img
+
+    def doChoi(self,img):
+        brightness = 80
+        contrast = 0.5
+        adjusted_img = cv2.convertScaleAbs(img, alpha=contrast, beta=brightness)
+        return adjusted_img
+
+    def doimau(self,img):
+        hsv_img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+        hue_shift = 20
+        hsv_img[:, :, 0] = (hsv_img[:, :, 0] + hue_shift) % 180
+        color_shifted_img = cv2.cvtColor(hsv_img, cv2.COLOR_HSV2BGR)  
+        return color_shifted_img      
+
+
 
 if __name__ == "__main__":
     import sys

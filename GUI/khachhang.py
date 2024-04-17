@@ -159,7 +159,7 @@ class Ui_Form(object):
                 sizePolicy.setHeightForWidth(self.tableWidget.sizePolicy().hasHeightForWidth())
                 self.tableWidget.setSizePolicy(sizePolicy)
                 self.tableWidget.setWordWrap(False)
-                self.tableWidget.setColumnCount(5)
+                self.tableWidget.setColumnCount(6)
                 self.tableWidget.setObjectName("tableWidget")
                 self.tableWidget.setRowCount(0)
                 item = QtWidgets.QTableWidgetItem()
@@ -177,6 +177,9 @@ class Ui_Form(object):
                 item = QtWidgets.QTableWidgetItem()
                 item.setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
                 self.tableWidget.setHorizontalHeaderItem(4, item)
+                item = QtWidgets.QTableWidgetItem()
+                item.setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+                self.tableWidget.setHorizontalHeaderItem(5, item)
                 self.tableWidget.horizontalHeader().setCascadingSectionResizes(False)
                 self.tableWidget.horizontalHeader().setSortIndicatorShown(False)
                 self.tableWidget.horizontalHeader().setStretchLastSection(True)
@@ -214,13 +217,20 @@ class Ui_Form(object):
                 item.setText(_translate("Form", "Số điện thoại"))
                 item = self.tableWidget.horizontalHeaderItem(4)
                 item.setText(_translate("Form", "Email"))
+                item = self.tableWidget.horizontalHeaderItem(5)
+                item.setText(_translate("Form", "Trạng thái"))
                 self.upload_list()
         
         def upload_list(self):
                 list = self.cusDAO.ReadFromDatabase()
                 self.tableWidget.setRowCount(0)
+                data_dir = 'data/khachhang'
+                list_directory = os.listdir(data_dir)
                 for cus in list:
-                        data = [cus.get_makh(), cus.get_tenkh(), cus.get_gioitinh(), cus.get_sdt(), cus.get_email()]
+                        tt = '<Chưa có dữ liệu>'
+                        if str(cus.get_makh()) in list_directory:
+                                tt = '<Có dữ liệu>'
+                        data = [cus.get_makh(), cus.get_tenkh(), cus.get_gioitinh(), cus.get_sdt(), cus.get_email(),tt]
                         self.add_row_to_table(data)
 
         

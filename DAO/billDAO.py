@@ -46,6 +46,8 @@ class billDAO:
         conn = self.conn
         try:
             conn.connect()
+            query=f"delete from chitiet_hd where mahd = '{id}'"
+            db.execute_query(conn, query)
             query=f"delete from hoadon where mahd = '{id}'"
             db.execute_query(conn,query)
             return 'Xoá thành công !!!!'
@@ -58,7 +60,7 @@ class billDAO:
         conn = self.conn
         try:
             conn.connect()
-            query=f"update hoadon set ngaytao = '{bill.get_ngaytao()}', tongtien = '{bill.get_tongtien()}', manv = '{bill.get_manv()}', makh = '{bill.get_makh()}' where mahd = '{bill.get_mahd()}'"
+            query=f"update hoadon set ngaytao = STR_TO_DATE('{bill.get_ngaytao()}', '%m-%d-%Y'), tongtien = '{bill.get_tongtien()}', manv = '{bill.get_manv()}', makh = '{bill.get_makh()}' where mahd = '{bill.get_mahd()}'"
             db.execute_query(conn, query)
             return 'Cập nhật thành công !!!!'
         except mysql.connector.Error as error:
@@ -66,6 +68,15 @@ class billDAO:
         finally:
             conn.close()
 
+    def updateTotalPrice(self, mahd, totalprice):
+        conn = self.conn
+        try:
+            conn.connect()
+            query=f"update hoadon set tongtien = '{totalprice}' where mahd = '{mahd}'"
+            db.execute_query(conn, query)
+            return "Sửa thành công!"
+        except mysql.connector.Error as error:
+            return "Sửa thất bại!"
     
     def findById(self, id):
         result = None

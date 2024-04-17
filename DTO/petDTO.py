@@ -5,8 +5,6 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from DAO.customerDAO import customerDAO
 class pet:
-    max_matn = 0
-
     def __init__(self, matn : int, tentn : str, maulong : str, cannang : str, makh : int):
         self.__matn = matn
         self.__tentn = tentn
@@ -51,7 +49,3 @@ class pet:
         self.__khachhang = cus.findByid(self.get_makh())
         return self.__khachhang
     
-    @classmethod
-    def generate_manv(cls):
-        cls.max_matn += 1
-        return cls.max_matn

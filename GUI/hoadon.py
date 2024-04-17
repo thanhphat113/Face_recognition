@@ -9,7 +9,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QTableWidgetItem, QTableView
 
-
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -59,9 +58,7 @@ class Ui_Form(object):
         self.horizontalLayout_5.addWidget(self.txtSearchHD)
         self.btnSearchHD = QtWidgets.QPushButton(self.groupBox_2)
         self.btnSearchHD.setMinimumSize(QtCore.QSize(40, 40))
-        self.btnSearchHD.setStyleSheet("background-color: #BDD5D7;\n"
-"border-radius: 5px;\n"
-"border: none;")
+        self.btnSearchHD.setStyleSheet("background-color: #BDD5D7")
         self.btnSearchHD.setText("")
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("img/search.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -100,22 +97,20 @@ class Ui_Form(object):
         self.horizontalLayout_6.setObjectName("horizontalLayout_6")
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_6.addItem(spacerItem)
-        self.btnAddCTNP = QtWidgets.QPushButton(self.groupBox)
-        self.btnAddCTNP.setMinimumSize(QtCore.QSize(40, 40))
-        self.btnAddCTNP.setStyleSheet("background-color: #9FC899;\n"
-"border-radius: 5px;\n"
-"border: none;")
-        self.btnAddCTNP.setText("")
+        self.btnAddCTHD = QtWidgets.QPushButton(self.groupBox)
+        self.btnAddCTHD.setMinimumSize(QtCore.QSize(40, 40))
+        self.btnAddCTHD.setStyleSheet("background-color: rgb(159, 255, 153)")
+        self.btnAddCTHD.setText("")
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap("img/add.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.btnAddCTNP.setIcon(icon1)
-        self.btnAddCTNP.setObjectName("btnAddCTNP")
-        self.horizontalLayout_6.addWidget(self.btnAddCTNP)
+        self.btnAddCTHD.setIcon(icon1)
+        self.btnAddCTHD.setObjectName("btnAddCTHD")
+        self.horizontalLayout_6.addWidget(self.btnAddCTHD)
         self.verticalLayout_2.addLayout(self.horizontalLayout_6)
         self.table_cthd = QtWidgets.QTableWidget(self.groupBox)
         self.table_cthd.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
         self.table_cthd.setObjectName("table_cthd")
-        self.table_cthd.setColumnCount(4)
+        self.table_cthd.setColumnCount(5)
         self.table_cthd.setRowCount(0)
 
         item = QtWidgets.QTableWidgetItem()
@@ -136,7 +131,7 @@ class Ui_Form(object):
         self.widget = QtWidgets.QWidget(Form)
         self.widget.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
         self.widget.setStyleSheet("QWidget{\n"
-"    background-color: #BDD5D7;\n"
+"    background-color: rgb(133, 255, 246);\n"
 "    border:1px solid black\n"
 "}\n"
 "QLabel{\n"
@@ -174,11 +169,9 @@ class Ui_Form(object):
         self.horizontalLayout.addItem(spacerItem1)
 
         self.btnAdd = QtWidgets.QPushButton(self.widget_3)
-        self.btnAdd.setMinimumSize(QtCore.QSize(90, 40))
+        self.btnAdd.setMinimumSize(QtCore.QSize(100, 30))
         self.btnAdd.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.btnAdd.setStyleSheet("background-color: #9FC899;\n"
-"border: none;\n"
-"border-radius: 5px;")
+        self.btnAdd.setStyleSheet("background-color: rgb(159, 255, 153)")
         self.btnAdd.setIcon(icon1)
         self.btnAdd.setIconSize(QtCore.QSize(20, 20))
         self.btnAdd.setFlat(False)
@@ -186,43 +179,30 @@ class Ui_Form(object):
         self.horizontalLayout.addWidget(self.btnAdd)
 
         
-
-        
-        
-        icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("img/delete.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.btnDelete = QtWidgets.QPushButton(self.widget_3)
-        self.btnDelete.setMinimumSize(QtCore.QSize(90, 40))
-        self.btnDelete.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.btnDelete.setStyleSheet("background-color: rgb(255, 124, 125);\n"
-"border: none;\n"
-"border-radius: 5px;")
-        self.btnDelete.setIcon(icon2)
-        self.btnDelete.setIconSize(QtCore.QSize(20, 20))
-        self.btnDelete.setFlat(False)
-        self.btnDelete.setObjectName("btnDelete")
-        self.horizontalLayout.addWidget(self.btnDelete)
-        self.pushButton = QtWidgets.QPushButton(self.widget_3)
-        self.pushButton.setMinimumSize(QtCore.QSize(90, 40))
-        self.pushButton.setStyleSheet("background-color: rgb(188, 202, 255);\n"
-"border-radius: 5px;\n"
-"border: none;")
-        
-
-
         icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap("img/refresh.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon3.addPixmap(QtGui.QPixmap("img/edit_48px.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btnUpdate = QtWidgets.QPushButton(self.widget_3)
-        self.btnUpdate.setMinimumSize(QtCore.QSize(90, 40))
+        self.btnUpdate.setMinimumSize(QtCore.QSize(100, 30))
         self.btnUpdate.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.btnUpdate.setStyleSheet("background-color: rgb(188, 202, 255);\n"
-"border: none;\n"
-"border-radius: 5px;")
+        self.btnUpdate.setStyleSheet("background-color: rgb(255, 255, 127);\n")
         self.btnUpdate.setIcon(icon3)
         self.btnUpdate.setIconSize(QtCore.QSize(20, 20))
         self.btnUpdate.setFlat(False)
         self.btnUpdate.setObjectName("btnUpdate")
         self.horizontalLayout.addWidget(self.btnUpdate)
+
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap("img/delete.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btnDelete = QtWidgets.QPushButton(self.widget_3)
+        self.btnDelete.setMinimumSize(QtCore.QSize(100, 30))
+        self.btnDelete.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.btnDelete.setStyleSheet("background-color: rgb(255, 124, 125);\n")
+        self.btnDelete.setIcon(icon2)
+        self.btnDelete.setIconSize(QtCore.QSize(20, 20))
+        self.btnDelete.setFlat(False)
+        self.btnDelete.setObjectName("btnDelete")
+        self.horizontalLayout.addWidget(self.btnDelete)
+
         self.gridLayout_2.addLayout(self.horizontalLayout, 0, 0, 1, 1)
         self.gridLayout_3.addWidget(self.widget_3, 2, 0, 1, 1)
         
@@ -239,7 +219,7 @@ class Ui_Form(object):
 
         self.btnDeleteCTHD = QtWidgets.QPushButton(self.groupBox)
         self.btnDeleteCTHD.setMinimumSize(QtCore.QSize(40, 40))
-        self.btnDeleteCTHD.setStyleSheet("background-color: rgb(255, 255, 127);\n"
+        self.btnDeleteCTHD.setStyleSheet("background-color: rgb(255, 124, 125);\n"
 "")
         self.btnDeleteCTHD.setText("")
         icon3 = QtGui.QIcon()
@@ -259,21 +239,23 @@ class Ui_Form(object):
         item = self.table_hoadon.horizontalHeaderItem(0)
         item.setText(_translate("Form", "Mã hóa đơn"))
         item = self.table_hoadon.horizontalHeaderItem(1)
-        item.setText(_translate("Form", "Ngày tạo"))
+        item.setText(_translate("Form", "Tên nhân viên"))
         item = self.table_hoadon.horizontalHeaderItem(2)
-        item.setText(_translate("Form", "Tổng tiền"))
+        item.setText(_translate("Form", "Tên khách hàng"))
         item = self.table_hoadon.horizontalHeaderItem(3)
-        item.setText(_translate("Form", "Mã nhân viên"))
+        item.setText(_translate("Form", "Ngày tạo"))
         item = self.table_hoadon.horizontalHeaderItem(4)
-        item.setText(_translate("Form", "Mã khách hàng"))
+        item.setText(_translate("Form", "Tổng tiền"))
         self.groupBox.setTitle(_translate("Form", "CHI TIẾT HÓA ĐƠN"))
         item = self.table_cthd.horizontalHeaderItem(0)
-        item.setText(_translate("Form", "Mã hóa đơn"))
+        item.setText(_translate("Form", "Mã chi tiết hóa đơn"))
         item = self.table_cthd.horizontalHeaderItem(1)
-        item.setText(_translate("Form", "Mã dịch vụ"))
+        item.setText(_translate("Form", "Mã hóa đơn"))
         item = self.table_cthd.horizontalHeaderItem(2)
-        item.setText(_translate("Form", "Số lượng"))
+        item.setText(_translate("Form", "Tên dịch vụ"))
         item = self.table_cthd.horizontalHeaderItem(3)
+        item.setText(_translate("Form", "Số lượng"))
+        item = self.table_cthd.horizontalHeaderItem(4)
         item.setText(_translate("Form", "Đơn giá"))
 
         self.label.setText(_translate("Form", "Quản lý hóa đơn"))
@@ -282,16 +264,11 @@ class Ui_Form(object):
         self.btnUpdate.setText(_translate("Form", "Sửa"))
         self.table_hoadon.itemClicked.connect(self.on_table_hoadon_clicked)
         self.btnAdd.clicked.connect(self.show_add_hd_dialog)
-        self.btnDelete.clicked.connect(self.on_button_clicked)
-        self.btnUpdate.clicked.connect(self.update_HD)
-        self.btnAddCTNP.clicked.connect(self.show_add_cthd_dialog)
-    
-        self.btnUpdateCTHD.clicked.connect(self.update_CTHD)
+        self.btnDelete.clicked.connect(self.delete_HD)
+        self.btnUpdate.clicked.connect(self.show_update_hd_dialog)
+        self.btnAddCTHD.clicked.connect(self.show_add_cthd_dialog)
+        self.btnUpdateCTHD.clicked.connect(self.show_update_cthd_dialog)
         self.btnDeleteCTHD.clicked.connect(self.delete_CTHD)
-       
-        
-
-        
         self.upload_hoadon()
     
     def fillTableHoaDon(self, bill_list):
@@ -299,20 +276,23 @@ class Ui_Form(object):
         self.table_hoadon.setRowCount(len(bill_list))
         for bill in bill_list:
             self.table_hoadon.setItem(row, 0, QtWidgets.QTableWidgetItem(str(bill.get_mahd())))
-            self.table_hoadon.setItem(row, 1, QtWidgets.QTableWidgetItem(str(bill.get_ngaytao())))
-            self.table_hoadon.setItem(row, 2, QtWidgets.QTableWidgetItem(str(bill.get_tongtien())))
-            self.table_hoadon.setItem(row, 3, QtWidgets.QTableWidgetItem(str(bill.get_manv())))
-            self.table_hoadon.setItem(row, 4, QtWidgets.QTableWidgetItem(str(bill.get_makh())))
+            self.table_hoadon.setItem(row, 1, QtWidgets.QTableWidgetItem(str(bill.getNhanVien().tennv)))
+            self.table_hoadon.setItem(row, 2, QtWidgets.QTableWidgetItem(str(bill.getKH().get_tenkh())))
+            self.table_hoadon.setItem(row, 3, QtWidgets.QTableWidgetItem(str(bill.get_ngaytao())))
+            self.table_hoadon.setItem(row, 4, QtWidgets.QTableWidgetItem(str(bill.get_tongtien())))
             row = row +1
 
     def fillTableCTHD(self, cthd_list):
         row = 0
         self.table_cthd.setRowCount(len(cthd_list))
+        dao = serviceDAO()
         for cthd in cthd_list:
-            self.table_cthd.setItem(row, 0, QtWidgets.QTableWidgetItem(str(cthd.get_mahd())))
-            self.table_cthd.setItem(row, 1, QtWidgets.QTableWidgetItem(str(cthd.get_madv())))
-            self.table_cthd.setItem(row, 2, QtWidgets.QTableWidgetItem(str(cthd.get_soLuong())))
-            self.table_cthd.setItem(row, 3, QtWidgets.QTableWidgetItem(str(cthd.get_gia())))
+            service = dao.getServiceById(cthd.get_madv())
+            self.table_cthd.setItem(row, 0, QtWidgets.QTableWidgetItem(str(cthd.get_macthd())))
+            self.table_cthd.setItem(row, 1, QtWidgets.QTableWidgetItem(str(cthd.get_mahd())))
+            self.table_cthd.setItem(row, 2, QtWidgets.QTableWidgetItem(service.getTen()))
+            self.table_cthd.setItem(row, 3, QtWidgets.QTableWidgetItem(str(cthd.get_soLuong())))
+            self.table_cthd.setItem(row, 4, QtWidgets.QTableWidgetItem(str(cthd.get_gia())))
             row = row +1
 
     def upload_hoadon(self):
@@ -335,6 +315,7 @@ class Ui_Form(object):
         self.hoadon_dialog.setupUi(dialog)
         self.loadComboboxMaNV()
         self.loadComboboxMaKH()
+        self.hoadon_dialog.txtTotalPrice.setEnabled(False)
         self.hoadon_dialog.btnAccept.clicked.connect(self.addHoaDon)
         dialog.exec_()
         dialog.show()
@@ -353,12 +334,91 @@ class Ui_Form(object):
         
         selected_row = selected_items[0].row()
         id = self.table_hoadon.item(selected_row, 0).text()
+        tongtien = self.table_hoadon.item(selected_row, 4).text()
         
         self.cthd_dialog.cbMaDV.currentIndexChanged.connect(self.loadPriceOfService)
-        self.cthd_dialog.btnAccept.clicked.connect(lambda: self.addCTHD(id))
+        self.cthd_dialog.btnAccept.clicked.connect(lambda: self.addCTHD(id, int(tongtien)))
         dialog.exec_()
         dialog.show()
         self.upload_hoadon()
+
+    def show_update_hd_dialog(self):
+        dialog = QtWidgets.QDialog()
+        self.hoadon_dialog = Ui_hoadon_dialog()
+        self.hoadon_dialog.setupUi(dialog)
+        self.hoadon_dialog.label_4.setText("SỬA HÓA ĐƠN")
+        self.loadComboboxMaNV()
+        self.loadComboboxMaKH()
+
+        selected_row = self.table_hoadon.currentRow()
+        if selected_row < 0:
+            msg.show_warning_messagebox("Vui lòng chọn 1 dòng trong bảng hóa đơn")
+            return
+
+        selected_items = self.table_hoadon.selectedItems()
+        row_data = [item.text() for item in selected_items]
+        mahd = row_data[0]
+        manv = row_data[1]
+        makh = row_data[2]
+        ngaytao = QtCore.QDate.fromString(row_data[3], "yyyy-M-d")   
+        tongtien = row_data[4]   
+        cbNV = self.hoadon_dialog.cbMaNV
+        cbKH = self.hoadon_dialog.cbMaKH  
+        for count in range(cbNV.count()):
+            if manv in cbNV.itemText(count):
+                indexNV = count
+
+        for count in range(cbKH.count()):
+            if makh in cbKH.itemText(count):
+                indexKH = count
+
+        self.hoadon_dialog.cbMaNV.setCurrentIndex(indexNV)
+        self.hoadon_dialog.cbMaKH.setCurrentIndex(indexKH)
+        self.hoadon_dialog.txtTotalPrice.setText(tongtien)
+        self.hoadon_dialog.dateNgayTao.setDate(ngaytao)
+        hd = bill(mahd, ngaytao, tongtien, manv, makh)
+
+        self.hoadon_dialog.btnAccept.clicked.connect(lambda: self.update_HD(hd))
+        dialog.exec_()
+        dialog.show()
+
+    def show_update_cthd_dialog(self):
+        dialog = QtWidgets.QDialog()
+        self.cthd_dialog = Ui_cthd_dialog()
+        self.cthd_dialog.setupUi(dialog)
+        self.cthd_dialog.label_4.setText("SỬA THÔNG TIN CTHD")
+        self.loadComboboxMaDV()
+
+        selected_hd = self.table_hoadon.selectedItems()
+        if not selected_hd:
+            msg.show_warning_messagebox("Vui lòng chọn 1 dòng trong bảng hóa đơn")
+            return
+        
+        items_cthd = self.table_cthd.selectedItems()
+        if not items_cthd:
+            msg.show_warning_messagebox("Vui lòng chọn 1 dòng trong bảng chi tiết hóa đơn")
+            return
+        
+        selected_row = items_cthd[0].row()
+        macthd = self.table_cthd.item(selected_row, 0).text()
+        mahd = self.table_cthd.item(selected_row, 1).text()
+        tendv = self.table_cthd.item(selected_row, 2).text()
+        sl = self.table_cthd.item(selected_row, 3).text()
+        gia = self.table_cthd.item(selected_row, 4).text()
+        thanhtiencu = int(sl) * int(gia)
+        tongtien = self.table_hoadon.item(selected_hd[0].row(), 4).text()
+        cbDV = self.cthd_dialog.cbMaDV
+        for count in range(cbDV.count()):
+            if tendv in cbDV.itemText(count):
+                index = count
+        self.cthd_dialog.cbMaDV.setCurrentIndex(index)
+        self.cthd_dialog.txtQty.setText(sl)
+        self.cthd_dialog.txtPrice.setText(gia)
+        
+        self.cthd_dialog.cbMaDV.currentIndexChanged.connect(self.loadPriceOfService)
+        self.cthd_dialog.btnAccept.clicked.connect(lambda: self.update_CTHD(macthd, mahd, thanhtiencu, tongtien))
+        dialog.exec_()
+        dialog.show()
     
     def loadPriceOfService(self):
         madv = self.cthd_dialog.cbMaDV.currentText().split("-")[0]
@@ -385,11 +445,6 @@ class Ui_Form(object):
         for s in service:
             self.cthd_dialog.cbMaDV.addItem(f"{s.getMaDV()} - {s.getTen()}")
 
-
-
-    
-    
-
     def on_button_clicked(self):
         Dialog = QtWidgets.QDialog()
         ui = tb.Ui_Dialog()
@@ -405,23 +460,43 @@ class Ui_Form(object):
         self.upload_hoadon()
 
                 
-    def delete_HD(self, value):
-        dao = billDAO()
-        return dao.delete(value)
+    def delete_HD(self):
+        selected_items = self.table_hoadon.selectedItems()
+        if selected_items:
+            selected_row = selected_items[0].row()
+            id = self.table_hoadon.item(selected_row, 0).text()
+            dao = billDAO()
+            dao.delete(id)
+            msg.show_warning_messagebox("Xóa hóa đơn đã chọn thành công")
+            self.upload_hoadon()
+            self.on_table_hoadon_clicked()
+        else:
+            msg.show_warning_messagebox("Vui lòng chọn 1 dòng trong bảng hóa đơn")
     
     def delete_CTHD(self):
-        selected_hd = self.table_cthd.selectedItems()
-        if not selected_hd:
+        items_hd = self.table_hoadon.selectedItems()
+        if not items_hd:
             msg.show_warning_messagebox("Vui lòng chọn 1 dòng trong bảng hóa đơn")
             return
-        selected_cthd = self.table_cthd.selectedItems()
-        if selected_cthd:
-            selected_row = selected_cthd[0].row()
-            mahd = self.table_cthd.item(selected_row, 0).text()
-            dao = cthdDAO()
-            dao.deleteCTHD(mahd)
+        
+        items_cthd = self.table_cthd.selectedItems()
+        if items_cthd:
+            selected_row_cthd = items_cthd[0].row()
+            selected_row_hd = items_hd[0].row()
+            macthd = self.table_cthd.item(selected_row_cthd, 0).text()
+            sl = self.table_cthd.item(selected_row_cthd, 3).text()
+            gia = self.table_cthd.item(selected_row_cthd, 4).text()
+            mahd = self.table_hoadon.item(selected_row_hd, 0).text()
+            tt = self.table_hoadon.item(selected_row_hd, 4).text()
+            tongtien = int(tt) - (int(gia) * int(sl))
+            
+            hddao = billDAO()
+            cthddao = cthdDAO()
+            cthddao.deleteCTHD(macthd)
+            hddao.updateTotalPrice(mahd, tongtien)
             msg.show_warning_messagebox("Xóa chi tiết hoá đơn đã chọn thành công")
             self.on_table_hoadon_clicked()
+            self.upload_hoadon()
         else:
             msg.show_warning_messagebox("Vui lòng chọn 1 dòng trong bảng chi tiết hóa đơn")
 
@@ -430,55 +505,63 @@ class Ui_Form(object):
         manv = int(self.hoadon_dialog.cbMaNV.currentText().split("-")[0])
         makh = int(self.hoadon_dialog.cbMaKH.currentText().split("-")[0])
         ngaytao = self.hoadon_dialog.dateNgayTao.date().toString('yyyy-MM-dd')
-        tongtien = int(self.hoadon_dialog.txtTotalPrice.text())
 
         hdDAO = billDAO()
-        subBill = bill("", ngaytao, tongtien, manv, makh)
+        subBill = bill("", ngaytao, 0, manv, makh)
         hdDAO.insert(subBill)
         msg.show_info_messagebox("Thêm hóa đơn thành công")
     
-    def addCTHD(self, mahd):
+    def addCTHD(self, mahd, tongtien):
         madv = self.cthd_dialog.cbMaDV.currentText().split("-")[0]
         gia = self.cthd_dialog.txtPrice.text()
         sl = self.cthd_dialog.txtQty.text()
+        tongtien += int(sl) * int(gia)
         
         if not sl:
             msg.show_warning_messagebox("Vui lòng nhập đầy đủ dữ liệu")
             return
     
-        dao = cthdDAO()
-        dao.insertCTHD(CTHD(mahd, madv, sl, gia))
+        hddao = billDAO()
+        cthddao = cthdDAO()
+        cthddao.insertCTHD(CTHD(None, mahd, madv, sl, gia))
+        hddao.updateTotalPrice(mahd, tongtien)
         msg.show_info_messagebox("Thêm chi tiết hóa đơn thành công")
         self.on_table_hoadon_clicked()
         
-    def update_HD(self):
-        dialog = QtWidgets.QDialog()
-        self.hoadon_dialog = Ui_hoadon_dialog()
-        self.hoadon_dialog.setupUi(dialog)
-        self.loadComboboxMaNV()
-        self.loadComboboxMaKH()
-        selected_row = self.table_hoadon.currentRow()
-        if selected_row  >= 0:
-            selected_items = self.table_hoadon.selectedItems()
-            row_data = [item.text() for item in selected_items]
-            self.hoadon_dialog.dateNgayTao.date()
-            self.hoadon_dialog.txtTotalPrice.setText(self._translate("dialog",row_data[2]))
-        dialog.exec_()
-        dialog.show()
+    def update_HD(self, hd):
+        manv = self.hoadon_dialog.cbMaNV.currentText().split("-")[0]
+        makh = self.hoadon_dialog.cbMaKH.currentText().split("-")[0]
+        ngaytao = self.hoadon_dialog.dateNgayTao.date().toString('MM-dd-yyyy')
+        tongtien = self.hoadon_dialog.txtTotalPrice.text()
+
+        if not tongtien:
+            msg.show_warning_messagebox("Vui lòng nhập đầy đủ dữ liệu")
+            return
+        
+        dao = billDAO()
+        dao.update(bill(hd.get_mahd(), ngaytao, tongtien, manv, makh))
+        msg.show_info_messagebox("Sửa hóa đơn thành công")
         self.upload_hoadon()
-    def update_CTHD(self, mahd):
+
+    def update_CTHD(self, macthd, mahd, thanhtiencu, tongtien):
         madv = self.cthd_dialog.cbMaDV.currentText().split("-")[0]
         gia = self.cthd_dialog.txtPrice.text()
         sl = self.cthd_dialog.txtQty.text()
+        thanhtien = int(gia) * int(sl)
+        ttmoi = int(tongtien) - thanhtiencu + int(thanhtien)
+        print(ttmoi)
         
         if not sl:
             msg.show_warning_messagebox("Vui lòng nhập đầy đủ dữ liệu")
             return
-    
-        dao = cthdDAO()
-        dao.updateCTHD(CTHD(mahd, madv, sl, gia))
+
+        hddao = billDAO()
+        cthddao = cthdDAO()
+        cthddao.updateCTHD(CTHD(macthd, mahd, madv, sl, gia))
+        hddao.updateTotalPrice(mahd, ttmoi)
         msg.show_info_messagebox("Sửa chi tiết hóa đơn thành công")
         self.on_table_hoadon_clicked()
+        self.upload_hoadon()
  
         
 if __name__ == "__main__":
