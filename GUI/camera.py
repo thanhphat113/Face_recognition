@@ -13,7 +13,6 @@ import cv2
 
 import sys
 import os
-import shutil
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 import GUI.thongbao as tb
@@ -77,7 +76,7 @@ class Ui_Form(object):
         self.horizontalLayout.addItem(spacerItem1)
         self.verticalLayout.addLayout(self.horizontalLayout)
         
-        self.camera = cv2.VideoCapture(1)
+        self.camera = cv2.VideoCapture(0)
         
         self.timer = QTimer()
         self.timer.timeout.connect(self.update_frame)
@@ -138,7 +137,7 @@ class Ui_Form(object):
         
     def delete_directory(self):
         try:
-            shutil.rmtree(self.parent_directory)
+            os.remove(self.parent_directory)
             self.tb.thongBao("Đã xoá thư mục thành công !")
         except OSError as e:
             self.tb.thongBao(f"Lỗi: {self.parent_directory} - {e.strerror}")
