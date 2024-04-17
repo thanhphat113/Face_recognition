@@ -112,7 +112,6 @@ class Ui_Dialog(object):
                 self.txtEmail.setText("")
                 self.txtPhone.setText("")
             return result
-            
         else: 
             return 'Tên và số điện thoại không được rỗng !!!!'
         

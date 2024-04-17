@@ -82,7 +82,6 @@ class Ui_Dialog(object):
         self.comboBox.addItem("Nữ")
         self.comboBox.addItem("Nam")
             
-
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
@@ -112,7 +111,6 @@ class Ui_Dialog(object):
                 self.txtPhone.setText("")
                 self.comboBox.setCurrentIndex(0)
             return result
-            
         else: 
             return 'Tên và số điện thoại không được rỗng !!!!'
 
@@ -141,11 +139,3 @@ class Ui_Dialog(object):
     def show_dialog_insert(self):
         self.tb.thongBao(self.insert_data())
 
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Dialog = QtWidgets.QDialog()
-    ui = Ui_Dialog()
-    ui.setupUi(Dialog)
-    Dialog.show()
-    sys.exit(app.exec_())

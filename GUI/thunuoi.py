@@ -19,9 +19,11 @@ import GUI.TacvuTN as tv
 import GUI.thongbao as tb
 from  DAO.petDAO import petDAO
 from  DAO.customerDAO import customerDAO
+import GUI.camera as cmr
 
 class Ui_Form(object):
     def setupUi(self, Form):
+        self.tb = tb.Ui_Dialog()
         Form.setObjectName("Form")
         Form.resize(800, 500)
         Form.setStyleSheet("background-color: rgb(255, 255, 255);")
@@ -73,9 +75,19 @@ class Ui_Form(object):
         self.pushButton_3.setObjectName("pushButton_3")
         self.horizontalLayout.addWidget(self.pushButton_3)
         self.pushButton = QtWidgets.QPushButton(self.widget_3)
-        self.pushButton.setStyleSheet("background-color: rgb(255, 124, 125);\n"
-"\n"
-"")
+        self.pushButton.setStyleSheet("background-color: rgb(255, 124, 125);")
+                                
+        self.btnCamera = QtWidgets.QPushButton(self.widget_3)
+        self.btnCamera.setStyleSheet("background-color: rgb(35, 124, 125);")
+        icon10 = QtGui.QIcon()
+        icon10.addPixmap(QtGui.QPixmap("img/camera.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btnCamera.setIcon(icon10)
+        self.btnCamera.setIconSize(QtCore.QSize(20, 20))
+        self.btnCamera.setObjectName("btnCamera")
+        self.btnCamera.setMinimumSize(100,30)
+        self.horizontalLayout.addWidget(self.btnCamera)
+        self.btnCamera.clicked.connect(self.openCamera)                    
+                                
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap("img/delete.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.pushButton.setIcon(icon1)
@@ -176,6 +188,7 @@ class Ui_Form(object):
         Form.setWindowTitle(_translate("Form", "Form"))
         self.label.setText(_translate("Form", "Quản lý thú nuôi"))
         self.pushButton_3.setText(_translate("Form", "Thêm"))
+        self.btnCamera.setText(_translate("Form", "Camera"))
         self.pushButton_3.setMinimumSize(100, 30)
         self.pushButton_3.clicked.connect(self.TacVu_TN)
         self.pushButton.setText(_translate("Form", "Xoá"))
@@ -330,6 +343,17 @@ class Ui_Form(object):
             self.upload_list()
         self.lineEdit.setText("")
 
+    def openCamera(self):
+        selected_row = self.tableWidget.currentRow()
+        if selected_row  >= 0:
+            selected_items = self.tableWidget.selectedItems()
+            row_data = [item.text() for item in selected_items]
+            id = self._translate("Dialog",row_data[0])
+            camera = QtWidgets.QDialog()
+            ui = cmr.Ui_Form()
+            ui.setupUi(camera,id,2)
+            camera.exec_()
+        else: self.tb.thongBao("Vui lòng chọn 1 dòng để thực hiện tác vụ !")
 
 
 if __name__ == "__main__":

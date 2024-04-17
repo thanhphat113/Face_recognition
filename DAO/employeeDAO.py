@@ -23,8 +23,7 @@ class employeeDAO:
                 emp=employee(nv[0],nv[1],nv[2],nv[3])
                 employee_list.append(emp)
             return employee_list
-        except mysql.connector.Error as error:
-            print(f'Error: {error}')
+        except mysql.connector.Error:
             return None
         finally:
             conn.close()

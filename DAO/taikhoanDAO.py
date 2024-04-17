@@ -8,8 +8,6 @@ import DAO.database as db
 from DTO.taikhoanDTO import taikhoan
 from DTO.employeeDTO import employee
 
-
-
 class taikhoanDAO:
     def __init__(self):
         self.conn = db.connect_to_database()

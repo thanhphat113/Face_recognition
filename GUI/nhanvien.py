@@ -7,7 +7,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QTableWidgetItem,QTableView,QMessageBox,QWidget
+from PyQt5.QtWidgets import QTableWidgetItem,QTableView
 
 import sys
 import os
@@ -160,7 +160,6 @@ class Ui_Form(object):
                 self.verticalLayout_2.addWidget(self.tableWidget)
                 self.gridLayout_3.addWidget(self.widget_2, 1, 0, 1, 1)
                 
-
                 self.retranslateUi(Form)
                 QtCore.QMetaObject.connectSlotsByName(Form)
 
@@ -179,10 +178,10 @@ class Ui_Form(object):
                 self.label_2.setText(_translate("Form", "Tìm kiếm "))
                 self.pushButton_4.setText(_translate("Form", "Tìm"))
                 
-                
                 self.tableWidget.setSortingEnabled(False)
                 self.tableWidget.setEditTriggers(QTableView.NoEditTriggers)
                 self.tableWidget.setSelectionBehavior(QTableView.SelectRows)
+                
                 item = self.tableWidget.horizontalHeaderItem(0)
                 item.setText(_translate("Form", "Mã nhân viên"))
                 item = self.tableWidget.horizontalHeaderItem(1)
@@ -294,6 +293,7 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     Form = QtWidgets.QWidget()
     ui = Ui_Form()
+    ui.upload_list()
     ui.setupUi(Form)
     Form.show()
     sys.exit(app.exec())

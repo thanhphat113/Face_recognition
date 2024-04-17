@@ -9,8 +9,6 @@ import GUI.TacvuTK as tv
 import GUI.thongbao as tb
 from  DAO.taikhoanDAO import taikhoanDAO
 from  DAO.loaitaikhoanDAO import loaitaikhoanDAO
-from  DAO.employeeDAO import employeeDAO
-import DAO.database as db
 
 class Ui_Form(object):
     def setupUi(self, Form):

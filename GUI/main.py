@@ -6,7 +6,7 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from GUI.sidebar import Ui_MainWindow
 from GUI.login import Ui_login_form
-from GUI import phongbenh as pb, nhanvien as nv ,dichvu as dv, thunuoi as tn, home ,khachhang as kh, hoadon,phieunhap as pn,duocpham as dp,taikhoan as tk,nhacungcap as ncc,thongtin as tt,doimk as mk
+from GUI import phongbenh as pb, nhanvien as nv ,dichvu as dv, thunuoi as tn, home ,khachhang as kh, phieunhap as pn,duocpham as dp,taikhoan as tk,nhacungcap as ncc,thongtin as tt,doimk as mk
 from DAO.serviceDAO import serviceDAO
 from DAO.taikhoanDAO import taikhoanDAO
 from DAO.employeeDAO import employeeDAO
@@ -150,8 +150,6 @@ class Main_Page(QMainWindow, Ui_MainWindow):
     def showService_Pages(self):
         self.stackedWidget.setCurrentIndex(9)
         
-
-    
 
     # Xử lý giao diện
     def eventHandling(self):
