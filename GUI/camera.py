@@ -99,11 +99,16 @@ class Ui_Form(object):
         self.btnDelete.setText(_translate("Dialog", "Xoá dữ liệu"))
 
     def update_frame(self):
+        self.face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
         ret, frame = self.camera.read()
         if ret:
             # Chuyển đổi hình ảnh từ BGR sang RGB để hiển thị trong PyQt5
             frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             frame_rgb = cv2.resize(frame_rgb,(900,600))
+            
+            self.faces = self.face_cascade.detectMultiScale(frame_rgb, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
+            for (x, y, w, h) in self.faces:
+                cv2.rectangle(frame_rgb, (x, y), (x+w, y+h), (255, 0, 0), 2)
             
             image = QImage(frame_rgb.data, frame_rgb.shape[1], frame_rgb.shape[0], QImage.Format_RGB888)
             pixmap = QPixmap.fromImage(image)
@@ -115,16 +120,24 @@ class Ui_Form(object):
         self.timer_capture.start(300)
             
     def chup_anh(self):
+        self.btnStart.setText("Đang lưu ảnh....!")
         ret , frame = self.camera.read()
         self.check_directory()
         if ret:
-            self.count += 1     
-            cv2.imwrite(f'{self.parent_directory}/{self.id}_{self.count}.png',frame)
+            self.faces = self.face_cascade.detectMultiScale(frame, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
+            if len(self.faces) !=0:
+                if self.count == 50:
+                    self.tb.thongBao("Đã lưu dữ liệu gương mặt hoàn tất!")
+                    self.count= 0
+                    self.timer_capture.stop()
+                    self.btnStart.setText("Bắt đầu")
+                else:
+                    for (x, y, w, h) in self.faces:
+                        face_image = frame[y:y+h, x:x+w]
+                        # face_image = cv2.cvtColor(face_image,cv2.COLOR_BAYER_BRG2)
+                        self.count += 1  
+                        cv2.imwrite(f'{self.parent_directory}/{self.id}_{self.count}.png',face_image)
             
-        if self.count == 50:
-            self.tb.thongBao("Đã lưu dữ liệu gương mặt hoàn tất!")
-            self.count= 0
-            self.timer_capture.stop()
         
     def check_directory(self):
         if not os.path.exists(self.parent_directory):

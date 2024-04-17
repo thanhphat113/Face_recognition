@@ -98,7 +98,7 @@ if __name__ == "__main__":
     model = CNNModel(count=num)
     datax, datay = model.load_data(data_dir)
     model.train_model(datax, datay)
-    print(model.predict_img(model.model,'data/khachhang/3/3_16.png'))
+    print(model.predict_img(model.model,'data/khachhang/4/4_16.png'))
     
 
 

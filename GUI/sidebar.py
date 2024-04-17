@@ -441,10 +441,6 @@ class Ui_MainWindow(object):
         self.service_Page.setObjectName("service_Page")
         self.stackedWidget.addWidget(self.service_Page)
         
-        # Doanh thu
-        self.chart_Page = QtWidgets.QWidget()
-        self.chart_Page.setObjectName("chart_Page")
-        self.stackedWidget.addWidget(self.chart_Page)
         
         self.verticalLayout_5.addWidget(self.stackedWidget)
         self.gridLayout.addWidget(self.widget_3, 0, 2, 1, 1)
