@@ -1,9 +1,17 @@
 class CTHD:
-    def __init__(self, mahd, madv, soluong, gia):
+    max_macthd = 0
+    def __init__(self, macthd, mahd, madv, soluong, gia):
+        self.macthd = macthd
         self.mahd = mahd
         self.madv = madv
         self.soluong = soluong
         self.gia = gia
+    
+    def get_macthd(self):
+        return self.macthd
+    
+    def set_macthd(self, macthd):
+        self.macthd = macthd
 
     def get_mahd(self):
         return self.mahd
@@ -27,4 +35,9 @@ class CTHD:
         return self.gia
     
     def set_gia(self, gia):
-        self.gia = gia 
+        self.gia = gia
+
+    @classmethod
+    def generate_macthd(cls):
+        cls.max_macthd += 1
+        return cls.max_macthd

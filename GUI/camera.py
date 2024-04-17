@@ -77,7 +77,7 @@ class Ui_Form(object):
         self.horizontalLayout.addItem(spacerItem1)
         self.verticalLayout.addLayout(self.horizontalLayout)
         
-        self.camera = cv2.VideoCapture(1)
+        self.camera = cv2.VideoCapture(0)
         
         self.timer = QTimer()
         self.timer.timeout.connect(self.update_frame)
