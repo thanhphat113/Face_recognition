@@ -5,12 +5,6 @@ class CTHD:
         self.madv = madv
         self.soluong = soluong
         self.gia = gia
-    
-    def get_macthd(self):
-        return self.macthd
-    
-    def set_macthd(self, macthd):
-        self.macthd = macthd
 
     def get_macthd(self):
         return self.macthd
@@ -40,9 +34,4 @@ class CTHD:
         return self.gia
     
     def set_gia(self, gia):
-        self.gia = gia
-
-    @classmethod
-    def generate_macthd(cls):
-        cls.max_macthd += 1
-        return cls.max_macthd
+        self.gia = gia 
