@@ -2,7 +2,6 @@
 import numpy as np
 import cv2
 import keras
-import matplotlib.pyplot as plt
 from keras.models import Sequential
 from keras.layers import Conv2D, MaxPooling2D, Dense, Flatten,Dropout
 from keras.utils import to_categorical
@@ -18,7 +17,11 @@ class CNNModel:
 
     def build_model(self):
         model = Sequential()
-        model.add(Conv2D(32, (3,3), activation='relu', input_shape=self.input_shape))
+        model.add(Conv2D(16, (3,3), activation='relu', input_shape=self.input_shape))
+        model.add(MaxPooling2D(pool_size=(2, 2)))
+        model.add(Dropout(0.25))
+        
+        model.add(Conv2D(32, (3,3), activation='relu'))
         model.add(MaxPooling2D(pool_size=(2, 2)))
         model.add(Dropout(0.25))
         
@@ -26,30 +29,26 @@ class CNNModel:
         model.add(MaxPooling2D(pool_size=(2, 2)))
         model.add(Dropout(0.25))
         
-        model.add(Conv2D(128, (3,3), activation='relu'))
-        model.add(MaxPooling2D(pool_size=(2, 2)))
-        model.add(Dropout(0.25))
-        
-        model.add(Conv2D(128, (3,3), activation='relu'))
+        model.add(Conv2D(32, (3,3), activation='relu'))
         model.add(MaxPooling2D(pool_size=(2, 2)))
         model.add(Dropout(0.25))
         
         model.add(Flatten())
         model.add(Dense(256, activation='relu'))
         model.add(Dropout(0.25))
-        model.add(Dense(self.num_class, activation='softmax'))
+        model.add(Dense(self.num_class, activation='sigmoid'))
         return model
 
     def compile_model(self):
         self.model.compile(optimizer='adam',
-                      loss='categorical_crossentropy',
+                      loss=keras.losses.BinaryCrossentropy(),
                       metrics=['accuracy'])
         
     def save_model(self, model, path):
         model.save(path)
     
     def predict_img(self, model:keras.Model, img):
-        img = cv2.imread(img)
+        # img = cv2.imread(img)
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         img = cv2.resize(img, (120, 120))
         img = img.astype('float32') / 255.0
@@ -95,8 +94,13 @@ if __name__ == "__main__":
     num = len(list)
     model = CNNModel(num_class=num)
     datax, datay = model.load_data(data_dir)
+    print (datay)
     model.train_model(datax, datay)
-    print(model.predict_img(model.model,'data/khachhang/3/3_45.png'))
+    tile = model.predict_img(model.model,'saa.png')
+    print(tile)
+    max_index = np.argmax(tile)
+    print("Vị trí số lớn nhất:", max_index)
+    
     
 
 

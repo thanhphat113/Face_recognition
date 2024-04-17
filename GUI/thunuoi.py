@@ -150,7 +150,7 @@ class Ui_Form(object):
         self.tableWidget.setSizePolicy(sizePolicy)
         self.tableWidget.setMinimumSize(QtCore.QSize(0, 0))
         self.tableWidget.setWordWrap(False)
-        self.tableWidget.setColumnCount(5)
+        self.tableWidget.setColumnCount(6)
         self.tableWidget.setObjectName("tableWidget")
         self.tableWidget.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
@@ -170,7 +170,7 @@ class Ui_Form(object):
         self.tableWidget.setHorizontalHeaderItem(4, item)
         item = QtWidgets.QTableWidgetItem()
         item.setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-        self.tableWidget.setHorizontalHeaderItem(8, item)
+        self.tableWidget.setHorizontalHeaderItem(5, item)
         self.tableWidget.horizontalHeader().setCascadingSectionResizes(False)
         self.tableWidget.horizontalHeader().setSortIndicatorShown(False)
         self.tableWidget.horizontalHeader().setStretchLastSection(True)
@@ -213,21 +213,23 @@ class Ui_Form(object):
         item.setText(_translate("Form", "Cân nặng"))
         item = self.tableWidget.horizontalHeaderItem(4)
         item.setText(_translate("Form", "Khách hàng"))
+        item = self.tableWidget.horizontalHeaderItem(5)
+        item.setText(_translate("Form", "Tình trạng"))
         self.upload_list()
     
 
     def upload_list(self):
         dao = petDAO()
-        cusDAO = customerDAO()
-        customer = cusDAO.ReadFromDatabase()
         pet_list = dao.ReadFromDatabase()
         self.tableWidget.setRowCount(0)
+        data_dir = 'data/thunuoi'
+        list_directory = os.listdir(data_dir)
         for pet in pet_list:
-            for cus in customer:
-                if cus.get_makh() == pet.get_makh():
-                    data = [pet.get_matn(), pet.get_tentn(), pet.get_maulong(), pet.get_cannang(), cus.get_tenkh()]
-                    self.add_row_to_table(data)
-                    break
+            tt = '<Chưa có dữ liệu>'
+            if str(pet.get_matn()) in list_directory:
+                tt = '<Có dữ liệu>'
+            data = [pet.get_matn(), pet.get_tentn(), pet.get_maulong(), pet.get_cannang(), pet.get_khachhang().get_tenkh(),tt]
+            self.add_row_to_table(data)
                 
     
 

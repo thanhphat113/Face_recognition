@@ -1,38 +1,32 @@
+from demo import CNNModel
+import os
 import cv2
 import numpy as np
 
-# Load ảnh
-img = cv2.imread('data/khachhang/4/4_5.png')
+data_dir = ('data/khachhang')
+list = os.listdir(data_dir)
+num = len(list)
+cnn = CNNModel(num_class=num)
 
-# Xoay ảnh
-angle = 30
-rows, cols = img.shape[:2]
-M = cv2.getRotationMatrix2D((cols / 2, rows / 2), angle, 1)
-rotated_img = cv2.warpAffine(img, M, (cols, rows))
+cnn.build_model()
+datax, datay = cnn.load_data(data_dir)
+cnn.train_model(datax, datay)
 
-# Phóng to và thu nhỏ
-scale_percent = 200  # Phóng to 150%
-width = int(img.shape[1] * scale_percent / 100)
-height = int(img.shape[0] * scale_percent / 100)
-resized_img = cv2.resize(img, (width, height))
-
-# Lật ảnh
-flipped_img = cv2.flip(img, 1)  # Lật theo chiều ngang
-
-# Thay đổi độ sáng và độ tương phản
-brightness = 80
-contrast = 0.5
-adjusted_img = cv2.convertScaleAbs(img, alpha=contrast, beta=brightness)
-
-# Thay đổi màu sắc
-hsv_img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-hue_shift = 20
-hsv_img[:, :, 0] = (hsv_img[:, :, 0] + hue_shift) % 180
-color_shifted_img = cv2.cvtColor(hsv_img, cv2.COLOR_HSV2BGR)
-
-# Lưu ảnh
-cv2.imwrite('rotated_img.jpg', rotated_img)
-cv2.imwrite('resized_img.jpg', resized_img)
-cv2.imwrite('flipped_img.jpg', flipped_img)
-cv2.imwrite('adjusted_img.jpg', adjusted_img)
-cv2.imwrite('color_shifted_img.jpg', color_shifted_img)
+cap = cv2.VideoCapture(0)
+face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+while True:
+    ret, frame = cap.read()
+    faces = face_cascade.detectMultiScale(frame, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
+    result = cnn.predict_img(cnn.model,frame)
+    for (x, y, w, h) in faces:
+        cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0), 2)
+        index = int(np.argmax(result))
+        cv2.putText(frame, str(list[index]), (x+w+10, y+h), cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 255, 0), 2)
+    
+    cv2.imshow('ahha',frame)
+    
+    if cv2.waitKey(1) == ord('q'):
+        break
+    
+cap.release()
+cv2.destroyAllWindows()
