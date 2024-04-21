@@ -89,3 +89,16 @@ class serviceDAO:
         finally:
             conn.close()
     
+    def isServiceUseMedicine(self, madv):
+        madp_list = []
+        conn=self.conn
+        try:
+            conn.connect()
+            query=f"Select * from dichvu_duocpham where madv = '{madv}'"
+            list = db.execute_fetch_all(conn,query)
+            for rs in list:
+                madp_list.append(rs[1])
+            return madp_list
+        except mysql.connector.Error as error:
+            print('Excute thất bại !!!!')
+            return None

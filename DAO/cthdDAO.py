@@ -10,23 +10,6 @@ class cthdDAO:
     def __init__(self):
         self.conn = db.connect_to_database()
 
-    def ReadFromDatabase(self):
-        cthd_list = []
-        conn = self.conn
-        try:
-            conn.connect()
-            query = "Select * from chitiet_hd"
-            list = db.execute_fetch_all(conn, query)
-            for cthd in list:
-                result = CTHD(cthd[0], cthd[1], cthd[2], cthd[3], cthd[4])
-                cthd_list.append(result)
-            return cthd_list
-        except mysql.connector.Error as error:
-            print(f'Error: {error}')
-            return None
-        finally:
-            conn.close()
-
     def getCTHDById(self, mahd):
         cthd_list = []
         conn = self.conn

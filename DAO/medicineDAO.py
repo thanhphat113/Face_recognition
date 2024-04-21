@@ -58,6 +58,30 @@ class medicineDAO:
         except mysql.connector.Error as error:
             return "Sửa thất bại!"
         
+    def updateDecQuantity(self, madp_list, sl):
+        conn = self.conn
+        try:
+            conn.connect()
+            for id in madp_list:
+                medicine = self.getMedicineById(id)
+                query=f"update duocpham set soluong = '{medicine.getSoLuong() - sl}'where madp = '{medicine.getMaDP()}'"
+                db.execute_query(conn, query)
+            return "Sửa thành công!"
+        except mysql.connector.Error as error:
+            return "Sửa thất bại!"
+        
+    def updateIncQuantity(self, madp_list, sl):
+        conn = self.conn
+        try:
+            conn.connect()
+            for id in madp_list:
+                medicine = self.getMedicineById(id)
+                query=f"update duocpham set soluong = '{medicine.getSoLuong() + sl}'where madp = '{medicine.getMaDP()}'"
+                db.execute_query(conn, query)
+            return "Sửa thành công!"
+        except mysql.connector.Error as error:
+            return "Sửa thất bại!"
+
     def deleteMedicine(self, madp):
         conn = self.conn
         try:

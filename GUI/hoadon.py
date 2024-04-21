@@ -22,6 +22,7 @@ from  DAO.employeeDAO import employeeDAO
 from  DAO.customerDAO import customerDAO
 from  DAO.serviceDAO import serviceDAO
 from  DAO.cthdDAO import cthdDAO
+from  DAO.medicineDAO import medicineDAO
 from  DTO.billDTO import bill
 from  DTO.cthdDTO import CTHD
 import GUI.mesage_box as msg
@@ -326,6 +327,7 @@ class Ui_Form(object):
         self.cthd_dialog = Ui_cthd_dialog()
         self.cthd_dialog.setupUi(dialog)
         self.loadComboboxMaDV()
+        self.cthd_dialog.txtPrice.setText('200000')
 
         selected_items = self.table_hoadon.selectedItems()
         if not selected_items:
@@ -515,16 +517,28 @@ class Ui_Form(object):
         madv = self.cthd_dialog.cbMaDV.currentText().split("-")[0]
         gia = self.cthd_dialog.txtPrice.text()
         sl = self.cthd_dialog.txtQty.text()
-        tongtien += int(sl) * int(gia)
-        
+
         if not sl:
             msg.show_warning_messagebox("Vui lòng nhập đầy đủ dữ liệu")
             return
+        
+        if not sl.isnumeric() or int(sl) <= 0:
+            msg.show_warning_messagebox("Vui lòng chỉ nhập số lớn hơn 0 cho trường số lượng")
+            return
     
+        tongtien += int(sl) * int(gia)
+
         hddao = billDAO()
         cthddao = cthdDAO()
+        dpdao = serviceDAO()
         cthddao.insertCTHD(CTHD(None, mahd, madv, sl, gia))
         hddao.updateTotalPrice(mahd, tongtien)
+
+        list = dpdao.isServiceUseMedicine(madv)
+        dpdao = medicineDAO()
+        if len(list) > 0:
+            dpdao.updateDecQuantity(list, sl)
+        
         msg.show_info_messagebox("Thêm chi tiết hóa đơn thành công")
         self.on_table_hoadon_clicked()
         
@@ -538,6 +552,10 @@ class Ui_Form(object):
             msg.show_warning_messagebox("Vui lòng nhập đầy đủ dữ liệu")
             return
         
+        if not tongtien.isnumeric() or int(tongtien) <= 0:
+            msg.show_warning_messagebox("Vui lòng chỉ nhập số cho trường tổng tiền")
+            return
+        
         dao = billDAO()
         dao.update(bill(hd.get_mahd(), ngaytao, tongtien, manv, makh))
         msg.show_info_messagebox("Sửa hóa đơn thành công")
@@ -547,13 +565,18 @@ class Ui_Form(object):
         madv = self.cthd_dialog.cbMaDV.currentText().split("-")[0]
         gia = self.cthd_dialog.txtPrice.text()
         sl = self.cthd_dialog.txtQty.text()
-        thanhtien = int(gia) * int(sl)
-        ttmoi = int(tongtien) - thanhtiencu + int(thanhtien)
-        print(ttmoi)
         
         if not sl:
             msg.show_warning_messagebox("Vui lòng nhập đầy đủ dữ liệu")
             return
+        
+        if not sl.isnumeric() or int(sl) <= 0:
+            msg.show_warning_messagebox("Vui lòng chỉ nhập số cho trường số lượng")
+            return
+            
+
+        thanhtien = int(gia) * int(sl)
+        ttmoi = int(tongtien) - thanhtiencu + int(thanhtien)
 
         hddao = billDAO()
         cthddao = cthdDAO()
