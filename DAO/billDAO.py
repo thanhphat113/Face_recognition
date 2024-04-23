@@ -77,6 +77,16 @@ class billDAO:
             return "Sửa thành công!"
         except mysql.connector.Error as error:
             return "Sửa thất bại!"
+        
+    def updateTotalPrice2(self, totalprice):
+        conn = self.conn
+        try:
+            conn.connect()
+            query=f"update hoadon set tongtien = tongtien +'{totalprice}' where mahd = (SELECT MAX(mahd) FROM hoadon)"
+            db.execute_query(conn, query)
+            return "Sửa thành công!"
+        except mysql.connector.Error as error:
+            return "Sửa thất bại!"
     
     def findById(self, id):
         result = None

@@ -71,6 +71,18 @@ class Ui_MainWindow(object):
         self.iconHome.setObjectName("iconHome")
         self.verticalLayout.addWidget(self.iconHome)
         
+        #Icon tạo hoá đơn
+        self.iconCreateBill = QtWidgets.QPushButton(self.icon_menu_widget)
+        self.iconCreateBill.setText("")
+        icon12 = QtGui.QIcon()
+        icon12.addPixmap(QtGui.QPixmap("img/create_bill.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.iconCreateBill.setIcon(icon12)
+        self.iconCreateBill.setIconSize(QtCore.QSize(20, 20))
+        self.iconCreateBill.setCheckable(True)
+        self.iconCreateBill.setAutoExclusive(True)
+        self.iconCreateBill.setObjectName("iconCreateBill")
+        self.verticalLayout.addWidget(self.iconCreateBill)
+        
         #Icon khách hàng
         self.iconCustomer = QtWidgets.QPushButton(self.icon_menu_widget)
         self.iconCustomer.setText("")
@@ -270,6 +282,15 @@ class Ui_MainWindow(object):
         self.btnHome.setObjectName("btnHome")
         self.verticalLayout_2.addWidget(self.btnHome)
         
+        #Nút tạo hoá đơn
+        self.btnCreateBill = QtWidgets.QPushButton(self.menu_widget)
+        self.btnCreateBill.setIcon(icon12)
+        self.btnCreateBill.setIconSize(QtCore.QSize(20, 20))
+        self.btnCreateBill.setCheckable(True)
+        self.btnCreateBill.setAutoExclusive(True)
+        self.btnCreateBill.setObjectName("btnCreateBill")
+        self.verticalLayout_2.addWidget(self.btnCreateBill)
+        
         #Nút khách hàng
         self.btnCustomer = QtWidgets.QPushButton(self.menu_widget)
         self.btnCustomer.setIcon(icon1)
@@ -418,6 +439,11 @@ class Ui_MainWindow(object):
         self.home_Page.setObjectName("home_Page")
         self.stackedWidget.addWidget(self.home_Page)
         
+        # Tạo hoá đơn
+        self.create_Bill_Page = QtWidgets.QWidget()
+        self.create_Bill_Page.setObjectName("create_Bill_Page")
+        self.stackedWidget.addWidget(self.create_Bill_Page)
+        
         # Khách hàng
         self.customer_Page = QtWidgets.QWidget()
         self.customer_Page.setObjectName("customer_Page")
@@ -482,6 +508,10 @@ class Ui_MainWindow(object):
         self.btnCustomer.toggled['bool'].connect(self.iconCustomer.setChecked)
         self.iconCustomer.toggled['bool'].connect(self.btnCustomer.setChecked)
         
+        #Sự kiện tạo hoá đơn
+        self.btnCreateBill.toggled['bool'].connect(self.iconCreateBill.setChecked)
+        self.iconCreateBill.toggled['bool'].connect(self.btnCreateBill.setChecked)
+        
         #Sự kiện nhân viên
         self.btnEmployee.toggled['bool'].connect(self.iconEmployee.setChecked)
         self.iconEmployee.toggled['bool'].connect(self.btnEmployee.setChecked)
@@ -530,6 +560,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "Phòng khám thú y"))
         self.label.setText(_translate("MainWindow", "SideBar"))
         self.btnHome.setText(_translate("MainWindow", "Trang chủ"))
+        self.btnCreateBill.setText(_translate("MainWindow", "Tạo hoá đơn"))
         self.btnCustomer.setText(_translate("MainWindow", "Khách hàng"))
         self.btnPets.setText(_translate("MainWindow", "Thú nuôi"))
         self.btnBed.setText(_translate("MainWindow", "Phòng bệnh"))

@@ -6,7 +6,7 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from GUI.sidebar import Ui_MainWindow
 from GUI.login import Ui_login_form
-from GUI import phongbenh as pb, nhanvien as nv ,dichvu as dv, thunuoi as tn, home ,khachhang as kh, hoadon,phieunhap as pn,duocpham as dp,taikhoan as tk,nhacungcap as ncc,thongtin as tt,doimk as mk
+from GUI import phongbenh as pb, nhanvien as nv ,dichvu as dv, thunuoi as tn, home ,khachhang as kh, hoadon,phieunhap as pn,duocpham as dp,taikhoan as tk,nhacungcap as ncc,thongtin as tt,doimk as mk,demo as create
 from DAO.serviceDAO import serviceDAO
 from DAO.taikhoanDAO import taikhoanDAO
 from DAO.employeeDAO import employeeDAO
@@ -41,8 +41,6 @@ class Login(QWidget, Ui_login_form):
             
                 if taikhoan[3] == 0:
                     self.thongbao.thongBao("Tài khoản của bạn đã bị ngưng hoạt động")
-                # elif taikhoan[5] is None:
-                #     self.thongbao.thongBao("Bạn đã nhập sai mật khẩu hoặc tài khoản")
                 elif taikhoan[4] == 1:
                     self.sidebar = Main_Page(nhanvien)
                     self.close()
@@ -62,6 +60,7 @@ class Main_Page(QMainWindow, Ui_MainWindow):
 
         self.window = QMainWindow()
         self.setupUi(self)
+        self.showFullScreen()
         
             
         self.btnAcc.clicked.connect(lambda: self.showInfor(self.nhanvien))
@@ -70,6 +69,9 @@ class Main_Page(QMainWindow, Ui_MainWindow):
 
         self.home_form = home.Ui_Form()
         self.home_form.setupUi(self.home_Page)
+        
+        self.create_form = create.Ui_Form()
+        self.create_form.setupUi(self.create_Bill_Page)
 
         self.nv_form = nv.Ui_Form()
         self.nv_form.setupUi(self.employee_page)
@@ -108,6 +110,7 @@ class Main_Page(QMainWindow, Ui_MainWindow):
         self.pushButton_12.clicked.connect(self.dangXuat)
         self.pushButton_5.clicked.connect(self.dangXuat)
         self.loadServiceData()
+        self.stackedWidget.currentChanged.connect(self.on_stackwidget_changed)
         
        
         if type == 2:
@@ -132,40 +135,44 @@ class Main_Page(QMainWindow, Ui_MainWindow):
 
     def showHome_Pages(self):
         self.stackedWidget.setCurrentIndex(0)
-    
-    def showCustomer_Pages(self):
+        
+    def showCreate_Pages(self):
         self.stackedWidget.setCurrentIndex(1)
     
-    def showPets_Pages(self):
+    def showCustomer_Pages(self):
         self.stackedWidget.setCurrentIndex(2)
+    
+    def showPets_Pages(self):
+        self.stackedWidget.setCurrentIndex(3)
         
     def showBed_Pages(self):
-        self.stackedWidget.setCurrentIndex(3)
+        self.stackedWidget.setCurrentIndex(4)
     
     def showEmployee_Pages(self):
-        self.stackedWidget.setCurrentIndex(4)
+        self.stackedWidget.setCurrentIndex(5)
         
     def showAccount_Pages(self):
-        self.stackedWidget.setCurrentIndex(5)
-
-    def showHoaDon_Pages(self):
         self.stackedWidget.setCurrentIndex(6)
 
-    def showPhieuNhap_Pages(self):
+    def showHoaDon_Pages(self):
         self.stackedWidget.setCurrentIndex(7)
+
+    def showPhieuNhap_Pages(self):
+        self.stackedWidget.setCurrentIndex(8)
         
     def showNcc_Pages(self):
-        self.stackedWidget.setCurrentIndex(8)
-
-    def showMedicine_Pages(self):
         self.stackedWidget.setCurrentIndex(9)
 
-    def showService_Pages(self):
+    def showMedicine_Pages(self):
         self.stackedWidget.setCurrentIndex(10)
+
+    def showService_Pages(self):
+        self.stackedWidget.setCurrentIndex(11)
         
     # Xử lý giao diện
     def eventHandling(self):
         self.btnEmployee.clicked.connect(self.showEmployee_Pages)
+        self.btnCreateBill.clicked.connect(self.showCreate_Pages)
         self.btnCustomer.clicked.connect(self.showCustomer_Pages)
         self.btnAccount.clicked.connect(self.showAccount_Pages)
         self.btnBed.clicked.connect(self.showBed_Pages)
@@ -177,6 +184,7 @@ class Main_Page(QMainWindow, Ui_MainWindow):
         self.btnMedicine.clicked.connect(self.showMedicine_Pages)
         self.btnBill.clicked.connect(self.showHoaDon_Pages)
         self.iconEmployee.clicked.connect(self.showEmployee_Pages)
+        self.iconCreateBill.clicked.connect(self.showCreate_Pages)
         self.iconCustomer.clicked.connect(self.showCustomer_Pages)
         self.iconAccount.clicked.connect(self.showAccount_Pages)
         self.iconPets.clicked.connect(self.showPets_Pages)
@@ -215,3 +223,7 @@ class Main_Page(QMainWindow, Ui_MainWindow):
         ui.setupUi(Dialog)
         ui.manv.setText(manv)
         Dialog.exec_()
+        
+    def on_stackwidget_changed(self, index):
+        if index != 1:
+            self.create_form.stop_camera()
