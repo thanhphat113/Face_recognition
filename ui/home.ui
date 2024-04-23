@@ -6,46 +6,258 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>524</width>
-    <height>359</height>
+    <width>1127</width>
+    <height>696</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true"/>
+   <string notr="true">#Form {
+	image: url(img/background.jpg);
+	border: none;
+}</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
-   <property name="leftMargin">
-    <number>0</number>
-   </property>
-   <property name="topMargin">
-    <number>0</number>
-   </property>
-   <property name="rightMargin">
-    <number>0</number>
-   </property>
-   <property name="bottomMargin">
-    <number>0</number>
-   </property>
+  <layout class="QGridLayout" name="gridLayout_5">
    <item row="0" column="0">
-    <widget class="QLabel" name="label">
-     <property name="text">
-      <string/>
+    <widget class="QWidget" name="widget" native="true">
+     <property name="styleSheet">
+      <string notr="true">border: none;
+background-color: transparent;
+</string>
      </property>
-     <property name="pixmap">
-      <pixmap>../img/home.png</pixmap>
-     </property>
-     <property name="scaledContents">
-      <bool>true</bool>
-     </property>
+     <layout class="QGridLayout" name="gridLayout_4">
+      <item row="0" column="0" rowspan="2">
+       <widget class="QFrame" name="frame">
+        <property name="styleSheet">
+         <string notr="true">border: none;
+background-color: transparent;</string>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_2">
+         <item row="0" column="0">
+          <widget class="QPushButton" name="btn_prev">
+           <property name="styleSheet">
+            <string notr="true">#btn_prev {
+	border: none;
+	width: 40px;
+	height: 300px;
+	qproperty-iconSize: 60px;
+}
+#btn_prev:hover {
+	border-radius: 5px;
+	border: 1px solid #777777;
+}</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>../img/Back_50px.png</normaloff>../img/Back_50px.png</iconset>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="0" column="2" rowspan="2">
+       <widget class="QFrame" name="frame_2">
+        <property name="styleSheet">
+         <string notr="true">border: none;
+background-color: transparent;</string>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_3">
+         <item row="0" column="0">
+          <widget class="QPushButton" name="btn_next">
+           <property name="styleSheet">
+            <string notr="true">#btn_next {
+	border: none;
+	width: 40px;
+	height: 300px;
+	qproperty-iconSize: 60px;
+}
+#btn_next:hover {
+	border-radius: 5px;
+	border: 1px solid #777777;
+}</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>../img/next_50px.png</normaloff>../img/next_50px.png</iconset>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QFrame" name="frame_3">
+        <property name="styleSheet">
+         <string notr="true">border: none;
+background-color: transparent;</string>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Raised</enum>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>400</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btn_bottom_1">
+           <property name="styleSheet">
+            <string notr="true">#btn_bottom_1 {
+	border: none;
+	background-color: #777777;
+	height: 5px;
+	width: 30px;
+}
+#btn_bottom_1:checked {
+	background-color: #fff;
+}</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="autoExclusive">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btn_bottom_2">
+           <property name="styleSheet">
+            <string notr="true">#btn_bottom_2 {
+	border: none;
+	background-color: #777777;
+	height: 5px;
+	width: 30px;
+}
+#btn_bottom_2:checked {
+	background-color: #fff;
+}</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="autoExclusive">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btn_bottom_3">
+           <property name="styleSheet">
+            <string notr="true">#btn_bottom_3 {
+	border: none;
+	background-color: #777777;
+	height: 5px;
+	width: 30px;
+}</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+           <property name="autoExclusive">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>399</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QStackedWidget" name="stackedWidget">
+        <property name="styleSheet">
+         <string notr="true">border: none;
+background-color: transparent;</string>
+        </property>
+        <property name="currentIndex">
+         <number>2</number>
+        </property>
+        <widget class="QWidget" name="page">
+         <property name="accessibleDescription">
+          <string>background-color: transparent;</string>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border: none;</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout"/>
+        </widget>
+        <widget class="QWidget" name="page_3">
+         <property name="accessibleDescription">
+          <string>background-color: transparent;</string>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border: none;</string>
+         </property>
+        </widget>
+        <widget class="QWidget" name="page_2">
+         <property name="accessibleDescription">
+          <string>background-color: transparent;</string>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">border: none;</string>
+         </property>
+        </widget>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="../img/new.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
