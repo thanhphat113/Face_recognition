@@ -221,6 +221,7 @@ class Ui_Form(object):
     def upload_list(self):
         dao = petDAO()
         pet_list = dao.ReadFromDatabase()
+        cus_list = customerDAO().ReadFromDatabase()
         self.tableWidget.setRowCount(0)
         data_dir = 'data/thunuoi'
         list_directory = os.listdir(data_dir)
@@ -228,8 +229,11 @@ class Ui_Form(object):
             tt = '<Chưa có dữ liệu>'
             if str(pet.get_matn()) in list_directory:
                 tt = '<Có dữ liệu>'
-            data = [pet.get_matn(), pet.get_tentn(), pet.get_maulong(), pet.get_cannang(), pet.get_khachhang().get_tenkh(),tt]
-            self.add_row_to_table(data)
+            for cus in cus_list:
+                if cus.get_makh() == pet.get_makh():
+                    data = [pet.get_matn(), pet.get_tentn(), pet.get_maulong(), pet.get_cannang(), cus.get_tenkh(), tt]
+                    self.add_row_to_table(data)
+                    break
                 
     
 
@@ -351,6 +355,7 @@ class Ui_Form(object):
             selected_items = self.tableWidget.selectedItems()
             row_data = [item.text() for item in selected_items]
             id = self._translate("Dialog",row_data[0])
+            name = self._translate("Dialog",row_data[1])
             camera = QtWidgets.QDialog()
             ui = cmr.Ui_Form()
             ui.setupUi(camera,id,2)

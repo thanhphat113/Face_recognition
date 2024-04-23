@@ -16,13 +16,18 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 import GUI.thongbao as tb
-
+from demo import CNNModel
+import os
+import cv2
+import numpy as np
+import ex
 
 class Ui_Form(object):
     def setupUi(self, Dialog, id, type=1):
         #Khai báo
         self.tb = tb.Ui_Dialog()
         self.id = id
+        self.type = type
         self.parent_directory = f'data/khachhang/{id}'
         self.Dialog = Dialog
         self.count = 0
@@ -47,6 +52,14 @@ class Ui_Form(object):
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
         
+        #Chạy tiến trình nhận diện
+        self.btnDetect = QtWidgets.QPushButton(parent=Dialog)
+        self.btnDetect.setMinimumSize(QtCore.QSize(180, 30))
+        self.btnDetect.setMaximumSize(QtCore.QSize(180, 30))
+        self.btnDetect.setObjectName("btnDetect")
+        self.horizontalLayout.addWidget(self.btnDetect)
+        self.btnDetect.clicked.connect(self.detect)
+
         #Chạy tiến trình lưu ảnh
         self.btnStart = QtWidgets.QPushButton(parent=Dialog)
         self.btnStart.setMinimumSize(QtCore.QSize(180, 30))
@@ -88,13 +101,14 @@ class Ui_Form(object):
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
         
-        if type == 2:
+        if self.type == 2:
             self.parent_directory = f'data/thunuoi/{id}'
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
-        self.btnStart.setText(_translate("Dialog", "Bắt đầu"))
+        self.btnDetect.setText(_translate("Dialog", "Nhận diện"))
+        self.btnStart.setText(_translate("Dialog", "Thu thập dữ liệu nhận diện"))
         self.btnClose.setText(_translate("Dialog", "Đóng"))
         self.btnDelete.setText(_translate("Dialog", "Xoá dữ liệu"))
 
@@ -114,7 +128,14 @@ class Ui_Form(object):
             pixmap = QPixmap.fromImage(image)
             
             self.label.setPixmap(pixmap)
-            
+    
+    def detect(self):
+        if self.type == 1:
+            object = 'khachhang'
+        else:
+            object = 'thunuoi'
+        ex.detect(object)
+
     def start_capture(self):
         # Bắt đầu lập lịch chụp ảnh bằng cách bật QTimer
         self.timer_capture.start(300)
