@@ -130,8 +130,7 @@ class Ui_Form(object):
         if ret:
             self.faces = self.face_cascade.detectMultiScale(frame, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
             if len(self.faces) !=0:
-                if self.count == 30:
-                    self.trainModel(self.data_dir)
+                if self.count >= 30:
                     if self.type == 1:
                         self.tb.thongBao("Đã lưu dữ liệu gương mặt hoàn tất!")
                     else: 
@@ -139,6 +138,7 @@ class Ui_Form(object):
                     self.count= 0
                     self.timer_capture.stop()
                     self.btnStart.setText("Bắt đầu")
+                    self.trainModel(self.data_dir)
                 elif(self.type == 1):
                     for (x, y, w, h) in self.faces:
                         face_image = frame[y:y+h, x:x+w]
