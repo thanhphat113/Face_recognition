@@ -6,7 +6,7 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from GUI.sidebar import Ui_MainWindow
 from GUI.login import Ui_login_form
-from GUI import phongbenh as pb, nhanvien as nv ,dichvu as dv, thunuoi as tn, home ,khachhang as kh, hoadon,phieunhap as pn,duocpham as dp,taikhoan as tk,nhacungcap as ncc,thongtin as tt,doimk as mk,demo as create
+from GUI import phongbenh as pb, nhanvien as nv ,dichvu as dv, thunuoi as tn, home ,khachhang as kh, hoadon,phieunhap as pn,duocpham as dp,taikhoan as tk,nhacungcap as ncc,thongtin as tt,doimk as mk,createBill as create
 from DAO.serviceDAO import serviceDAO
 from DAO.taikhoanDAO import taikhoanDAO
 from DAO.employeeDAO import employeeDAO
@@ -71,7 +71,7 @@ class Main_Page(QMainWindow, Ui_MainWindow):
         self.home_form.setupUi(self.home_Page)
         
         self.create_form = create.Ui_Form()
-        self.create_form.setupUi(self.create_Bill_Page)
+        self.create_form.setupUi(self.create_Bill_Page,self.nhanvien.manv)
 
         self.nv_form = nv.Ui_Form()
         self.nv_form.setupUi(self.employee_page)

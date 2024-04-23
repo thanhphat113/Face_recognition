@@ -9,6 +9,7 @@
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtCore import QTimer
 from PyQt5.QtGui import QPixmap,QImage
+import numpy as np
 import cv2
 
 import sys
@@ -76,7 +77,7 @@ class Ui_Form(object):
         self.horizontalLayout.addItem(spacerItem1)
         self.verticalLayout.addLayout(self.horizontalLayout)
         
-        self.camera = cv2.VideoCapture(1)
+        self.camera = cv2.VideoCapture(0)
         
         self.timer = QTimer()
         self.timer.timeout.connect(self.update_frame)
@@ -126,7 +127,7 @@ class Ui_Form(object):
         if ret:
             self.faces = self.face_cascade.detectMultiScale(frame, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
             if len(self.faces) !=0:
-                if self.count == 100:
+                if self.count == 30:
                     self.tb.thongBao("Đã lưu dữ liệu gương mặt hoàn tất!")
                     self.count= 0
                     self.timer_capture.stop()
@@ -135,8 +136,33 @@ class Ui_Form(object):
                     for (x, y, w, h) in self.faces:
                         face_image = frame[y:y+h, x:x+w]
                         # face_image = cv2.cvtColor(face_image,cv2.COLOR_BAYER_BRG2)
-                        self.count += 1  
+        
+                        # Điều chỉnh độ sáng và độ tương phản
+                        alpha = 1.5  # Độ sáng
+                        beta = 30   # Độ tương phản
+                        adjusted_image = cv2.convertScaleAbs(face_image, alpha=alpha, beta=beta)
+
+                        # Phóng to và thu nhỏ
+                        scaled_up_image = cv2.resize(face_image, None, fx=1.5, fy=1.5, interpolation=cv2.INTER_LINEAR)
+                        scaled_down_image = cv2.resize(face_image, None, fx=0.5, fy=0.5, interpolation=cv2.INTER_LINEAR)
+
+                        # Quay ảnh
+                        rows, cols = face_image.shape[:2]
+                        rotation_matrix = cv2.getRotationMatrix2D((cols/2, rows/2), 45, 1)  # Quay góc 45 độ
+                        rotated_image = cv2.warpAffine(face_image, rotation_matrix, (cols, rows))
+
+                        # Làm mờ và làm nổi bật
+                        blurred_image = cv2.GaussianBlur(face_image, (9, 9), 0)
+                        sharpened_image = cv2.filter2D(face_image, -1, np.array([[-1, -1, -1], [-1, 9, -1], [-1, -1, -1]]))
+
                         cv2.imwrite(f'{self.parent_directory}/{self.id}_{self.count}.png',face_image)
+                        cv2.imwrite(f'{self.parent_directory}/{self.id}_adjusted_{self.count}.png',adjusted_image)
+                        cv2.imwrite(f'{self.parent_directory}/{self.id}_up_{self.count}.png',scaled_up_image)
+                        cv2.imwrite(f'{self.parent_directory}/{self.id}_down_{self.count}.png',scaled_down_image)
+                        cv2.imwrite(f'{self.parent_directory}/{self.id}_rotated_{self.count}.png',rotated_image)
+                        cv2.imwrite(f'{self.parent_directory}/{self.id}_blurred_{self.count}.png',blurred_image)
+                        cv2.imwrite(f'{self.parent_directory}/{self.id}_sharpened_{self.count}.png',sharpened_image)
+                        self.count += 1 
                         
             
         

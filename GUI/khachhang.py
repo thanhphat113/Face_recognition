@@ -344,6 +344,7 @@ class Ui_Form(object):
                         ui = cmr.Ui_Form()
                         ui.setupUi(camera,id)
                         camera.exec_()
+                        self.upload_list()
                 else: self.tb.thongBao("Vui lòng chọn 1 dòng để thực hiện tác vụ !")
                 
 

@@ -86,10 +86,7 @@ if __name__ == "__main__":
     datax, datay = model.load_data(data_dir)
     print (datay)
     model.train_model(datax, datay)
-    tile = model.predict_img(model.model,'saa.png')
-    print(tile)
-    max_index = np.argmax(tile)
-    print("Vị trí số lớn nhất:", max_index)
+    model.save_model("model/demo1.h5")
     
     
 
