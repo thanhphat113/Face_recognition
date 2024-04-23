@@ -24,6 +24,7 @@ class Ui_Form(object):
         #Khai báo
         self.tb = tb.Ui_Dialog()
         self.id = id
+        self.type=type
         self.parent_directory = f'data/khachhang/{id}'
         self.Dialog = Dialog
         self.count = 0
@@ -72,12 +73,11 @@ class Ui_Form(object):
         self.horizontalLayout.addWidget(self.btnDelete)
         self.btnDelete.clicked.connect(self.delete_directory)
         
-        
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout.addItem(spacerItem1)
         self.verticalLayout.addLayout(self.horizontalLayout)
         
-        self.camera = cv2.VideoCapture(0)
+        self.camera = cv2.VideoCapture(1)
         
         self.timer = QTimer()
         self.timer.timeout.connect(self.update_frame)
@@ -89,7 +89,7 @@ class Ui_Form(object):
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
         
-        if type == 2:
+        if self.type == 2:
             self.parent_directory = f'data/thunuoi/{id}'
 
     def retranslateUi(self, Dialog):
@@ -108,8 +108,9 @@ class Ui_Form(object):
             frame_rgb = cv2.resize(frame_rgb,(900,600))
             
             self.faces = self.face_cascade.detectMultiScale(frame_rgb, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
-            for (x, y, w, h) in self.faces:
-                cv2.rectangle(frame_rgb, (x, y), (x+w, y+h), (255, 0, 0), 2)
+            if self.type == 1:
+                for (x, y, w, h) in self.faces:
+                    cv2.rectangle(frame_rgb, (x, y), (x+w, y+h), (255, 0, 0), 2)
             
             image = QImage(frame_rgb.data, frame_rgb.shape[1], frame_rgb.shape[0], QImage.Format_RGB888)
             pixmap = QPixmap.fromImage(image)
@@ -129,48 +130,53 @@ class Ui_Form(object):
             self.faces = self.face_cascade.detectMultiScale(frame, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
             if len(self.faces) !=0:
                 if self.count == 30:
-                    self.tb.thongBao("Đã lưu dữ liệu gương mặt hoàn tất!")
+                    if self.type == 1:
+                        self.tb.thongBao("Đã lưu dữ liệu gương mặt hoàn tất!")
+                    else: 
+                        self.tb.thongBao("Đã lưu dữ liệu thú nuôi hoàn tất!")
                     self.count= 0
                     self.timer_capture.stop()
                     self.btnStart.setText("Bắt đầu")
-                else:
+                elif(self.type == 1):
                     for (x, y, w, h) in self.faces:
                         face_image = frame[y:y+h, x:x+w]
-                        # face_image = cv2.cvtColor(face_image,cv2.COLOR_BAYER_BRG2)
-        
-                        # Điều chỉnh độ sáng và độ tương phản
-                        alpha = 1.5  # Độ sáng
-                        beta = 30   # Độ tương phản
-                        adjusted_image = cv2.convertScaleAbs(face_image, alpha=alpha, beta=beta)
-
-                        # Phóng to và thu nhỏ
-                        scaled_up_image = cv2.resize(face_image, None, fx=1.5, fy=1.5, interpolation=cv2.INTER_LINEAR)
-                        scaled_down_image = cv2.resize(face_image, None, fx=0.5, fy=0.5, interpolation=cv2.INTER_LINEAR)
-
-                        # Quay ảnh
-                        rows, cols = face_image.shape[:2]
-                        rotation_matrix = cv2.getRotationMatrix2D((cols/2, rows/2), 45, 1)  # Quay góc 45 độ
-                        rotated_image = cv2.warpAffine(face_image, rotation_matrix, (cols, rows))
-
-                        # Làm mờ và làm nổi bật
-                        blurred_image = cv2.GaussianBlur(face_image, (9, 9), 0)
-                        sharpened_image = cv2.filter2D(face_image, -1, np.array([[-1, -1, -1], [-1, 9, -1], [-1, -1, -1]]))
-
-                        cv2.imwrite(f'{self.parent_directory}/{self.id}_{self.count}.png',face_image)
-                        cv2.imwrite(f'{self.parent_directory}/{self.id}_adjusted_{self.count}.png',adjusted_image)
-                        cv2.imwrite(f'{self.parent_directory}/{self.id}_up_{self.count}.png',scaled_up_image)
-                        cv2.imwrite(f'{self.parent_directory}/{self.id}_down_{self.count}.png',scaled_down_image)
-                        cv2.imwrite(f'{self.parent_directory}/{self.id}_rotated_{self.count}.png',rotated_image)
-                        cv2.imwrite(f'{self.parent_directory}/{self.id}_blurred_{self.count}.png',blurred_image)
-                        cv2.imwrite(f'{self.parent_directory}/{self.id}_sharpened_{self.count}.png',sharpened_image)
-                        self.count += 1 
+                        self.save_pic(face_image)
+                else:
+                    self.save_pic(frame)
+                    
                         
             
         
     def check_directory(self):
         if not os.path.exists(self.parent_directory):
                 os.makedirs(self.parent_directory)  
-            
+    
+    def save_pic(self,face_image):
+        alpha = 1.5  # Độ sáng
+        beta = 30   # Độ tương phản
+        adjusted_image = cv2.convertScaleAbs(face_image, alpha=alpha, beta=beta)
+
+        # Phóng to và thu nhỏ
+        scaled_up_image = cv2.resize(face_image, None, fx=1.5, fy=1.5, interpolation=cv2.INTER_LINEAR)
+        scaled_down_image = cv2.resize(face_image, None, fx=0.5, fy=0.5, interpolation=cv2.INTER_LINEAR)
+
+        # Quay ảnh
+        rows, cols = face_image.shape[:2]
+        rotation_matrix = cv2.getRotationMatrix2D((cols/2, rows/2), 45, 1)  # Quay góc 45 độ
+        rotated_image = cv2.warpAffine(face_image, rotation_matrix, (cols, rows))
+
+        # Làm mờ và làm nổi bật
+        blurred_image = cv2.GaussianBlur(face_image, (9, 9), 0)
+        sharpened_image = cv2.filter2D(face_image, -1, np.array([[-1, -1, -1], [-1, 9, -1], [-1, -1, -1]]))
+
+        cv2.imwrite(f'{self.parent_directory}/{self.id}_{self.count}.png',face_image)
+        cv2.imwrite(f'{self.parent_directory}/{self.id}_adjusted_{self.count}.png',adjusted_image)
+        cv2.imwrite(f'{self.parent_directory}/{self.id}_up_{self.count}.png',scaled_up_image)
+        cv2.imwrite(f'{self.parent_directory}/{self.id}_down_{self.count}.png',scaled_down_image)
+        cv2.imwrite(f'{self.parent_directory}/{self.id}_rotated_{self.count}.png',rotated_image)
+        cv2.imwrite(f'{self.parent_directory}/{self.id}_blurred_{self.count}.png',blurred_image)
+        cv2.imwrite(f'{self.parent_directory}/{self.id}_sharpened_{self.count}.png',sharpened_image)
+        self.count += 1 
     
     def close_dialog(self):
         self.camera.release()
