@@ -38,6 +38,18 @@ class cthdDAO:
             return 'Thêm thất bại !!!!'
         finally:
             conn.close()
+    
+    def insertCTHD2(self, cthd):
+        conn = self.conn
+        try:
+            conn.connect()
+            query = f"insert into chitiet_hd(mahd, madv, soluong, gia) SELECT (MAX(mahd)), '{cthd.get_madv()}', '{cthd.get_soLuong()}', '{cthd.get_gia()}' from HoaDon"
+            db.execute_query(conn,query)
+            return 'Thêm thành công !!!!'
+        except mysql.connector.Error as error:
+            return 'Thêm thất bại !!!!'
+        finally:
+            conn.close()
         
     def updateCTHD(self, cthd):
         conn = self.conn

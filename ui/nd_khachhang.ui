@@ -6,8 +6,13 @@
    <rect>
     <x>0</x>
     <y>0</y>
+<<<<<<< HEAD
+    <width>1440</width>
+    <height>768</height>
+=======
     <width>1090</width>
     <height>722</height>
+>>>>>>> 23c44c16e4dd171810a42078673cc71ebe34b648
    </rect>
   </property>
   <property name="windowTitle">
@@ -39,6 +44,8 @@
     <widget class="QWidget" name="widget_2" native="true">
      <layout class="QHBoxLayout" name="horizontalLayout_4">
       <item>
+<<<<<<< HEAD
+=======
        <widget class="QGroupBox" name="groupBox_2">
         <property name="maximumSize">
          <size>
@@ -402,6 +409,7 @@ border: none;</string>
        </widget>
       </item>
       <item>
+>>>>>>> 23c44c16e4dd171810a42078673cc71ebe34b648
        <widget class="QGroupBox" name="groupBox">
         <property name="font">
          <font>
@@ -426,7 +434,11 @@ border: none;</string>
              <property name="maximumSize">
               <size>
                <width>16777215</width>
+<<<<<<< HEAD
+               <height>50</height>
+=======
                <height>90</height>
+>>>>>>> 23c44c16e4dd171810a42078673cc71ebe34b648
               </size>
              </property>
              <layout class="QHBoxLayout" name="horizontalLayout_6">

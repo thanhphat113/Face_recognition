@@ -19,23 +19,18 @@ class CNNModel:
         model = Sequential()
         model.add(Conv2D(16, (3,3), activation='relu', input_shape=self.input_shape))
         model.add(MaxPooling2D(pool_size=(2, 2)))
-        model.add(Dropout(0.25))
         
         model.add(Conv2D(32, (3,3), activation='relu'))
         model.add(MaxPooling2D(pool_size=(2, 2)))
-        model.add(Dropout(0.25))
         
         model.add(Conv2D(64, (3,3), activation='relu'))
         model.add(MaxPooling2D(pool_size=(2, 2)))
-        model.add(Dropout(0.25))
         
         model.add(Conv2D(32, (3,3), activation='relu'))
         model.add(MaxPooling2D(pool_size=(2, 2)))
-        model.add(Dropout(0.25))
         
         model.add(Flatten())
         model.add(Dense(256, activation='relu'))
-        model.add(Dropout(0.25))
         model.add(Dense(self.num_class, activation='sigmoid'))
         return model
 
@@ -44,17 +39,16 @@ class CNNModel:
                       loss=keras.losses.BinaryCrossentropy(),
                       metrics=['accuracy'])
         
-    def save_model(self, model, path):
-        model.save(path)
+    def save_model(self, path):
+        self.model.save(path)
     
-    def predict_img(self, model:keras.Model, img):
+    def predict_img(self, img):
         # img = cv2.imread(img)
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         img = cv2.resize(img, (120, 120))
-        img = img.astype('float32') / 255.0
         img = np.expand_dims(img, axis=0)
         # return img
-        return model.predict(img)
+        return self.model.predict(img)
         
     def load_data(self,folder_path, input_shape=(120,120)):
         class_names = os.listdir(folder_path)
@@ -83,10 +77,6 @@ class CNNModel:
         self.compile_model()
         self.model.fit(X_train, y_train, epochs=epochs)
     
-    
-    def chuanhoa_label(self, label):
-        ch_label = np.array([label])
-        return ch_label
     
 if __name__ == "__main__":
     data_dir = 'data/khachhang'
