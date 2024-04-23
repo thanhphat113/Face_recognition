@@ -4,14 +4,11 @@ import cv2
 import numpy as np
 import cv2
 from keras.models import load_model
-
-import sys
-import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from demo import CNNModel
 from DAO.customerDAO import customerDAO
 from DTO.customerDTO import customer
 
-model = load_model('model/demo1.h5')
+model = load_model('model/modelKH.h5')
 
 data_dir = 'data/khachhang'
 
@@ -78,5 +75,5 @@ while True:
     if cv2.waitKey(1) == ord('q'):
             break
     
-cap.release()
-cv2.destroyAllWindows()
+    cap.release()
+    cv2.destroyAllWindows()

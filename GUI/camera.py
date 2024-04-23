@@ -47,7 +47,7 @@ class Ui_Form(object):
         self.horizontalLayout.setObjectName("horizontalLayout")
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
-        
+
         #Chạy tiến trình lưu ảnh
         self.btnStart = QtWidgets.QPushButton(parent=Dialog)
         self.btnStart.setMinimumSize(QtCore.QSize(180, 30))
@@ -115,7 +115,8 @@ class Ui_Form(object):
             pixmap = QPixmap.fromImage(image)
             
             self.label.setPixmap(pixmap)
-            
+    
+
     def start_capture(self):
         # Bắt đầu lập lịch chụp ảnh bằng cách bật QTimer
         self.timer_capture.start(200)
