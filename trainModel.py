@@ -42,13 +42,6 @@ class CNNModel:
     def save_model(self, path):
         self.model.save(path)
     
-    def predict_img(self, img):
-        # img = cv2.imread(img)
-        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-        img = cv2.resize(img, (120, 120))
-        img = np.expand_dims(img, axis=0)
-        # return img
-        return self.model.predict(img)
         
     def load_data(self,folder_path, input_shape=(120,120)):
         class_names = os.listdir(folder_path)

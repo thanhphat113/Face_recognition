@@ -9,6 +9,7 @@
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtCore import QTimer
 from PyQt5.QtGui import QPixmap,QImage
+from trainModel import CNNModel
 import numpy as np
 import cv2
 
@@ -25,11 +26,10 @@ class Ui_Form(object):
         self.tb = tb.Ui_Dialog()
         self.id = id
         self.type=type
+        self.data_dir = 'data/khachhang'
         self.parent_directory = f'data/khachhang/{id}'
         self.Dialog = Dialog
         self.count = 0
-        
-        # self.name = next(os.walk(self.parent_directory))[1]
         
         Dialog.setObjectName("Dialog")
         Dialog.resize(800, 550)
@@ -90,6 +90,7 @@ class Ui_Form(object):
         QtCore.QMetaObject.connectSlotsByName(Dialog)
         
         if self.type == 2:
+            self.data_dir = 'data/thunuoi'
             self.parent_directory = f'data/thunuoi/{id}'
 
     def retranslateUi(self, Dialog):
@@ -130,6 +131,7 @@ class Ui_Form(object):
             self.faces = self.face_cascade.detectMultiScale(frame, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
             if len(self.faces) !=0:
                 if self.count == 30:
+                    self.trainModel(self.data_dir)
                     if self.type == 1:
                         self.tb.thongBao("Đã lưu dữ liệu gương mặt hoàn tất!")
                     else: 
@@ -143,6 +145,17 @@ class Ui_Form(object):
                         self.save_pic(face_image)
                 else:
                     self.save_pic(frame)
+    
+    def trainModel(self,data_dir):
+        list = os.listdir(data_dir)
+        num = len(list)
+        model = CNNModel(num_class=num)
+        datax, datay = model.load_data(data_dir)
+        model.train_model(datax, datay)
+        if self.type == 1:
+            model.save_model("model/modelKH.h5")
+        else:
+            model.save_model("model/modelTN.h5")
                     
                         
             

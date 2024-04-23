@@ -4,7 +4,7 @@ import cv2
 import numpy as np
 import cv2
 from keras.models import load_model
-from demo import CNNModel
+from trainModel import CNNModel
 from DAO.customerDAO import customerDAO
 from DTO.customerDTO import customer
 
