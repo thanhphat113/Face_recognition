@@ -26,9 +26,11 @@ class Ui_Form(object):
         #Khai báo
         self.tb = tb.Ui_Dialog()
         self.id = id
+        self.data_dir = 'data/khachhang'
         self.parent_directory = f'data/khachhang/{id}'
         self.Dialog = Dialog
         self.count = 0
+        self.type=type
         
         # self.name = next(os.walk(self.parent_directory))[1]
         
@@ -91,7 +93,8 @@ class Ui_Form(object):
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
         
-        if type == 2:
+        if self.type == 2:
+            self.data_dir = 'data/thunuoi'
             self.parent_directory = f'data/thunuoi/{id}'
 
     def retranslateUi(self, Dialog):
@@ -110,8 +113,9 @@ class Ui_Form(object):
             frame_rgb = cv2.resize(frame_rgb,(900,600))
             
             self.faces = self.face_cascade.detectMultiScale(frame_rgb, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
-            for (x, y, w, h) in self.faces:
-                cv2.rectangle(frame_rgb, (x, y), (x+w, y+h), (255, 0, 0), 2)
+            if self.type == 1:
+                for (x, y, w, h) in self.faces:
+                    cv2.rectangle(frame_rgb, (x, y), (x+w, y+h), (255, 0, 0), 2)
             
             image = QImage(frame_rgb.data, frame_rgb.shape[1], frame_rgb.shape[0], QImage.Format_RGB888)
             pixmap = QPixmap.fromImage(image)
@@ -129,11 +133,15 @@ class Ui_Form(object):
         if ret:
             self.faces = self.face_cascade.detectMultiScale(frame, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
             if len(self.faces) !=0:
-                if self.count == 50:
-                    self.tb.thongBao("Đã lưu dữ liệu gương mặt hoàn tất!")
+                if self.count >= 30:
+                    if self.type == 1:
+                        self.tb.thongBao("Đã lưu dữ liệu gương mặt hoàn tất!")
+                    else: 
+                        self.tb.thongBao("Đã lưu dữ liệu thú nuôi hoàn tất!")
                     self.count= 0
                     self.timer_capture.stop()
                     self.btnStart.setText("Bắt đầu")
+                    self.trainModel(self.data_dir)
                 elif(self.type == 1):
                     for (x, y, w, h) in self.faces:
                         face_image = frame[y:y+h, x:x+w]
