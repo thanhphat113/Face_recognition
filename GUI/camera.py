@@ -26,11 +26,11 @@ class Ui_Form(object):
         #Khai báo
         self.tb = tb.Ui_Dialog()
         self.id = id
-        self.type=type
-        self.data_dir = 'data/khachhang'
         self.parent_directory = f'data/khachhang/{id}'
         self.Dialog = Dialog
         self.count = 0
+        
+        # self.name = next(os.walk(self.parent_directory))[1]
         
         Dialog.setObjectName("Dialog")
         Dialog.resize(800, 550)
@@ -49,7 +49,7 @@ class Ui_Form(object):
         self.horizontalLayout.setObjectName("horizontalLayout")
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout.addItem(spacerItem)
-
+        
         #Chạy tiến trình lưu ảnh
         self.btnStart = QtWidgets.QPushButton(parent=Dialog)
         self.btnStart.setMinimumSize(QtCore.QSize(180, 30))
@@ -74,11 +74,12 @@ class Ui_Form(object):
         self.horizontalLayout.addWidget(self.btnDelete)
         self.btnDelete.clicked.connect(self.delete_directory)
         
+        
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout.addItem(spacerItem1)
         self.verticalLayout.addLayout(self.horizontalLayout)
         
-        self.camera = cv2.VideoCapture(1)
+        self.camera = cv2.VideoCapture(0)
         
         self.timer = QTimer()
         self.timer.timeout.connect(self.update_frame)
@@ -90,8 +91,7 @@ class Ui_Form(object):
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
         
-        if self.type == 2:
-            self.data_dir = 'data/thunuoi'
+        if type == 2:
             self.parent_directory = f'data/thunuoi/{id}'
 
     def retranslateUi(self, Dialog):
@@ -110,19 +110,17 @@ class Ui_Form(object):
             frame_rgb = cv2.resize(frame_rgb,(900,600))
             
             self.faces = self.face_cascade.detectMultiScale(frame_rgb, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
-            if self.type == 1:
-                for (x, y, w, h) in self.faces:
-                    cv2.rectangle(frame_rgb, (x, y), (x+w, y+h), (255, 0, 0), 2)
+            for (x, y, w, h) in self.faces:
+                cv2.rectangle(frame_rgb, (x, y), (x+w, y+h), (255, 0, 0), 2)
             
             image = QImage(frame_rgb.data, frame_rgb.shape[1], frame_rgb.shape[0], QImage.Format_RGB888)
             pixmap = QPixmap.fromImage(image)
             
             self.label.setPixmap(pixmap)
-    
-
+            
     def start_capture(self):
         # Bắt đầu lập lịch chụp ảnh bằng cách bật QTimer
-        self.timer_capture.start(200)
+        self.timer_capture.start(300)
             
     def chup_anh(self):
         self.btnStart.setText("Đang lưu ảnh....!")
@@ -131,36 +129,17 @@ class Ui_Form(object):
         if ret:
             self.faces = self.face_cascade.detectMultiScale(frame, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
             if len(self.faces) !=0:
-                if self.count >= 30:
-                    if self.type == 1:
-                        self.tb.thongBao("Đã lưu dữ liệu gương mặt hoàn tất!")
-                    else: 
-                        self.tb.thongBao("Đã lưu dữ liệu thú nuôi hoàn tất!")
+                if self.count == 50:
+                    self.tb.thongBao("Đã lưu dữ liệu gương mặt hoàn tất!")
                     self.count= 0
                     self.timer_capture.stop()
                     self.btnStart.setText("Bắt đầu")
-                    self.trainModel(self.data_dir)
                 elif(self.type == 1):
                     for (x, y, w, h) in self.faces:
                         face_image = frame[y:y+h, x:x+w]
                         self.save_pic(face_image)
                 else:
                     self.save_pic(frame)
-    
-    def trainModel(self,data_dir):
-        list = os.listdir(data_dir)
-        num = len(list)
-        model = CNNModel(num_class=num)
-        datax, datay = model.load_data(data_dir)
-        model.train_model(datax, datay)
-        if self.type == 1:
-            model.save_model("model/modelKH.h5")
-        else:
-            model.save_model("model/modelTN.h5")
-                    
-    def check_directory(self):
-        if not os.path.exists(self.parent_directory):
-                os.makedirs(self.parent_directory)  
     
     def save_pic(self,face_image):
         alpha = 1.5  # Độ sáng
@@ -187,7 +166,23 @@ class Ui_Form(object):
         cv2.imwrite(f'{self.parent_directory}/{self.id}_rotated_{self.count}.png',rotated_image)
         cv2.imwrite(f'{self.parent_directory}/{self.id}_blurred_{self.count}.png',blurred_image)
         cv2.imwrite(f'{self.parent_directory}/{self.id}_sharpened_{self.count}.png',sharpened_image)
-        self.count += 1 
+        self.count += 1
+    
+    def trainModel(self,data_dir):
+        list = os.listdir(data_dir)
+        num = len(list)
+        model = CNNModel(num_class=num)
+        datax, datay = model.load_data(data_dir)
+        model.train_model(datax, datay)
+        if self.type == 1:
+            model.save_model("model/modelKH.h5")
+        else:
+            model.save_model("model/modelTN.h5")
+                    
+    def check_directory(self):
+        if not os.path.exists(self.parent_directory):
+                os.makedirs(self.parent_directory)  
+            
     
     def close_dialog(self):
         self.camera.release()
@@ -200,14 +195,3 @@ class Ui_Form(object):
         except OSError as e:
             self.tb.thongBao(f"Lỗi: {self.parent_directory} - {e.strerror}")
         
-
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Dialog = QtWidgets.QDialog()
-    ui = Ui_Form()
-    ui.setupUi(Dialog,4)
-    Dialog.show()
-    sys.exit(app.exec())
