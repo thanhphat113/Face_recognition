@@ -76,17 +76,6 @@ class petDAO:
         finally:
             conn.close()
 
-    def findById1(self,id):
-        result = None
-        try:
-            self.conn.connect()
-            query = f"select * from ThuNuoi where matn = '{id}'"
-            list = db.execute_fetch_all(self.conn,query)
-            for subpet in list:
-                result = pet(subpet[0],subpet[1],subpet[2],subpet[3],subpet[4])
-            return result
-        except mysql.connector.Error as error:
-            return f'Lỗi: {error}'
                    
     def findById(self,id):
         pets_list = []

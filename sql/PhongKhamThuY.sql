@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost
--- Thời gian đã tạo: Th4 12, 2024 lúc 06:15 AM
+-- Thời gian đã tạo: Th4 24, 2024 lúc 06:10 AM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.0.28
 
@@ -34,6 +34,16 @@ CREATE TABLE `ChiTiet_HD` (
   `soluong` int(11) DEFAULT NULL,
   `gia` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `ChiTiet_HD`
+--
+
+INSERT INTO `ChiTiet_HD` (`mact_hd`, `mahd`, `madv`, `soluong`, `gia`) VALUES
+(1, 3, 1, 4, 50),
+(2, 5, 2, 3, 1500000),
+(3, 5, 6, 1, 250000),
+(4, 6, 4, 1, 1000000);
 
 -- --------------------------------------------------------
 
@@ -153,7 +163,11 @@ CREATE TABLE `HoaDon` (
 --
 
 INSERT INTO `HoaDon` (`mahd`, `ngaytao`, `tongtien`, `manv`, `makh`) VALUES
-(2, '2000-01-01', 11111, 1, 1);
+(2, '2000-01-01', 11111, 1, 1),
+(3, '2023-01-05', 0, 1, 2),
+(4, '2024-04-23', 0, 2, 1),
+(5, '2024-04-23', 1750000, 2, 1),
+(6, '2024-04-23', 1000000, 24, 18);
 
 -- --------------------------------------------------------
 
@@ -184,7 +198,12 @@ INSERT INTO `KhachHang` (`makh`, `tenkh`, `gioitinh`, `sdt`, `email`) VALUES
 (8, 'Lương Thị H', 0, '0967890123', 'luongthih@example.com'),
 (9, 'Đặng Văn I', 1, '0978901234', 'dangvani@example.com'),
 (10, 'Lê Thị K', 0, '0989012345', 'lethik@example.com'),
-(13, 'Quyên', 0, '123', '@gmail.com');
+(13, 'Quyên', 0, '123', '@gmail.com'),
+(14, 'Á Nhân', 0, '02842145', 'anhan@gmail.com'),
+(16, 'ronaldo', 1, '1000000', 'ronaldo@gmail.com'),
+(17, 'messi', 1, '12521521', 'messi@gmail.com'),
+(18, 'neymar', 1, '214321421', 'neymar@gmail.com'),
+(19, 'Lý Thanh Phát', 1, '21521521', 'thanhphat@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -261,7 +280,9 @@ INSERT INTO `NhanVien` (`manv`, `tennv`, `sdt`, `email`) VALUES
 (9, 'Lương Thị P', '0967890123', 'luongthip@example.com'),
 (10, 'Đặng Văn O', '0978901234', 'dangvano@example.com'),
 (11, 'Lê Thị N', '0989012345', 'lethin@example.com'),
-(19, 'Thanh Dũng', '021214', 'thanhdung@gmailc.com');
+(19, 'Thanh Dũng', '021214', 'thanhdung@gmailc.com'),
+(24, 'admin', NULL, NULL),
+(29, 'Lý Thanh Phát', '123', '@');
 
 -- --------------------------------------------------------
 
@@ -327,7 +348,7 @@ CREATE TABLE `TaiKhoan` (
   `password` varchar(255) DEFAULT NULL,
   `trangthai` tinyint(1) DEFAULT NULL,
   `maloai` int(11) DEFAULT NULL,
-  `manv` int(11) NOT NULL
+  `manv` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -335,17 +356,16 @@ CREATE TABLE `TaiKhoan` (
 --
 
 INSERT INTO `TaiKhoan` (`matk`, `username`, `password`, `trangthai`, `maloai`, `manv`) VALUES
-(2, 'nguyenvanx', '1', 1, 2, 2),
+(2, 'nguyenvanx', '123', 1, 2, 2),
 (3, 'tranthiy', 'password2', 1, 2, 3),
 (4, 'levanz', 'password3', 1, 2, 4),
 (5, 'phamthit', 'password4', 1, 2, 5),
-(6, 'hoangvans', 'password5', 1, 2, 3),
-(7, 'maithir', 'password6', 1, 2, 3),
-(8, 'vuvanq', 'password7', 1, 1, 3),
-(9, 'luongthip', 'password8', 1, 2, 3),
-(10, 'dangvano', 'password9', 1, 2, 3),
-(11, 'lethin', 'password10', 1, 2, 3),
-(13, 'admin', 'admin', 1, 1, 3);
+(8, 'vuvanq', 'password7', 1, 1, 8),
+(9, 'luongthip', 'password8', 0, 1, 9),
+(10, 'dangvano', 'password9', 1, 2, 10),
+(11, 'lethin', 'password10', 1, 2, 11),
+(13, 'admin', 'admin', 1, 1, 24),
+(17, 'lythanhphat', '123', 1, 2, 29);
 
 -- --------------------------------------------------------
 
@@ -372,11 +392,11 @@ INSERT INTO `ThuNuoi` (`matn`, `tentn`, `mau`, `cannang`, `makh`) VALUES
 (4, 'Hà Cảo', 'Vàng', '0.3 kg', 4),
 (5, 'Rùa Rồng', 'Xanh', '3 kg', 5),
 (6, 'Chim Cánh Cụt', 'Hồng', '2 kg', 6),
-(7, 'Hươu Cao Cổ', 'Nâu', '100 kg', 7),
+(7, 'Hươu Cao Cổ', 'Nâu', '100 kg', 14),
 (8, 'Khỉ Đuôi Dài', 'Nâu', '15 kg', 8),
 (9, 'Gấu Trúc', 'Trắng đen', '80 kg', 9),
 (10, 'Sư Tử', 'Vàng', '150 kg', 10),
-(12, 'shiba', 'Vàng', '35', NULL),
+(12, 'shiba', 'Vàng', '35', 6),
 (13, 'Chó Shiba', 'Vàng Đen', '45', 1);
 
 --
@@ -486,13 +506,13 @@ ALTER TABLE `ThuNuoi`
 -- AUTO_INCREMENT cho bảng `ChiTiet_HD`
 --
 ALTER TABLE `ChiTiet_HD`
-  MODIFY `mact_hd` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `mact_hd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `ChiTiet_PN`
 --
 ALTER TABLE `ChiTiet_PN`
-  MODIFY `mact_pn` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `mact_pn` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `DichVu`
@@ -510,13 +530,13 @@ ALTER TABLE `DuocPham`
 -- AUTO_INCREMENT cho bảng `HoaDon`
 --
 ALTER TABLE `HoaDon`
-  MODIFY `mahd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `mahd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT cho bảng `KhachHang`
 --
 ALTER TABLE `KhachHang`
-  MODIFY `makh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `makh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT cho bảng `LoaiTaiKhoan`
@@ -534,7 +554,7 @@ ALTER TABLE `NhaCungCap`
 -- AUTO_INCREMENT cho bảng `NhanVien`
 --
 ALTER TABLE `NhanVien`
-  MODIFY `manv` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `manv` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT cho bảng `PhieuNhap`
@@ -552,7 +572,7 @@ ALTER TABLE `PhongBenh`
 -- AUTO_INCREMENT cho bảng `TaiKhoan`
 --
 ALTER TABLE `TaiKhoan`
-  MODIFY `matk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `matk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT cho bảng `ThuNuoi`

@@ -24,6 +24,7 @@ import cv2
 
 class Ui_Form(object):
     def setupUi(self, Form, manv):
+        self.id = None
         self.manv = manv
         self.tb = tb.Ui_Dialog()
         self.model = load_model('model/modelKH.h5')
@@ -196,7 +197,7 @@ class Ui_Form(object):
             
     def start_camera(self):
         if self.flag is False:
-                self.camera = cv2.VideoCapture(1)
+                self.camera = cv2.VideoCapture(0)
                 self.timer = QTimer()
                 self.timer.timeout.connect(self.update_frame)
                 self.timer.start()
@@ -213,6 +214,7 @@ class Ui_Form(object):
                 self.timer.stop()
                 self.lb_camera.clear()
                 self.lb_camera.setText('Đã tắt camera, vui lòng bấm "Bắt đầu" để mở.')
+                self.id = None
         else: pass
 
 if __name__ == "__main__":

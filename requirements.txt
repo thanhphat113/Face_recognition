@@ -1,6 +1,5 @@
 tensorflow
 numpy
-shutil
 scikit-learn
 Pillow
 opencv-python

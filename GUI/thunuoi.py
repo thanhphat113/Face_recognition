@@ -17,12 +17,14 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 import GUI.TacvuTN as tv
 import GUI.thongbao as tb
+import GUI.camTN as cam
 from  DAO.petDAO import petDAO
 from  DAO.customerDAO import customerDAO
 import GUI.camera as cmr
 
 class Ui_Form(object):
     def setupUi(self, Form):
+        self.camTN = cam.Ui_Form()
         self.tb = tb.Ui_Dialog()
         Form.setObjectName("Form")
         Form.resize(800, 500)
@@ -86,7 +88,17 @@ class Ui_Form(object):
         self.btnCamera.setObjectName("btnCamera")
         self.btnCamera.setMinimumSize(100,30)
         self.horizontalLayout.addWidget(self.btnCamera)
-        self.btnCamera.clicked.connect(self.openCamera)                    
+        self.btnCamera.clicked.connect(self.openCamera) 
+        
+        self.btnNhanDien = QtWidgets.QPushButton(self.widget_3)
+        self.btnNhanDien.setStyleSheet("background-color: rgb(100, 124, 125);")
+        self.btnNhanDien.setIcon(icon10)
+        self.btnNhanDien.setIconSize(QtCore.QSize(20, 20))
+        self.btnNhanDien.setObjectName("btnNhanDien")
+        self.btnNhanDien.setMinimumSize(100,30)
+        self.btnNhanDien.clicked.connect(self.showCam)
+        self.horizontalLayout.addWidget(self.btnNhanDien)
+        # self.btnNhanDien.clicked.connect(self.openCamera)                   
                                 
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap("img/delete.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
@@ -193,6 +205,8 @@ class Ui_Form(object):
         self.pushButton_3.clicked.connect(self.TacVu_TN)
         self.pushButton.setText(_translate("Form", "Xoá"))
         self.pushButton.setMinimumSize(100, 30)
+        self.btnNhanDien.setText(_translate("Form", "Nhận diện"))
+        self.btnNhanDien.setMinimumSize(100, 30)
         self.pushButton.clicked.connect(self.on_button_clicked)
         self.pushButton_2.setText(_translate("Form", "Sửa"))
         self.pushButton_2.setMinimumSize(100, 30)
@@ -234,6 +248,11 @@ class Ui_Form(object):
                     data = [pet.get_matn(), pet.get_tentn(), pet.get_maulong(), pet.get_cannang(), cus.get_tenkh(), tt]
                     self.add_row_to_table(data)
                     break
+                
+    def showCam(self):
+        Form = QtWidgets.QDialog()
+        self.camTN.setupUi(Form)
+        Form.exec_()
                 
     
 
