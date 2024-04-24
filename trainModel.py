@@ -15,6 +15,7 @@ class CNNModel:
         self.num_class = num_class
         self.model = self.build_model()
 
+    #Cấu trúc hệ thống của model
     def build_model(self):
         model = Sequential()
         model.add(Conv2D(16, (3,3), activation='relu', input_shape=self.input_shape))
@@ -34,15 +35,17 @@ class CNNModel:
         model.add(Dense(self.num_class, activation='sigmoid'))
         return model
 
+    #Complie model
     def compile_model(self):
         self.model.compile(optimizer='adam',
                       loss=keras.losses.BinaryCrossentropy(),
                       metrics=['accuracy'])
         
+    #Lưu lại model 
     def save_model(self, path):
         self.model.save(path)
     
-        
+    # Chuẩn hoá hình ảnh và nhãn cho dữ liệu
     def load_data(self,folder_path, input_shape=(120,120)):
         class_names = os.listdir(folder_path)
         X_train = []
@@ -59,13 +62,13 @@ class CNNModel:
                 y_train.append(i)
         X_train = np.array(X_train)
         y_train = np.array(y_train)
-        # return X_train, y_train 
         label_encoder = LabelEncoder()
         y_train_encoded = label_encoder.fit_transform(y_train)
         y_train_categorical = to_categorical(y_train_encoded)
         
         return X_train, y_train_categorical
     
+    # Train dữ liệu vào model
     def train_model(self, X_train, y_train, epochs=15):
         self.compile_model()
         self.model.fit(X_train, y_train, epochs=epochs)

@@ -23,7 +23,7 @@ import cv2
 
 
 class Ui_Form(object):
-    def setupUi(self, Form,manv):
+    def setupUi(self, Form, manv):
         self.manv = manv
         self.tb = tb.Ui_Dialog()
         self.model = load_model('model/modelKH.h5')
@@ -159,7 +159,7 @@ class Ui_Form(object):
                 
                 prediction = self.model.predict(np.expand_dims(face_image_rgb, axis=0))
 
-                if prediction.max() < 0.9:
+                if prediction.max() < 0.6:
                         self.id = None
                         label = "Unknown"
                         color = (255,0,0)

@@ -43,6 +43,8 @@ class customerDAO:
             conn.connect()
             query=f"delete from KhachHang where makh = '{id}'"
             db.execute_query(conn,query)
+            query=f"delete from ThuNuoi where makh = '{id}'"
+            db.execute_query(conn,query)
             return 'Xoá thành công !!!!'
         except mysql.connector.Error as error:
             return f'Lỗi: {error}'

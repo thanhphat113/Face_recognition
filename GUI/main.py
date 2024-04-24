@@ -60,6 +60,7 @@ class Main_Page(QMainWindow, Ui_MainWindow):
 
         self.window = QMainWindow()
         self.setupUi(self)
+        self.showFullScreen()
         
             
         self.btnAcc.clicked.connect(lambda: self.showInfor(self.nhanvien))

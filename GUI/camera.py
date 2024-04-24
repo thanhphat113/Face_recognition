@@ -14,6 +14,7 @@ import numpy as np
 import cv2
 
 import sys
+import shutil
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
@@ -157,9 +158,6 @@ class Ui_Form(object):
         else:
             model.save_model("model/modelTN.h5")
                     
-                        
-            
-        
     def check_directory(self):
         if not os.path.exists(self.parent_directory):
                 os.makedirs(self.parent_directory)  
@@ -197,7 +195,7 @@ class Ui_Form(object):
         
     def delete_directory(self):
         try:
-            os.remove(self.parent_directory)
+            shutil.rmtree(self.parent_directory)
             self.tb.thongBao("Đã xoá thư mục thành công !")
         except OSError as e:
             self.tb.thongBao(f"Lỗi: {self.parent_directory} - {e.strerror}")
