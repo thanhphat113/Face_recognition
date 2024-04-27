@@ -135,9 +135,9 @@ class Ui_Form(object):
             if len(self.faces) !=0:
                 if self.count >= 30:
                     if self.type == 1:
-                        self.tb.thongBao("Đã lưu dữ liệu gương mặt hoàn tất!")
+                        self.tb.thongBao("Đã lưu dữ liệu gương mặt hoàn tất! Vui lòng chờ....")
                     else: 
-                        self.tb.thongBao("Đã lưu dữ liệu thú nuôi hoàn tất!")
+                        self.tb.thongBao("Đã lưu dữ liệu thú nuôi hoàn tất! Vui lòng chờ....")
                     self.count= 0
                     self.timer_capture.stop()
                     self.btnStart.setText("Bắt đầu")

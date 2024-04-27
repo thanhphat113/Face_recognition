@@ -74,6 +74,18 @@ class customerDAO:
             return cus
         except mysql.connector.Error as error:
             return f'Error: {error}'
+        
+    def findByName(self,name):
+        cus = None
+        try:
+            self.conn.connect()
+            query = f"select * from KhachHang where tenkh = '{name}'"
+            result = db.execute_fetch_all(self.conn,query)
+            for kh in result:
+                cus = customer(kh[0],kh[1],kh[2],kh[3],kh[4])
+            return cus
+        except mysql.connector.Error as error:
+            return f'Error: {error}'
     
     def findByCondition(self, type, condition):
                 cus_list = []

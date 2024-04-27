@@ -5,6 +5,7 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from DAO.petDAO import petDAO
 from DTO.petDTO import pet
+from DAO.customerDAO import customerDAO
 import GUI.thongbao as tb
 
 
@@ -122,13 +123,15 @@ class Ui_Dialog(object):
             return 'Tên thú nuôi không được rỗng !!!!'
         
     def update_data(self, id):
+        cus = customerDAO()
         ten = self.txtName.text()
         cannang = self.txtWeight.text()
         mau = self.txtColor.text()
-        khachhang = self.cbMaKH.currentIndex() + 1
+        khachhang = self.cbMaKH.currentText()
+        kh = cus.findByName(khachhang)
         dao = petDAO()
         if ten:
-            subPet = pet(id, ten, mau, cannang, khachhang)
+            subPet = pet(id, ten, mau, cannang, kh.get_makh())
             return dao.update(subPet)  
         else: 
             return 'Tên thú nuôi không được rỗng !!!!'

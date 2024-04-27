@@ -26,7 +26,7 @@ class Ui_Form(object):
         self.parent_directory = 'data/thunuoi'
         self.model = load_model('model/modelTN.h5')
         
-        self.camera = cv2.VideoCapture(0)
+        self.camera = cv2.VideoCapture(1)
         
         self.timer = QTimer()
         self.timer.timeout.connect(self.update_frame)
@@ -76,7 +76,7 @@ class Ui_Form(object):
         if ret:
             # Chuyển đổi hình ảnh từ BGR sang RGB để hiển thị trong PyQt5
             frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            frame_rgb = cv2.resize(frame_rgb,(900,600))
+            frame_rgb = cv2.resize(frame_rgb,(120,120))
             
             frame_pil = Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
                 
@@ -96,9 +96,9 @@ class Ui_Form(object):
                 pet = tn.findById1(self.id)
                 color = (0,255,0)
                 draw.text((10, 10), f'Tên: {pet.get_tentn()}', font=font, fill=color) 
-                draw.text((40, 10), f'Màu lông: {pet.get_maulong()}', font=font, fill=color) 
-                draw.text((70, 10), f'Cân nặng: {pet.get_cannang()}', font=font, fill=color)
-                draw.text((70, 10), f'Thuộc khách: {pet.get_khachhang().get_tenkh()}', font=font, fill=color)
+                draw.text((10, 40), f'Màu lông: {pet.get_maulong()}', font=font, fill=color) 
+                draw.text((10, 70), f'Cân nặng: {pet.get_cannang()}', font=font, fill=color)
+                draw.text((10, 100), f'Thuộc khách: {pet.get_khachhang().get_tenkh()}', font=font, fill=color)
             
             frame_with_text = cv2.cvtColor(np.array(frame_pil), cv2.COLOR_RGB2BGR)
             frame_rgb = cv2.cvtColor(frame_with_text, cv2.COLOR_BGR2RGB)

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost
--- Thời gian đã tạo: Th4 24, 2024 lúc 06:10 AM
+-- Thời gian đã tạo: Th4 27, 2024 lúc 06:55 PM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.0.28
 
@@ -43,7 +43,8 @@ INSERT INTO `ChiTiet_HD` (`mact_hd`, `mahd`, `madv`, `soluong`, `gia`) VALUES
 (1, 3, 1, 4, 50),
 (2, 5, 2, 3, 1500000),
 (3, 5, 6, 1, 250000),
-(4, 6, 4, 1, 1000000);
+(4, 6, 4, 1, 1000000),
+(5, 7, 1, 5, 1000000);
 
 -- --------------------------------------------------------
 
@@ -167,7 +168,8 @@ INSERT INTO `HoaDon` (`mahd`, `ngaytao`, `tongtien`, `manv`, `makh`) VALUES
 (3, '2023-01-05', 0, 1, 2),
 (4, '2024-04-23', 0, 2, 1),
 (5, '2024-04-23', 1750000, 2, 1),
-(6, '2024-04-23', 1000000, 24, 18);
+(6, '2024-04-23', 1000000, 24, 18),
+(7, '2024-04-24', 1000000, 24, 19);
 
 -- --------------------------------------------------------
 
@@ -203,7 +205,9 @@ INSERT INTO `KhachHang` (`makh`, `tenkh`, `gioitinh`, `sdt`, `email`) VALUES
 (16, 'ronaldo', 1, '1000000', 'ronaldo@gmail.com'),
 (17, 'messi', 1, '12521521', 'messi@gmail.com'),
 (18, 'neymar', 1, '214321421', 'neymar@gmail.com'),
-(19, 'Lý Thanh Phát', 1, '21521521', 'thanhphat@gmail.com');
+(19, 'Lý Thanh Phát', 1, '21521521', 'thanhphat@gmail.com'),
+(21, 'Châu Nguyễn Mỹ Nguyên', 0, '124214', '@gmail.com'),
+(22, 'Phạm Ngô Tấn Kha', 1, '215215214', '@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -324,14 +328,14 @@ CREATE TABLE `PhongBenh` (
 --
 
 INSERT INTO `PhongBenh` (`mapb`, `tenpb`, `tinhtrang`, `matn`) VALUES
-(1, 'Phòng A', 0, 1),
-(2, 'Phòng B', 0, 2),
+(1, 'Phòng A', 0, NULL),
+(2, 'Phòng B', 0, NULL),
 (3, 'Phòng C', 0, 3),
 (4, 'Phòng D', 0, 4),
 (5, 'Phòng E', 1, NULL),
 (6, 'Phòng F', 0, 6),
 (7, 'Phòng G', 1, NULL),
-(8, 'Phòng H', 0, 8),
+(8, 'Phòng H', 0, NULL),
 (9, 'Phòng I', 1, NULL),
 (11, 'Phòng E', 0, NULL),
 (13, 'Phòng E12', 1, NULL);
@@ -386,17 +390,13 @@ CREATE TABLE `ThuNuoi` (
 --
 
 INSERT INTO `ThuNuoi` (`matn`, `tentn`, `mau`, `cannang`, `makh`) VALUES
-(1, 'Mèo Kitty', 'Trắng', '5 kg', 1),
-(2, 'Chó La La', 'Nâu', '10 kg', 2),
-(3, 'Chim Cút', 'Đen', '0.5 kg', 3),
+(3, 'Khủng long', 'Xanh', '700 kg', 2),
 (4, 'Hà Cảo', 'Vàng', '0.3 kg', 4),
-(5, 'Rùa Rồng', 'Xanh', '3 kg', 5),
+(5, 'Heo', 'da', '3 kg', 5),
 (6, 'Chim Cánh Cụt', 'Hồng', '2 kg', 6),
 (7, 'Hươu Cao Cổ', 'Nâu', '100 kg', 14),
-(8, 'Khỉ Đuôi Dài', 'Nâu', '15 kg', 8),
-(9, 'Gấu Trúc', 'Trắng đen', '80 kg', 9),
+(9, 'Gấu Trúc', 'Trắng đen', '80 kg', 19),
 (10, 'Sư Tử', 'Vàng', '150 kg', 10),
-(12, 'shiba', 'Vàng', '35', 6),
 (13, 'Chó Shiba', 'Vàng Đen', '45', 1);
 
 --
@@ -506,7 +506,7 @@ ALTER TABLE `ThuNuoi`
 -- AUTO_INCREMENT cho bảng `ChiTiet_HD`
 --
 ALTER TABLE `ChiTiet_HD`
-  MODIFY `mact_hd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `mact_hd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT cho bảng `ChiTiet_PN`
@@ -530,13 +530,13 @@ ALTER TABLE `DuocPham`
 -- AUTO_INCREMENT cho bảng `HoaDon`
 --
 ALTER TABLE `HoaDon`
-  MODIFY `mahd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `mahd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `KhachHang`
 --
 ALTER TABLE `KhachHang`
-  MODIFY `makh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `makh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT cho bảng `LoaiTaiKhoan`

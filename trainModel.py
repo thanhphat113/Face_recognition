@@ -75,14 +75,14 @@ class CNNModel:
     
     
 if __name__ == "__main__":
-    data_dir = 'data/khachhang'
+    data_dir = 'data/thunuoi'
     list = os.listdir(data_dir)
     num = len(list)
     model = CNNModel(num_class=num)
     datax, datay = model.load_data(data_dir)
     print (datay)
     model.train_model(datax, datay)
-    model.save_model("model/demo1.h5")
+    model.save_model("model/modelTN.h5")
     
     
 

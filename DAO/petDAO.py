@@ -56,8 +56,12 @@ class petDAO:
         conn = self.conn
         try:
             conn.connect()
+            query=f"update phongbenh set matn = null where matn = '{id}'"
+            db.execute_query(conn,query)
+            
             query=f"delete from thunuoi where matn = '{id}'"
             db.execute_query(conn,query)
+    
             return 'Xoá thành công !!!!'
         except mysql.connector.Error as error:
             return f'Lỗi: {error}'
