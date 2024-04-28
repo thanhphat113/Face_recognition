@@ -100,3 +100,26 @@ class billDAO:
             return result
         except mysql.connector.Error as error:
             return f'Lỗi: {error}'
+        
+    def searchHoaDon(self, search, choice):
+        hd_list = []
+        conn = self.conn
+        try:
+            conn.connect()
+            if choice == 0:
+                query=f"select * from hoadon where mahd LIKE '{search}%'"
+            elif choice == 1:
+                query=f"select * from hoadon where manv LIKE '{search}%'"
+            elif choice == 2:
+                query=f"select * from hoadon where makh LIKE '{search}%'"
+
+            list=db.execute_fetch_all(conn,query)
+            for hd in list:
+                hoadon = bill(hd[0],hd[1],hd[2],hd[3],hd[4])
+                hd_list.append(hoadon)
+            return hd_list
+        except mysql.connector.Error as error:
+            print(f'Error: {error}')
+            return None
+        finally:
+            conn.close()

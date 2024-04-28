@@ -331,6 +331,8 @@ class Ui_Form(object):
         self.phieunhap_dialog.label_4.setText("SỬA PHIẾU NHẬP")
         self.loadComboboxMaNV()
         self.loadComboboxMaNCC()
+        self.phieunhap_dialog.label_3.setVisible(True)
+        self.phieunhap_dialog.label_5.setVisible(True)
 
         selected_row = self.table_phieunhap.currentRow()
         if selected_row < 0:
@@ -369,6 +371,7 @@ class Ui_Form(object):
         self.ctpn_dialog = Ui_ctpn_dialog()
         self.ctpn_dialog.setupUi(dialog)
         self.loadComboboxMaDP()
+        self.ctpn_dialog.txtPrice.setText('50000    ')
 
         selected_items = self.table_phieunhap.selectedItems()
         if not selected_items:
@@ -388,7 +391,7 @@ class Ui_Form(object):
         dialog = QtWidgets.QDialog()
         self.ctpn_dialog = Ui_ctpn_dialog()
         self.ctpn_dialog.setupUi(dialog)
-        self.ctpn_dialog.label_4.setText("SỬA CHI TIẾT PHIẾU NHẬP")
+        self.ctpn_dialog.label_4.setText("SỬA CTPN")
         self.loadComboboxMaDP()
 
         selected_pn = self.table_phieunhap.selectedItems()
