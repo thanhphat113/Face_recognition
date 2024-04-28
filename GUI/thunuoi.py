@@ -10,6 +10,8 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QTableWidgetItem,QTableView
+import trainModel
+import shutil
 
 import sys
 import os
@@ -292,8 +294,27 @@ class Ui_Form(object):
 
                 
     def delete_TN(self, value):
-        dao = petDAO()
-        return dao.delete(value)
+        if self.delete_directory(value):
+            self.trainModel()
+            dao = petDAO()
+            return dao.delete(value)
+        else:
+            return "Không tìm thấy dữ liệu"
+    
+    def delete_directory(self, path):
+                try:
+                        shutil.rmtree(f'data/thunuoi/{path}')
+                        return True
+                except OSError as e:
+                        return False
+    
+    def trainModel(self, data_dir='data/thunuoi'):
+                list = os.listdir(data_dir)
+                num = len(list)
+                model = trainModel(num_class=num)
+                datax, datay = model.load_data(data_dir)
+                model.train_model(datax, datay)
+                model.save_model("model/modelTN.h5")
                 
         
     def update_TN(self):

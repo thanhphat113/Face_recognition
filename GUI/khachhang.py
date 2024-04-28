@@ -10,6 +10,8 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QTableWidgetItem,QTableWidget
+import trainModel
+import shutil
 
 import sys
 import os
@@ -277,8 +279,25 @@ class Ui_Form(object):
                 self.upload_list()
                 
         def delete_KH(self,id):
-                return self.cusDAO.delete(id)
-    
+                if self.delete_directory(id):
+                        self.trainModel()
+                        return self.cusDAO.delete(id)
+        
+        def delete_directory(self, path):
+                try:
+                        shutil.rmtree(f'data/khachhang/{path}')
+                        return True
+                except OSError as e:
+                        return False
+        
+        def trainModel(self, data_dir='data/khachhang'):
+                list = os.listdir(data_dir)
+                num = len(list)
+                model = trainModel(num_class=num)
+                datax, datay = model.load_data(data_dir)
+                model.train_model(datax, datay)
+                model.save_model("model/modelKH.h5")
+        
         def handleIndexChanged(self):
                 choiseIndex = self.comboBox.currentIndex()
                 if choiseIndex == 2:

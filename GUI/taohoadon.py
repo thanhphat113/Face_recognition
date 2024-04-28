@@ -127,7 +127,7 @@ class Ui_Dialog(object):
         self.txtid.setDragEnabled(False)
         self.txtid.setReadOnly(True)
         self.txtid.setObjectName("txtid")
-        self.txtid.setText(str(self.kh.get_makh()))
+        self.txtid.setText(makh)
         self.txtid.setAlignment(QtCore.Qt.AlignRight)
         self.horizontalLayout.addWidget(self.txtid)
         self.verticalLayout_5.addLayout(self.horizontalLayout)

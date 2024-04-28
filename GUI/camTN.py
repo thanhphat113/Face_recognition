@@ -22,11 +22,12 @@ from DAO.petDAO import petDAO
 
 class Ui_Form(object):
     def setupUi(self, Form):
+        self.Form = Form
         
         self.parent_directory = 'data/thunuoi'
         self.model = load_model('model/modelTN.h5')
         
-        self.camera = cv2.VideoCapture(1)
+        self.camera = cv2.VideoCapture(0)
         
         self.timer = QTimer()
         self.timer.timeout.connect(self.update_frame)
@@ -34,9 +35,9 @@ class Ui_Form(object):
         
         self.class_names = os.listdir(self.parent_directory)
         
-        Form.setObjectName("Form")
-        Form.resize(800, 550)
-        Form.setMaximumSize(QtCore.QSize(800, 550))
+        self.Form.setObjectName("Form")
+        self.Form.resize(800, 550)
+        self.Form.setMaximumSize(QtCore.QSize(800, 550))
         self.verticalLayout = QtWidgets.QVBoxLayout(Form)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setObjectName("verticalLayout")
@@ -61,12 +62,12 @@ class Ui_Form(object):
         self.horizontalLayout.addItem(spacerItem1)
         self.verticalLayout.addLayout(self.horizontalLayout)
 
-        self.retranslateUi(Form)
+        self.retranslateUi()
         QtCore.QMetaObject.connectSlotsByName(Form)
 
-    def retranslateUi(self, Form):
+    def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Nhận diện"))
+        self.Form.setWindowTitle(_translate("Form", "Nhận diện"))
         self.pushButton.setText(_translate("Form", "Xong"))
         
     
@@ -111,7 +112,7 @@ class Ui_Form(object):
             
     def close_dialog(self):
         self.camera.release()
-        self.Dialog.close()
+        self.Form.close()
 
 
 if __name__ == "__main__":

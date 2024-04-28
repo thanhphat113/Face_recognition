@@ -188,10 +188,10 @@ class Ui_Form(object):
                 
     def createBill(self):
             if self.id is not None:
-                self.stop_camera()
                 Dialog = QtWidgets.QDialog()
                 ui = cbill.Ui_Dialog()
                 ui.setupUi(Dialog,self.id,self.manv)
+                self.stop_camera()
                 Dialog.exec_()
             else: self.tb.thongBao("Không thể nhận diện được hoặc chưa có dữ liệu!")   
             
