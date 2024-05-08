@@ -160,7 +160,7 @@ class Ui_Form(object):
                 
                 prediction = self.model.predict(np.expand_dims(face_image_rgb, axis=0))
 
-                if prediction.max() < 0.6:
+                if prediction.max() < 0.9:
                         self.id = None
                         label = "Unknown"
                         color = (255,0,0)

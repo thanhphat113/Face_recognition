@@ -69,7 +69,7 @@ class CNNModel:
         return X_train, y_train_categorical
     
     # Train dữ liệu vào model
-    def train_model(self, X_train, y_train, epochs=15):
+    def train_model(self, X_train, y_train, epochs=10):
         self.compile_model()
         self.model.fit(X_train, y_train, epochs=epochs)
     

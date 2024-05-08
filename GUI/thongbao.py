@@ -49,6 +49,7 @@ class Ui_Dialog(object):
         ui.label.setText(text)
         Dialog.exec_()
         
+        
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)

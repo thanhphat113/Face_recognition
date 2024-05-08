@@ -282,6 +282,8 @@ class Ui_Form(object):
                 if self.delete_directory(id):
                         self.trainModel()
                         return self.cusDAO.delete(id)
+                else:
+                        return "Không tìm thấy dữ liệu"
         
         def delete_directory(self, path):
                 try:
