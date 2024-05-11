@@ -143,16 +143,17 @@ class Ui_Form(object):
     def update_frame(self):
         self.face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
         ret, frame = self.camera.read()
+        frame = cv2.resize(frame,(900,600))
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         if ret:
             # Chuyển đổi hình ảnh từ BGR sang RGB để hiển thị trong PyQt5
             
             faces = self.face_cascade.detectMultiScale(frame, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
             for (x, y, w, h) in faces:
                 face_image = frame[y:y+h, x:x+w]
-                face_image_rgb = cv2.cvtColor(face_image,cv2.COLOR_BGR2RGB)
-                face_image_rgb = cv2.resize(face_image_rgb,(120,120))
+                face_image_rgb = cv2.resize(face_image,(120,120))
                 
-                frame_pil = Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
+                frame_pil = Image.fromarray(frame)
                 
                 draw = ImageDraw.Draw(frame_pil)
                 
@@ -160,11 +161,11 @@ class Ui_Form(object):
                 
                 prediction = self.model.predict(np.expand_dims(face_image_rgb, axis=0))
 
-                if prediction.max() < 0.9:
+                if prediction.max() < 0.6:
                         self.id = None
                         label = "Unknown"
                         color = (255,0,0)
-                        color_rec = (0, 0, 255)
+                        color_rec = (255, 0, 0)
                 else:
                         self.id = self.class_names[int(np.argmax(prediction))]
                         kh = customerDAO()
@@ -174,17 +175,17 @@ class Ui_Form(object):
                         color_rec = (0,255,0)
         
                 draw.text((x + w + 10, y + h), label, font=font, fill=color)
-                frame_with_text = cv2.cvtColor(np.array(frame_pil), cv2.COLOR_RGB2BGR)
+                
+                frame_with_text = np.array(frame_pil)
             
                 cv2.rectangle(frame_with_text, (x, y), (x+w, y+h), color_rec, 2)
                 
-                frame_rgb = cv2.cvtColor(frame_with_text, cv2.COLOR_BGR2RGB)
-                frame_rgb = cv2.resize(frame_rgb,(900,600))
+                frame = frame_with_text
                 
-                image = QImage(frame_rgb.data, frame_rgb.shape[1], frame_rgb.shape[0], QImage.Format_RGB888)
-                pixmap = QPixmap.fromImage(image)
+        image = QImage(frame.data, frame.shape[1], frame.shape[0], QImage.Format_RGB888)
+        pixmap = QPixmap.fromImage(image)
             
-                self.lb_camera.setPixmap(pixmap)
+        self.lb_camera.setPixmap(pixmap)
                 
     def createBill(self):
             if self.id is not None:
@@ -222,6 +223,6 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     Form = QtWidgets.QWidget()
     ui = Ui_Form()
-    ui.setupUi(Form)
+    ui.setupUi(Form,1)
     Form.show()
     sys.exit(app.exec())

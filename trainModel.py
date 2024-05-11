@@ -46,7 +46,7 @@ class CNNModel:
         self.model.save(path)
     
     # Chuẩn hoá hình ảnh và nhãn cho dữ liệu
-    def load_data(self,folder_path, input_shape=(120,120)):
+    def load_data(self, folder_path, input_shape=(120,120)):
         class_names = os.listdir(folder_path)
         X_train = []
         y_train = []
@@ -57,7 +57,6 @@ class CNNModel:
                 img_path = os.path.join(class_dir, img_name)
                 img = cv2.imread(img_path)
                 img = cv2.resize(img, input_shape) 
-                img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
                 X_train.append(img)
                 y_train.append(i)
         X_train = np.array(X_train)
@@ -74,15 +73,17 @@ class CNNModel:
         self.model.fit(X_train, y_train, epochs=epochs)
     
     
+    def trainModel(self, data_dir, model_name):
+        datax, datay = self.load_data(data_dir)
+        self.train_model(datax, datay)
+        self.save_model(f'model/{model_name}')
+    
 if __name__ == "__main__":
-    data_dir = 'data/thunuoi'
+    data_dir = 'data/khachhang'
     list = os.listdir(data_dir)
     num = len(list)
     model = CNNModel(num_class=num)
-    datax, datay = model.load_data(data_dir)
-    print (datay)
-    model.train_model(datax, datay)
-    model.save_model("model/modelTN.h5")
+    model.trainModel(data_dir, 'modelKH.h5')
     
     
 

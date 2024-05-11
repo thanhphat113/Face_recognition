@@ -24,6 +24,7 @@ import GUI.thongbao as tb
 class Ui_Form(object):
     def setupUi(self, Dialog, id, type=1):
         #Khai báo
+        self.cnn = CNNModel()
         self.tb = tb.Ui_Dialog()
         self.id = id
         self.data_dir = 'data/khachhang'
@@ -133,7 +134,7 @@ class Ui_Form(object):
         if ret:
             self.faces = self.face_cascade.detectMultiScale(frame, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
             if len(self.faces) !=0:
-                if self.count >= 30:
+                if self.count >= 100:
                     if self.type == 1:
                         self.tb.thongBao("Đã lưu dữ liệu gương mặt hoàn tất! Vui lòng chờ....")
                     else: 
@@ -176,16 +177,14 @@ class Ui_Form(object):
         cv2.imwrite(f'{self.parent_directory}/{self.id}_sharpened_{self.count}.png',sharpened_image)
         self.count += 1
     
-    def trainModel(self,data_dir):
+    def trainModel(self, data_dir):
         list = os.listdir(data_dir)
         num = len(list)
         model = CNNModel(num_class=num)
-        datax, datay = model.load_data(data_dir)
-        model.train_model(datax, datay)
         if self.type == 1:
-            model.save_model("model/modelKH.h5")
+            model.trainModel(data_dir,"model/modelKH.h5")
         else:
-            model.save_model("model/modelTN.h5")
+            model.trainModel(data_dir,"model/modelTN.h5")
                     
     def check_directory(self):
         if not os.path.exists(self.parent_directory):
@@ -200,6 +199,7 @@ class Ui_Form(object):
         try:
             shutil.rmtree(self.parent_directory)
             self.tb.thongBao("Đã xoá thư mục thành công !")
+            self.trainModel(self.data_dir)
         except OSError as e:
             self.tb.thongBao(f"Lỗi: {self.parent_directory} - {e.strerror}")
         

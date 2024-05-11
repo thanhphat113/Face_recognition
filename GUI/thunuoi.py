@@ -10,7 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QTableWidgetItem,QTableView
-import trainModel
+from trainModel import CNNModel
 import shutil
 
 import sys
@@ -240,10 +240,10 @@ class Ui_Form(object):
         cus_list = customerDAO().ReadFromDatabase()
         self.tableWidget.setRowCount(0)
         data_dir = 'data/thunuoi'
-        list_directory = os.listdir(data_dir)
+        self.list_directory = os.listdir(data_dir)
         for pet in pet_list:
             tt = '<Chưa có dữ liệu>'
-            if str(pet.get_matn()) in list_directory:
+            if str(pet.get_matn()) in self.list_directory:
                 tt = '<Có dữ liệu>'
             for cus in cus_list:
                 if cus.get_makh() == pet.get_makh():
@@ -294,12 +294,11 @@ class Ui_Form(object):
 
                 
     def delete_TN(self, value):
-        if self.delete_directory(value):
+        if str(value) in self.list_directory:
+            self.delete_directory(value)
             self.trainModel()
-            dao = petDAO()
-            return dao.delete(value)
-        else:
-            return "Không tìm thấy dữ liệu"
+        dao = petDAO()
+        return dao.delete(value)
     
     def delete_directory(self, path):
                 try:
@@ -311,10 +310,8 @@ class Ui_Form(object):
     def trainModel(self, data_dir='data/thunuoi'):
                 list = os.listdir(data_dir)
                 num = len(list)
-                model = trainModel(num_class=num)
-                datax, datay = model.load_data(data_dir)
-                model.train_model(datax, datay)
-                model.save_model("model/modelTN.h5")
+                model = CNNModel(num_class=num)
+                model.trainModel(data_dir,"model/modelTN.h5")
                 
         
     def update_TN(self):

@@ -10,7 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QTableWidgetItem,QTableWidget
-import trainModel
+from trainModel import CNNModel
 import shutil
 
 import sys
@@ -227,10 +227,10 @@ class Ui_Form(object):
                 list = self.cusDAO.ReadFromDatabase()
                 self.tableWidget.setRowCount(0)
                 data_dir = 'data/khachhang'
-                list_directory = os.listdir(data_dir)
+                self.list_directory = os.listdir(data_dir)
                 for cus in list:
                         tt = '<Chưa có dữ liệu>'
-                        if str(cus.get_makh()) in list_directory:
+                        if str(cus.get_makh()) in self.list_directory:
                                 tt = '<Có dữ liệu>'
                         data = [cus.get_makh(), cus.get_tenkh(), cus.get_gioitinh(), cus.get_sdt(), cus.get_email(),tt]
                         self.add_row_to_table(data)
@@ -279,11 +279,10 @@ class Ui_Form(object):
                 self.upload_list()
                 
         def delete_KH(self,id):
-                if self.delete_directory(id):
+                if str(id) in self.list_directory:
+                        self.delete_directory(id)
                         self.trainModel()
-                        return self.cusDAO.delete(id)
-                else:
-                        return "Không tìm thấy dữ liệu"
+                return self.cusDAO.delete(id)
         
         def delete_directory(self, path):
                 try:
@@ -295,10 +294,8 @@ class Ui_Form(object):
         def trainModel(self, data_dir='data/khachhang'):
                 list = os.listdir(data_dir)
                 num = len(list)
-                model = trainModel(num_class=num)
-                datax, datay = model.load_data(data_dir)
-                model.train_model(datax, datay)
-                model.save_model("model/modelKH.h5")
+                model = CNNModel(num_class=num)
+                model.trainModel(data_dir,"model/modelKH.h5")
         
         def handleIndexChanged(self):
                 choiseIndex = self.comboBox.currentIndex()
