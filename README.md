@@ -49,7 +49,40 @@ python3 app.py
 ## Demo chương trình
 ### Trang chủ
 
-<img src="./image/trangchu" style="zoom:60%" alt="game"/>
+<img src="./image/trangchu.png" style="zoom:60%" alt="trang chủ"/>
+
+### Khách hàng
+<img src="./image/khachhang.png" style="zoom:60%" alt="trang chủ"/>
+
+### Tạo hóa đơn
+<img src="./image/taohoadon.png" style="zoom:60%" alt="trang chủ"/>
+
+### Thú nuôi
+<img src="./image/thunuoi.png" style="zoom:60%" alt="trang chủ"/>
+
+### Phòng bệnh
+<img src="./image/phongbenh.png" style="zoom:60%" alt="trang chủ"/>
+
+### Nhân viên
+<img src="./image/nhanvien.png" style="zoom:60%" alt="trang chủ"/>
+
+### Tài khoản
+<img src="./image/taikhoan.png" style="zoom:60%" alt="trang chủ"/>
+
+### Hóa đơn
+<img src="./image/hoadon.png" style="zoom:60%" alt="trang chủ"/>
+
+### Phiếu nhập
+<img src="./image/phieunhap.png" style="zoom:60%" alt="trang chủ"/>
+
+### Nhà cung cấp
+<img src="./image/nhacungcap.png" style="zoom:60%" alt="trang chủ"/>
+
+### Dược phẩm
+<img src="./image/duocpham.png" style="zoom:60%" alt="trang chủ"/>
+
+### Dịch vụ
+<img src="./image/dichvu.png" style="zoom:60%" alt="trang chủ"/>
 
 
 
