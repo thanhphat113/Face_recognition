@@ -46,4 +46,13 @@ python3 app.py
 ```
 
 
-## Demo chương Trình'
+## Demo chương trình
+### Trang chủ
+
+<img src="./image/trangchu" style="zoom:60%" alt="game"/>
+
+
+
+### Contact email:
+- [toanld392003@gmail.com](mailto:toanld392003@gmail.com)
+
