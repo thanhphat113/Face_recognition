@@ -182,9 +182,9 @@ class Ui_Form(object):
         num = len(list)
         model = CNNModel(num_class=num)
         if self.type == 1:
-            model.trainModel(data_dir,"model/modelKH.h5")
+            model.trainModel(data_dir,"modelKH.h5")
         else:
-            model.trainModel(data_dir,"model/modelTN.h5")
+            model.trainModel(data_dir,"modelTN.h5")
                     
     def check_directory(self):
         if not os.path.exists(self.parent_directory):
